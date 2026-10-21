@@ -1,270 +1,143 @@
 # 🚀 Déploiement — Afterglow by Kevin
-### afterglowbykevin.ch · GitHub → Hostinger VPS · CI/CD automatique
+### afterglowbykevin.ch · dépôt `snapshot-media/Afterglow` · VPS principal de Snapshot (srv888831)
 
-Ce guide te permet de publier le site et de le mettre à jour automatiquement
-à chaque sauvegarde depuis l'éditeur (push GitHub). Une fois configuré,
-tu n'auras plus rien à faire manuellement.
+Un push sur `main` met le site en ligne, sans rien d'autre à faire. Ce guide dit
+comment, ce qui vit sur le serveur hors de git, et quoi vérifier.
 
----
-
-## Vue d'ensemble du pipeline
-
-```
-Éditeur (ici) ──push──▶ GitHub (repo "Afterglow") ──Action──▶ VPS Hostinger
-                                                                   (git pull)
-```
+> Mis à jour le 21.10.2026. Le guide d'origine (02.06.2026) décrivait une
+> installation nginx + certbot + `git pull` par SSH qui n'existe plus : le site
+> tourne derrière le Caddy partagé du VPS principal.
 
 ---
 
-## ÉTAPE 1 — Créer le repo GitHub
+## Comment ça marche
 
-1. Va sur **github.com/new**
-2. Nom du repo : `Afterglow`
-3. Visibilité : **Private** (recommandé — le code source reste chez toi)
-4. Ne pas initialiser avec un README (on pousse depuis ici)
-5. Cliquer **Create repository**
-6. Copie l'URL SSH du repo : `git@github.com:Expelliarmus00/Afterglow.git`
+```
+poste de Kevin ──git push main──▶ GitHub (snapshot-media/Afterglow)
+                                        │
+                     runner dédié srv888831-afterglow (sur le VPS)
+                                        ▼
+             /var/www/afterglow : git fetch + git reset --hard origin/main
+                                        ▼
+       Caddy (/etc/caddy/Caddyfile, partagé) ──▶ fichiers statiques
+                                             └─▶ php8.3-fpm (contact.php)
+```
+
+- **Workflow** `.github/workflows/deploy.yml` (« 🚀 Deploy to VPS ») : à chaque push
+  sur `main`, le runner met le clone à jour, puis remet les droits (fichiers `.php`
+  en 644, dossiers en 755). Aucune construction sur le serveur : ce qui est poussé
+  est servi tel quel.
+- **Runner** : service `actions.runner.snapshot-media-Afterglow.srv888831-afterglow`,
+  installé dans `/opt/github-runner-afterglow`, sous l'utilisateur `github-runner`.
+  Il est enregistré sur ce dépôt seul, hors du groupe de runners du portail.
+- **Clone** : `/var/www/afterglow` (`github-runner:www-data`), remote
+  `https://github.com/snapshot-media/Afterglow.git`, branche `main`.
 
 ---
 
-## ÉTAPE 2 — Connecter l'éditeur à GitHub
+## Avant de pousser : construire sur le poste
 
-Dans l'éditeur (là où tu modifies le site) :
+```bash
+npm run build     # CSS minifiés (.min.css), chaque .jsx compilé en .js, pages prérendues, bundles/
+npm run sitemap   # sitemap.xml
+```
 
-1. Clique sur l'icône **GitHub** dans la barre latérale (ou le bouton Connect)
-2. Autorise l'accès à ton compte `Expelliarmus00`
-3. Sélectionne le repo `Afterglow`
-4. Effectue un premier **push** — tous les fichiers du projet seront envoyés
-
-> Chaque fois que tu enregistres une modification ici, un push vers GitHub
-> déclenchera automatiquement le déploiement sur le VPS.
+Commiter le résultat avec les sources : le serveur ne construit rien.
+Aperçu local : `python -m http.server 8000` (configuration de `.claude/launch.json`) ;
+le formulaire de contact (PHP) n'y tourne pas.
 
 ---
 
-## ÉTAPE 3 — Préparer le VPS (SSH)
+## Ce qui vit sur le serveur, hors de git
 
-Connecte-toi à ton VPS Hostinger en SSH :
+`git reset --hard` ne touche pas aux fichiers ignorés par `.gitignore` : ceux-ci
+restent en place d'un déploiement à l'autre. Ils ne sont pas dans le dépôt, donc à
+recréer à la main sur un nouveau serveur.
 
-```bash
-ssh root@IP_DE_TON_VPS
-# ou
-ssh utilisateur@IP_DE_TON_VPS
-```
-
-### 3a — Mettre à jour le système
-
-```bash
-apt update && apt upgrade -y
-```
-
-### 3b — Installer Nginx + PHP + Git
-
-```bash
-apt install -y nginx git php8.2-fpm php8.2-cli
-```
-
-> Si `php8.2-fpm` n'existe pas, essaie `php8.1-fpm` ou `php-fpm`.
-> Pour vérifier la version disponible : `apt-cache search php-fpm`
-
-### 3c — Vérifier que Nginx et PHP tournent
-
-```bash
-systemctl status nginx
-systemctl status php8.2-fpm
-```
-
-Les deux doivent afficher `active (running)`.
+| Fichier | Rôle |
+|---|---|
+| `/var/www/afterglow/vendor/` + `composer.json` | PHPMailer, installé avec Composer dans le dossier du site. |
+| `/var/www/afterglow/smtp-config.php` | Identifiants SMTP Infomaniak (`SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`). `contact.php` le cherche d'abord dans `/var/www/`, puis dans le dossier du site (c'est là qu'il est aujourd'hui). Caddy refuse de le servir (404). |
+| `/var/www/contact-log.csv` | Journal des demandes, écrit par `contact.php` hors de la racine web. ⚠️ Aujourd'hui il ne s'écrit pas : `/var/www` appartient à root et `www-data` ne peut pas y créer de fichier. L'envoi de l'e-mail n'en dépend pas. Il n'est pas non plus dans la sauvegarde de nuit. |
 
 ---
 
-## ÉTAPE 4 — Générer une clé SSH pour GitHub Actions
+## Caddy et HTTPS
 
-Sur le VPS, crée une clé dédiée au déploiement :
+Le site est un bloc de la **section 4** du Caddyfile partagé du VPS principal
+(`/etc/caddy/Caddyfile`), à côté de toutes les autres apps. Caddy obtient et renouvelle
+le certificat tout seul.
 
-```bash
-ssh-keygen -t ed25519 -C "github-actions-afterglow" -f ~/.ssh/afterglow_deploy
-# Appuyer sur Entrée (pas de passphrase)
-```
-
-Ajoute la **clé publique** aux clés autorisées du VPS :
-
-```bash
-cat ~/.ssh/afterglow_deploy.pub >> ~/.ssh/authorized_keys
-chmod 600 ~/.ssh/authorized_keys
-```
-
-Affiche la **clé privée** (tu en auras besoin à l'étape 6) :
+Le fichier `Caddyfile` du dépôt n'est qu'une copie de référence de ce bloc, et elle
+diffère du bloc en service (`preload` dans HSTS). **Ne jamais le copier sur
+`/etc/caddy/Caddyfile`** : il remplacerait la configuration de tout le serveur.
+Modifier le bloc en place, puis :
 
 ```bash
-cat ~/.ssh/afterglow_deploy
+caddy validate --config /etc/caddy/Caddyfile && systemctl reload caddy
 ```
 
-Copie tout le contenu (de `-----BEGIN...` à `...END-----`).
+Pas de `www` : `www.afterglowbykevin.ch` n'existe pas au DNS, et son bloc de
+redirection a été retiré le 21.10.2026 (Caddy échouait à en obtenir le certificat).
+Pour en ajouter un un jour : l'enregistrement DNS d'abord, puis le bloc
+`www.afterglowbykevin.ch { redir https://afterglowbykevin.ch{uri} permanent }`.
+
+Caddy refuse de servir (404) : `.git*`, `.env*`, `smtp-config.php`, `composer.*`,
+`contact-log.csv`, `*.csv`, `*.md`, `*.jsx`, `vendor/`, `.github/`, `package*.json`,
+`scripts/`. `.image-slots.state.json` doit rester servi (les images en dépendent).
 
 ---
 
-## ÉTAPE 5 — Cloner le repo sur le VPS
+## Vérifier un déploiement
+
+1. GitHub → onglet **Actions** → « 🚀 Deploy to VPS » en vert
+   (ou `gh run list -R snapshot-media/Afterglow --limit 3`).
+2. `curl -sI https://afterglowbykevin.ch/` → `200`.
+3. Sur le serveur, le clone est au commit poussé :
+   `sudo -u github-runner git -C /var/www/afterglow log -1 --oneline`.
+
+---
+
+## Commandes utiles (VPS principal, en root)
 
 ```bash
-# Créer le dossier du site
-mkdir -p /var/www/afterglowbykevin.ch
+# État du runner dédié
+systemctl status actions.runner.snapshot-media-Afterglow.srv888831-afterglow
 
-# Cloner le repo (utilise HTTPS la première fois, plus simple)
-git clone https://github.com/Expelliarmus00/Afterglow.git /var/www/afterglowbykevin.ch
+# Mettre à jour à la main, sans passer par GitHub (comme le workflow, sous son utilisateur)
+sudo -u github-runner git -C /var/www/afterglow fetch origin
+sudo -u github-runner git -C /var/www/afterglow reset --hard origin/main
 
-# Vérifier que les fichiers sont bien là
-ls /var/www/afterglowbykevin.ch
+# Erreurs de Caddy (il ne tient pas de journal d'accès)
+journalctl -u caddy --since "-1h" --no-pager
+
+# PHP (formulaire de contact)
+systemctl reload php8.3-fpm
 ```
 
-Si le repo est privé, GitHub te demandera ton nom d'utilisateur et un
-**Personal Access Token** (pas ton mot de passe) :
-- Va sur github.com → Settings → Developer settings → Personal access tokens
-- Génère un token avec le scope `repo`
-- Utilise-le comme mot de passe lors du `git clone`
-
-### Configurer git pour les pulls futurs
-
-```bash
-cd /var/www/afterglowbykevin.ch
-git config pull.rebase false
-```
+Toujours `sudo -u github-runner` pour `git` dans `/var/www/afterglow` : lancé en root,
+il laisserait des fichiers à root que le runner ne pourrait plus réécrire au
+déploiement suivant. (`.git/config` et `.git/index` sont déjà à root, restes d'anciens
+passages ; sans gêne aujourd'hui, git remplace l'index au lieu de l'écrire.)
 
 ---
 
-## ÉTAPE 6 — Ajouter les secrets GitHub Actions
+## Ce qui est publié
 
-Dans ton repo GitHub → **Settings** → **Secrets and variables** → **Actions** :
-
-| Nom du secret   | Valeur                                      |
-|-----------------|---------------------------------------------|
-| `VPS_HOST`      | L'IP de ton VPS (ex: `185.XXX.XXX.XXX`)    |
-| `VPS_USER`      | Ton utilisateur SSH (ex: `root` ou `kevin`) |
-| `VPS_SSH_KEY`   | La clé privée copiée à l'étape 4            |
-
-> **VPS_SSH_KEY** : colle tout le contenu de la clé privée, y compris
-> les lignes `-----BEGIN OPENSSH PRIVATE KEY-----` et `-----END...-----`.
-
----
-
-## ÉTAPE 7 — Configurer Nginx
-
-Sur le VPS :
-
-```bash
-# Copier la config Nginx fournie dans le repo
-cp /var/www/afterglowbykevin.ch/nginx.conf /etc/nginx/sites-available/afterglowbykevin.ch
-
-# Activer le site
-ln -s /etc/nginx/sites-available/afterglowbykevin.ch /etc/nginx/sites-enabled/
-
-# Désactiver le site par défaut (si présent)
-rm -f /etc/nginx/sites-enabled/default
-
-# Vérifier la config
-nginx -t
-
-# Recharger Nginx
-systemctl reload nginx
-```
-
----
-
-## ÉTAPE 8 — Installer le certificat SSL (HTTPS gratuit)
-
-```bash
-apt install -y certbot python3-certbot-nginx
-
-certbot --nginx -d afterglowbykevin.ch -d www.afterglowbykevin.ch
-```
-
-Certbot va :
-- Te demander ton e-mail (pour les alertes d'expiration)
-- Accepter les CGU (Y)
-- Mettre à jour automatiquement ta config Nginx pour HTTPS
-
-Le certificat se renouvelle automatiquement. ✅
-
----
-
-## ÉTAPE 9 — Tester le déploiement automatique
-
-1. Fais une petite modification dans l'éditeur
-2. Pousse vers GitHub
-3. Va dans ton repo → onglet **Actions**
-4. Tu verras le workflow `🚀 Deploy to VPS` s'exécuter
-5. Après ~30 secondes, visite **afterglowbykevin.ch** — le changement est en ligne !
-
----
-
-## ÉTAPE 10 — Vérifier le formulaire de contact
-
-Teste le formulaire sur le site. Si les e-mails n'arrivent pas :
-
-```bash
-# Sur le VPS, vérifier que PHP peut envoyer des mails
-php -r "mail('test@example.com', 'Test', 'OK');"
-
-# Vérifier les logs PHP
-tail -f /var/log/php8.2-fpm.log
-tail -f /var/log/nginx/afterglowbykevin.ch.error.log
-```
-
-### Option recommandée : SMTP via Hostinger
-
-Hostinger fournit un serveur SMTP avec chaque hébergement.
-Pour une meilleure délivrabilité, configure PHPMailer dans `contact.php` :
-
-```bash
-# Sur le VPS, installer Composer puis PHPMailer
-cd /var/www/afterglowbykevin.ch
-curl -sS https://getcomposer.org/installer | php
-php composer.phar require phpmailer/phpmailer
-```
-
-Les paramètres SMTP Hostinger se trouvent dans **hPanel → Emails → Comptes e-mail**.
-
----
-
-## Résumé des commandes utiles sur le VPS
-
-```bash
-# Mettre à jour manuellement (sans passer par GitHub)
-cd /var/www/afterglowbykevin.ch && git pull origin main
-
-# Voir les logs du site
-tail -f /var/log/nginx/afterglowbykevin.ch.access.log
-tail -f /var/log/nginx/afterglowbykevin.ch.error.log
-
-# Redémarrer les services
-systemctl reload nginx
-systemctl restart php8.2-fpm
-
-# Vérifier la config Nginx
-nginx -t
-```
-
----
-
-## Structure des fichiers déployés
+Tout ce qui est dans git arrive sur le serveur ; Caddy n'en sert que ce qu'il ne
+bloque pas (voir plus haut). Pour l'essentiel :
 
 ```
-/var/www/afterglowbykevin.ch/
-├── Kevin Chinelli.html    ← Page d'accueil
-├── contact.php            ← Formulaire (envoie à info@snapshotmedia.ch)
-├── kc.css / kc-pages.css  ← Styles
-├── kc-*.jsx / kc-*.js     ← Scripts
-├── *.html                 ← Toutes les pages
-├── sitemap.xml
-├── robots.txt
-├── .github/
-│   └── workflows/
-│       └── deploy.yml     ← CI/CD GitHub Actions
-└── nginx.conf             ← Config Nginx (copiée en étape 7)
+/var/www/afterglow/
+├── index.html, *.html          ← pages (prérendues par npm run build), 404.html
+├── bundles/, kc-*.js           ← scripts compilés depuis les .jsx
+├── kc.min.css, kc-pages.min.css
+├── images/, fonts/, lib/
+├── contact.php                 ← formulaire de contact (PHPMailer, SMTP Infomaniak)
+├── .image-slots.state.json     ← doit rester servi
+├── sitemap.xml, robots.txt, llms.txt, site.webmanifest
+└── .github/workflows/deploy.yml
 ```
 
-> Les dossiers `screenshots/`, `scraps/`, `uploads/` et les fichiers
-> `Wireframe-*.html` sont ignorés par `.gitignore` et ne sont pas publiés.
-
----
-
-*Guide généré le 02/06/2026 — Afterglow by Kevin · afterglowbykevin.ch*
+Les dossiers `screenshots/`, `scraps/`, `uploads/`, les fichiers `Wireframe - *.html`
+et `HANDOFF-DEV.md` sont ignorés par `.gitignore` et ne sont pas publiés.
