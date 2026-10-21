@@ -57,8 +57,16 @@ recréer à la main sur un nouveau serveur.
 | Fichier | Rôle |
 |---|---|
 | `/var/www/afterglow/vendor/` + `composer.json` | PHPMailer, installé avec Composer dans le dossier du site. |
-| `/var/www/afterglow/smtp-config.php` | Identifiants SMTP Infomaniak (`SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`). `contact.php` le cherche d'abord dans `/var/www/`, puis dans le dossier du site (c'est là qu'il est aujourd'hui). Caddy refuse de le servir (404). |
-| `/var/www/contact-log.csv` | Journal des demandes, écrit par `contact.php` hors de la racine web. ⚠️ Aujourd'hui il ne s'écrit pas : `/var/www` appartient à root et `www-data` ne peut pas y créer de fichier. L'envoi de l'e-mail n'en dépend pas. Il n'est pas non plus dans la sauvegarde de nuit. |
+| `/var/www/afterglow-private/` | Dossier privé, hors de la racine web, `www-data:www-data` en **700** : `php-fpm` y lit et y écrit, le runner GitHub (pourtant membre du groupe `www-data`) n'y entre pas. Même modèle que Patounes. |
+| `/var/www/afterglow-private/smtp-config.php` | Identifiants SMTP Infomaniak (`SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`), en 600. `contact.php` ne le cherche que là : s'il manque, le formulaire répond par une erreur. |
+| `/var/www/afterglow-private/contact-log.csv` | Journal des demandes, une ligne par demande valide, écrit par `contact.php` avant l'envoi de l'e-mail. Sauvegardé chaque nuit (`/opt/snapshot-backup/backup.sh`, B2 chiffré). |
+
+Sur un nouveau serveur, créer le dossier avant le premier déploiement :
+
+```bash
+install -d -o www-data -g www-data -m 700 /var/www/afterglow-private
+install -o www-data -g www-data -m 600 smtp-config.php /var/www/afterglow-private/
+```
 
 ---
 

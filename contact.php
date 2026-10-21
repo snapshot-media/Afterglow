@@ -2,15 +2,17 @@
 /* ============================================================
    AFTERGLOW BY KEVIN — Endpoint de contact / devis
    Utilise PHPMailer + SMTP Infomaniak pour l'envoi.
-   Les identifiants SMTP sont dans smtp-config.php (hors git).
+   Identifiants SMTP et journal des demandes : dans le dossier privé.
    ============================================================ */
 
+/* Dossier privé, HORS de la racine web et hors git : smtp-config.php
+   (identifiants SMTP) et contact-log.csv (journal des demandes).
+   www-data seul (700) : php-fpm lit et écrit, le runner GitHub n'y entre
+   pas. Même modèle que Patounes (/var/www/patounes-private). */
+$PRIVE = "/var/www/afterglow-private";
+
 require_once __DIR__ . '/vendor/autoload.php';
-/* smtp-config.php contient les identifiants SMTP (hors git).
-   On le cherche d'abord HORS de la racine web (plus sûr), puis dans le
-   dossier courant en repli pour ne pas casser une install existante. */
-if (is_file(__DIR__ . '/../smtp-config.php'))      require_once __DIR__ . '/../smtp-config.php';
-else                                               require_once __DIR__ . '/smtp-config.php';
+require_once $PRIVE . '/smtp-config.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -20,8 +22,9 @@ $FROM      = SMTP_USER;
 $SUBJECT_P = "[Afterglow] Demande de devis — ";
 $SITE_NAME = "Afterglow by Kevin";
 /* Journal des demandes : écrit HORS de la racine web pour ne jamais être
-   téléchargeable (contient nom/email/téléphone = données personnelles). */
-$LOG_FILE  = __DIR__ . "/../contact-log.csv";
+   téléchargeable (contient nom/email/téléphone = données personnelles).
+   Sauvegardé chaque nuit par /opt/snapshot-backup/backup.sh. */
+$LOG_FILE  = $PRIVE . "/contact-log.csv";
 
 header("Content-Type: application/json; charset=utf-8");
 
