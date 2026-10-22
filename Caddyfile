@@ -2,13 +2,19 @@
 # Afterglow by Kevin — Configuration Caddy
 # afterglowbykevin.ch
 #
-# Installation sur le VPS (une seule fois) :
-#   sudo cp Caddyfile /etc/caddy/Caddyfile
-#   sudo caddy validate --config /etc/caddy/Caddyfile
-#   sudo systemctl reload caddy
+# COPIE DE RÉFÉRENCE du bloc du site. Le bloc en service vit dans le
+# Caddyfile PARTAGÉ du VPS principal (/etc/caddy/Caddyfile, section 4),
+# à côté de toutes les autres apps et sites.
 #
-# Caddy gère le HTTPS automatiquement (Let's Encrypt) — aucun chemin de
-# certificat à indiquer. Adapter la version PHP-FPM si besoin (php8.3).
+# NE JAMAIS copier ce fichier sur /etc/caddy/Caddyfile : il remplacerait
+# la configuration de tout le serveur. Modifier le bloc en place, puis :
+#   caddy validate --config /etc/caddy/Caddyfile && systemctl reload caddy
+#
+# Écart avec le bloc en service (relevé le 22.10.2026) : ici HSTS porte
+# « preload », pas là-bas. Pas de www : www.afterglowbykevin.ch n'existe
+# pas au DNS (voir DEPLOY.md).
+#
+# Caddy gère le HTTPS tout seul (certificat obtenu et renouvelé).
 # ============================================================
 
 afterglowbykevin.ch {
