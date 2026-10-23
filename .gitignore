@@ -35,3 +35,11 @@ Thumbs.db
 
 # === Node (si jamais utilisé) ===
 node_modules/
+
+# === Hors dépôt public ===
+
+# Réglages locaux de Claude Code (jamais publiés)
+.claude/
+
+# Archives d'export (celle du 2 juin reste dans l'historique, commit aa4eea3)
+*.zip

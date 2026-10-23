@@ -43,7 +43,7 @@ npm run sitemap   # sitemap.xml
 ```
 
 Commiter le résultat avec les sources : le serveur ne construit rien.
-Aperçu local : `python -m http.server 8000` (configuration de `.claude/launch.json`) ;
+Aperçu local : `python -m http.server 8000` ;
 le formulaire de contact (PHP) n'y tourne pas.
 
 ---
@@ -76,9 +76,9 @@ Le site est un bloc de la **section 4** du Caddyfile partagé du VPS principal
 (`/etc/caddy/Caddyfile`), à côté de toutes les autres apps. Caddy obtient et renouvelle
 le certificat tout seul.
 
-Le fichier `Caddyfile` du dépôt n'est qu'une copie de référence de ce bloc, et elle
-diffère du bloc en service (`preload` dans HSTS). **Ne jamais le copier sur
-`/etc/caddy/Caddyfile`** : il remplacerait la configuration de tout le serveur.
+Le bloc n'existe que dans le Caddyfile partagé du serveur : ce dépôt est public, il n'en
+garde plus de copie (la copie de référence est dans le dépôt privé de gouvernance). Ne
+jamais écraser `/etc/caddy/Caddyfile` : on remplacerait la configuration de tout le serveur.
 Modifier le bloc en place, puis :
 
 ```bash
@@ -92,7 +92,9 @@ Pour en ajouter un un jour : l'enregistrement DNS d'abord, puis le bloc
 
 Caddy refuse de servir (404) : `.git*`, `.env*`, `smtp-config.php`, `composer.*`,
 `contact-log.csv`, `*.csv`, `*.md`, `*.jsx`, `vendor/`, `.github/`, `package*.json`,
-`scripts/`. `.image-slots.state.json` doit rester servi (les images en dépendent).
+`scripts/`, et depuis le 23.10.2026 `.claude*`, `Caddyfile`, `*.zip`, `*.phar`, `Wireframe*`,
+`screenshots/`, `uploads/`, `scraps/` (ils traînaient sur le disque ou dans le dépôt).
+`.image-slots.state.json` doit rester servi (les images en dépendent).
 
 ---
 
@@ -147,5 +149,6 @@ bloque pas (voir plus haut). Pour l'essentiel :
 └── .github/workflows/deploy.yml
 ```
 
-Les dossiers `screenshots/`, `scraps/`, `uploads/`, les fichiers `Wireframe - *.html`
-et `HANDOFF-DEV.md` sont ignorés par `.gitignore` et ne sont pas publiés.
+Les dossiers `screenshots/`, `scraps/`, `uploads/`, les fichiers `Wireframe - *.html`,
+`HANDOFF-DEV.md` et `composer.phar` sont ignorés par `.gitignore`. S'ils traînent sur le
+disque du serveur (restes d'un export), Caddy les masque (404) : ils ne sont pas publiés.
