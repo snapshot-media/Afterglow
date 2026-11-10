@@ -4,9 +4,9 @@
 Un push sur `main` met le site en ligne, sans rien d'autre à faire. Ce guide dit
 comment, ce qui vit sur le serveur hors de git, et quoi vérifier.
 
-> Mis à jour le 21.10.2026. Le guide d'origine (02.06.2026) décrivait une
-> installation nginx + certbot + `git pull` par SSH qui n'existe plus : le site
-> tourne derrière le Caddy partagé du VPS principal.
+> Mis à jour le 21.10.2026, puis le 10.11.2026 (PHP limité aux `.php` depuis Caddy 2.11.9).
+> Le guide d'origine (02.06.2026) décrivait une installation nginx + certbot + `git pull`
+> par SSH qui n'existe plus : le site tourne derrière le Caddy partagé du VPS principal.
 
 ---
 
@@ -20,7 +20,7 @@ poste de Kevin ──git push main──▶ GitHub (snapshot-media/Afterglow)
              /var/www/afterglow : git fetch + git reset --hard origin/main
                                         ▼
        Caddy (/etc/caddy/Caddyfile, partagé) ──▶ fichiers statiques
-                                             └─▶ php8.3-fpm (contact.php)
+                                             └─▶ php8.3-fpm (les seuls *.php : contact.php)
 ```
 
 - **Workflow** `.github/workflows/deploy.yml` (« 🚀 Deploy to VPS ») : à chaque push
@@ -77,13 +77,21 @@ Le site est un bloc de la **section 4** du Caddyfile partagé du VPS principal
 le certificat tout seul.
 
 Le bloc n'existe que dans le Caddyfile partagé du serveur : ce dépôt est public, il n'en
-garde plus de copie (la copie de référence est dans le dépôt privé de gouvernance). Ne
-jamais écraser `/etc/caddy/Caddyfile` : on remplacerait la configuration de tout le serveur.
+garde plus de copie (la copie de référence est dans le dépôt privé de gouvernance,
+`snapshot-meta`, `ops/vps-principal/caddy-afterglow.caddy`). Ne jamais copier un fichier sur
+`/etc/caddy/Caddyfile` : on remplacerait la configuration de tout le serveur.
 Modifier le bloc en place, puis :
 
 ```bash
 caddy validate --config /etc/caddy/Caddyfile && systemctl reload caddy
 ```
+
+**PHP ne reçoit que les fichiers `.php`** (depuis le 07.11.2026) : le bloc pose
+`@php path *.php` puis `php_fastcgi @php unix//run/php/php8.3-fpm.sock`. Depuis Caddy 2.11.9
+(mise à jour du 06.11.2026), un `php_fastcgi` sans ce matcher envoyait aussi « / » à PHP-FPM,
+qui cherchait un `index.php` absent : la page d'accueil répondait 404 « File not found. »
+(Afterglow et Patounes, du 6 au 7 novembre). Ne pas retirer le matcher ; après toute mise à jour
+qui touche Caddy, vérifier « / » des deux sites PHP (voir plus bas).
 
 Pas de `www` : `www.afterglowbykevin.ch` n'existe pas au DNS, et son bloc de
 redirection a été retiré le 21.10.2026 (Caddy échouait à en obtenir le certificat).
@@ -102,7 +110,9 @@ Caddy refuse de servir (404) : `.git*`, `.env*`, `smtp-config.php`, `composer.*`
 
 1. GitHub → onglet **Actions** → « 🚀 Deploy to VPS » en vert
    (ou `gh run list -R snapshot-media/Afterglow --limit 3`).
-2. `curl -sI https://afterglowbykevin.ch/` → `200`.
+2. `curl -sI https://afterglowbykevin.ch/` → `200`, et la page servie est la vraie (pas
+   « File not found. », le symptôme d'un PHP qui reçoit « / ») ; `curl -s -o /dev/null -w '%{http_code}'
+   https://afterglowbykevin.ch/smtp-config.php` → `404`.
 3. Sur le serveur, le clone est au commit poussé :
    `sudo -u github-runner git -C /var/www/afterglow log -1 --oneline`.
 
