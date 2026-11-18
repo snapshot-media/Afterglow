@@ -34,7 +34,7 @@ const PALETTE_OPTS = Object.values(KC.PALETTES);
 
 const PRESTA_NAV = [
   { slug: "mariage",   title: "Mariages",              short: "Mariages",  href: "mariages.html" },
-  { slug: "portrait",  title: "Portraits",             short: "Portraits", href: "portraits.html" },
+  { slug: "portrait",  title: "Lifestyle",             short: "Lifestyle", href: "portraits.html" },
   { slug: "studio",    title: "Studio",                short: "Studio",    href: "studio.html" },
   { slug: "maternite", title: "Maternité & Grossesse", short: "Maternité", href: "maternite-grossesse.html" },
 ];

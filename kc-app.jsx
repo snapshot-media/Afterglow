@@ -28,7 +28,7 @@ const PRESTATIONS = [
   { n: "01", title: "Mariages", id: "presta-mariage", href: "mariages.html",
     img: "Mariage — cérémonie / golden hour",
     text: "De la promesse échangée aux derniers pas de danse — une narration sensible et discrète de votre journée, au plus près de l'émotion, sans mise en scène inutile." },
-  { n: "02", title: "Portraits", id: "presta-portrait", href: "portraits.html",
+  { n: "02", title: "Lifestyle", id: "presta-portrait", href: "portraits.html",
     img: "Portrait — lumière naturelle / extérieur",
     text: "Un portrait qui vous ressemble, en lumière naturelle ou en extérieur. Personnel, artistique ou pour votre image de marque — sincère et vivant." },
   { n: "03", title: "Studio", id: "presta-studio", href: "studio.html",
@@ -119,8 +119,8 @@ const HOME_HERO = {
 function HeroCtas({ light }) {
   return (
     <div className="hh-ctas reveal in d3">
-      <a className={"hh-btn" + (light ? " on-img" : "")} href="portfolio.html">Voir le portfolio <span className="ar">→</span></a>
-      <a className="hh-link" href="contact.html">Réserver une date</a>
+      <a className={"hh-btn" + (light ? " on-img" : "")} href="contact.html">Réserver une date <span className="ar">→</span></a>
+      <a className="hh-link" href="portfolio.html">Voir le portfolio</a>
     </div>
   );
 }

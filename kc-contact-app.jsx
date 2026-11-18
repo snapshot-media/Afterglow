@@ -9,7 +9,7 @@ const Q = new URLSearchParams(window.location.search);
 
 const TYPES = [
   { key: "Mariage", href: "mariages.html" },
-  { key: "Portrait", href: "portraits.html" },
+  { key: "Lifestyle", href: "portraits.html" },
   { key: "Studio", href: "studio.html" },
   { key: "Maternité & Grossesse", href: "maternite-grossesse.html" },
   { key: "Bon cadeau", href: "" },
@@ -18,15 +18,15 @@ const TYPES = [
 
 const FORMULES = {
   "Mariage": [
-    { name: "Essentiel — 6 h", price: "CHF 1'290" },
-    { name: "Signature — 10 h", price: "CHF 2'690" },
+    { name: "Essentiel — 4 h", price: "CHF 1'290" },
+    { name: "Signature — 10 h", price: "CHF 2'490" },
     { name: "Prestige — 2 jours", price: "dès CHF 4'500" },
     { name: "Je ne sais pas encore", price: "" },
   ],
-  "Portrait": [
-    { name: "Signature — 45 min", price: "CHF 320" },
-    { name: "Lumière — 1 h 30", price: "CHF 520" },
-    { name: "Présence — 2 h (pro)", price: "CHF 850" },
+  "Lifestyle": [
+    { name: "Essentiel — 30 min", price: "CHF 180" },
+    { name: "Signature — 1 h", price: "CHF 280" },
+    { name: "Corporate — pro & image de marque", price: "Sur devis" },
     { name: "Je ne sais pas encore", price: "" },
   ],
   "Studio": [
@@ -36,9 +36,9 @@ const FORMULES = {
     { name: "Je ne sais pas encore", price: "" },
   ],
   "Maternité & Grossesse": [
-    { name: "Lumière — 1 h studio", price: "CHF 380" },
-    { name: "Cocon — 1 h 30", price: "CHF 590" },
-    { name: "Continuité — grossesse + nouveau-né", price: "CHF 980" },
+    { name: "Lumière — 30 min", price: "CHF 180" },
+    { name: "Cocon — 1 h", price: "CHF 280" },
+    { name: "Continuité — grossesse + nouveau-né", price: "CHF 480" },
     { name: "Je ne sais pas encore", price: "" },
   ],
   "Couple": [

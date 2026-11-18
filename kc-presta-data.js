@@ -68,7 +68,7 @@ window.KC_PRESTA = {
 
   /* ====================== PORTRAITS ====================== */
   portrait: {
-    slug: "portrait", title: "Portraits", crumb: "Portraits", heroDefault: "bas",
+    slug: "portrait", title: "Lifestyle", crumb: "Lifestyle", heroDefault: "bas",
     heroImg: "Photo hero — portrait en lumière naturelle, extérieur",
     heroHint: "Photographe portrait en Suisse romande, en lumière naturelle.",
     intro: {

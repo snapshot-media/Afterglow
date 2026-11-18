@@ -10,7 +10,7 @@ const { useState } = React;
 const PF_CATS = [
   { key: "all",       label: "Tout" },
   { key: "mariage",   label: "Mariages" },
-  { key: "portrait",  label: "Portraits" },
+  { key: "portrait",  label: "Lifestyle" },
   { key: "studio",    label: "Studio" },
   { key: "maternite", label: "Maternité" },
 ];
