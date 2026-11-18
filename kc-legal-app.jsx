@@ -10,7 +10,7 @@ const LEGAL_SECTIONS = [
     p: [
       "Le présent site afterglowbykevin.ch (« Afterglow by Kevin ») est édité et exploité par Kevin Chinelli, photographe indépendant.",
       "Adresse : Ch. de l'Ancien-Tram 18, 1083 Mézières (Vaud), Suisse.",
-      "Contact : contact@afterglowbykevin.ch · +41 76 424 76 03.",
+      "Contact : contact@afterglowbykevin.ch · +41 79 850 76 03.",
     ],
   },
   {

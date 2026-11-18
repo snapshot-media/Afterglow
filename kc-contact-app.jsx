@@ -18,7 +18,7 @@ const TYPES = [
 
 const FORMULES = {
   "Mariage": [
-    { name: "Essentiel — 6 h", price: "CHF 1'690" },
+    { name: "Essentiel — 6 h", price: "CHF 1'290" },
     { name: "Signature — 10 h", price: "CHF 2'690" },
     { name: "Prestige — 2 jours", price: "dès CHF 4'500" },
     { name: "Je ne sais pas encore", price: "" },
@@ -248,7 +248,7 @@ function ContactApp() {
             <div className="fn-aside reveal d1">
               <a href="mailto:contact@afterglowbykevin.ch">contact@afterglowbykevin.ch</a>
               <span className="jl-dot">·</span>
-              <a href="tel:+41764247603">+41 76 424 76 03</a>
+              <a href="tel:+41798507603">+41 79 850 76 03</a>
               <span className="jl-dot">·</span>
               <a href="https://www.instagram.com/afterglowbykevin/" target="_blank" rel="noopener">@afterglowbykevin</a>
               <span className="jl-dot">·</span>

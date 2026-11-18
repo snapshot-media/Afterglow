@@ -443,7 +443,7 @@ function Footer() {
       <div className="footer">
         <div className="wordmark"><span className="wm-main">Afterglow</span><span className="wm-by">by Kevin Chinelli</span></div>
         <div className="copy">© 2026 — Tous droits réservés · Site créé par <a href="https://snapshotmedia.ch" target="_blank" rel="noopener">Snapshot Media</a></div>
-        <div className="social"><a href="apropos.html">À propos</a><a href="confidentialite.html">Confidentialité</a><a href="https://www.instagram.com/afterglowbykevin/" target="_blank" rel="noopener">Instagram</a><a href="tel:+41764247603">+41 76 424 76 03</a><a href="mailto:contact@afterglowbykevin.ch">contact@afterglowbykevin.ch</a></div>
+        <div className="social"><a href="apropos.html">À propos</a><a href="confidentialite.html">Confidentialité</a><a href="https://www.instagram.com/afterglowbykevin/" target="_blank" rel="noopener">Instagram</a><a href="tel:+41798507603">+41 79 850 76 03</a><a href="mailto:contact@afterglowbykevin.ch">contact@afterglowbykevin.ch</a></div>
       </div>
     </footer>
   );

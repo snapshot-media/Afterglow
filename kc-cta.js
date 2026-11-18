@@ -6,7 +6,7 @@
 (function () {
   if (window.__kcCta) return; window.__kcCta = true;
 
-  var KC_PHONE = "41764247603"; // format international sans "+" ni espaces
+  var KC_PHONE = "41798507603"; // format international sans "+" ni espaces
   var WA_TEXT  = encodeURIComponent("Bonjour Kevin, j'aimerais des informations pour une séance photo.");
   var here = (location.pathname.split("/").pop() || "").toLowerCase();
   if (here === "contact.html") return; // inutile sur la page contact

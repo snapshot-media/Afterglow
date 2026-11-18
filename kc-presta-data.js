@@ -32,9 +32,9 @@ window.KC_PRESTA = {
       { ph: "Émotion d'un invité",               o: "v" },
     ],
     formules: [
-      { tag: "Demi-journée · 4 h", name: "Essentiel", price: "CHF 1'690",
+      { tag: "Demi-journée · 4 h", name: "Essentiel", price: "CHF 1'290",
         items: ["Couverture 4 h continues — cérémonie & vin d'honneur", "Galerie privée en ligne, téléchargement HD", "Env. 200 photos, toutes retouchées"] },
-      { tag: "Le plus choisi · 10 h", name: "Signature", price: "CHF 2'990", feature: true,
+      { tag: "Le plus choisi · 10 h", name: "Signature", price: "CHF 2'490", feature: true,
         items: ["Couverture 10 h, des préparatifs à la soirée", "Séance engagement offerte", "Galerie privée + sélection de favoris", "Env. 500 photos, toutes retouchées"] },
       { tag: "Sur mesure · 2 jours", name: "Prestige", price: "CHF 4'500",
         items: ["Présence sur 2 jours (veille / brunch)", "Second photographe", "Séance engagement offerte", "Album fine art relié", "Tirage fine art", "Livraison express sous 10 jours"] },
@@ -92,9 +92,9 @@ window.KC_PRESTA = {
       { ph: "Instant spontané", o: "h" },
     ],
     formules: [
-      { tag: "Découverte · 30 min", name: "Essentiel", price: "CHF 240",
+      { tag: "Découverte · 30 min", name: "Essentiel", price: "CHF 180",
         items: ["1 lieu extérieur", "10 photos retouchées", "Galerie privée en ligne", "Galerie complète en option"] },
-      { tag: "Le plus choisi · 1 h", name: "Signature", price: "CHF 340", feature: true,
+      { tag: "Le plus choisi · 1 h", name: "Signature", price: "CHF 280", feature: true,
         items: ["2 lieux (intérieur ou extérieur) ou 2 ambiances proches", "25 photos retouchées", "Galerie privée en ligne", "Galerie complète en option"] },
       { tag: "Pro & image de marque", name: "Corporate", price: "Sur devis",
         items: ["Portraits pro & personal branding", "Extérieur, intérieur ou studio", "Portraits d'équipe possibles", "Droits d'usage commercial inclus", "Volume & délai selon vos besoins"] },
@@ -151,11 +151,11 @@ window.KC_PRESTA = {
       { ph: "La magie de l'attente", o: "h" },
     ],
     formules: [
-      { tag: "Solo · 30 min", name: "Lumière", price: "CHF 240",
+      { tag: "Solo · 30 min", name: "Lumière", price: "CHF 180",
         items: ["Séance grossesse en solo", "10 photos retouchées", "Galerie privée en ligne", "Galerie complète en option"] },
-      { tag: "Le plus choisi · 1 h", name: "Cocon", price: "CHF 340", feature: true,
+      { tag: "Le plus choisi · 1 h", name: "Cocon", price: "CHF 280", feature: true,
         items: ["Séance grossesse 1 h", "Seule, en couple ou en famille", "25 photos retouchées", "Galerie privée en ligne", "Galerie complète en option"] },
-      { tag: "Grossesse + nouveau-né", name: "Continuité", price: "CHF 540",
+      { tag: "Grossesse + nouveau-né", name: "Continuité", price: "CHF 480",
         items: ["Séance grossesse + séance nouveau-né", "Seule, en couple ou en famille", "Galerie privée commune", "Env. 40 photos retouchées", "Galerie complète en option"] },
     ],
     process: [

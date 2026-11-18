@@ -10,7 +10,7 @@ const HREF = {};
 
 const TARIF_FAQ = [
   { q: "Combien coûte un photographe de mariage en Suisse romande ?",
-    a: "Un reportage de mariage se situe généralement entre CHF 1'690 (demi-journée) et CHF 4'500 et plus (couverture sur deux jours, second photographe et album). Ma formule la plus choisie — Signature, 10 h de couverture — est à CHF 2'990. Chaque devis reste personnalisé selon votre déroulé." },
+    a: "Un reportage de mariage se situe généralement entre CHF 1'290 (demi-journée) et CHF 4'500 et plus (couverture sur deux jours, second photographe et album). Ma formule la plus choisie — Signature, 10 h de couverture — est à CHF 2'490. Chaque devis reste personnalisé selon votre déroulé." },
   { q: "Les frais de déplacement sont-ils inclus ?",
     a: "Oui — aucun frais de déplacement à l'intérieur de la Suisse romande (Vaud, Genève, Fribourg, Neuchâtel, Valais). Pour un projet ailleurs en Suisse ou à l'étranger, le déplacement et l'hébergement éventuel sont chiffrés clairement dans le devis." },
   { q: "Les tarifs sont-ils fixes ou sur devis ?",

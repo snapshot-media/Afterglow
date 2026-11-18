@@ -183,7 +183,7 @@ window.KC_JOURNAL = {
       sections: [
         { h: "Les fourchettes de prix en Suisse romande", p: [
           "En Suisse romande, un reportage de mariage complet se situe le plus souvent entre 2'500 et 4'500 francs. En dessous de 1'500 francs, vous trouverez surtout des photographes débutants ou des couvertures très courtes ; au-delà de 5'000 francs, des photographes très établis ou des prestations sur deux jours avec second photographe et album haut de gamme.",
-          "Chez Afterglow, mes [formules mariage](mariages.html) démarrent à CHF 1'690 pour une demi-journée et vont jusqu'à CHF 4'500 pour une présence sur deux jours. Cette fourchette n'est pas arbitraire : elle suit la durée de présence, le nombre d'images livrées et les livrables physiques inclus.",
+          "Chez Afterglow, mes [formules mariage](mariages.html) démarrent à CHF 1'290 pour une demi-journée et vont jusqu'à CHF 4'500 pour une présence sur deux jours. Cette fourchette n'est pas arbitraire : elle suit la durée de présence, le nombre d'images livrées et les livrables physiques inclus.",
         ] },
         { h: "Ce qui fait vraiment le prix", list: [
           "Les heures de présence : une demi-journée et une couverture des préparatifs jusqu'au bout de la soirée n'engagent pas le même travail.",
