@@ -9,7 +9,8 @@
 import { build, transform } from "esbuild";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
-import { readFileSync, writeFileSync, readdirSync } from "node:fs";
+import { readFileSync, writeFileSync, readdirSync, existsSync } from "node:fs";
+import { createHash } from "node:crypto";
 import { prerenderAll } from "./prerender.mjs";
 import { bundleAll } from "./bundle-scripts.mjs";
 import { downloadFonts } from "./download-fonts.mjs";
@@ -106,18 +107,30 @@ for (const htmlFile of htmlFiles) {
 }
 if (fontUpdated > 0) console.log(`✅ Polices locales : ${fontUpdated} pages mises à jour`);
 
-// Stamp a ?v=YYYYMMDD querystring on every local JS/CSS reference in all HTML
-// files so browser caches are invalidated after each deployment.
-// Couvre désormais : lib/, kc*, tweaks*, image-slot*, bundles/, fonts/fonts.css
-const version = new Date().toISOString().slice(0, 10).replace(/-/g, "");
+// Empreinte ?v=<hash du contenu> sur chaque CSS/JS local référencé par les pages.
+// Caddy les sert « immutable » pendant 30 jours : avant le 19.11.2026, l'empreinte était la
+// DATE du jour, donc deux mises en ligne le même jour gardaient la même adresse et un visiteur
+// déjà passé gardait l'ancien fichier (titre Lifestyle cassé chez Kevin). Désormais, l'adresse
+// change dès que le contenu du fichier change, et seulement dans ce cas.
+// Couvre : lib/, kc*, tweaks*, image-slot*, bundles/, fonts/fonts.css
 const assetRe = /(<(?:script|link)[^>]+(?:src|href)=")((?:(?:lib\/|bundles\/|kc|tweaks|image-slot)[^"?]*|kc\.min\.css|kc-pages\.min\.css|fonts\/fonts\.css)[^"?]*)(\?v=[^"]*)?(")([^>]*>)/g;
+const hashes = new Map();
+const hashOf = (path) => {
+  if (!hashes.has(path)) {
+    const fp = resolve(root, path);
+    hashes.set(path, existsSync(fp) ? createHash("sha256").update(readFileSync(fp)).digest("hex").slice(0, 10) : "absent");
+  }
+  return hashes.get(path);
+};
 let stampCount = 0;
 for (const htmlFile of htmlFiles) {
   const fp = resolve(root, htmlFile);
   const original = readFileSync(fp, "utf8");
   const stamped = original.replace(assetRe, (_, pre, path, _v, quote, post) =>
-    `${pre}${path}?v=${version}${quote}${post}`
+    `${pre}${path}?v=${hashOf(path)}${quote}${post}`
   );
   if (stamped !== original) { writeFileSync(fp, stamped); stampCount++; }
 }
-console.log(`✅ Cache version ${version} appliquée (${stampCount} fichiers HTML)`);
+const missing = [...hashes].filter(([, h]) => h === "absent").map(([p]) => p);
+if (missing.length) console.warn(`  ⚠ fichiers référencés introuvables : ${missing.join(", ")}`);
+console.log(`✅ Empreintes de cache par contenu appliquées (${hashes.size} fichiers, ${stampCount} pages HTML)`);
