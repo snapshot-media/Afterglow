@@ -340,6 +340,9 @@ image-slot[id="home-hero-mobile"]{ position:absolute; inset:0; display:none; }
   .hhero.va .hh-tag{ margin-top:10px; }
   .hhero.va .hh-ctas{ margin-top:18px; }
   .hhero.va .hh-meta{ margin-top:12px; }
+  /* Téléphone : hero épuré (demande de Kevin, 19.11.2026) — sans la phrase ni la liste sous les boutons */
+  .hhero.va .hh-tag, .hhero.va .hh-meta{ display:none; }
+  .hhero.va .hh-ctas{ margin-top:24px; }
 }
 .hh-scroll{ position:absolute; bottom:40px; left:50%; transform:translateX(-50%); z-index:2;
   width:14px; height:52px; color:var(--accent); opacity:.8;
