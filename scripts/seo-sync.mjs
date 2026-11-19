@@ -184,8 +184,15 @@ export function finishPage(html) {
   const NS = '<noscript><style>.reveal{opacity:1!important;transform:none!important}</style></noscript>';
   if (!html.includes(NS)) html = html.replace("</head>", NS + "\n</head>");
   html = html.replace(/<script defer src="\/u\/script\.js"[^>]*><\/script>\r?\n?/g, "");
+  html = html.replace(/<script data-umami-optout>[\s\S]*?<\/script>\r?\n?/g, "");
   if (UMAMI_WEBSITE_ID) {
-    html = html.replace("</head>", `<script defer src="/u/script.js" data-website-id="${UMAMI_WEBSITE_ID}" data-domains="afterglowbykevin.ch"></script>\n</head>`);
+    // Exclure un appareil des statistiques sans console (iPhone compris) : ouvrir une page avec
+    // #sans-stats (#avec-stats pour revenir). Umami lit localStorage « umami.disabled » avant chaque envoi.
+    const OPTOUT = '<script data-umami-optout>try{var h=location.hash;if(h==="#sans-stats"||h==="#avec-stats"){' +
+      'h==="#sans-stats"?localStorage.setItem("umami.disabled","1"):localStorage.removeItem("umami.disabled");' +
+      'history.replaceState(null,"",location.pathname+location.search);' +
+      'alert(h==="#sans-stats"?"Cet appareil n\\u2019est plus compt\\u00e9 dans les statistiques.":"Cet appareil est de nouveau compt\\u00e9 dans les statistiques.")}}catch(e){}</script>';
+    html = html.replace("</head>", `${OPTOUT}\n<script defer src="/u/script.js" data-website-id="${UMAMI_WEBSITE_ID}" data-domains="afterglowbykevin.ch"></script>\n</head>`);
   }
   return html;
 }
