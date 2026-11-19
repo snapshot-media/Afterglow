@@ -35,7 +35,11 @@ window.KC_VILLE = {
       { q: "Connaissez-vous les lieux de mariage lausannois ?", a: "Très bien — de la cathédrale aux quais d'Ouchy, en passant par l'Hôtel de Ville, Sauvabelin et les domaines de Lavaux. Au repérage, on cale ensemble le déroulé et les meilleurs spots selon l'heure et la lumière de votre date." },
       { q: "Peut-on faire les photos de couple sur les quais ?", a: "Absolument. Les quais d'Ouchy et le bord du Léman sont parfaits à l'heure dorée. Pour éviter la foule estivale, on privilégie le début de matinée ou la fin de journée." },
     ],
-    related: { article: "journal-spots-photo-couple-leman.html", articleTitle: "Spots photo de couple autour du Léman" },
+    related: [
+      { article: "journal-lieux-mariage-vaud-leman.html", articleTitle: "Se marier dans le canton de Vaud : 10 lieux autour du Léman" },
+      { article: "journal-lieux-mariage-lavaux.html", articleTitle: "Où se marier en Lavaux : 8 lieux face au Léman" },
+      { article: "journal-spots-photo-couple-leman.html", articleTitle: "Spots photo de couple autour du Léman" },
+    ],
   },
 
   /* ===================== GENÈVE ===================== */
@@ -68,7 +72,11 @@ window.KC_VILLE = {
       { q: "Où faire les photos de couple à Genève ?", a: "La vieille ville et la cathédrale Saint-Pierre pour le cachet historique, le Parc des Bastions pour la verdure, et les quais ou les Bains des Pâquis pour le lac et le jet d'eau. On choisit selon votre déroulé et la lumière du jour." },
       { q: "Gérez-vous les cérémonies civiles à Genève ?", a: "Oui, j'ai l'habitude des salles des mariages et des contraintes de lumière en intérieur. On anticipe ensemble le timing pour ne rien manquer de l'échange des consentements." },
     ],
-    related: { article: "journal-spots-photo-couple-leman.html", articleTitle: "Spots photo de couple autour du Léman" },
+    related: [
+      { article: "journal-ou-se-marier-geneve.html", articleTitle: "Où se marier à Genève : lieux et décors de rêve" },
+      { article: "journal-lieux-mariage-la-cote.html", articleTitle: "Se marier sur La Côte : châteaux, vignes et bord du lac" },
+      { article: "journal-spots-photo-couple-leman.html", articleTitle: "Spots photo de couple autour du Léman" },
+    ],
   },
 
   /* ===================== MONTREUX ===================== */
@@ -101,7 +109,10 @@ window.KC_VILLE = {
       { q: "Peut-on faire des photos au château de Chillon ?", a: "Oui, les abords du château offrent un décor spectaculaire. L'accès aux intérieurs et certaines zones peut nécessiter une autorisation : on anticipe ce point ensemble lors de la préparation." },
       { q: "Quelle est la meilleure heure pour les quais de Montreux ?", a: "L'heure dorée, en fin de journée : la lumière chaude sublime les massifs fleuris et le lac, avec les Alpes qui rosissent en arrière-plan. Le matin tôt est aussi superbe et plus calme." },
     ],
-    related: { article: "journal-lieux-mariage-lavaux.html", articleTitle: "Où se marier en Lavaux : 8 lieux face au Léman" },
+    related: [
+      { article: "journal-lieux-mariage-lavaux.html", articleTitle: "Où se marier en Lavaux : 8 lieux face au Léman" },
+      { article: "journal-lieux-mariage-vaud-leman.html", articleTitle: "Se marier dans le canton de Vaud : 10 lieux autour du Léman" },
+    ],
   },
 
   /* ===================== FAMILLE × LAUSANNE ===================== */
@@ -134,6 +145,10 @@ window.KC_VILLE = {
       { q: "Où faire les photos de famille à Lausanne ?", a: "En extérieur — quais d'Ouchy, Sauvabelin, parc de Mon-Repos, vignes de Lavaux — ou à votre domicile pour des images du quotidien. On choisit selon l'âge des enfants et l'ambiance que vous aimez." },
       { q: "Quel est le meilleur moment pour une séance avec des enfants ?", a: "En fin d'après-midi pour la belle lumière, mais surtout au moment où les enfants sont le plus disponibles (après la sieste, après le goûter). On s'adapte à leur rythme — c'est la clé de photos réussies." },
     ],
+    related: [
+      { article: "journal-spots-seance-photo-lausanne.html", articleTitle: "Les plus beaux endroits pour une séance photo à Lausanne" },
+      { article: "journal-quelle-tenue-seance-portrait.html", articleTitle: "Quelle tenue porter pour une séance portrait ?" },
+    ],
   },
 
   /* ===================== FAMILLE × GENÈVE ===================== */
@@ -165,6 +180,10 @@ window.KC_VILLE = {
       { q: "Intervenez-vous à Genève sans supplément pour une séance famille ?", a: "Oui, Genève fait partie de ma zone de couverture en Suisse romande : pas de frais de déplacement. Je rayonne aussi sur Vaud, Fribourg, Neuchâtel et le Valais romand." },
       { q: "Quels lieux pour une séance famille à Genève ?", a: "Le Parc La Grange et le Parc des Bastions pour la verdure, les bords du lac pour la lumière et le jet d'eau, ou votre domicile. On choisit selon l'âge des enfants et l'ambiance souhaitée." },
       { q: "Comment ça se passe avec de jeunes enfants ?", a: "Tout en souplesse : on joue, on bouge, on fait des pauses si besoin. Je ne cherche jamais à les figer — les enfants spontanés donnent les plus belles images." },
+    ],
+    related: [
+      { article: "journal-quelle-tenue-seance-portrait.html", articleTitle: "Quelle tenue porter pour une séance portrait ?" },
+      { article: "journal-portrait-studio-ou-exterieur.html", articleTitle: "Portrait en studio ou en extérieur : lequel choisir ?" },
     ],
   },
 };

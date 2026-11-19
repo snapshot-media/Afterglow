@@ -20,6 +20,33 @@ function RichText({ text }) {
   return <>{parts}</>;
 }
 
+/* « À lire aussi » : deux articles du même thème, pris à la suite dans l'ordre du journal (en boucle),
+   pour que chaque article en reçoive autant que ses voisins. Avant le 19.11.2026, toutes les pages
+   montraient les deux premiers du journal (17 et 20 liens pour eux, 1 pour d'autres).
+   Thème d'un seul article : thèmes proches ; PAIRES fixe un choix quand l'ordre ne suffit pas. */
+const NEAR = { Mariage: ["Couple"], Portrait: ["Studio", "Couple"], Studio: ["Portrait"], Couple: ["Portrait", "Mariage"], "Maternité": ["Portrait"] };
+const PAIRES = { "photos-linkedin-personal-branding": ["portrait-studio-ou-exterieur", "quelle-tenue-seance-portrait"] };
+function readNext(A) {
+  const all = J_ALL.order.map((s) => J_ALL.articles[s]);
+  if (PAIRES[A.slug]) return PAIRES[A.slug].map((s) => J_ALL.articles[s]);
+  const same = all.filter((a) => a.category === A.category);
+  const i = same.findIndex((a) => a.slug === A.slug);
+  const picks = [];
+  for (let k = 1; k < same.length && picks.length < 2; k++) picks.push(same[(i + k) % same.length]);
+  for (const c of NEAR[A.category] || []) for (const a of all) if (picks.length < 2 && a.category === c && !picks.includes(a)) picks.push(a);
+  for (const a of all) if (picks.length < 2 && a.slug !== A.slug && !picks.includes(a)) picks.push(a);
+  return picks;
+}
+
+/* Guides de lieux → page « photographe à … » de la ville (sinon liées seulement par leur page prestation). */
+const SUR_PLACE = {
+  "ou-se-marier-geneve": [["Votre photographe de mariage à Genève", "photographe-mariage-geneve.html"]],
+  "lieux-mariage-la-cote": [["Votre photographe de mariage à Genève", "photographe-mariage-geneve.html"], ["Votre photographe de mariage à Lausanne", "photographe-mariage-lausanne.html"]],
+  "lieux-mariage-vaud-leman": [["Votre photographe de mariage à Lausanne", "photographe-mariage-lausanne.html"], ["Votre photographe de mariage à Montreux", "photographe-mariage-montreux.html"]],
+  "lieux-mariage-lavaux": [["Votre photographe de mariage à Montreux", "photographe-mariage-montreux.html"], ["Votre photographe de mariage à Lausanne", "photographe-mariage-lausanne.html"]],
+  "spots-seance-photo-lausanne": [["Votre séance photo de famille à Lausanne", "photographe-famille-lausanne.html"]],
+};
+
 function ArticleApp() {
   const [t, setTweak] = useTweaks({
     palette: KC.PALETTES["Noir chaud"],
@@ -29,7 +56,8 @@ function ArticleApp() {
   useApplyTweaks(t);
   useReveal([]);
 
-  const others = J_ALL.order.filter((s) => s !== A.slug).map((s) => J_ALL.articles[s]).slice(0, 2);
+  const others = readNext(A);
+  const places = SUR_PLACE[A.slug] || [];
 
   return (
     <>
@@ -59,7 +87,10 @@ function ArticleApp() {
               ))}
               <div className="art-closing reveal">
                 <p>{A.closing}</p>
-                <a href={A.relatedHref} className="link-arrow">Découvrir mes séances {A.relatedTitle.toLowerCase()} <span className="ar">→</span></a>
+                <div className="art-next">
+                  <a href={A.relatedHref} className="link-arrow">Découvrir mes séances {A.relatedTitle.toLowerCase()} <span className="ar">→</span></a>
+                  {places.map(([label, href]) => <a key={href} href={href} className="link-arrow">{label} <span className="ar">→</span></a>)}
+                </div>
               </div>
             </div>
           </div>

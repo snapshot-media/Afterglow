@@ -132,8 +132,26 @@ function Footer() {
         <a href={KC.HOME} className="wordmark"><span className="wm-main">Afterglow</span><span className="wm-by">by Kevin Chinelli</span></a>
         <div className="copy">© 2026 — Tous droits réservés · Site créé par <a href="https://snapshotmedia.ch" target="_blank" rel="noopener">Snapshot Media</a></div>
         <FooterLinks />
+        <FooterZones />
       </div>
     </footer>
+  );
+}
+/* Les pages ville, depuis toutes les pages : sans cela, chacune n'était liée que par sa page prestation
+   (maillage interne, audit du 19.11.2026). L'accueil, kc-app.jsx, en a une copie. */
+const ZONES = [
+  { label: "Mariage à Lausanne", href: "photographe-mariage-lausanne.html" },
+  { label: "Mariage à Genève", href: "photographe-mariage-geneve.html" },
+  { label: "Mariage à Montreux", href: "photographe-mariage-montreux.html" },
+  { label: "Famille à Lausanne", href: "photographe-famille-lausanne.html" },
+  { label: "Famille à Genève", href: "photographe-famille-geneve.html" },
+];
+function FooterZones() {
+  return (
+    <div className="zones">
+      <span className="zones-label">Par région</span>
+      {ZONES.map((z) => <a key={z.href} href={z.href}>{z.label}</a>)}
+    </div>
   );
 }
 /* Liens du pied de page (l'accueil, kc-app.jsx, en a une copie). data-umami-event : clics mesurés par Umami. */

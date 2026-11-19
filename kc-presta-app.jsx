@@ -316,7 +316,7 @@ const JOURNAL_CATS = {
   portrait: ["Portrait", "Couple", "Studio"],
   solo: ["Portrait", "Studio"],
   couple: ["Couple", "Portrait"],
-  // famille : pas encore d'article dédié → pas de bande journal
+  famille: ["Portrait"], // pas encore d'article famille : les conseils de séance (lieux, tenue) valent aussi
   studio: ["Studio", "Portrait"],
   maternite: ["Maternité"],
 };
@@ -325,9 +325,12 @@ function JournalBand() {
   const cats = JOURNAL_CATS[window.KC_SLUG];
   if (!J || !cats) return null;
   // articles de la première catégorie d'abord (ex. Couple sur la page Couple), puis les suivantes ; ordre du journal ensuite
-  const arts = J.order.map((s) => J.articles[s]).filter((a) => cats.includes(a.category))
-    .sort((x, y) => cats.indexOf(x.category) - cats.indexOf(y.category)).slice(0, 3);
-  if (arts.length === 0) return null;
+  const all = J.order.map((s) => J.articles[s]).filter((a) => cats.includes(a.category))
+    .sort((x, y) => cats.indexOf(x.category) - cats.indexOf(y.category));
+  if (all.length === 0) return null;
+  // trois en cartes ; les autres du même thème en liens sous les cartes (maillage : avant le 19.11.2026,
+  // cinq guides mariage n'étaient liés que depuis la page Journal)
+  const arts = all.slice(0, 3), more = all.slice(3);
   return (
     <section className="sec s-dark pad-y">
       <div className="wrap">
@@ -350,6 +353,12 @@ function JournalBand() {
             </a>
           ))}
         </div>
+        {more.length > 0 && (
+          <div className="jl-more reveal">
+            <span className="jl-more-label">Aussi dans le journal</span>
+            {more.map((a) => <a key={a.slug} href={a.file}>{a.title} <span className="ar">→</span></a>)}
+          </div>
+        )}
       </div>
     </section>
   );

@@ -450,6 +450,15 @@ function Footer() {
           <a href="tel:+41798507603" data-umami-event="telephone">+41 79 850 76 03</a>
           <a href="mailto:contact@afterglowbykevin.ch" data-umami-event="email">contact@afterglowbykevin.ch</a>
         </div>
+        {/* même liste que FooterZones (kc-shared.jsx) */}
+        <div className="zones">
+          <span className="zones-label">Par région</span>
+          <a href="photographe-mariage-lausanne.html">Mariage à Lausanne</a>
+          <a href="photographe-mariage-geneve.html">Mariage à Genève</a>
+          <a href="photographe-mariage-montreux.html">Mariage à Montreux</a>
+          <a href="photographe-famille-lausanne.html">Famille à Lausanne</a>
+          <a href="photographe-famille-geneve.html">Famille à Genève</a>
+        </div>
       </div>
     </footer>
   );

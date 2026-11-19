@@ -21,6 +21,28 @@ function VilleReassure() {
   );
 }
 
+/* Les autres villes de la même prestation (maillage interne) : mêmes pastilles que la bande « Par région »
+   des pages prestation. */
+function VillesSoeurs() {
+  const others = Object.values(window.KC_VILLE).filter((o) => o.slug !== V.slug && (o.presta || { slug: "mariage" }).slug === VP.slug);
+  if (others.length === 0) return null;
+  const Cap = VP.label.charAt(0).toUpperCase() + VP.label.slice(1);
+  return (
+    <section className="sec s-light pad-y">
+      <div className="wrap" style={{ textAlign: "center" }}>
+        <Overline className="reveal" style={{ justifyContent: "center" }}>Par région</Overline>
+        <h2 className="display reveal d1" style={{ fontSize: "clamp(26px,3.2vw,44px)", margin: "18px 0 clamp(28px,3.5vw,44px)" }}>Je me déplace aussi ailleurs.</h2>
+        <div className="villes-row reveal d1">
+          {others.map((o) => (
+            <a key={o.slug} href={"photographe-" + (o.presta ? o.slug : "mariage-" + o.slug) + ".html"} className="ville-chip">{Cap} à {o.ville} <span className="ar">→</span></a>
+          ))}
+          <a href={VP.href} className="ville-chip">Partout en Suisse romande <span className="ar">→</span></a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function VilleApp() {
   const [t, setTweak] = useTweaks({ palette: KC.PALETTES["Noir chaud"], heading: "Cinzel", body: "Jost" });
   useApplyTweaks(t);
@@ -100,13 +122,15 @@ function VilleApp() {
                 </details>
               ))}
             </div>
-            {V.related && (
-              <div style={{ textAlign: "center", marginTop: "clamp(30px,4vw,48px)" }}>
-                <a href={V.related.article} className="link-arrow reveal">À lire : {V.related.articleTitle} <span className="ar">→</span></a>
+            {V.related && V.related.length > 0 && (
+              <div className="ville-reads reveal">
+                {V.related.map((r) => <a key={r.article} href={r.article} className="link-arrow">À lire : {r.articleTitle} <span className="ar">→</span></a>)}
               </div>
             )}
           </div>
         </section>
+
+        <VillesSoeurs />
 
         <CtaContact overline={VLOCAL} title={VP.slug === "mariage" ? "Vérifions votre date." : "Réservez votre séance."} />
       </main>

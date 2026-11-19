@@ -596,6 +596,13 @@ select.control option{ background:#1a1714; color:#f2ede6; }
 .footer .social{ display:flex; gap:18px; }
 .footer .social a{ font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); transition:color .35s; }
 .footer .social a:hover{ color:var(--accent); }
+/* Pages ville (maillage interne) : une ligne pleine largeur sous le pied de page, même voix que les liens */
+.footer .zones{ flex-basis:100%; display:flex; flex-wrap:wrap; align-items:baseline; gap:8px 18px; padding-top:22px; border-top:1px solid var(--line-d); }
+.footer .zones a, .footer .zones-label{ font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); }
+.footer .zones-label{ opacity:.6; }
+.footer .zones a{ transition:color .35s; }
+.footer .zones a:hover{ color:var(--accent); }
+@media(max-width:640px){ .footer .zones{ justify-content:center; gap:10px 14px; padding-top:18px; } .footer .zones-label{ flex-basis:100%; } }
 
 /* monogram mark */
 .mono-mark{ font-family:var(--font-display); font-weight:400; letter-spacing:.05em; }
