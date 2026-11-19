@@ -820,5 +820,35 @@
     "s": 1,
     "x": 0,
     "y": 0
+  },
+  "ville-hero-yverdon": {
+    "u": "images/ville-yverdon-hero.webp",
+    "s": 1,
+    "x": 0,
+    "y": 0
+  },
+  "ville-hero-yverdon-mobile": {
+    "u": "images/ville-yverdon-hero-mobile.webp",
+    "s": 1,
+    "x": 0,
+    "y": 0
+  },
+  "ville-yverdon-p1": {
+    "u": "images/pf-mariage-5.webp",
+    "s": 1,
+    "x": 0,
+    "y": 0
+  },
+  "ville-yverdon-p2": {
+    "u": "images/pf-mariage-7.webp",
+    "s": 1,
+    "x": 0,
+    "y": 0
+  },
+  "ville-yverdon-p3": {
+    "u": "images/pf-mariage-8.webp",
+    "s": 1,
+    "x": 0,
+    "y": 0
   }
 }

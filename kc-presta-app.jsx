@@ -285,6 +285,7 @@ const VILLE_LINKS = {
     { ville: "Lausanne", href: "photographe-mariage-lausanne.html" },
     { ville: "Genève", href: "photographe-mariage-geneve.html" },
     { ville: "Montreux", href: "photographe-mariage-montreux.html" },
+    { ville: "Yverdon", href: "photographe-mariage-yverdon.html" },
   ] },
   famille: { label: "famille", items: [
     { ville: "Lausanne", href: "photographe-famille-lausanne.html" },

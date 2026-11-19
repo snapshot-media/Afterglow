@@ -456,6 +456,7 @@ function Footer() {
           <a href="photographe-mariage-lausanne.html">Mariage à Lausanne</a>
           <a href="photographe-mariage-geneve.html">Mariage à Genève</a>
           <a href="photographe-mariage-montreux.html">Mariage à Montreux</a>
+          <a href="photographe-mariage-yverdon.html">Mariage à Yverdon</a>
           <a href="photographe-famille-lausanne.html">Famille à Lausanne</a>
           <a href="photographe-famille-geneve.html">Famille à Genève</a>
         </div>

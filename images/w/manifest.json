@@ -782,5 +782,25 @@
    1200,
    1600
   ]
+ },
+ "images/ville-yverdon-hero-mobile.webp": {
+  "hash": "1ee81a652d38",
+  "W": 1080,
+  "H": 1620,
+  "w": [
+   480,
+   800
+  ]
+ },
+ "images/ville-yverdon-hero.webp": {
+  "hash": "8d559b593982",
+  "W": 2000,
+  "H": 1125,
+  "w": [
+   480,
+   800,
+   1200,
+   1600
+  ]
  }
 }

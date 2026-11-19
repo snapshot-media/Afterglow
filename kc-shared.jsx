@@ -143,6 +143,7 @@ const ZONES = [
   { label: "Mariage à Lausanne", href: "photographe-mariage-lausanne.html" },
   { label: "Mariage à Genève", href: "photographe-mariage-geneve.html" },
   { label: "Mariage à Montreux", href: "photographe-mariage-montreux.html" },
+  { label: "Mariage à Yverdon", href: "photographe-mariage-yverdon.html" },
   { label: "Famille à Lausanne", href: "photographe-famille-lausanne.html" },
   { label: "Famille à Genève", href: "photographe-famille-geneve.html" },
 ];

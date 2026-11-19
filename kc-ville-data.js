@@ -299,6 +299,104 @@ window.KC_VILLE = {
     ],
   },
 
+  /* ===================== YVERDON-LES-BAINS ===================== */
+  /* Kevin y a photographié un civil, dans la salle des Vingt-Quatre (photos de la page). Faits : vd.ch,
+     Ville d'Yverdon (brochure des 250 ans de l'Hôtel de Ville), Grande Cariçaie, musée, Grand Hôtel, châteaux. */
+  yverdon: {
+    slug: "yverdon", ville: "Yverdon-les-Bains", region: "Nord vaudois",
+    h1: "Photographe de mariage à Yverdon-les-Bains",
+    heroImg: "La mariée entre au bras de son père dans la salle des Vingt-Quatre, à l'Hôtel de Ville d'Yverdon",
+    heroAlt: "La mariée entre au bras de son père dans la salle des Vingt-Quatre, à l'Hôtel de Ville d'Yverdon-les-Bains",
+    heroMobile: true,
+    heroHint: "Du civil à l'Hôtel de Ville jusqu'au souper, dans tout le Nord vaudois. À 36 minutes de chez moi.",
+    intro: {
+      lead: "À Yverdon, on se dit oui dans une salle de 1773, et le château est de l'autre côté de la place. C'est là que j'ai photographié le civil que vous voyez sur cette page.",
+      paragraphs: [
+        "J'habite à Mézières, à 36 minutes d'Yverdon par la route. Le Nord vaudois a de quoi remplir une journée entière : des châteaux où l'on peut se marier, les vignes de Bonvillars, les rives du lac de Neuchâtel et le Jura juste derrière.",
+        "Le jour J, je travaille en reportage. Je photographie l'entrée dans la salle, le père qui serre un peu trop fort le bras de sa fille, les enfants d'honneur qui ne tiennent plus en place, et je ne fais rien rejouer. Pour les photos à deux, une demi-heure suffit, au moment où la lumière est la plus belle.",
+        "Plus bas, ce que je sais de la salle, les lieux pour les photos, ce qui est interdit dans la Grande Cariçaie, le marché du samedi et le plan pluie. Tout est vérifié auprès des sources officielles.",
+      ],
+    },
+    civil: {
+      over: "Le civil à Yverdon",
+      title: "La salle des Vingt-Quatre, à l'Hôtel de Ville.",
+      facts: [
+        { k: "La salle", v: "La salle des Vingt-Quatre, au premier étage de l'Hôtel de Ville, place Pestalozzi. Tout le monde l'appelle la salle des mariages." },
+        { k: "Combien", v: "90 personnes au plus, vous deux, vos témoins et l'officier compris. L'officier peut réduire ce nombre." },
+        { k: "Accès", v: "Accessible aux personnes à mobilité réduite, sur demande." },
+        { k: "Durée", v: "15 à 30 minutes, avec deux témoins majeurs. La salle et l'heure sont confirmées à la signature de la procédure." },
+        { k: "Formalités", v: "De 250 à 500 francs, auprès de l'état civil du canton." },
+        { k: "Autour", v: "Orbe a sa salle à l'Hôtel de Ville, pour 50 personnes. Les châteaux de La Sarraz et de Lucens et la Maison du Prieur à Romainmôtier sont des lieux d'exception du canton." },
+      ],
+      paragraphs: [
+        "C'est dans cette salle que j'ai fait les photos de cérémonie de cette page. Des boiseries de chêne dessinées par Pierre-Abraham Guignard, une grande porte à deux battants, des fauteuils : le conseil s'y est réuni pour la première fois le 27 novembre 1773, et la salle est classée monument historique depuis 1955. Elle n'a besoin d'aucune décoration.",
+        "Avec 90 personnes, elle offre presque deux fois plus de place que celle de Lausanne : la famille entière tient dedans, et je peux me placer sur le côté sans gêner personne. Je travaille sans flash.",
+        "Le samedi matin, le marché s'installe rue du Milieu et sur la place Pestalozzi, juste devant l'Hôtel de Ville. Si votre civil a lieu ce matin-là, la sortie se fera au milieu des étals : c'est vivant, mais pour une place dégagée, mieux vaut l'après-midi.",
+        "Pour une cérémonie dans un château, les lieux d'exception coûtent 1'500 francs, procédure préparatoire comprise, du jeudi au samedi entre 14 h et 16 h, location du lieu en plus. Comptez une heure de cérémonie. Le château de Grandson en faisait partie ; l'état civil le donnait encore en rénovation en novembre 2026 : demandez si ses salles ont rouvert.",
+      ],
+      source: "Sources : [état civil du canton de Vaud](https://www.vd.ch/population/etat-civil/mariage/salles-des-mariages/nord-vaudois/yverdon-les-bains), [lieux d'exception](https://www.vd.ch/population/etat-civil/mariage/salles-des-mariages/salles-particulieres) et [Ville d'Yverdon-les-Bains](https://www.yverdon-les-bains.ch), consultés en novembre 2026. En cas de doute, l'état civil fait foi.",
+    },
+    spots: {
+      over: "Les photos de couple",
+      title: "De la place Pestalozzi au pied du Jura.",
+      intro: "En sortant de la salle, le château est sur la même place. Pour le reste, le Nord vaudois demande un peu de voiture, et chaque lieu a ses règles : les voici.",
+      list: [
+        { meta: "Devant la salle", name: "Le château et la place Pestalozzi", text: "Le château commandé en 1259 par Pierre II de Savoie, modèle du « carré savoyard », fait face à l'Hôtel de Ville et au temple. Les photos de famille se font dehors, sur la place. À l'intérieur, le musée n'autorise les photos que pour un usage privé, sans flash : pour une séance, il faut demander." },
+        { meta: "Bord du lac", name: "Le parc des Rives du Lac", text: "Un ancien hippodrome devenu parc, entre la Thièle, le canal Oriental et le lac de Neuchâtel. De l'herbe, de l'eau et beaucoup d'horizon : pour les photos à deux, en fin de journée." },
+        { meta: "Entre Yverdon et Yvonand", name: "La Grande Cariçaie", text: "Les roselières des Grèves de Cheseaux sont une réserve naturelle. Le règlement ne parle pas de photographie, mais il interdit de quitter les sentiers balisés, de stationner le long de la route cantonale et d'y organiser une manifestation. On y va donc à deux, discrètement, sur les chemins." },
+        { meta: "Grandson", name: "Le château de Grandson et ses rives", text: "Le château au bord du lac, ouvert tous les jours sauf le mardi, de 11 h à 17 h. Pour des photos de mariage à l'intérieur, rien n'est publié : on demande au château, et je m'en charge." },
+        { meta: "Nord du lac", name: "Le vignoble de Bonvillars", text: "De Grandson à Concise, en passant par Bonvillars, Champagne et Onnens, les vignes descendent vers le lac. Ce sont des parcelles privées : on reste sur les chemins, et je demande au vigneron quand on veut entrer dans les rangs." },
+        { meta: "Les hauts · Sainte-Croix", name: "Les Rasses et le Chasseron", text: "Le Jura, à environ 1'600 mètres au Chasseron, au départ des Rasses. Trop loin pour le jour J, mais parfait pour une séance d'engagement ou un lendemain de mariage, quand vous avez le temps de monter." },
+      ],
+      outro: "À savoir : au Grand Hôtel, le Centre thermal interdit les photos sans autorisation écrite de la direction. Si votre réception a lieu aux Bains, on photographie dans le parc et les salons, pas aux bassins.",
+    },
+    photos: [
+      { id: "ville-yverdon-p1", alt: "La mariée avec deux enfants d'honneur qui tiennent chacun un petit bouquet, le jour du civil à Yverdon", caption: "Le jour du civil, à Yverdon" },
+      { id: "ville-yverdon-p2", alt: "Gros plan sur le bouquet de la mariée et son alliance", caption: "Le bouquet, l'alliance au doigt" },
+      { id: "ville-yverdon-p3", alt: "Gros plan sur un bouquet de fleurs blanches et orange", caption: "Les fleurs du jour" },
+    ],
+    journee: {
+      over: "Une journée type",
+      title: "Un mariage à Yverdon en juin, heure par heure.",
+      intro: "Un exemple, avec un civil à 14 h à l'Hôtel de Ville, une fois le marché du samedi rangé, et une réception dans un château du Nord vaudois.",
+      steps: [
+        { t: "11 h 30", title: "Les préparatifs", text: "J'arrive pendant que vous vous préparez, chez vous ou à l'hôtel. Les détails, les témoins, le moment où le père voit sa fille en robe pour la première fois." },
+        { t: "13 h 50", title: "La salle des Vingt-Quatre", text: "Dix minutes d'avance, puis la cérémonie. À la sortie, photos de famille sur la place Pestalozzi, avec le château en face." },
+        { t: "15 h", title: "Au bord du lac, à deux", text: "Une demi-heure au parc des Rives du Lac ou à Grandson, pendant que vos invités prennent la route de la réception." },
+        { t: "21 h", title: "La lumière du soir", text: "Mi-juin, le soleil se couche vers 21 h 30. Vingt minutes dans les jardins du château ou au bord des vignes, puis je reste pour les discours et la fête." },
+      ],
+      note: "En septembre, le soleil se couche vers 19 h 45, à la mi-octobre vers 17 h 50 : on avance d'autant les photos du soir. Je vous donne l'heure exacte pour votre date.",
+    },
+    savoir: {
+      over: "Bon à savoir",
+      title: "Ce que je vérifie avant un mariage dans le Nord vaudois.",
+      items: [
+        { title: "S'il pleut", text: "Je n'ai pas trouvé d'abri public couvert autour de la place Pestalozzi : le plan pluie se prévoit avec votre lieu de réception. Au château, la Salle bleue du musée se loue dès 150 francs, pour 40 personnes, avec un accès par escalier. Et des parapluies clairs valent mieux que des noirs, pour les visages." },
+        { title: "Les jours chargés", text: "Le marché occupe la place Pestalozzi et la rue du Milieu le samedi matin, et une foire a lieu le dernier mardi du mois. Le marché de Noël s'installe au château et sur la place du 28 novembre au 23 décembre 2026, et les Brandons sont annoncés du 12 au 14 mars 2027." },
+        { title: "Se garer", text: "Le parking Pestalozzi-Château compte un peu plus de 40 places, à deux pas de la salle. C'est peu pour une noce : réservez-le à ceux qui marchent moins bien, et que les autres se garent un peu plus loin." },
+        { title: "Pour la réception", text: "Le Grand Hôtel des Bains reçoit 140 convives dans sa salle Belle Époque. Le château de La Sarraz sert 100 personnes au repas dans son Grand Cellier, la Maison du Prieur à Romainmôtier 100 au banquet, avec un jardin pour l'apéritif, et le château de Lucens jusqu'à 180, avec 29 chambres. Les trois châteaux peuvent aussi accueillir le civil." },
+      ],
+    },
+    tarifs: {
+      over: "Les formules",
+      title: "Les mêmes prix dans le Nord vaudois.",
+      intro: "Yverdon est à 36 minutes de chez moi, et le déplacement est compris, Grandson, Orbe, La Sarraz et Sainte-Croix aussi. Dix photos vous arrivent sous trois à cinq jours, la galerie complète sous quatre semaines.",
+    },
+    faqTitle: "Vos questions sur un mariage à Yverdon.",
+    faq: [
+      { q: "Où se marier civilement à Yverdon-les-Bains ?", a: "Dans la salle des Vingt-Quatre, au premier étage de l'Hôtel de Ville, place Pestalozzi. Elle accueille 90 personnes au plus, vous deux, vos témoins et l'officier compris, et elle est accessible aux personnes à mobilité réduite sur demande." },
+      { q: "Peut-on se marier dans un château du Nord vaudois ?", a: "Oui. Les châteaux de La Sarraz et de Lucens et la Maison du Prieur à Romainmôtier font partie des lieux d'exception du canton : 1'500 francs, procédure préparatoire comprise, du jeudi au samedi entre 14 h et 16 h, location du lieu en plus. Pour Grandson, demandez à l'état civil si ses salles ont rouvert." },
+      { q: "Peut-on faire des photos dans la Grande Cariçaie ?", a: "Le règlement de la réserve ne parle pas de photographie, mais il interdit de quitter les sentiers balisés, de stationner le long de la route cantonale et d'organiser une manifestation. Une séance à deux sur les chemins, oui ; un cortège dans les roseaux, non." },
+      { q: "Et au Centre thermal des Bains ?", a: "Le règlement des Bains interdit les photos sans autorisation écrite de la direction. Si votre réception a lieu au Grand Hôtel, on photographie dans le parc et les salons." },
+      { q: "Le déplacement à Yverdon est-il compris ?", a: "Oui. J'habite à Mézières, à 36 minutes : Yverdon et tout le Nord vaudois sont compris dans le prix, comme le reste de la Suisse romande." },
+      { q: "Quand réserver ?", a: "Pour un samedi de mai à septembre, huit à quatorze mois avant. Je ne prends qu'un mariage par jour : [écrivez-moi votre date](contact.html?type=Mariage), je vous réponds sous 48 heures." },
+    ],
+    related: [
+      { article: "journal-lieux-mariage-vaud-leman.html", articleTitle: "Se marier dans le canton de Vaud : 10 lieux autour du Léman" },
+      { article: "journal-quand-reserver-photographe-mariage.html", articleTitle: "Quand réserver son photographe de mariage ?" },
+    ],
+  },
+
   /* ===================== FAMILLE × LAUSANNE ===================== */
   "famille-lausanne": {
     slug: "famille-lausanne", ville: "Lausanne", region: "Vaud",
