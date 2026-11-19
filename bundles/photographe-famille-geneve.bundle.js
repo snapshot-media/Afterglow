@@ -562,75 +562,103 @@ window.KC_VILLE = {
 
 ;
 /* ============================================================
-   KEVIN CHINELLI — persistent conversion CTA + WhatsApp
-   Vanilla, injected on every page (no React dependency).
-   ⚠️ Replace KC_PHONE with the real number before going live.
+   KEVIN CHINELLI — barre d'action sur téléphone (≤ 600 px)
+   Vanilla, chargée sur toutes les pages (aucune dépendance React).
+
+   Choix de Kevin le 19.11.2026 sur maquette (https://claude.ai/artifact/USShVWXQJyFBD9j3GsEGop) :
+   forme A (barre pleine largeur), visible dès le héros passé, libellé selon la page.
+   - « Écrire » : WhatsApp sur le 079 (pro), même message que le pied de page.
+   - bouton doré : le formulaire, déjà réglé sur la prestation de la page (contact.html?type=…).
+   - masquée sur le héros, quand le bandeau final (.cta-band ; section.contact sur l'accueil) ou le pied de page entre à l'écran,
+     quand une photo est agrandie ou le menu ouvert ; absente de Contact et Confidentialité.
+   - sur ordinateur : rien (le bouton Contact du menu reste visible).
+
+   Remplace l'ancien bouton flottant « Demander un devis » + WhatsApp, invisible depuis le
+   pré-rendu : il se plaçait d'après le <footer> lu au chargement, que React remplace ensuite
+   (élément détaché → rectangle à zéro → bouton poussé hors de l'écran). Ici, rien n'est gardé
+   en mémoire : héros, bandeau et pied de page sont relus à chaque calcul.
    ============================================================ */
 (function () {
   if (window.__kcCta) return; window.__kcCta = true;
 
-  var KC_PHONE = "41798507603"; // format international sans "+" ni espaces
-  var WA_TEXT  = encodeURIComponent("Bonjour Kevin, j'aimerais des informations pour une séance photo.");
-  var here = (location.pathname.split("/").pop() || "").toLowerCase();
-  if (here === "contact.html") return; // inutile sur la page contact
+  var file = (location.pathname.split("/").pop() || "").replace(/\.html$/, "") || "index";
+  if (file === "contact" || file === "confidentialite") return;
+
+  // Thème de la page → libellé et prestation du formulaire
+  var J = window.KC_JOURNAL;
+  var art = window.KC_ARTICLE && J && J.articles ? J.articles[window.KC_ARTICLE] : null;
+  var CAT = { "Mariage": "mariage", "Portrait": "portrait", "Couple": "couple", "Studio": "studio", "Maternité": "maternite" };
+  var theme = window.KC_VILLE_SLUG ? (/^famille/.test(window.KC_VILLE_SLUG) ? "famille" : "mariage")
+    : art ? CAT[art.category]
+    : file === "bon-cadeau" ? "cadeau"
+    : window.KC_SLUG;
+  var SEANCE = "Réserver une séance";
+  var MAP = {
+    mariage: ["Réserver une date", "Mariage"],
+    portrait: [SEANCE, "Lifestyle"], solo: [SEANCE, "Lifestyle"], couple: [SEANCE, "Lifestyle"], famille: [SEANCE, "Lifestyle"],
+    studio: [SEANCE, "Studio"],
+    maternite: [SEANCE, "Maternité & Grossesse"],
+    cadeau: ["Commander un bon", "Bon cadeau"],
+  };
+  var pick = MAP[theme] || ["Réserver une date", ""];
+  var href = "contact.html" + (pick[1] ? "?type=" + encodeURIComponent(pick[1]) : "");
+  var WA = "https://wa.me/41798507603?text=" + encodeURIComponent("Bonjour Kevin, je vous écris depuis le site Afterglow au sujet d'une séance photo : ");
 
   var css = ''
-    + '.kc-cta{position:fixed;right:clamp(16px,2.4vw,28px);bottom:clamp(16px,2.4vw,28px);z-index:880;'
-    + '  display:flex;flex-direction:column;align-items:flex-end;gap:12px;'
-    + '  font-family:var(--font-body,system-ui,sans-serif);'
-    + '  opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}'
-    + '.kc-cta.in{opacity:1;transform:none}'
-    + '.kc-cta a{text-decoration:none}'
-    + '.kc-wa{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;'
-    + '  background:#1f1d1a;border:1px solid rgba(242,237,230,.16);color:#f2ede6;'
-    + '  box-shadow:0 10px 30px rgba(0,0,0,.34);transition:transform .35s cubic-bezier(.2,.7,.2,1),background .35s,border-color .35s}'
-    + '.kc-wa:hover{transform:translateY(-3px);background:#262320;border-color:var(--accent,#b9926b)}'
-    + '.kc-wa svg{width:25px;height:25px;display:block}'
-    + '.kc-devis{display:inline-flex;align-items:center;gap:11px;'
-    + '  padding:14px 22px;border-radius:999px;background:var(--accent,#b9926b);color:#141210;'
-    + '  font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:500;'
-    + '  box-shadow:0 12px 34px rgba(0,0,0,.32);transition:transform .35s cubic-bezier(.2,.7,.2,1),filter .35s}'
-    + '.kc-devis:hover{transform:translateY(-3px);filter:brightness(1.06)}'
-    + '.kc-devis .ar{transition:transform .4s cubic-bezier(.2,.7,.2,1)}'
-    + '.kc-devis:hover .ar{transform:translateX(5px)}'
-    + '@media(max-width:600px){.kc-devis{padding:12px 18px;font-size:11px}.kc-wa{width:48px;height:48px}}'
-    + '@media print{.kc-cta{display:none}}'
-    + '@media (prefers-reduced-motion:reduce){.kc-cta{transition:none;opacity:1;transform:none}}';
+    + '.kc-bar{display:none}'
+    + '@media(max-width:600px){'
+    + '.kc-bar{position:fixed;left:0;right:0;bottom:0;z-index:870;display:grid;grid-template-columns:auto 1fr;gap:10px;'
+    + '  padding:12px 16px 26px;background:rgba(20,18,16,.94);border-top:1px solid rgba(248,245,239,.14);'
+    + '  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);font-family:var(--font-body,"Jost",system-ui,sans-serif);'
+    + '  transition:transform .32s cubic-bezier(.2,.7,.2,1),opacity .32s}'
+    + '.kc-bar.off{opacity:0;transform:translateY(24px);pointer-events:none}'
+    + '.kc-bar a{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:50px;padding:0 22px;min-width:0;'
+    + '  font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:500;text-decoration:none;white-space:nowrap}'
+    + '.kc-bar .kb-wa{background:transparent;color:#f8f5ef;border:1px solid rgba(248,245,239,.38)}'
+    + '.kc-bar .kb-go{background:#b9926b;color:#141210;border:1px solid #b9926b}'
+    + '.kc-bar svg{width:18px;height:18px;flex:none}'
+    + '}'
+    // écrans étroits : mêmes boutons, un peu moins d'air, pour que les libellés longs tiennent
+    + '@media(max-width:380px){.kc-bar a{padding:0 14px;letter-spacing:.14em}}'
+    + '@media(max-width:350px){.kc-bar a{font-size:11px;letter-spacing:.1em;padding:0 12px}.kc-bar{gap:8px;padding-left:12px;padding-right:12px}}'
+    + 'body:has(.kc-lb.open) .kc-bar,body:has(.nav.menu-open) .kc-bar,body:has(.mobile-menu.is-open) .kc-bar'
+    + '{opacity:0!important;pointer-events:none!important}'
+    + '@media print{.kc-bar{display:none!important}}'
+    + '@media (prefers-reduced-motion:reduce){.kc-bar{transition:none}}';
 
   var st = document.createElement("style");
   st.textContent = css;
   document.head.appendChild(st);
 
-  var waSvg = '<svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16 3C9.4 3 4 8.4 4 15c0 2.1.6 4.2 1.6 6L4 29l8.2-1.6c1.7.9 3.7 1.4 5.8 1.4 6.6 0 12-5.4 12-12S22.6 3 16 3zm0 21.8c-1.8 0-3.6-.5-5.1-1.4l-.4-.2-4.9 1 1-4.7-.2-.4c-1-1.6-1.5-3.4-1.5-5.3C4.4 9.9 9.1 5.2 16 5.2S27.6 9.9 27.6 15 22.9 24.8 16 24.8zm6.5-7.3c-.4-.2-2.1-1-2.4-1.1-.3-.1-.6-.2-.8.2-.2.4-.9 1.1-1.1 1.3-.2.2-.4.2-.8.1-.4-.2-1.5-.6-2.9-1.8-1.1-1-1.8-2.2-2-2.6-.2-.4 0-.6.2-.8.2-.2.4-.4.5-.6.2-.2.2-.4.4-.6.1-.2.1-.5 0-.7-.1-.2-.8-2-1.1-2.7-.3-.7-.6-.6-.8-.6h-.7c-.2 0-.6.1-.9.5-.3.4-1.2 1.2-1.2 2.9 0 1.7 1.2 3.3 1.4 3.6.2.2 2.4 3.7 5.9 5.2.8.4 1.5.6 2 .7.8.3 1.6.2 2.2.1.7-.1 2.1-.9 2.4-1.7.3-.8.3-1.6.2-1.7-.1-.2-.3-.3-.7-.4z"/></svg>';
+  var waSvg = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>';
 
-  var wrap = document.createElement("div");
-  wrap.className = "kc-cta";
-  wrap.innerHTML =
-      '<a class="kc-wa" href="https://wa.me/' + KC_PHONE + '?text=' + WA_TEXT + '" target="_blank" rel="noopener" aria-label="Écrire sur WhatsApp">' + waSvg + '</a>'
-    + '<a class="kc-devis" href="contact.html">Demander un devis <span class="ar">→</span></a>';
-  document.body.appendChild(wrap);
-  requestAnimationFrame(function () { setTimeout(function () { wrap.classList.add("in"); }, 600); });
+  var bar = document.createElement("div");
+  bar.className = "kc-bar off";
+  bar.setAttribute("role", "navigation");
+  bar.setAttribute("aria-label", "Réserver ou écrire");
+  bar.innerHTML =
+      '<a class="kb-wa" href="' + WA + '" target="_blank" rel="noopener" data-umami-event="barre-whatsapp" aria-label="Écrire sur WhatsApp">' + waSvg + 'Écrire</a>'
+    + '<a class="kb-go" href="' + href + '" data-umami-event="barre-reserver">' + pick[0] + ' <span aria-hidden="true">→</span></a>';
+  document.body.appendChild(bar);
 
-  /* Remonte les boutons quand le footer entre dans le viewport.
-     getBoundingClientRect() est fiable sur mobile (barre URL dynamique incluse). */
-  function baseBottom() {
-    return Math.max(16, Math.min(28, window.innerWidth * 0.024));
+  // Visible quand le bas du héros a passé le milieu de l'écran, jusqu'à ce que le bandeau final
+  // (ou le pied de page) arrive au-dessus de la barre. Éléments relus à chaque fois (React les remplace).
+  var HERO = ".phero, .hhero, .hero, .art-hero";
+  var raf = 0;
+  function update() {
+    raf = 0;
+    var vh = window.innerHeight;
+    var hero = document.querySelector(HERO);
+    var passed = hero ? hero.getBoundingClientRect().bottom < vh / 2 : window.scrollY > vh / 2;
+    var end = document.querySelector(".cta-band, section.contact") || document.querySelector("footer"); // section.contact : fin de l'accueil
+    var atEnd = end ? end.getBoundingClientRect().top < vh - 90 : false;
+    bar.classList.toggle("off", !(passed && !atEnd));
   }
-  var footerEl = document.querySelector("footer");
-  if (footerEl) {
-    function updateCtaBottom() {
-      var rect = footerEl.getBoundingClientRect();
-      var wh = window.innerHeight;
-      if (rect.top < wh) {
-        wrap.style.bottom = (wh - rect.top + baseBottom()) + "px";
-      } else {
-        wrap.style.bottom = "";
-      }
-    }
-    window.addEventListener("scroll", updateCtaBottom, { passive: true });
-    window.addEventListener("resize", updateCtaBottom);
-    updateCtaBottom();
-  }
+  function ask() { if (!raf) raf = requestAnimationFrame(update); }
+  window.addEventListener("scroll", ask, { passive: true });
+  window.addEventListener("resize", ask);
+  window.addEventListener("load", ask);
+  ask();
 })();
 
 ;

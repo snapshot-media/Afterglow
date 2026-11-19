@@ -180,8 +180,7 @@ body.nav-force-scrolled .nav{ background:color-mix(in oklab,var(--bg),transparen
   .mm-top{ font-family:var(--font-display); font-size:clamp(22px,6vw,34px); letter-spacing:.02em; color:var(--cream); }
   .mobile-menu a{ transition:color .3s; }
   .mobile-menu a:active, .mobile-menu a:hover{ color:var(--accent); }
-  /* cacher les boutons CTA fixes quand le menu est ouvert */
-  body:has(.nav.menu-open) .kc-cta{ opacity:0 !important; pointer-events:none !important; }
+  /* (la barre d'action, kc-cta.js, se masque elle-même quand le menu est ouvert) */
 }
 
 /* ---------- HERO ---------- */
