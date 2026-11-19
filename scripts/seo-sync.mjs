@@ -19,8 +19,9 @@
 export const BASE = "https://afterglowbykevin.ch";
 
 // Mesure d'audience : Umami auto-hébergé, servi sous /u/ (même origine → CSP inchangée).
-// Laisser vide tant que le service n'est pas en place : aucun script n'est alors injecté.
-export const UMAMI_WEBSITE_ID = "";
+// Laisser vide pour couper la mesure : aucun script n'est alors injecté.
+// Site « Afterglow » dans Umami (https://stats.snapshotmedia.ch), créé le 19.11.2026 — identifiant public.
+export const UMAMI_WEBSITE_ID = "29a3b336-b78e-4056-8efc-6018b3092291";
 
 const LD_RE = /<script type="application\/ld\+json">([\s\S]*?)<\/script>/;
 

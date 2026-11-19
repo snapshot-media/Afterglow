@@ -31,6 +31,9 @@ function getPageScripts(html) {
 
     const srcM = attrs.match(/src="([^"?]+)/);
     if (!srcM) continue;
+    // Scripts servis hors du site statique (chemin absolu « / », autre domaine) : jamais regroupés.
+    // Ex. : la mesure Umami, /u/script.js, relayée par Caddy.
+    if (/^(\/|https?:)/.test(srcM[1])) continue;
     const base = srcM[1].split("/").pop();
     // Ignore vendor + tout ce qui vient du dossier bundles/
     if (VENDOR_BASES.has(base) || base === "vendor.js" || base.endsWith(".bundle.js")) continue;
@@ -42,7 +45,9 @@ function getPageScripts(html) {
 
 /* Remplace le bloc de <script src="..."> locaux par les 2 tags bundle. */
 function replaceScriptTags(html, slug, pageScripts) {
-  const localRe = /<script[^>]+src="(?!https?:|\/\/|data:)[^"]*"[^>]*><\/script>/g;
+  // Scripts locaux relatifs seulement : un src absolu (« / », « // », http) n'est pas à nous
+  // (sinon la balise Umami du <head> ferait remplacer tout le corps de la page, vu le 19.11.2026).
+  const localRe = /<script[^>]+src="(?!https?:|\/|data:)[^"]*"[^>]*><\/script>/g;
   const matches = [...html.matchAll(localRe)];
   if (matches.length === 0) return html;
 

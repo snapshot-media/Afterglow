@@ -322,7 +322,9 @@ function JournalBand() {
   const J = window.KC_JOURNAL;
   const cats = JOURNAL_CATS[window.KC_SLUG];
   if (!J || !cats) return null;
-  const arts = J.order.map((s) => J.articles[s]).filter((a) => cats.includes(a.category)).slice(0, 3);
+  // articles de la première catégorie d'abord (ex. Couple sur la page Couple), puis les suivantes ; ordre du journal ensuite
+  const arts = J.order.map((s) => J.articles[s]).filter((a) => cats.includes(a.category))
+    .sort((x, y) => cats.indexOf(x.category) - cats.indexOf(y.category)).slice(0, 3);
   if (arts.length === 0) return null;
   return (
     <section className="sec s-dark pad-y">
