@@ -611,7 +611,7 @@ window.KC_JOURNAL = {
           "Un conseil : prévoyez un temps de battement après la cérémonie. C'est souvent là qu'on glisse les photos de groupe et de famille, sans courir.",
         ] },
         { h: "Cocktail, photos de groupe et couple", list: [
-          "Le vin d'honneur : moment détendu, parfait pour des images d'ambiance pendant que vous profitez de vos invités.",
+          "L'apéritif : moment détendu, parfait pour des images d'ambiance pendant que vous profitez de vos invités.",
           "Les photos de groupe : efficaces si la liste est préparée à l'avance (comptez 20 à 30 minutes).",
           "La séance de couple : 30 à 45 minutes, idéalement calées sur l'heure dorée, juste avant le coucher du soleil. C'est souvent votre seule vraie parenthèse à deux de la journée.",
         ] },

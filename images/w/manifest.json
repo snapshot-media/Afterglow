@@ -375,6 +375,16 @@
    800
   ]
  },
+ "images/pf-mariage-4.webp": {
+  "hash": "2849683c5683",
+  "W": 1400,
+  "H": 2100,
+  "w": [
+   480,
+   800,
+   1200
+  ]
+ },
  "images/pf-mariage-4b.webp": {
   "hash": "2849683c5683",
   "W": 1400,
@@ -751,6 +761,26 @@
    480,
    800,
    1200
+  ]
+ },
+ "images/ville-lausanne-hero-mobile.webp": {
+  "hash": "a64baed8d1b7",
+  "W": 1080,
+  "H": 1620,
+  "w": [
+   480,
+   800
+  ]
+ },
+ "images/ville-lausanne-hero.webp": {
+  "hash": "92712d19e393",
+  "W": 2400,
+  "H": 1350,
+  "w": [
+   480,
+   800,
+   1200,
+   1600
   ]
  }
 }

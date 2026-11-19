@@ -134,7 +134,7 @@
 
     _resized() {
       const stored = this.id ? getSlot(this.id) : null;
-      if (!stored || !stored.s || this.querySelector(':scope > img, :scope > picture')) return;
+      if (!stored || typeof stored.s !== 'string' || this.querySelector(':scope > img, :scope > picture')) return;
       const s = this._sizes(stored);
       if (this._img.getAttribute('sizes') !== s) this._img.setAttribute('sizes', s);
     }
@@ -185,7 +185,9 @@
         // Versions réduites (images/w/, scripts/gen-variants.mjs) : le navigateur prend la plus petite
         // qui suffit au cadre. sizes : même règle que le build (seo-sync.mjs), pour retomber sur la
         // version déjà chargée par l'image du HTML. src reste l'original (agrandissement, kc-lightbox).
-        const set = stored && stored.s;
+        // (dans .image-slots.state.json, « s » est un ancien réglage d'échelle, un nombre : ce n'est un srcset
+        // que dans la correspondance #kc-slots écrite par le build)
+        const set = stored && typeof stored.s === 'string' ? stored.s : null;
         if (set) {
           this._img.setAttribute('sizes', this._sizes(stored));
           if (this._img.getAttribute('srcset') !== set) this._img.setAttribute('srcset', set);
@@ -403,7 +405,7 @@ window.KC_PRESTA = {
     ],
     formules: [
       { tag: "Demi-journée · 4 h", name: "Essentiel", price: "CHF 1'290",
-        items: ["Couverture 4 h continues — cérémonie & vin d'honneur", "Galerie privée en ligne, téléchargement HD", "Env. 200 photos, toutes retouchées"] },
+        items: ["Couverture 4 h continues — cérémonie & apéritif", "Galerie privée en ligne, téléchargement HD", "Env. 200 photos, toutes retouchées"] },
       { tag: "Le plus choisi · 10 h", name: "Signature", price: "CHF 2'490", feature: true,
         items: ["Couverture 10 h, des préparatifs à la soirée", "Séance engagement offerte", "Galerie privée + sélection de favoris", "Env. 500 photos, toutes retouchées"] },
       { tag: "Sur mesure · 2 jours", name: "Prestige", price: "CHF 4'500",

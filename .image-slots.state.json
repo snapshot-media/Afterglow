@@ -294,13 +294,13 @@
     "y": 0
   },
   "ville-hero-lausanne": {
-    "u": "images/hero-mariage.webp",
+    "u": "images/ville-lausanne-hero.webp",
     "s": 1,
     "x": 0,
     "y": 0
   },
   "ville-hero-geneve": {
-    "u": "images/presta-mariage.webp",
+    "u": "images/hero-mariage.webp",
     "s": 1,
     "x": 0,
     "y": 0
@@ -751,6 +751,72 @@
   },
   "cadeau-img": {
     "u": "images/maternite-g2.webp",
+    "s": 1,
+    "x": 0,
+    "y": 0
+  },
+  "ville-hero-lausanne-mobile": {
+    "u": "images/ville-lausanne-hero-mobile.webp",
+    "s": 1,
+    "x": 0,
+    "y": 0
+  },
+  "ville-hero-montreux-mobile": {
+    "u": "images/phero-mariage-mobile.webp",
+    "s": 1,
+    "x": 0,
+    "y": 0
+  },
+  "ville-lausanne-p1": {
+    "u": "images/pf-mariage-4.webp",
+    "s": 1,
+    "x": 0,
+    "y": 0
+  },
+  "ville-lausanne-p2": {
+    "u": "images/pf-mariage-1.webp",
+    "s": 1,
+    "x": 0,
+    "y": 0
+  },
+  "ville-lausanne-p3": {
+    "u": "images/pf-mariage-5.webp",
+    "s": 1,
+    "x": 0,
+    "y": 0
+  },
+  "ville-geneve-p1": {
+    "u": "images/pf-mariage-6.webp",
+    "s": 1,
+    "x": 0,
+    "y": 0
+  },
+  "ville-geneve-p2": {
+    "u": "images/pf-mariage-3.webp",
+    "s": 1,
+    "x": 0,
+    "y": 0
+  },
+  "ville-geneve-p3": {
+    "u": "images/pf-mariage-8.webp",
+    "s": 1,
+    "x": 0,
+    "y": 0
+  },
+  "ville-montreux-p1": {
+    "u": "images/pf-mariage-2.webp",
+    "s": 1,
+    "x": 0,
+    "y": 0
+  },
+  "ville-montreux-p2": {
+    "u": "images/pf-mariage-7.webp",
+    "s": 1,
+    "x": 0,
+    "y": 0
+  },
+  "ville-montreux-p3": {
+    "u": "images/pf-mariage-8.webp",
     "s": 1,
     "x": 0,
     "y": 0

@@ -2,6 +2,14 @@
    KEVIN CHINELLI — Landing pages locales (SEO local par ville)
    window.KC_VILLE[slug]. Contenu unique et substantiel par ville
    (pas de pages "doorway"). Lu par kc-ville-app.jsx.
+
+   Pages mariage réécrites le 20.11.2026 à partir de faits vérifiés sur les sites officiels
+   (état civil vaud.ch et geneve.ch, Villes de Lausanne, Vevey, Montreux, château de Chillon,
+   MétéoSuisse) : rien n'est publié ici sans source. Kevin a photographié des mariages à Lausanne,
+   en Lavaux et à Yverdon, jamais encore à Genève ni sur la Riviera : sur ces deux pages, aucune
+   phrase ne prétend à une expérience sur place. Une photo n'est jamais légendée ailleurs que là
+   où elle a été prise. Heures de coucher du soleil : calcul astronomique pour 2027.
+   [texte](lien) : lien rendu par kc-ville-app.jsx (Rich).
    ============================================================ */
 window.KC_VILLE = {
 
@@ -9,31 +17,91 @@ window.KC_VILLE = {
   lausanne: {
     slug: "lausanne", ville: "Lausanne", region: "Vaud",
     h1: "Photographe de mariage à Lausanne",
-    heroImg: "Couple de mariés sur les quais d'Ouchy à Lausanne, lac Léman",
-    heroHint: "Reportage de mariage à Lausanne et sur les rives du Léman — discret, à hauteur d'émotion.",
+    heroImg: "Jeunes mariés sous un platane, le Léman en contrebas, en Lavaux",
+    heroAlt: "Jeunes mariés enlacés sous un platane, au-dessus du Léman, en Lavaux",
+    heroMobile: true,
+    heroHint: "Du oui à la Palud jusqu'au souper, en reportage. Mézières, d'où je viens, est à vingt minutes.",
     intro: {
-      lead: "Se marier à Lausanne, c'est conjuguer la ville et le lac : une cathédrale gothique perchée sur la colline, les quais d'Ouchy ouverts sur le Léman, et la lumière changeante de la baie. Je connais cette ville et ses recoins, et je sais où la lumière sera la plus belle à chaque heure de votre journée.",
+      lead: "À Lausanne, une journée de mariage monte et descend : le oui à la Palud, les photos à la Cité, l'apéritif au bord du lac. Je vous suis d'un bout à l'autre, sans vous faire courir.",
       paragraphs: [
-        "Photographe basé en Suisse romande, je couvre les mariages à Lausanne sans frais de déplacement : de la préparation en centre-ville à la cérémonie civile à l'Hôtel de Ville de la place de la Palud, jusqu'à la réception sur les hauteurs ou au bord de l'eau. Mon approche reste la même partout — du reportage, peu de poses, beaucoup d'attention aux instants qui passent vite.",
-        "Lausanne offre des décors variés à quelques minutes les uns des autres : on peut enchaîner une séance de couple devant la cathédrale, sur les escaliers du Marché, puis terminer à l'heure dorée sur les quais d'Ouchy ou dans les vignes de Lavaux toutes proches.",
+        "J'habite à Mézières, dans le Jorat, à une vingtaine de minutes de la Riponne. Lausanne est la grande ville la plus proche de chez moi, et j'y ai déjà photographié des mariés. Je connais ses montées, ses parkings et les coins où l'on peut faire des photos à deux sans traverser tout le centre en robe longue.",
+        "Je travaille en reportage : je photographie ce qui se passe, sans rien vous faire rejouer. Les doigts qui cherchent la bonne alliance, une mère qui se retourne pour voir qui pleure déjà, la famille qui déborde sur la place à la sortie. Pour les photos de couple, je vous emprunte une demi-heure au meilleur moment de lumière, puis je vous rends à vos invités.",
+        "Plus bas, ce que je vérifie avant un mariage lausannois : la salle de l'état civil, six endroits pour les photos, les jours de marché, le plan pluie et l'heure du coucher du soleil. Le reste se règle au téléphone ou autour d'un café.",
       ],
-      quote: "« La ville et le lac, dans une même journée. »",
     },
-    lieux: {
-      title: "Les plus beaux lieux de mariage à Lausanne",
+    civil: {
+      over: "Le civil à Lausanne",
+      title: "La salle de la Palud, et ce qu'elle change pour les photos.",
+      facts: [
+        { k: "La salle", v: "La salle des mariages de la place de la Palud, en vieille ville. Une seconde salle existe à Sévelin 46, au siège de l'état civil." },
+        { k: "Combien", v: "50 personnes au plus, vous deux, vos témoins et l'officier compris." },
+        { k: "Durée", v: "15 à 30 minutes. L'état civil demande d'arriver dix minutes avant." },
+        { k: "Témoins", v: "Deux, majeurs, avec une pièce d'identité. Un permis de séjour ne suffit pas." },
+        { k: "Formalités", v: "De 250 à 500 francs. La salle et l'heure ne sont confirmées qu'à la signature de la procédure." },
+        { k: "Plus grand", v: "Lutry reçoit 118 personnes, Pully 50. Le canton propose aussi dix lieux d'exception, dont le château d'Oron : 1'500 francs, du jeudi au samedi, entre 14 h et 16 h." },
+      ],
+      paragraphs: [
+        "C'est une belle salle ancienne, pas une grande salle. À cinquante, on est serrés. Je me place sur le côté avant le début, je ne bouge plus pendant les consentements et je travaille sans flash : la cérémonie reste une cérémonie.",
+        "L'état civil signale un accès difficile pour les personnes à mobilité réduite. Si une grand-mère vient en fauteuil, dites-le en réservant : la salle de Sévelin ou celle d'une commune voisine sera peut-être plus simple.",
+        "À la sortie, tout le monde se retrouve sur la place, autour de la fontaine de la Justice. C'est le moment des photos de famille, avant que chacun parte à l'apéritif. Un détail à connaître : l'horloge animée de la Palud se met en route à chaque heure pile, de 9 h à 19 h. Si vous sortez à l'heure juste, elle s'anime derrière vous.",
+        "Le mercredi et le samedi matin, le marché occupe la place jusqu'à 13 h, et les stands sont démontés au plus tard à 14 h 30. Pour une Palud dégagée sur les photos, un civil l'après-midi est plus sûr.",
+      ],
+      source: "Sources : [état civil du canton de Vaud](https://www.vd.ch/population/etat-civil/mariage) et [Ville de Lausanne](https://www.lausanne.ch/vie-pratique/economie-et-commerces/marches-et-commerce-itinerant/marches-lausannois/marche-du-centre-ville), consultés en novembre 2026. En cas de doute, l'état civil fait foi.",
+    },
+    spots: {
+      over: "Les photos de couple",
+      title: "Six endroits à quelques minutes de la Palud.",
+      intro: "Lausanne a un avantage : tout est proche. Ces six lieux tiennent dans dix minutes à pied, en m2 ou en voiture. On choisit ensemble selon l'heure, la saison et l'énergie qu'il vous reste.",
       list: [
-        "La cathédrale de Lausanne et l'esplanade de la Cité — vue plongeante sur les toits et le lac.",
-        "Les quais d'Ouchy et le Beau-Rivage Palace — l'élégance au bord du Léman.",
-        "L'Hôtel de Ville, place de la Palud — pour la cérémonie civile au cœur de la vieille ville.",
-        "Les escaliers du Marché et la place de la Riponne — ambiance urbaine et intime.",
-        "Le bois de Sauvabelin et son lac — un écrin de verdure à dix minutes du centre.",
-        "Les vignes de Lavaux, à l'est de la ville — imbattables au coucher du soleil.",
+        { meta: "Vieille ville · à pied", name: "Les Escaliers du Marché", text: "Les escaliers de bois couverts qui montent de la Palud vers la cathédrale, entre des façades serrées. Ils servent deux fois : pour des images à deux, intimes, et comme abri s'il pleut à la sortie du civil." },
+        { meta: "La Cité · 7 minutes à pied", name: "L'esplanade de la cathédrale", text: "En haut des escaliers, la vue sur les toits de la ville et sur le lac. C'est là que je fais la photo de groupe quand vous voulez de l'air autour, puis quelques images à deux contre la pierre de la cathédrale." },
+        { meta: "Centre · 9 minutes à pied", name: "L'esplanade de Montbenon", text: "Le balcon du centre-ville : des pelouses, le Palais de justice, le Casino, et le lac au bout du regard. En fin de journée, c'est l'un des endroits les plus lumineux de Lausanne." },
+        { meta: "Les hauts · bus 16, arrêt Signal", name: "Sauvabelin", text: "La forêt, le petit lac et la tour en bois. Quand le soleil tape fort à midi en été, les arbres donnent une lumière douce que le centre n'a pas. La tour est gratuite, mais elle ferme par grand vent, neige ou glace." },
+        { meta: "Bord du lac · m2 Ouchy-Olympique", name: "Ouchy et le Denantou", text: "Les quais, le château d'Ouchy, puis, un peu plus à l'est, le pavillon thaïlandais du parc du Denantou. Au bord de l'eau, je préfère la fin de journée : moins de promeneurs et une lumière qui ne tombe plus d'en haut." },
+        { meta: "Montriond · m2 Délices", name: "Le crêt de Montriond", text: "Une butte arborée au-dessus de la place de Milan, avec une esplanade au sommet et le lac en face. Les invités la connaissent rarement, et c'est tant mieux : vingt minutes au calme pendant l'apéritif." },
+      ],
+      outro: "À savoir : la Fondation de l'Hermitage est fermée pour travaux jusqu'en 2027 au moins. Pour des photos dans un parc public, la Ville ne publie aucune démarche particulière ; dans un hôtel, un musée ou une propriété privée, on demande toujours avant, et je m'en charge si vous me donnez le contact.",
+    },
+    photos: [
+      { id: "ville-lausanne-p1", alt: "La mariée entre dans la salle des mariages au bras de son père", caption: "Au bras de son père, au civil à Yverdon" },
+      { id: "ville-lausanne-p2", alt: "Le marié signe le registre, la mariée sourit derrière lui, son bouquet à la main", caption: "La signature du registre" },
+      { id: "ville-lausanne-p3", alt: "La mariée avec deux enfants d'honneur qui tiennent chacun un petit bouquet", caption: "Les enfants d'honneur" },
+    ],
+    journee: {
+      over: "Une journée type",
+      title: "Un mariage à Lausanne en juin, heure par heure.",
+      intro: "Un exemple, avec un civil à 15 h à la Palud. Les horaires se calent ensuite sur votre lieu de réception et sur la lumière du jour.",
+      steps: [
+        { t: "12 h", title: "Les préparatifs", text: "J'arrive pendant que vous vous habillez, chez vous ou à l'hôtel. Les détails, les témoins qui arrivent, et le moment où l'un de vous découvre l'autre, si vous voulez le vivre avant la cérémonie." },
+        { t: "14 h 50", title: "Le civil à la Palud", text: "Dix minutes d'avance, comme le demande l'état civil. Après la cérémonie, photos de famille sur la place, devant la fontaine, pendant que l'émotion est encore là." },
+        { t: "16 h", title: "La Cité, à pied", text: "Les Escaliers du Marché, puis l'esplanade de la cathédrale : vingt minutes à deux, pendant que vos invités partent à l'apéritif. Pour descendre au bord du lac, le m2 met neuf minutes de la Riponne à Ouchy." },
+        { t: "21 h", title: "La lumière du soir", text: "Mi-juin, le soleil se couche vers 21 h 30. Je vous emprunte vingt minutes entre deux plats du souper, au bord de l'eau ou dans les vignes, puis je reste pour les discours, la première danse et le début de la fête." },
+      ],
+      note: "En septembre, le soleil se couche vers 19 h 45, en octobre vers 18 h 45 : on avance d'autant les photos du soir. Je vous donne l'heure exacte pour votre date.",
+    },
+    savoir: {
+      over: "Bon à savoir",
+      title: "Ce que je vérifie avant un mariage lausannois.",
+      items: [
+        { title: "S'il pleut", text: "Les Escaliers du Marché sont couverts et à deux pas de la salle : les photos de famille se font au sec. Pour les photos à deux, on guette une éclaircie ou on se replie sur votre lieu de réception. Prévoyez des parapluies transparents ou blancs : ils laissent passer la lumière sur les visages." },
+        { title: "Les jours chargés", text: "Le marché occupe la Palud le mercredi et le samedi matin. En 2027, le Festival de la Cité remplit la vieille ville du 6 au 11 juillet, et le Lausanne Marathon a lieu le 24 octobre. Ces jours-là, on adapte le parcours." },
+        { title: "Se garer, se déplacer", text: "Le centre est en grande partie piéton. Le parking de la Riponne, ouvert jour et nuit, est le plus pratique pour la Palud. Entre la ville haute et le lac, le m2 évite les montées en tenue de mariage." },
+        { title: "Pour la réception", text: "À Lausanne même, plusieurs maisons reçoivent des mariages : le Beau-Rivage Palace et le Royal Savoy à Ouchy, le Lausanne Palace au centre, le Château d'Ouchy pour une quarantaine de personnes, l'Auberge de l'Abbaye de Montheron dans les bois au nord de la ville. Et Lavaux commence à Lutry : voici [huit lieux de mariage en Lavaux](journal-lieux-mariage-lavaux.html)." },
       ],
     },
+    tarifs: {
+      over: "Les formules",
+      title: "Les mêmes prix à Lausanne que partout en Suisse romande.",
+      intro: "Le déplacement est compris, pour Lausanne comme pour Lavaux. Vous recevez dix photos sous trois à cinq jours, puis la galerie complète sous quatre semaines. La formule Signature couvre la journée entière, des préparatifs à la soirée.",
+    },
+    faqTitle: "Vos questions sur un mariage à Lausanne.",
     faq: [
-      { q: "Vous déplacez-vous gratuitement à Lausanne ?", a: "Oui, Lausanne est dans ma zone de couverture principale : aucun frais de déplacement. Je me déplace aussi librement dans tout le canton de Vaud, à Genève, Fribourg, Neuchâtel et en Valais romand." },
-      { q: "Connaissez-vous les lieux de mariage lausannois ?", a: "Très bien — de la cathédrale aux quais d'Ouchy, en passant par l'Hôtel de Ville, Sauvabelin et les domaines de Lavaux. Au repérage, on cale ensemble le déroulé et les meilleurs spots selon l'heure et la lumière de votre date." },
-      { q: "Peut-on faire les photos de couple sur les quais ?", a: "Absolument. Les quais d'Ouchy et le bord du Léman sont parfaits à l'heure dorée. Pour éviter la foule estivale, on privilégie le début de matinée ou la fin de journée." },
+      { q: "Où se marier civilement à Lausanne ?", a: "Dans la salle des mariages de la place de la Palud, ou dans celle de Sévelin 46, au siège de l'état civil. Les deux dépendent du même office cantonal. Pour plus de monde, la salle de Lutry reçoit 118 personnes ; pour un cadre de château, le canton propose dix lieux d'exception, dont le château d'Oron." },
+      { q: "Combien de personnes dans la salle de la Palud ?", a: "Cinquante au maximum, vous deux, vos témoins et l'officier compris. Si vous êtes plus nombreux, une partie de vos proches vous attendra sur la place : la sortie n'en est que plus belle à photographier." },
+      { q: "Peut-on faire le civil et le religieux le même jour ?", a: "Oui, dans cet ordre : en Suisse, le mariage religieux ne peut pas précéder le mariage civil. Prévoyez une bonne heure entre les deux pour le trajet et les photos de famille." },
+      { q: "Combien de temps prévoir pour les photos de couple ?", a: "Une demi-heure l'après-midi, et vingt minutes de plus en fin de journée si la lumière est belle. À Lausanne, tout est proche : on ne perd pas une heure en trajets." },
+      { q: "Le déplacement à Lausanne est-il compris ?", a: "Oui. J'habite à Mézières, à une vingtaine de minutes : Lausanne, Lavaux et le reste de la Suisse romande sont compris dans le prix." },
+      { q: "Quand réserver son photographe ?", a: "Pour un samedi de mai à septembre, huit à quatorze mois avant. Je ne prends qu'un mariage par jour : [écrivez-moi votre date](contact.html?type=Mariage), je vous réponds sous 48 heures." },
     ],
     related: [
       { article: "journal-lieux-mariage-vaud-leman.html", articleTitle: "Se marier dans le canton de Vaud : 10 lieux autour du Léman" },
@@ -46,31 +114,89 @@ window.KC_VILLE = {
   geneve: {
     slug: "geneve", ville: "Genève", region: "Genève",
     h1: "Photographe de mariage à Genève",
-    heroImg: "Couple de mariés dans la vieille ville de Genève, ruelles pavées",
-    heroHint: "Reportage de mariage à Genève, de la vieille ville aux rives du lac.",
+    heroImg: "Table de mariage dressée, verres et compositions de fleurs séchées",
+    heroAlt: "Table de mariage dressée, verres et compositions de fleurs séchées",
+    heroHint: "Votre mariage en reportage, de la mairie des Eaux-Vives jusqu'au souper. Déplacement compris depuis le canton de Vaud.",
     intro: {
-      lead: "Genève marie l'élégance internationale et le charme d'une vieille ville médiévale. Entre la cathédrale Saint-Pierre, les ruelles de la Cité, les parcs au bord du lac et le jet d'eau, la ville offre des décors d'une grande variété pour un reportage de mariage.",
+      lead: "À Genève, le mariage civil a ses horaires : en semaine, ou certains samedis matin seulement. C'est la première chose à vérifier avant de bloquer une date.",
       paragraphs: [
-        "Je photographie les mariages à Genève sans frais de déplacement depuis la Suisse romande. De la cérémonie civile à la Salle des mariages, à la réception dans un domaine de la campagne genevoise ou sur les bords du lac, je suis votre journée en reportage, discrètement, du premier regard au dernier éclat de rire.",
-        "Genève est idéale pour varier les ambiances en peu de temps : on passe des marronniers de la promenade de la Treille aux quais et au jet d'eau, puis aux ruelles de la vieille ville pour des images plus intimes.",
+        "J'habite à Mézières, dans le canton de Vaud, à un peu plus d'une heure de Genève. Le déplacement est compris dans mes formules, comme partout en Suisse romande : vous ne payez pas les kilomètres.",
+        "Je photographie en reportage : la cérémonie telle qu'elle se passe, vos proches, l'apéritif, la fête. Pour les photos de couple, une demi-heure suffit, et à Genève les plus beaux endroits sont tout près des salles de l'état civil : la promenade des Bastions est juste derrière le palais Eynard.",
+        "Ce que vous lisez plus bas, je l'ai vérifié auprès de la Ville de Genève : les salles, les jours, les prix, les règles pour photographier sur le domaine public. Le jour venu, il ne vous reste qu'à vivre la journée.",
       ],
-      quote: "« Le raffinement d'une ville ouverte sur le monde. »",
     },
-    lieux: {
-      title: "Les plus beaux lieux de mariage à Genève",
+    civil: {
+      over: "Le civil à Genève",
+      title: "En semaine, ou certains samedis matin seulement.",
+      facts: [
+        { k: "L'état civil", v: "Rue de la Mairie 37, aux Eaux-Vives, dans l'ancienne mairie. Le bâtiment n'est pas accessible en fauteuil roulant." },
+        { k: "En semaine", v: "Du lundi au vendredi, de 10 h à 11 h 15 et de 14 h à 15 h 30. Jamais le dimanche ni un jour férié." },
+        { k: "Le samedi", v: "Quatorze samedis matin en 2027, de 9 h 30 à 11 h 30, aux Eaux-Vives seulement, pour les couples genevois ou domiciliés à Genève." },
+        { k: "Les salles", v: "Le palais Eynard (salons de 20 et de 60 personnes) et l'Hôtel-restaurant du parc des Eaux-Vives (salons de 20 à 50), du lundi au vendredi uniquement." },
+        { k: "Le prix", v: "125 francs la célébration. 650 francs dans l'une des deux salles particulières, plus la location du salon." },
+        { k: "Ailleurs", v: "Le canton compte neuf arrondissements d'état civil. Se marier dans une autre commune que celle de la procédure demande une autorisation de célébrer : 30 francs." },
+      ],
+      paragraphs: [
+        "Les samedis 2027 aux Eaux-Vives : 16 janvier, 6 février, 6 mars, 17 avril, 22 mai, 5 et 19 juin, 3 juillet, 28 août, 18 et 25 septembre, 9 octobre, 6 novembre et 4 décembre. Si votre fête tombe un autre samedi, le civil se fera en semaine, et je peux photographier les deux.",
+        "Au palais Eynard, on entre par le perron côté Bastions. Pour les photos, c'est un cadeau : en sortant, la promenade des Bastions est à deux minutes, la Treille et son long banc de bois à trois, la Vieille-Ville juste au-dessus.",
+        "Musique ou lecture pendant la cérémonie : c'est à régler avec l'officier d'état civil. Je me présente à lui avant le début, je prends ma place sur le côté et je travaille sans flash.",
+      ],
+      source: "Sources : [Ville de Genève, célébration du mariage](https://www.geneve.ch/demarches/celebration-mariage) et [lieux de célébration](https://www.geneve.ch/themes/civil-parcours-vie/marier-convertir-partenariat/lieux-celebration), consultés en novembre 2026. Les samedis sont ceux publiés pour 2027.",
+    },
+    spots: {
+      over: "Les photos de couple",
+      title: "De la Vieille-Ville au bord du lac.",
+      intro: "Depuis le palais Eynard, presque tout se fait à pied. Depuis la mairie des Eaux-Vives, on part plutôt vers le lac et les grands parcs de la rive gauche.",
       list: [
-        "La vieille ville et la cathédrale Saint-Pierre — ruelles pavées et perspectives historiques.",
-        "Le Parc des Bastions et la promenade de la Treille — marronniers et bancs romantiques.",
-        "Les Bains des Pâquis — lumière du matin et vue sur le jet d'eau.",
-        "Le Parc La Grange et ses roseraies — l'un des plus beaux jardins de la ville.",
-        "Les quais et le jet d'eau — l'image emblématique de Genève.",
-        "Les domaines viticoles de la campagne genevoise — pour une réception au vert.",
+        { meta: "2 minutes du palais Eynard", name: "La promenade des Bastions", text: "Les grands arbres, les échiquiers géants et le mur des Réformateurs. Ouverte jour et nuit, et juste derrière la salle : on y fait les photos de famille sans perdre de temps." },
+        { meta: "3 minutes du palais Eynard", name: "La Treille", text: "Le plus long banc de bois du monde, 120 mètres sous les marronniers, avec la vue sur les Bastions. Assis côte à côte, la promenade qui file derrière vous : une image très genevoise." },
+        { meta: "Vieille-Ville · 5 minutes", name: "L'Ancien Arsenal et le Bourg-de-Four", text: "Les arcades de l'Ancien Arsenal, ses canons et ses trois mosaïques, puis la place du Bourg-de-Four et ses terrasses. Les arcades sont couvertes et publiques : c'est notre abri s'il pleut." },
+        { meta: "Rive gauche · 11 minutes", name: "Le Jardin anglais et le Jet d'eau", text: "L'Horloge fleurie, le kiosque et le Jet d'eau en face. Ses horaires changent avec la saison : en été il tourne jusqu'au soir, en hiver de 10 h à 16 h seulement. Il s'arrête par vent fort ou grand froid, et pour son entretien en novembre." },
+        { meta: "12 minutes de la mairie des Eaux-Vives", name: "Le parc La Grange", text: "Un grand parc au bord du lac, avec un jardin de quatre cents rosiers replantés en 2021. Il ferme la nuit : à 22 h en été, à 18 h en hiver. Le parc des Eaux-Vives, juste à côté, reste ouvert et descend en pelouse vers l'eau." },
+        { meta: "Traversée · Mouettes genevoises", name: "La rade en Mouette", text: "Les petits bateaux jaunes traversent la rade toutes les dix minutes entre les Pâquis, le Molard et les Eaux-Vives, pour deux francs. Le week-end, ils circulent d'environ 10 h à 18 h. Quelques minutes sur l'eau, l'un contre l'autre, et le trajet est tout trouvé." },
+      ],
+      outro: "À savoir : la Ville de Genève soumet à autorisation tout « shooting-photo » sur le domaine public, et sa page ne prévoit pas d'exception pour un couple et son photographe. Je pose la question au service de l'espace public pour votre date, bien avant le jour J.",
+    },
+    photos: [
+      { id: "ville-geneve-p1", alt: "La mariée sourit, son bouquet coloré à la main", caption: "La mariée et son bouquet" },
+      { id: "ville-geneve-p2", alt: "Table de mariage dressée, verres et fleurs séchées", caption: "La table, avant les invités" },
+      { id: "ville-geneve-p3", alt: "Gros plan sur un bouquet de fleurs blanches et orange", caption: "Les fleurs du jour" },
+    ],
+    journee: {
+      over: "Une journée type",
+      title: "Un samedi de juin à Genève, heure par heure.",
+      intro: "Un exemple pour le samedi 19 juin 2027, l'un des samedis où la mairie des Eaux-Vives célèbre des mariages le matin.",
+      steps: [
+        { t: "8 h 30", title: "Les préparatifs", text: "Le civil du samedi se fait le matin : on commence tôt. J'arrive pendant que vous vous préparez, chez vous ou à l'hôtel, pour les détails et les premiers regards." },
+        { t: "10 h 30", title: "La mairie des Eaux-Vives", text: "La cérémonie dans l'ancienne mairie, puis les photos de famille à la sortie. Le parc La Grange est à douze minutes à pied." },
+        { t: "12 h 30", title: "À deux, au bord du lac", text: "Une demi-heure au parc des Eaux-Vives ou à La Grange, puis direction la campagne genevoise, où des domaines de Jussy ou de Satigny reçoivent des mariages." },
+        { t: "21 h", title: "Le soir dans les vignes", text: "Mi-juin, le soleil se couche vers 21 h 30. Vingt minutes entre deux plats, dans les vignes ou au bord de l'eau, puis je reste pour les discours et la fête." },
+      ],
+      note: "Si votre civil a lieu en semaine, je le photographie à part : une heure ou deux suffisent, et la fête du samedi garde toute sa place.",
+    },
+    savoir: {
+      over: "Bon à savoir",
+      title: "Ce que je vérifie avant un mariage genevois.",
+      items: [
+        { title: "S'il pleut", text: "Les arcades de l'Ancien Arsenal sont couvertes et publiques, à cinq minutes du palais Eynard : on y fait les photos de famille au sec. Pour le reste, on s'organise avec votre lieu de réception. Pensez aux parapluies clairs : un parapluie noir assombrit les visages." },
+        { title: "Les samedis chargés", text: "Le samedi, le marché du boulevard Helvétique s'installe de 6 h 30 à 14 h 15, et les puces occupent la plaine de Plainpalais. Le Marathon de Genève est annoncé les 8 et 9 mai 2027, avec l'arrivée au pont du Mont-Blanc. En décembre, la Course de l'Escalade occupe les Bastions et la Vieille-Ville." },
+        { title: "Se garer", text: "Le parking Saint-Antoine (434 places, 2 mètres de hauteur) est à six minutes à pied du palais Eynard et à douze de la mairie des Eaux-Vives. Pensez-y pour vos témoins et pour les invités qui marchent moins bien." },
+        { title: "Pour la réception", text: "Au bord du lac, La Réserve, à Bellevue, organise des mariages. À la campagne, le Domaine Château-du-Crest, à Jussy, reçoit 80 personnes assises dans sa salle du Pressoir, et le Clos du Château, à Choully, accueille aussi des noces. Pour le coucher de soleil dans les vignes, la campagne genevoise est imbattable." },
       ],
     },
+    tarifs: {
+      over: "Les formules",
+      title: "Le même prix à Genève qu'à Lausanne.",
+      intro: "Genève est à un peu plus d'une heure de chez moi, et le déplacement reste compris. Dix photos vous arrivent sous trois à cinq jours, la galerie complète sous quatre semaines. Si votre civil a lieu en semaine et la fête le samedi, on choisit ensemble la formule qui couvre les deux.",
+    },
+    faqTitle: "Vos questions sur un mariage à Genève.",
     faq: [
-      { q: "Intervenez-vous à Genève sans supplément ?", a: "Oui. Le déplacement pour un mariage à Genève est inclus dans la formule — il est chiffré au forfait dans le devis, sans mauvaise surprise. Je couvre l'ensemble de la Suisse romande : Vaud, Genève, Fribourg, Neuchâtel et le Valais romand." },
-      { q: "Où faire les photos de couple à Genève ?", a: "La vieille ville et la cathédrale Saint-Pierre pour le cachet historique, le Parc des Bastions pour la verdure, et les quais ou les Bains des Pâquis pour le lac et le jet d'eau. On choisit selon votre déroulé et la lumière du jour." },
-      { q: "Gérez-vous les cérémonies civiles à Genève ?", a: "Oui, j'ai l'habitude des salles des mariages et des contraintes de lumière en intérieur. On anticipe ensemble le timing pour ne rien manquer de l'échange des consentements." },
+      { q: "Peut-on se marier civilement un samedi à Genève ?", a: "Oui, mais seulement certains samedis matin, de 9 h 30 à 11 h 30, à la mairie des Eaux-Vives, et ces dates sont réservées aux couples genevois ou domiciliés à Genève. La Ville en a publié quatorze pour 2027. Les autres jours, les célébrations ont lieu du lundi au vendredi." },
+      { q: "Où se marier civilement en ville de Genève ?", a: "À l'état civil de la Ville, dans l'ancienne mairie des Eaux-Vives, ou dans l'une des deux salles particulières : le palais Eynard, côté Bastions, et l'Hôtel-restaurant du parc des Eaux-Vives. Les communes du canton ont leurs propres arrondissements, comme Carouge ou Cologny." },
+      { q: "Combien coûte la cérémonie civile ?", a: "125 francs à la mairie. Dans une salle particulière, 650 francs, plus la location du salon : de 350 à 500 francs au palais Eynard, de 600 à 1'000 francs au parc des Eaux-Vives. Ce sont les tarifs publiés par la Ville en novembre 2026." },
+      { q: "Faut-il une autorisation pour les photos dans les parcs ?", a: "La Ville soumet à autorisation tout « shooting-photo » sur le domaine public, sans exception publiée pour un mariage. Je pose la question pour votre date au service de l'espace public, et je vous dis ce qu'il en est bien avant le jour J." },
+      { q: "Pouvez-vous photographier un civil en semaine et la fête le samedi ?", a: "Oui. Le civil seul tient en une heure ou deux ; on l'ajoute à votre formule, et je vous envoie un prix clair avant que vous réserviez." },
+      { q: "Le déplacement à Genève est-il compris ?", a: "Oui. J'habite dans le canton de Vaud, à un peu plus d'une heure, et le déplacement est compris dans toutes mes formules en Suisse romande." },
     ],
     related: [
       { article: "journal-ou-se-marier-geneve.html", articleTitle: "Où se marier à Genève : lieux et décors de rêve" },
@@ -81,33 +207,91 @@ window.KC_VILLE = {
 
   /* ===================== MONTREUX ===================== */
   montreux: {
-    slug: "montreux", ville: "Montreux", region: "Riviera vaudoise",
+    slug: "montreux", ville: "Montreux", region: "Riviera",
     h1: "Photographe de mariage à Montreux",
-    heroImg: "Couple de mariés sur les quais fleuris de Montreux, château de Chillon",
-    heroHint: "Reportage de mariage à Montreux et sur la Riviera, face aux Alpes et au Léman.",
+    heroImg: "Les mariés et leurs familles devant le Léman et les Alpes, en Lavaux",
+    heroAlt: "Les mariés et leurs familles devant le Léman et les Alpes, en Lavaux",
+    heroMobile: true,
+    heroHint: "Montreux, Vevey et la Riviera, en reportage. À une demi-heure de chez moi, déplacement compris.",
     intro: {
-      lead: "Montreux et la Riviera vaudoise offrent l'un des décors les plus spectaculaires de Suisse : les quais fleuris, le château de Chillon posé sur l'eau, les vignes de Lavaux à l'ouest et les Alpes en toile de fond. Un cadre de carte postale pour un mariage face au lac.",
+      lead: "Se marier à Montreux demande de régler trois choses tôt : le civil se fait à Vevey, Chillon n'accueille aucune cérémonie, et début juillet les quais appartiennent au Jazz.",
       paragraphs: [
-        "Je couvre les mariages à Montreux, Vevey, Clarens et sur toute la Riviera sans frais de déplacement. Reportage discret, séance de couple à l'heure dorée sur les quais ou au château de Chillon, et toute la souplesse pour s'adapter à la météo changeante du haut-lac.",
-        "La Riviera permet des contrastes saisissants en peu de distance : la douceur méditerranéenne des quais et de leurs massifs fleuris, la pierre monumentale de Chillon, puis la hauteur et la fraîcheur des Rochers-de-Naye pour les plus aventureux.",
+        "Ces trois points réglés, il reste le lac, les Alpes en face et des hauts à vingt minutes de train. J'habite à Mézières, à une demi-heure de Montreux et un peu moins de Vevey. Ce que vous lisez ici, je l'ai vérifié auprès de l'état civil du canton, du château de Chillon et des communes : les salles, les prix, les règles pour photographier, les semaines où la ville est pleine.",
+        "Le jour J, je travaille en reportage : je photographie ce qui se passe, sans le provoquer. La demi-heure de photos à deux, je la place là où la lumière est la plus belle, souvent en fin de journée au bord de l'eau ou sur les hauts, puis je vous rends à vos invités.",
+        "Les photos de couple de cette page ont été faites en Lavaux, le vignoble qui commence aux portes de Vevey. C'est une sortie que je propose volontiers entre le civil et l'apéritif.",
       ],
-      quote: "« Le lac, les fleurs et les Alpes, réunis. »",
     },
-    lieux: {
-      title: "Les plus beaux lieux de mariage à Montreux et sur la Riviera",
+    civil: {
+      over: "Le civil sur la Riviera",
+      title: "On se marie à Vevey, pas à Montreux.",
+      facts: [
+        { k: "La salle", v: "La salle des mariages de l'Hôtel de Ville de Vevey, rue du Lac 2. Il n'y en a ni à Montreux ni à La Tour-de-Peilz." },
+        { k: "Combien", v: "Une petite salle : 30 places assises et 10 debout, selon l'état civil." },
+        { k: "Durée", v: "15 à 30 minutes. La cérémonie est publique, avec deux témoins majeurs." },
+        { k: "L'office", v: "Un seul état civil pour tout le canton, avenue de Sévelin 46 à Lausanne. Celui de Vevey a fermé en 2023 ; la salle, elle, est restée." },
+        { k: "Un château", v: "Le château d'Aigle fait partie des dix lieux d'exception du canton : 1'500 francs, du jeudi au samedi entre 14 h et 16 h, location du château en plus." },
+      ],
+      paragraphs: [
+        "Quarante personnes, c'est peu. Si vos invités sont plus nombreux, faites le civil en petit comité et réunissez tout le monde pour l'apéritif. Pour les photos, ce n'est pas une perte : les retrouvailles à la sortie sont souvent le moment le plus vivant de la journée.",
+        "Chillon, maintenant. Le château l'écrit noir sur blanc : aucune cérémonie n'y est possible, pas même dans la chapelle. Vous pouvez en revanche y faire des photos de mariage à l'intérieur, sur autorisation : 250 francs, entrée comprise pour vous deux et votre photographe, sans flash, sans perche et sans drone. Le règlement demande deux mois d'avance, les formulaires une semaine : prenez la marge large.",
+        "Le soir, après la fermeture, certaines salles du château se louent pour un banquet jusqu'à minuit : 45 francs par personne, 4'500 francs au minimum, et rien en décembre ni de janvier à mars. Si c'est votre idée, demandez au château s'il accepte un repas de noces ; ses conditions parlent de banquet.",
+      ],
+      source: "Sources : [état civil du canton de Vaud](https://www.vd.ch/population/etat-civil/mariage/salles-des-mariages/est-vaudois/vevey) et [château de Chillon](https://www.chillon.ch/faq/), consultés en novembre 2026. En cas de doute, l'état civil et le château font foi.",
+    },
+    spots: {
+      over: "Les photos de couple",
+      title: "Du bord du lac aux hauts de Montreux.",
+      intro: "Sur la Riviera, on change de décor en quelques minutes de train ou de voiture : l'eau, la vieille ville, les hauts, les vignes. Voici ceux que je propose, avec ce qu'il faut savoir pour chacun.",
       list: [
-        "Le château de Chillon — décor monumental, posé sur le Léman.",
-        "Les quais fleuris de Montreux — massifs colorés et Alpes en arrière-plan.",
-        "Le Montreux Palace et les grands hôtels de la Belle Époque — élégance d'époque.",
-        "Glion et les hauteurs de Caux — vue panoramique sur le haut-lac.",
-        "Vevey, sa place du Marché et la Confrérie — charme d'une ville au bord de l'eau.",
-        "Les vignes de Lavaux, en limite ouest — pour l'heure dorée dans les terrasses.",
+        { meta: "Montreux · bord du lac", name: "Les quais de Montreux", text: "Près de sept kilomètres de promenade au bord de l'eau, des massifs fleuris et les Alpes en face. La statue de Freddie Mercury est sur la place du Marché, devant le Marché couvert. Tôt le matin, on évite la foule." },
+        { meta: "Veytaux · 45 minutes à pied des quais", name: "Chillon, vu du bord du lac", text: "Le chemin du bord du lac mène jusqu'au château. En voiture, le parking est gratuit trois heures avec un disque, mais les places sont comptées. Les images du château posé sur l'eau se font depuis la rive ; pour l'intérieur, voir plus haut." },
+        { meta: "Montreux · vieille ville", name: "Les Planches et Saint-Vincent", text: "Les ruelles en pente de la vieille ville, et la terrasse du temple Saint-Vincent, rue du Temple, avec la vue sur le lac. À l'écart des quais, et beaucoup plus calme." },
+        { meta: "Les hauts · funiculaire ou train", name: "Glion et Caux", text: "Le funiculaire Territet–Glion monte en six à huit minutes ; le train relie Montreux à Glion en dix minutes et à Caux en vingt-deux. De là-haut, tout le Haut-Lac est devant vous. En mai, quand les narcisses fleurissent sur les hauts, on reste sur les sentiers et on ne cueille rien." },
+        { meta: "Vevey", name: "Le quai Perdonnet", text: "La statue de Charlie Chaplin au bord de l'eau, la promenade et le lac très ouvert. La Grande Place, elle, est en chantier : la commune annonce des travaux jusqu'en 2028 environ, et la Grenette reste fermée jusqu'au printemps 2027." },
+        { meta: "Lavaux · un quart d'heure", name: "Les vignes de Lavaux", text: "Chardonne est à quatorze minutes de Montreux, Saint-Saphorin à seize. Les vignes sont des propriétés privées : on reste sur les chemins et on ne touche ni aux ceps, ni au raisin, ni aux filets. En automne, pendant les vendanges, on laisse travailler les vignerons." },
+      ],
+      outro: "Sur la Riviera, je regarde aussi le vent. La bise descend du nord-nord-ouest sur le Haut-Lac ; la vaudaire souffle du sud-est par rafales soudaines, surtout les jours d'orage ou de foehn. Les deux décoiffent : on garde un plan à l'abri pour les voiles et les coiffures.",
+    },
+    photos: [
+      { id: "ville-montreux-p1", alt: "Jeunes mariés enlacés sous un platane, au-dessus du Léman, en Lavaux", caption: "En Lavaux, aux portes de la Riviera" },
+      { id: "ville-montreux-p2", alt: "Gros plan sur le bouquet de la mariée et son alliance", caption: "Le bouquet, l'alliance au doigt" },
+      { id: "ville-montreux-p3", alt: "Gros plan sur un bouquet de fleurs blanches et orange", caption: "Les fleurs du jour" },
+    ],
+    journee: {
+      over: "Une journée type",
+      title: "Un mariage sur la Riviera en juin, heure par heure.",
+      intro: "Un exemple, avec un civil à Vevey en début d'après-midi et une réception sur les hauts de Montreux.",
+      steps: [
+        { t: "11 h 30", title: "Les préparatifs", text: "Chez vous, à l'hôtel ou sur le lieu de réception : les détails, les témoins, les derniers boutons à fermer." },
+        { t: "13 h 50", title: "Le civil à Vevey", text: "Dix minutes d'avance à l'Hôtel de Ville, puis les photos de famille à la sortie, avant que tout le monde reparte." },
+        { t: "15 h 30", title: "Lavaux, à deux", text: "Quelques minutes de voiture vers Corseaux ou Chardonne, une demi-heure dans les vignes, pendant que vos invités rejoignent l'apéritif." },
+        { t: "21 h", title: "Le soir sur le Haut-Lac", text: "Mi-juin, le soleil se couche vers 21 h 25 à Montreux. Vingt minutes au bord de l'eau ou sur une terrasse des hauts, puis je reste pour les discours et la fête." },
+      ],
+      note: "Du 2 au 17 juillet 2027, pendant le Jazz, on évite les quais de Montreux : Vevey, Lavaux et les hauts restent tranquilles et tout aussi lumineux le soir.",
+    },
+    savoir: {
+      over: "Bon à savoir",
+      title: "Ce que je vérifie avant un mariage sur la Riviera.",
+      items: [
+        { title: "Le Montreux Jazz", text: "Du 2 au 17 juillet 2027, les quais sont occupés du parc Vernex au débarcadère, et la Grand-Rue est fermée le soir. Un mariage à Montreux ces jours-là reste possible, mais les photos se font ailleurs, et les parkings sont pleins." },
+        { title: "Le marché de Noël", text: "Montreux Riviera Noël occupe les quais de la fin novembre au 24 décembre. Pour un mariage d'hiver, on part sur les hauts ou à Vevey." },
+        { title: "Se garer", text: "Les parkings du Marché-Forum, de la Gare et Donner ne sont pleins tous les trois en même temps que pendant le Jazz et le marché de Noël. À Vevey, le mardi et le samedi matin, jours de marché, la Grande Place n'offre aucune place de parc." },
+        { title: "Pour la réception", text: "Les grands hôtels de la Riviera reçoivent des mariages : le Fairmont Le Montreux Palace, le Grand Hotel Suisse Majestic, le Victoria à Glion, Le Mirador au Mont-Pèlerin, et à Vevey l'Hôtel des Trois Couronnes et le Grand Hôtel du Lac. Le château d'Aigle, lui, peut accueillir la cérémonie civile." },
       ],
     },
+    tarifs: {
+      over: "Les formules",
+      title: "Les mêmes prix sur la Riviera.",
+      intro: "Montreux est à une demi-heure de chez moi : le déplacement est compris, Vevey, Lavaux et Chillon aussi. Dix photos vous arrivent sous trois à cinq jours, la galerie complète sous quatre semaines. Seule l'autorisation de photographier à l'intérieur du château, 250 francs payés à Chillon, reste à votre charge si vous la voulez.",
+    },
+    faqTitle: "Vos questions sur un mariage à Montreux.",
     faq: [
-      { q: "Vous déplacez-vous à Montreux et sur la Riviera ?", a: "Oui. Le déplacement pour un mariage à Montreux, Vevey ou sur la Riviera est inclus dans la formule — chiffré au forfait dans le devis, sans surprise. Je couvre l'ensemble de la Suisse romande." },
-      { q: "Peut-on faire des photos au château de Chillon ?", a: "Oui, les abords du château offrent un décor spectaculaire. L'accès aux intérieurs et certaines zones peut nécessiter une autorisation : on anticipe ce point ensemble lors de la préparation." },
-      { q: "Quelle est la meilleure heure pour les quais de Montreux ?", a: "L'heure dorée, en fin de journée : la lumière chaude sublime les massifs fleuris et le lac, avec les Alpes qui rosissent en arrière-plan. Le matin tôt est aussi superbe et plus calme." },
+      { q: "Peut-on se marier au château de Chillon ?", a: "Non. Le château n'accueille aucune cérémonie, pas même dans la chapelle. Il loue certaines salles le soir pour un banquet, et il autorise des photos de mariage à l'intérieur pour 250 francs, sur demande préalable." },
+      { q: "Où a lieu le mariage civil quand on se marie à Montreux ?", a: "La salle la plus proche est celle de l'Hôtel de Ville de Vevey, rue du Lac 2 : il n'y en a pas à Montreux. Pour un cadre de château, celui d'Aigle fait partie des lieux d'exception du canton." },
+      { q: "Peut-on faire les photos sur les quais pendant le Montreux Jazz ?", a: "Difficilement : du 2 au 17 juillet 2027, les quais sont pris par le festival. On choisit Vevey, Lavaux ou les hauts de Montreux, où la lumière du soir est tout aussi belle." },
+      { q: "Et s'il y a du vent ?", a: "Sur le Haut-Lac, la bise et la vaudaire peuvent souffler fort. Je prévois toujours un endroit à l'abri pour les photos de famille, et on garde le voile pour un moment plus calme." },
+      { q: "Le déplacement à Montreux est-il compris ?", a: "Oui. J'habite à Mézières, à une demi-heure : Montreux, Vevey, Lavaux et toute la Riviera sont compris dans le prix." },
+      { q: "Quand réserver ?", a: "Pour un samedi de mai à septembre, huit à quatorze mois avant. Je ne prends qu'un mariage par jour : [écrivez-moi votre date](contact.html?type=Mariage), je vous réponds sous 48 heures." },
     ],
     related: [
       { article: "journal-lieux-mariage-lavaux.html", articleTitle: "Où se marier en Lavaux : 8 lieux face au Léman" },

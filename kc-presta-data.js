@@ -34,7 +34,7 @@ window.KC_PRESTA = {
     ],
     formules: [
       { tag: "Demi-journée · 4 h", name: "Essentiel", price: "CHF 1'290",
-        items: ["Couverture 4 h continues — cérémonie & vin d'honneur", "Galerie privée en ligne, téléchargement HD", "Env. 200 photos, toutes retouchées"] },
+        items: ["Couverture 4 h continues — cérémonie & apéritif", "Galerie privée en ligne, téléchargement HD", "Env. 200 photos, toutes retouchées"] },
       { tag: "Le plus choisi · 10 h", name: "Signature", price: "CHF 2'490", feature: true,
         items: ["Couverture 10 h, des préparatifs à la soirée", "Séance engagement offerte", "Galerie privée + sélection de favoris", "Env. 500 photos, toutes retouchées"] },
       { tag: "Sur mesure · 2 jours", name: "Prestige", price: "CHF 4'500",
