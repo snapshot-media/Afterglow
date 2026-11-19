@@ -274,7 +274,7 @@
 (()=>{function useTweaks(defaults){return[defaults,()=>{}]}Object.assign(window,{useTweaks});})();
 
 ;
-(()=>{const{useState,useEffect,useRef}=React;(function(){try{var p=document.createElement("div");p.style.cssText="position:fixed;left:-9999px;top:0;width:2px;height:2px;opacity:0;transition:opacity .05s linear;pointer-events:none",document.documentElement.appendChild(p),requestAnimationFrame(function(){p.style.opacity="1"}),setTimeout(function(){var op=parseFloat(getComputedStyle(p).opacity);op>.9||document.documentElement.classList.add("no-anim"),p.remove()},220)}catch{}})();const KC={PALETTES:{"Noir chaud":["#141210","#b9926b","#f8f5ef"],"Noir profond":["#0f0e0d","#9a8f7e","#efe9df"],Anthracite:["#16181a","#8a97a0","#eef0f1"],"Ardoise cuivre":["#12100f","#a9744f","#f3ede4"]},HEAD_FONTS:{Cinzel:'"Cinzel", Georgia, serif',Cormorant:'"Cormorant Garamond", Georgia, serif'},BODY_FONTS:{Jost:'"Jost", system-ui, sans-serif',Mulish:'"Mulish", system-ui, sans-serif'},HOME:"index.html"},PALETTE_OPTS=Object.values(KC.PALETTES),PRESTA_NAV=[{slug:"mariage",title:"Mariages",short:"Mariages",href:"mariages.html"},{slug:"portrait",title:"Lifestyle",short:"Lifestyle",href:"portraits.html"},{slug:"studio",title:"Studio",short:"Studio",href:"studio.html"},{slug:"maternite",title:"Maternit\xE9 & Grossesse",short:"Maternit\xE9",href:"maternite-grossesse.html"}];function Slot({id,ph,alt,style,className,loading,fetchpriority}){return React.createElement("image-slot",{id,shape:"rect",fit:"cover",placeholder:ph,alt:alt||ph,"aria-label":alt||ph,role:"img",style,class:className,loading,fetchpriority})}function Overline({children,className=""}){return React.createElement("div",{className:"overline "+className},React.createElement("span",{className:"tick"}),children)}function Nav({active=""}){const[scrolled,setScrolled]=useState(!1),[open,setOpen]=useState(!1);useEffect(()=>{const onScroll=()=>setScrolled(window.scrollY>40);return onScroll(),window.addEventListener("scroll",onScroll,{passive:!0}),()=>window.removeEventListener("scroll",onScroll)},[]),useEffect(()=>(document.body.style.overflow=open?"hidden":"",()=>{document.body.style.overflow=""}),[open]);const menu=ReactDOM.createPortal(React.createElement("div",{className:"mobile-menu"+(open?" is-open":""),onClick:()=>setOpen(!1)},React.createElement("div",{className:"mm-inner",onClick:e=>e.stopPropagation()},React.createElement("div",{className:"mm-group"},React.createElement("span",{className:"mm-label"},"Prestations"),PRESTA_NAV.map(p=>React.createElement("a",{key:p.slug,href:p.href,onClick:()=>setOpen(!1)},p.title))),React.createElement("a",{className:"mm-top",href:"portfolio.html",onClick:()=>setOpen(!1)},"Portfolio"),React.createElement("a",{className:"mm-top",href:"tarifs.html",onClick:()=>setOpen(!1)},"Tarifs"),React.createElement("a",{className:"mm-top",href:"journal.html",onClick:()=>setOpen(!1)},"Journal"),React.createElement("a",{className:"mm-top",href:"apropos.html",onClick:()=>setOpen(!1)},"\xC0 propos"),React.createElement("a",{className:"mm-top",href:"contact.html",onClick:()=>setOpen(!1)},"Contact"))),document.body);return React.createElement(React.Fragment,null,React.createElement("nav",{className:"nav"+(scrolled?" scrolled":"")+(open?" menu-open":"")},React.createElement("a",{href:KC.HOME,className:"wordmark"},React.createElement("span",{className:"wm-main"},"Afterglow"),React.createElement("span",{className:"wm-by"},"by Kevin Chinelli")),React.createElement("div",{className:"nav-links"},React.createElement("div",{className:"nav-item nav-extra"+(PRESTA_NAV.some(p=>p.slug===active)?" is-active":"")},React.createElement("a",{href:PRESTA_NAV[0].href,"aria-haspopup":"true"},"Prestations",React.createElement("span",{className:"caret"},"\u25BE")),React.createElement("div",{className:"nav-drop"},PRESTA_NAV.map(p=>React.createElement("a",{key:p.slug,href:p.href,className:active===p.slug?"is-active":""},p.title)))),React.createElement("a",{href:"portfolio.html",className:"nav-extra"+(active==="portfolio"?" is-active":"")},"Portfolio"),React.createElement("a",{href:"tarifs.html",className:"nav-extra"+(active==="tarifs"?" is-active":"")},"Tarifs"),React.createElement("a",{href:"journal.html",className:"nav-extra"+(active==="journal"?" is-active":"")},"Journal"),React.createElement("a",{href:"apropos.html",className:"nav-extra"+(active==="apropos"?" is-active":"")},"\xC0 propos"),React.createElement("a",{href:"contact.html",className:"nav-cta"+(active==="contact"?" is-active":"")},"Contact")),React.createElement("button",{className:"nav-burger","aria-label":"Ouvrir le menu","aria-expanded":open,onClick:()=>setOpen(o=>!o)},React.createElement("span",null),React.createElement("span",null))),menu)}function Footer(){return React.createElement("footer",{className:"s-dark",style:{borderTop:"1px solid var(--line-d)"}},React.createElement("div",{className:"footer"},React.createElement("a",{href:KC.HOME,className:"wordmark"},React.createElement("span",{className:"wm-main"},"Afterglow"),React.createElement("span",{className:"wm-by"},"by Kevin Chinelli")),React.createElement("div",{className:"copy"},"\xA9 2026 \u2014 Tous droits r\xE9serv\xE9s \xB7 Site cr\xE9\xE9 par ",React.createElement("a",{href:"https://snapshotmedia.ch",target:"_blank",rel:"noopener"},"Snapshot Media")),React.createElement("div",{className:"social"},React.createElement("a",{href:"apropos.html"},"\xC0 propos"),React.createElement("a",{href:"confidentialite.html"},"Confidentialit\xE9"),React.createElement("a",{href:"https://www.instagram.com/afterglowbykevin/",target:"_blank",rel:"noopener"},"Instagram"),React.createElement("a",{href:"https://g.page/r/Ccd14Q8WzKZuEBM",target:"_blank",rel:"noopener"},"Google"),React.createElement("a",{href:"tel:+41798507603"},"+41 79 850 76 03"),React.createElement("a",{href:"mailto:contact@afterglowbykevin.ch"},"contact@afterglowbykevin.ch"))))}function RelatedPresta({current}){const items=PRESTA_NAV.filter(p=>p.slug!==current).slice(0,3);return React.createElement("section",{className:"sec s-light pad-y"},React.createElement("div",{className:"wrap"},React.createElement("div",{style:{textAlign:"center",marginBottom:"clamp(32px,4vw,52px)"}},React.createElement(Overline,{className:"reveal",style:{justifyContent:"center"}},"\xC0 d\xE9couvrir aussi"),React.createElement("h2",{className:"display reveal d1",style:{fontSize:"clamp(26px,3.2vw,44px)",marginTop:"18px"}},"Autres prestations.")),React.createElement("div",{className:"related-grid"},items.map((p,i)=>React.createElement("a",{key:p.slug,href:p.href,className:"related-card reveal d"+(i+1)},React.createElement("div",{className:"rc-img"},React.createElement(Slot,{id:"presta-"+p.slug,ph:p.title,alt:"Photographe "+p.title.toLowerCase()+" en Suisse romande \u2014 Kevin Chinelli",style:{width:"100%",height:"100%"}})),React.createElement("div",{className:"rc-meta"},React.createElement("h3",null,p.title),React.createElement("span",{className:"ar"},"D\xE9couvrir \u2192")))))))}function CtaContact({overline="Parlons de votre projet",title="R\xE9servez votre date."}){return React.createElement("section",{className:"sec s-darker cta-band"},React.createElement("div",{className:"wrap pad-y",style:{textAlign:"center"}},React.createElement(Overline,{className:"reveal"},overline),React.createElement("h2",{className:"display reveal d1",style:{fontSize:"clamp(34px,5.4vw,72px)",margin:"22px 0 38px"}},title),React.createElement("a",{href:"contact.html",className:"link-arrow reveal d2",style:{fontSize:"14px"}},"Me contacter ",React.createElement("span",{className:"ar"},"\u2192"))))}function useReveal(deps=[]){useEffect(()=>{const reveal=()=>{const vh=window.innerHeight;document.querySelectorAll(".reveal:not(.in)").forEach(el=>{const r=el.getBoundingClientRect();r.top<vh*.9&&r.bottom>0&&el.classList.add("in")})};reveal(),window.addEventListener("scroll",reveal,{passive:!0}),window.addEventListener("resize",reveal);const id=setTimeout(reveal,220);return()=>{window.removeEventListener("scroll",reveal),window.removeEventListener("resize",reveal),clearTimeout(id)}},deps)}function useApplyTweaks(t){useEffect(()=>{const r=document.documentElement.style;Array.isArray(t.palette)&&(r.setProperty("--bg",t.palette[0]),r.setProperty("--accent",t.palette[1]),r.setProperty("--cream",t.palette[2])),r.setProperty("--font-display",KC.HEAD_FONTS[t.heading]||KC.HEAD_FONTS.Cinzel),r.setProperty("--font-body",KC.BODY_FONTS[t.body]||KC.BODY_FONTS.Jost)},[t.palette,t.heading,t.body])}Object.assign(window,{KC,PALETTE_OPTS,PRESTA_NAV,Slot,Overline,Nav,Footer,CtaContact,RelatedPresta,useReveal,useApplyTweaks});})();
+(()=>{const{useState,useEffect,useRef}=React;(function(){try{var p=document.createElement("div");p.style.cssText="position:fixed;left:-9999px;top:0;width:2px;height:2px;opacity:0;transition:opacity .05s linear;pointer-events:none",document.documentElement.appendChild(p),requestAnimationFrame(function(){p.style.opacity="1"}),setTimeout(function(){var op=parseFloat(getComputedStyle(p).opacity);op>.9||document.documentElement.classList.add("no-anim"),p.remove()},220)}catch{}})();const KC={PALETTES:{"Noir chaud":["#141210","#b9926b","#f8f5ef"],"Noir profond":["#0f0e0d","#9a8f7e","#efe9df"],Anthracite:["#16181a","#8a97a0","#eef0f1"],"Ardoise cuivre":["#12100f","#a9744f","#f3ede4"]},HEAD_FONTS:{Cinzel:'"Cinzel", Georgia, serif',Cormorant:'"Cormorant Garamond", Georgia, serif'},BODY_FONTS:{Jost:'"Jost", system-ui, sans-serif',Mulish:'"Mulish", system-ui, sans-serif'},HOME:"/",WHATSAPP:"https://wa.me/41798507603?text="+encodeURIComponent("Bonjour Kevin, je vous \xE9cris depuis le site Afterglow au sujet d'une s\xE9ance photo : "),PRO_URL:"https://snapshotmedia.ch/services/photographie/portraits-professionnels/"},PALETTE_OPTS=Object.values(KC.PALETTES),PRESTA_NAV=[{slug:"mariage",title:"Mariages",short:"Mariages",href:"mariages.html"},{slug:"portrait",title:"Lifestyle",short:"Lifestyle",href:"portraits.html",children:[{slug:"solo",title:"Solo",href:"solo.html"},{slug:"couple",title:"Couple",href:"couple.html"},{slug:"famille",title:"Famille",href:"famille.html"}]},{slug:"studio",title:"Studio",short:"Studio",href:"studio.html"},{slug:"maternite",title:"Maternit\xE9 & Grossesse",short:"Maternit\xE9",href:"maternite-grossesse.html"}],PRESTA_PARENT={};PRESTA_NAV.forEach(p=>(p.children||[]).forEach(c=>{PRESTA_PARENT[c.slug]=p.slug}));function Slot({id,ph,alt,style,className,loading,fetchpriority}){return React.createElement("image-slot",{id,shape:"rect",fit:"cover",placeholder:ph,alt:alt||ph,"aria-label":alt||ph,role:"img",style,class:className,loading,fetchpriority})}function Overline({children,className=""}){return React.createElement("div",{className:"overline "+className},React.createElement("span",{className:"tick"}),children)}function Nav({active=""}){const[scrolled,setScrolled]=useState(!1),[open,setOpen]=useState(!1);useEffect(()=>{const onScroll=()=>setScrolled(window.scrollY>40);return onScroll(),window.addEventListener("scroll",onScroll,{passive:!0}),()=>window.removeEventListener("scroll",onScroll)},[]),useEffect(()=>(document.body.style.overflow=open?"hidden":"",()=>{document.body.style.overflow=""}),[open]);const menu=ReactDOM.createPortal(React.createElement("div",{className:"mobile-menu"+(open?" is-open":""),onClick:()=>setOpen(!1)},React.createElement("div",{className:"mm-inner",onClick:e=>e.stopPropagation()},React.createElement("div",{className:"mm-group"},React.createElement("span",{className:"mm-label"},"Prestations"),PRESTA_NAV.map(p=>[React.createElement("a",{key:p.slug,href:p.href,onClick:()=>setOpen(!1)},p.title),...(p.children||[]).map(c=>React.createElement("a",{key:c.slug,href:c.href,className:"mm-sub",onClick:()=>setOpen(!1)},c.title))])),React.createElement("a",{className:"mm-top",href:"portfolio.html",onClick:()=>setOpen(!1)},"Portfolio"),React.createElement("a",{className:"mm-top",href:"tarifs.html",onClick:()=>setOpen(!1)},"Tarifs"),React.createElement("a",{className:"mm-top",href:"journal.html",onClick:()=>setOpen(!1)},"Journal"),React.createElement("a",{className:"mm-top",href:"apropos.html",onClick:()=>setOpen(!1)},"\xC0 propos"),React.createElement("a",{className:"mm-top",href:"contact.html",onClick:()=>setOpen(!1)},"Contact"))),document.body);return React.createElement(React.Fragment,null,React.createElement("nav",{className:"nav"+(scrolled?" scrolled":"")+(open?" menu-open":"")},React.createElement("a",{href:KC.HOME,className:"wordmark"},React.createElement("span",{className:"wm-main"},"Afterglow"),React.createElement("span",{className:"wm-by"},"by Kevin Chinelli")),React.createElement("div",{className:"nav-links"},React.createElement("div",{className:"nav-item nav-extra"+(PRESTA_NAV.some(p=>p.slug===active||p.slug===PRESTA_PARENT[active])?" is-active":"")},React.createElement("a",{href:PRESTA_NAV[0].href,"aria-haspopup":"true"},"Prestations",React.createElement("span",{className:"caret"},"\u25BE")),React.createElement("div",{className:"nav-drop"},PRESTA_NAV.map(p=>[React.createElement("a",{key:p.slug,href:p.href,className:active===p.slug?"is-active":""},p.title),...(p.children||[]).map(c=>React.createElement("a",{key:c.slug,href:c.href,className:"nd-sub"+(active===c.slug?" is-active":"")},c.title))]))),React.createElement("a",{href:"portfolio.html",className:"nav-extra"+(active==="portfolio"?" is-active":"")},"Portfolio"),React.createElement("a",{href:"tarifs.html",className:"nav-extra"+(active==="tarifs"?" is-active":"")},"Tarifs"),React.createElement("a",{href:"journal.html",className:"nav-extra"+(active==="journal"?" is-active":"")},"Journal"),React.createElement("a",{href:"apropos.html",className:"nav-extra"+(active==="apropos"?" is-active":"")},"\xC0 propos"),React.createElement("a",{href:"contact.html",className:"nav-cta"+(active==="contact"?" is-active":"")},"Contact")),React.createElement("button",{className:"nav-burger","aria-label":"Ouvrir le menu","aria-expanded":open,onClick:()=>setOpen(o=>!o)},React.createElement("span",null),React.createElement("span",null))),menu)}function Footer(){return React.createElement("footer",{className:"s-dark",style:{borderTop:"1px solid var(--line-d)"}},React.createElement("div",{className:"footer"},React.createElement("a",{href:KC.HOME,className:"wordmark"},React.createElement("span",{className:"wm-main"},"Afterglow"),React.createElement("span",{className:"wm-by"},"by Kevin Chinelli")),React.createElement("div",{className:"copy"},"\xA9 2026 \u2014 Tous droits r\xE9serv\xE9s \xB7 Site cr\xE9\xE9 par ",React.createElement("a",{href:"https://snapshotmedia.ch",target:"_blank",rel:"noopener"},"Snapshot Media")),React.createElement(FooterLinks,null)))}function FooterLinks(){return React.createElement("div",{className:"social"},React.createElement("a",{href:"apropos.html"},"\xC0 propos"),React.createElement("a",{href:"confidentialite.html"},"Confidentialit\xE9"),React.createElement("a",{href:"https://www.instagram.com/afterglowbykevin/",target:"_blank",rel:"noopener","data-umami-event":"instagram"},"Instagram"),React.createElement("a",{href:"https://g.page/r/Ccd14Q8WzKZuEBM",target:"_blank",rel:"noopener","data-umami-event":"fiche-google"},"Google"),React.createElement("a",{href:KC.WHATSAPP,target:"_blank",rel:"noopener","data-umami-event":"whatsapp"},"WhatsApp"),React.createElement("a",{href:"tel:+41798507603","data-umami-event":"telephone"},"+41 79 850 76 03"),React.createElement("a",{href:"mailto:contact@afterglowbykevin.ch","data-umami-event":"email"},"contact@afterglowbykevin.ch"))}function RelatedPresta({current}){const parentSlug=PRESTA_PARENT[current],parent=PRESTA_NAV.find(p=>p.slug===parentSlug),items=parent?[parent,...parent.children.filter(c=>c.slug!==current)].slice(0,3):PRESTA_NAV.filter(p=>p.slug!==current).slice(0,3);return React.createElement("section",{className:"sec s-light pad-y"},React.createElement("div",{className:"wrap"},React.createElement("div",{style:{textAlign:"center",marginBottom:"clamp(32px,4vw,52px)"}},React.createElement(Overline,{className:"reveal",style:{justifyContent:"center"}},"\xC0 d\xE9couvrir aussi"),React.createElement("h2",{className:"display reveal d1",style:{fontSize:"clamp(26px,3.2vw,44px)",marginTop:"18px"}},parent?"Les autres s\xE9ances lifestyle.":"Autres prestations.")),React.createElement("div",{className:"related-grid"},items.map((p,i)=>React.createElement("a",{key:p.slug,href:p.href,className:"related-card reveal d"+(i+1)},React.createElement("div",{className:"rc-img"},React.createElement(Slot,{id:"presta-"+p.slug,ph:p.title,alt:"Photographe "+p.title.toLowerCase()+" en Suisse romande \u2014 Kevin Chinelli",style:{width:"100%",height:"100%"}})),React.createElement("div",{className:"rc-meta"},React.createElement("h3",null,p.title),React.createElement("span",{className:"ar"},"D\xE9couvrir \u2192")))))))}function CtaContact({overline="Parlons de votre projet",title="R\xE9servez votre date."}){return React.createElement("section",{className:"sec s-darker cta-band"},React.createElement("div",{className:"wrap pad-y",style:{textAlign:"center"}},React.createElement(Overline,{className:"reveal"},overline),React.createElement("h2",{className:"display reveal d1",style:{fontSize:"clamp(34px,5.4vw,72px)",margin:"22px 0 38px"}},title),React.createElement("a",{href:"contact.html",className:"link-arrow reveal d2",style:{fontSize:"14px"}},"Me contacter ",React.createElement("span",{className:"ar"},"\u2192"))))}function useReveal(deps=[]){useEffect(()=>{const reveal=()=>{const vh=window.innerHeight;document.querySelectorAll(".reveal:not(.in)").forEach(el=>{const r=el.getBoundingClientRect();r.top<vh*.9&&r.bottom>0&&el.classList.add("in")})};reveal(),window.addEventListener("scroll",reveal,{passive:!0}),window.addEventListener("resize",reveal);const id=setTimeout(reveal,220);return()=>{window.removeEventListener("scroll",reveal),window.removeEventListener("resize",reveal),clearTimeout(id)}},deps)}function useApplyTweaks(t){useEffect(()=>{const r=document.documentElement.style;Array.isArray(t.palette)&&(r.setProperty("--bg",t.palette[0]),r.setProperty("--accent",t.palette[1]),r.setProperty("--cream",t.palette[2])),r.setProperty("--font-display",KC.HEAD_FONTS[t.heading]||KC.HEAD_FONTS.Cinzel),r.setProperty("--font-body",KC.BODY_FONTS[t.body]||KC.BODY_FONTS.Jost)},[t.palette,t.heading,t.body])}Object.assign(window,{KC,PALETTE_OPTS,PRESTA_NAV,PRESTA_PARENT,Slot,Overline,Nav,Footer,FooterLinks,CtaContact,RelatedPresta,useReveal,useApplyTweaks});})();
 
 ;
 /* ============================================================
@@ -287,6 +287,7 @@ window.KC_PRESTA = {
   /* ====================== MARIAGES ====================== */
   mariage: {
     slug: "mariage", title: "Mariages", crumb: "Mariages", heroDefault: "bas",
+    schemaName: "Photographie de mariage",
     heroImg: "Photo hero — couple, cérémonie en extérieur",
     heroHint: "Photographe de mariage en Suisse romande — du premier regard au dernier éclat de rire.",
     intro: {
@@ -330,10 +331,6 @@ window.KC_PRESTA = {
       "Sélection réseaux sociaux livrée sous 3–5 jours", "Droits d'usage privé inclus",
       "Double sauvegarde sécurisée pendant 1 an", "Frais de déplacement inclus en Suisse romande",
     ],
-    testimonials: [
-      { quote: "Kevin a capturé notre mariage avec une justesse rare. Chaque image raconte précisément ce que nous avons ressenti ce jour-là.", who: "Camille & Thomas, Lavaux" },
-      { quote: "Discret toute la journée, et pourtant rien ne lui a échappé. Nos photos sont d'une élégance folle.", who: "Sophie & Julien, Fribourg" },
-    ],
     faq: [
       { q: "Dans quelles régions vous déplacez-vous ?", a: "Je me déplace avec plaisir pour tout mariage en Suisse romande et au-delà. Le déplacement est inclus dans toute la Suisse romande (Vaud, Genève, Fribourg, Neuchâtel, Valais) — sans frais ni surprise. Pour un mariage ailleurs en Suisse ou à l'étranger, transport et hébergement éventuels sont détaillés clairement dans le devis." },
       { q: "Photographiez-vous plusieurs mariages le même jour ?", a: "Jamais. Je ne réserve qu'un seul mariage par date : vous avez ma disponibilité et mon énergie du matin jusqu'à la fin de soirée." },
@@ -345,17 +342,74 @@ window.KC_PRESTA = {
     ],
   },
 
-  /* ====================== PORTRAITS ====================== */
+  /* ============== LIFESTYLE (page mère : solo, couple, famille) ============== */
   portrait: {
     slug: "portrait", title: "Lifestyle", crumb: "Lifestyle", heroDefault: "bas",
+    schemaName: "Photographie lifestyle et portrait",
     heroImg: "Photo hero — portrait en lumière naturelle, extérieur",
-    heroHint: "Photographe portrait en Suisse romande, en lumière naturelle.",
+    heroHint: "Photographe lifestyle et portrait en Suisse romande — seul, à deux ou en famille, en lumière naturelle.",
+    subpages: ["solo", "couple", "famille"],
+    intro: {
+      lead: "Une séance lifestyle, c'est un moment de vie photographié tel qu'il est : vous, la personne que vous aimez ou toute votre tribu, dans un lieu qui vous ressemble.",
+      paragraphs: [
+        "Pas de poses figées : on marche, on discute, on rit, et je saisis ce qui se passe entre deux. Je vous donne des indications simples et précises — où poser le regard, quoi faire de vos mains — pour que vous n'ayez jamais à « prendre la pose ». Les plus belles images arrivent presque toujours quand vous oubliez l'appareil.",
+        "La séance se vit seul, à deux ou en famille. Un portrait pour soi, des fiançailles, un anniversaire de rencontre, des enfants qui grandissent trop vite : le déroulé et les tarifs sont les mêmes, seule l'histoire change.",
+        "Je travaille la lumière naturelle, en extérieur ou chez vous : un quai du Léman à Lausanne, les vignes de Lavaux, une ruelle de la vieille ville de Genève, une forêt, votre salon un dimanche matin. Vous repartez avec une galerie privée et des fichiers haute définition, prêts pour l'impression comme pour le partage.",
+      ],
+      quote: "« Les plus belles images arrivent quand on oublie l'appareil. »",
+    },
+    gallery: [
+      { ph: "Portrait extérieur — lumière douce", o: "v" },
+      { ph: "Regard franc", o: "v" },
+      { ph: "Lumière de fin de journée", o: "h" },
+      { ph: "Portrait en pied", o: "v" },
+      { ph: "Attitude lifestyle", o: "v" },
+      { ph: "En mouvement", o: "h" },
+      { ph: "Profil — contre-jour", o: "v" },
+      { ph: "Portrait naturel", o: "v" },
+      { ph: "Instant spontané", o: "h" },
+    ],
+    formules: [
+      { tag: "Découverte · 30 min", name: "Essentiel", price: "CHF 180",
+        items: ["Seul, à deux ou en famille", "1 lieu en extérieur", "10 photos retouchées", "Galerie privée en ligne", "Galerie complète en option"] },
+      { tag: "Le plus choisi · 1 h", name: "Signature", price: "CHF 280", feature: true,
+        items: ["Seul, à deux ou en famille", "2 lieux (intérieur ou extérieur) ou 2 ambiances proches", "25 photos retouchées", "Galerie privée en ligne", "Galerie complète en option"] },
+    ],
+    entreprise: true,
+    process: [
+      { n: "01", title: "Prise de contact", text: "Vous me dites qui sera là et ce que vous aimeriez garder de ce moment. On choisit ensemble le lieu qui vous ressemble." },
+      { n: "02", title: "Préparation", text: "Conseils tenues, couleurs et horaire selon la lumière : tout est prêt pour que la séance soit fluide." },
+      { n: "03", title: "La séance", text: "Décontractée et guidée. Je vous propose des situations simples, vous restez vous-mêmes — et on s'amuse." },
+      { n: "04", title: "Livraison", text: "Votre galerie privée sous 2 semaines, fichiers prêts à l'emploi, web et impression." },
+    ],
+    inclus: [
+      "Conseils lieu, tenues & couleurs", "Direction de pose bienveillante",
+      "Toutes les photos livrées retouchées", "Fichiers web et impression HD", "Galerie privée en ligne",
+      "Frais de déplacement inclus en Suisse romande",
+    ],
+    faq: [
+      { q: "Quelle différence entre une séance solo, couple ou famille ?", a: "Le déroulé et les tarifs sont les mêmes : seule l'histoire change. En solo, la séance est centrée sur vous ; à deux, sur votre complicité ; en famille, on suit le rythme des enfants. Dites-moi qui sera là, j'adapte le lieu, l'heure et ma façon de vous guider." },
+      { q: "Où se déroule la séance ?", a: "Au lieu de votre choix en Suisse romande — quais de Lausanne, vieille ville de Genève, vignobles de Lavaux, forêt, bord de lac, ou votre intérieur — ou dans un cadre que je vous propose selon l'ambiance souhaitée. Je me déplace dans tout le canton de Vaud, à Genève, Fribourg, Neuchâtel et alentours." },
+      { q: "Je ne suis pas à l'aise devant l'objectif, est-ce un problème ?", a: "C'est le cas de la grande majorité des gens — et c'est précisément mon métier. Je guide pas à pas, sans jamais vous laisser chercher quoi faire. La plupart repartent en se disant que c'était bien plus simple que prévu." },
+      { q: "Combien de tenues puis-je prévoir ?", a: "Une à deux selon la durée. Je vous conseille en amont sur les couleurs et les matières qui rendent le mieux en photo, et qui s'accordent avec le décor." },
+      { q: "Peut-on offrir une séance ?", a: "Oui, je propose des bons cadeaux personnalisés, valables un an, pour une séance solo, en couple ou en famille." },
+      { q: "Sous quel délai les images sont-elles livrées ?", a: "Environ deux semaines, avec une livraison express possible en option si vous en avez besoin plus vite." },
+    ],
+  },
+
+  /* ====================== LIFESTYLE · SOLO ====================== */
+  solo: {
+    slug: "solo", parent: "portrait", title: "Solo", crumb: "Solo", heroDefault: "bas",
+    cardText: "Un portrait pour vous, en lumière naturelle, dans un lieu qui compte.",
+    schemaName: "Séance photo solo",
+    heroImg: "Photo hero — portrait solo en lumière naturelle",
+    heroHint: "Séance photo solo en Suisse romande — un portrait qui vous ressemble, en lumière naturelle.",
     intro: {
       lead: "Une séance portrait, c'est un cadeau qu'on se fait à soi-même : un temps suspendu, rien que pour vous, et des images qui vous ressemblent vraiment.",
       paragraphs: [
         "On commence par marcher et discuter, le temps que l'appareil se fasse oublier. Je vous donne des indications simples et précises — où poser le regard, quoi faire de vos mains — pour que vous n'ayez jamais à « prendre la pose ». Les plus belles images arrivent presque toujours entre deux consignes, quand vous redevenez tout simplement vous-même.",
         "On repousse si souvent les belles photos de soi à « plus tard » : au bon moment, à quand on sera prêt, à quand on aura le temps. Ce moment, c'est maintenant. S'offrir une séance, c'est s'accorder le droit de se voir autrement, de prendre soin de son image et de garder une trace juste de qui l'on est aujourd'hui.",
-        "Je travaille la lumière naturelle, en extérieur ou dans un lieu qui compte pour vous : un quai du Léman à Lausanne, une ruelle de la vieille ville de Genève, votre atelier ou votre intérieur. Portrait personnel, artistique ou pour votre image professionnelle, le cadre s'adapte à l'usage que vous ferez des photos. Vous repartez avec une galerie privée et des fichiers haute définition, prêts pour l'impression comme pour le web.",
+        "Je travaille la lumière naturelle, en extérieur ou dans un lieu qui compte pour vous : un quai du Léman à Lausanne, une ruelle de la vieille ville de Genève, votre atelier ou votre intérieur. Portrait personnel, artistique ou cadeau pour un anniversaire : le cadre s'adapte à ce que vous voulez garder de ce moment. Vous repartez avec une galerie privée et des fichiers haute définition, prêts pour l'impression comme pour le web.",
       ],
       quote: "« Un visage en dit toujours plus qu'un long discours. »",
     },
@@ -372,14 +426,13 @@ window.KC_PRESTA = {
     ],
     formules: [
       { tag: "Découverte · 30 min", name: "Essentiel", price: "CHF 180",
-        items: ["1 lieu extérieur", "10 photos retouchées", "Galerie privée en ligne", "Galerie complète en option"] },
+        items: ["1 lieu en extérieur", "10 photos retouchées", "Galerie privée en ligne", "Galerie complète en option"] },
       { tag: "Le plus choisi · 1 h", name: "Signature", price: "CHF 280", feature: true,
         items: ["2 lieux (intérieur ou extérieur) ou 2 ambiances proches", "25 photos retouchées", "Galerie privée en ligne", "Galerie complète en option"] },
-      { tag: "Pro & image de marque", name: "Corporate", price: "Sur devis",
-        items: ["Portraits pro & personal branding", "Extérieur, intérieur ou studio", "Portraits d'équipe possibles", "Droits d'usage commercial inclus", "Volume & délai selon vos besoins"] },
     ],
+    entreprise: true,
     process: [
-      { n: "01", title: "Prise de contact", text: "On clarifie l'usage des images, l'ambiance recherchée et le lieu qui vous correspond le mieux." },
+      { n: "01", title: "Prise de contact", text: "On clarifie ce que vous attendez des images, l'ambiance recherchée et le lieu qui vous correspond le mieux." },
       { n: "02", title: "Préparation", text: "Conseils tenues, couleurs et repérage : tout est prêt pour que la séance soit fluide et vous ressemble." },
       { n: "03", title: "La séance", text: "Décontractée et guidée. Je vous dirige avec justesse, vous restez vous-même — et on s'amuse." },
       { n: "04", title: "Livraison", text: "Votre galerie privée sous 2 semaines, fichiers prêts à l'emploi, web et impression." },
@@ -389,14 +442,10 @@ window.KC_PRESTA = {
       "Toutes les photos livrées retouchées", "Fichiers web et impression HD", "Galerie privée en ligne",
       "Frais de déplacement inclus en Suisse romande",
     ],
-    testimonials: [
-      { quote: "Je me trouve enfin à mon avantage sur une photo. Naturel, juste, sans surjeu.", who: "Sarah, Lausanne" },
-      { quote: "Des portraits qui me ressemblent vraiment — je les utilise partout, du site au LinkedIn.", who: "Damien, Genève" },
-    ],
     faq: [
       { q: "Où se déroule la séance ?", a: "Au lieu de votre choix en Suisse romande — quais de Lausanne, vieille ville de Genève, vignobles de Lavaux, forêt, bord de lac, ou votre intérieur — ou dans un cadre que je vous propose selon l'ambiance souhaitée. Je me déplace dans tout le canton de Vaud, à Genève, Fribourg, Neuchâtel et alentours." },
-      { q: "Portrait extérieur ou studio, comment choisir ?", a: "Le portrait en extérieur, en lumière naturelle, donne un rendu vivant et personnel. Le studio offre un cadre maîtrisé, idéal pour le corporate et l'éditorial. Si vous hésitez, on en parle : je vous oriente selon l'usage final des images." },
-      { q: "Puis-je utiliser les photos pour mon activité ?", a: "Oui. Pour un usage purement personnel, les droits privés sont inclus dans toutes les formules. Pour un usage professionnel ou commercial — site, réseaux, presse, supports imprimés, personal branding, portraits d'équipe — la formule Corporate inclut les droits d'usage commercial et s'établit sur devis selon vos besoins. Dites-moi simplement l'usage prévu, je vous prépare une proposition adaptée." },
+      { q: "Portrait en extérieur ou en studio, comment choisir ?", a: "Le portrait en extérieur, en lumière naturelle, donne un rendu vivant et personnel. Le studio offre un cadre maîtrisé, idéal pour un portrait éditorial plus graphique. Si vous hésitez, on en parle : je vous oriente selon ce que vous voulez faire des images." },
+      { q: "Puis-je utiliser les photos pour mon activité ?", a: "Les droits d'usage privé sont inclus dans toutes les formules. Pour des portraits destinés à une entreprise — site, réseaux professionnels, presse, équipe —, je travaille sous ma marque Snapshot Media, avec les droits d'usage commercial adaptés." },
       { q: "Combien de tenues puis-je prévoir ?", a: "Une à deux selon la durée. Je vous conseille en amont sur les couleurs et les matières qui rendent le mieux en photo, et qui s'accordent avec le décor." },
       { q: "Je ne suis pas à l'aise devant l'objectif, est-ce un problème ?", a: "C'est le cas de la grande majorité des gens — et c'est précisément mon métier. Je guide pas à pas, sans jamais vous laisser chercher quoi faire. La plupart repartent en se disant que c'était bien plus simple que prévu." },
       { q: "Sous quel délai les images sont-elles livrées ?", a: "Environ deux semaines, avec une livraison express possible en option si vous en avez besoin plus vite." },
@@ -406,6 +455,7 @@ window.KC_PRESTA = {
   /* ============== MATERNITÉ & GROSSESSE ============== */
   maternite: {
     slug: "maternite", title: "Maternité & Grossesse", crumb: "Maternité & Grossesse", heroDefault: "bas",
+    schemaName: "Photographie de grossesse et maternité",
     heroImg: "Photo hero — silhouette de grossesse, lumière douce",
     heroHint: "Photographe grossesse & maternité en Suisse romande — la douceur de l'attente.",
     intro: {
@@ -448,10 +498,6 @@ window.KC_PRESTA = {
       "Toutes les photos livrées retouchées", "Galerie privée en ligne", "Droits d'usage privé",
       "Frais de déplacement inclus en Suisse romande",
     ],
-    testimonials: [
-      { quote: "Une bulle de douceur. Je ne me trouvais jamais photogénique enceinte — Kevin m'a fait changer d'avis.", who: "Marie, Vevey" },
-      { quote: "Des images d'une finesse incroyable, qui resteront dans la famille pour toujours.", who: "Élodie & Nicolas, Neuchâtel" },
-    ],
     faq: [
       { q: "À quel moment de la grossesse réserver ?", a: "Idéalement entre la 30e et la 36e semaine : le ventre est joliment arrondi et vous êtes encore tout à fait à l'aise pour bouger. Pour un terme estival, pensez à réserver dès le 2e trimestre." },
       { q: "Où a lieu la séance en Suisse romande ?", a: "En studio chauffé (adresse communiquée à la réservation) ou en extérieur — bord du Léman, forêt, lieu qui vous est cher — dans le canton de Vaud, à Genève, Fribourg, Neuchâtel ou le Valais romand." },
@@ -465,20 +511,20 @@ window.KC_PRESTA = {
   /* ====================== STUDIO ====================== */
   studio: {
     slug: "studio", title: "Studio", crumb: "Studio", heroDefault: "bas",
+    schemaName: "Portrait en studio",
     heroImg: "Photo hero — portrait studio, fond sobre",
-    heroHint: "Portrait studio, corporate & éditorial en Suisse romande.",
+    heroHint: "Séance photo en studio en Suisse romande — portrait éditorial, lumière maîtrisée.",
     intro: {
       lead: "Un portrait fort en dit plus que mille mots. En studio, chaque détail est dirigé — lumière, posture, expression — pour révéler le meilleur de vous.",
       paragraphs: [
-        "Portraits corporate, photos d'équipe, images de marque personnelle, portraits éditoriaux : le studio offre un cadre maîtrisé et reproductible. Pratique quand il faut une cohérence visuelle entre plusieurs personnes, ou des images calibrées pour un site, une page LinkedIn ou la presse.",
-        "Je dirige la séance pas à pas, j'ajuste la lumière sur chaque visage et je vous montre les images au fur et à mesure pour valider ensemble. Choix des fonds (clair, sombre, coloré), une ou plusieurs tenues, et un rendu net, élégant et intemporel.",
-        "Pour les entreprises, je me déplace avec un studio mobile dans vos locaux à Lausanne, Genève ou ailleurs en Suisse romande, afin de photographier toute l'équipe sur place, sans perte de temps.",
+        "Portrait éditorial, clair-obscur, book d'artiste ou de comédien, portrait d'auteur, ou simplement une image forte de vous : le studio offre un cadre maîtrisé, où la lumière se règle au millimètre sur votre visage.",
+        "Je dirige la séance pas à pas, j'ajuste la lumière sur chaque expression et je vous montre les images au fur et à mesure pour valider ensemble. Choix des fonds (clair, sombre, coloré), une ou plusieurs tenues, et un rendu net, élégant et intemporel.",
       ],
       quote: "« La lumière sculpte, le regard révèle. »",
     },
     gallery: [
       { ph: "Portrait éditorial — clair", o: "v" },
-      { ph: "Portrait corporate", o: "v" },
+      { ph: "Portrait masculin — fond sombre", o: "v" },
       { ph: "Clair-obscur", o: "v" },
       { ph: "Attitude / posture", o: "v" },
       { ph: "Fond sobre", o: "v" },
@@ -489,67 +535,49 @@ window.KC_PRESTA = {
         items: ["Séance 30 min", "1 fond, 1 tenue", "Galerie privée", "5 photos retouchées", "Format web + impression"] },
       { tag: "Le plus choisi · 1 h", name: "Éditorial", price: "CHF 420", feature: true,
         items: ["Séance 1 h", "2 fonds, 2 tenues", "Direction artistique", "15 photos retouchées", "Droits web inclus"] },
-      { tag: "Équipes & marques", name: "Corporate", price: "dès CHF 1'400",
-        items: ["Demi-journée, studio mobile sur site", "Jusqu'à 12 personnes", "Charte visuelle cohérente", "Retouche uniforme", "Livraison express"] },
     ],
+    entreprise: true,
     process: [
-      { n: "01", title: "Brief", text: "On définit l'usage des images, le style recherché et l'ambiance visuelle — du portrait single au shooting d'équipe." },
-      { n: "02", title: "Préparation", text: "Conseils tenues, fonds et lumière, pour un résultat aligné avec votre image ou votre charte." },
+      { n: "01", title: "Brief", text: "On définit ce que vous voulez faire des images, le style recherché et l'ambiance visuelle." },
+      { n: "02", title: "Préparation", text: "Conseils tenues, fonds et lumière, pour un résultat qui vous ressemble." },
       { n: "03", title: "Séance", text: "Direction précise et bienveillante : je vous guide pose après pose et vous montre les images en direct." },
-      { n: "04", title: "Sélection & retouche", text: "Tri ensemble, puis retouche soignée et livraison aux formats utiles (web, print, réseaux)." },
+      { n: "04", title: "Sélection & retouche", text: "Tri ensemble, puis retouche soignée et livraison aux formats utiles (web, impression, réseaux)." },
     ],
     inclus: [
       "Studio professionnel équipé", "Direction de pose", "Choix des fonds et lumières",
       "Toutes les photos livrées retouchées", "Formats web et impression", "Galerie privée en ligne",
-      "Frais de déplacement inclus en Suisse romande",
-    ],
-    testimonials: [
-      { quote: "Mes nouveaux portraits corporate ont transformé l'image de mon entreprise. Net, élégant, professionnel.", who: "Antoine, CEO · Genève" },
-      { quote: "Kevin met instantanément à l'aise. Je déteste être photographiée — là, j'ai adoré le résultat.", who: "Valérie, Morges" },
     ],
     faq: [
-      { q: "Où se trouve le studio ?", a: "En Suisse romande ; l'adresse exacte et l'accès vous sont communiqués à la réservation. Pour les séances d'équipe, je me déplace avec un studio mobile dans vos locaux, à Lausanne, Genève, Fribourg, Neuchâtel ou ailleurs dans la région." },
-      { q: "À quoi servent ces portraits ?", a: "Photo de profil LinkedIn, page « équipe » d'un site, dossier de presse, couverture de magazine, image d'auteur ou de conférencier… Dites-moi l'usage final : je calibre le cadrage, le format et le fond en conséquence." },
+      { q: "Où se trouve le studio ?", a: "En Suisse romande ; l'adresse exacte et l'accès vous sont communiqués à la réservation." },
+      { q: "À quoi servent ces portraits ?", a: "Portrait d'auteur ou d'artiste, book de comédien ou de musicien, cadeau, image forte pour vos réseaux… Dites-moi l'usage final : je calibre le cadrage, le format et le fond en conséquence. Pour des portraits d'entreprise ou d'équipe, c'est Snapshot Media, ma structure pour les professionnels, qui s'en charge." },
       { q: "Puis-je venir avec plusieurs tenues ?", a: "Oui. Le nombre dépend de la formule. Je vous conseille sur les associations et les couleurs qui rendent le mieux selon le fond choisi." },
-      { q: "Comment se passe une séance corporate pour une équipe ?", a: "J'installe un studio mobile dans une salle de vos locaux. Chaque collaborateur passe 5 à 10 minutes ; je garde la même lumière et le même cadrage pour une galerie parfaitement homogène. Idéal pour une charte visuelle d'entreprise cohérente." },
-      { q: "Faites-vous des photos de produits ou de l'événementiel ?", a: "Mon cœur de métier reste le portrait et l'humain. Pour du produit ou de l'événementiel d'entreprise, contactez-moi : selon le projet, je le prends en charge ou vous oriente vers un confrère de confiance." },
+      { q: "Faites-vous des photos de produits ou de l'événementiel ?", a: "Pas sous Afterglow, qui reste consacré aux particuliers. Produit, événementiel et portraits d'équipe passent par Snapshot Media, mon studio pour les entreprises." },
       { q: "Sous quel délai les images sont-elles livrées ?", a: "Une à deux semaines selon la formule, avec une livraison express possible en option pour les besoins urgents." },
     ],
   },
 
-  /* ====================== COUPLE ====================== */
+  /* ====================== LIFESTYLE · COUPLE ====================== */
   couple: {
-    slug: "couple", title: "Couple", crumb: "Couple", heroDefault: "bas",
+    slug: "couple", parent: "portrait", title: "Couple", crumb: "Couple", heroDefault: "bas",
+    cardText: "Fiançailles, anniversaire de rencontre ou simplement vous deux.",
+    schemaName: "Séance photo de couple",
     heroImg: "Photo hero — couple complice en extérieur",
-    heroHint: "Photographe couple & fiançailles en Suisse romande.",
+    heroHint: "Séance photo de couple en Suisse romande — fiançailles, anniversaire ou simplement vous deux.",
     intro: {
       lead: "Pas besoin d'une grande occasion pour immortaliser un amour. Une séance couple, c'est du temps offert à votre complicité.",
       paragraphs: [
-        "En extérieur ou en atelier, je crée un espace léger où vous pouvez être vous-mêmes. Plutôt que des poses figées, je vous propose des situations — marcher, se chuchoter quelque chose, se taquiner — et je saisis ce qui naît entre deux. Les plus belles images viennent presque toujours d'un rire partagé.",
+        "En extérieur ou chez vous, je crée un espace léger où vous pouvez être vous-mêmes. Plutôt que des poses figées, je vous propose des situations — marcher, se chuchoter quelque chose, se taquiner — et je saisis ce qui naît entre deux. Les plus belles images viennent presque toujours d'un rire partagé.",
         "Fiançailles, anniversaire de rencontre, future demande, ou simplement l'envie de garder une trace de cette saison de votre vie : la séance s'adapte à votre histoire et au décor qui vous ressemble — un coucher de soleil sur le Léman, un sentier en forêt, les vignes de Lavaux ou un appartement cosy un dimanche matin.",
         "Vous repartez avec une galerie privée et des fichiers haute définition, parfaits pour un faire-part, un tirage ou simplement pour vous.",
       ],
       quote: "« S'aimer, c'est regarder ensemble dans la même direction. »",
     },
-    gallery: [
-      { ph: "Marche complice", o: "v" },
-      { ph: "Regard partagé", o: "v" },
-      { ph: "Étreinte — golden hour", o: "v" },
-      { ph: "Détails des mains", o: "v" },
-      { ph: "Rire spontané", o: "v" },
-      { ph: "Silhouette au coucher du soleil", o: "h" },
-      { ph: "En mouvement", o: "v" },
-      { ph: "Plan rapproché", o: "v" },
-      { ph: "Paysage & couple", o: "h" },
-      { ph: "Tendresse", o: "v" },
-    ],
+    gallery: [],
     formules: [
-      { tag: "Découverte · 45 min", name: "Escapade", price: "CHF 320",
-        items: ["Séance 45 min", "1 lieu extérieur", "Galerie privée", "20 photos retouchées"] },
-      { tag: "Le plus choisi · 1 h 30", name: "Complices", price: "CHF 520", feature: true,
-        items: ["Séance 1 h 30", "2 lieux ou 2 tenues", "Repérage conseillé", "40 photos retouchées", "Tirage A5 offert"] },
-      { tag: "Fiançailles · 2 h", name: "Promesse", price: "CHF 850",
-        items: ["Séance 2 h", "Extérieur + atelier", "Mini-film souvenir 30 s", "60 photos retouchées", "Album fine art 20×20"] },
+      { tag: "Découverte · 30 min", name: "Essentiel", price: "CHF 180",
+        items: ["Séance à deux, 30 min", "1 lieu en extérieur", "10 photos retouchées", "Galerie privée en ligne", "Galerie complète en option"] },
+      { tag: "Le plus choisi · 1 h", name: "Signature", price: "CHF 280", feature: true,
+        items: ["Séance à deux, 1 h", "2 lieux ou 2 tenues", "25 photos retouchées", "Galerie privée en ligne", "Galerie complète en option"] },
     ],
     process: [
       { n: "01", title: "Prise de contact", text: "On parle de vous, de votre histoire et de l'ambiance qui vous ressemble." },
@@ -558,27 +586,25 @@ window.KC_PRESTA = {
       { n: "04", title: "Livraison", text: "Votre galerie privée sous 2 semaines, prête à partager." },
     ],
     inclus: [
-      "Échange préparatoire", "Conseils lieu & tenues", "Direction décontractée",
+      "Conseils lieu & tenues", "Direction décontractée",
       "Toutes les photos livrées retouchées", "Galerie privée en ligne", "Droits d'usage privé",
       "Frais de déplacement inclus en Suisse romande",
-    ],
-    testimonials: [
-      { quote: "On riait tellement qu'on a oublié l'appareil. Les photos sont à notre image : vivantes et vraies.", who: "Inès & Karim, Montreux" },
-      { quote: "Le cadeau de fiançailles parfait. On a hâte de retravailler avec Kevin pour le mariage.", who: "Laura & Maxime, Sion" },
     ],
     faq: [
       { q: "Où se déroule la séance ?", a: "Au lieu de votre choix en Suisse romande — rives du Léman, vignobles de Lavaux, vieille ville, forêt ou votre intérieur — ou dans un cadre que je vous propose. Je me déplace dans le canton de Vaud, à Genève, Fribourg, Neuchâtel, en Valais romand et alentours." },
       { q: "Quel est le meilleur moment de la journée ?", a: "L'heure dorée, juste avant le coucher du soleil : la lumière y est chaude et flatteuse. On peut aussi profiter d'une lumière matinale, plus calme et plus fraîche, selon le lieu." },
-      { q: "Et s'il pleut le jour J ?", a: "On reporte sans frais à une date proche, ou on bascule en atelier pour une séance plus intimiste. La météo romande étant ce qu'elle est, on garde toujours une porte de sortie." },
-      { q: "Combien de temps dure une séance ?", a: "De 45 minutes à 2 heures selon la formule — le temps de se détendre, d'oublier l'objectif et de profiter l'un de l'autre." },
+      { q: "Et s'il pleut le jour J ?", a: "On reporte sans frais à une date proche, ou on bascule à l'intérieur, chez vous, pour une séance plus intimiste. La météo romande étant ce qu'elle est, on garde toujours une porte de sortie." },
+      { q: "Combien de temps dure une séance ?", a: "30 minutes ou une heure selon la formule — le temps de se détendre, d'oublier l'objectif et de profiter l'un de l'autre." },
       { q: "Peut-on l'offrir en cadeau ?", a: "Oui, je propose des bons cadeaux personnalisés, valables un an. Une belle idée pour une demande, un anniversaire ou les fêtes." },
       { q: "On veut s'en servir pour notre faire-part de mariage, c'est possible ?", a: "Bien sûr. Beaucoup de couples font leur séance couple ou fiançailles quelques mois avant le mariage, pour le faire-part et le site. C'est aussi un excellent moyen de se familiariser avec ma façon de travailler avant le jour J." },
     ],
   },
 
-  /* ====================== FAMILLE ====================== */
+  /* ====================== LIFESTYLE · FAMILLE ====================== */
   famille: {
-    slug: "famille", title: "Famille", crumb: "Famille", heroDefault: "bas",
+    slug: "famille", parent: "portrait", title: "Famille", crumb: "Famille", heroDefault: "bas",
+    cardText: "Des images vraies de votre tribu, au rythme des enfants.",
+    schemaName: "Séance photo de famille",
     heroImg: "Photo hero — famille complice en extérieur, lumière dorée",
     heroHint: "Photographe de famille en Suisse romande — des images vraies, sans poses figées.",
     intro: {
@@ -586,29 +612,16 @@ window.KC_PRESTA = {
       paragraphs: [
         "Oubliez le « tout le monde regarde l'objectif et sourit ». Je crée une parenthèse de jeu et de complicité — on marche, on se chamaille, on se câline — et je saisis les regards, les fous rires et les gestes tendres entre deux. Les enfants restent eux-mêmes, et les images vous ressemblent vraiment.",
         "En extérieur et en lumière naturelle — au bord du Léman, en forêt, dans les vignes de Lavaux — ou chez vous, dans votre cocon, pour des images intimes du quotidien. La séance s'adapte à l'âge des enfants et à votre rythme : on prend le temps qu'il faut, sans pression.",
-        "Séance famille classique, arrivée d'un nouveau-né, séance multigénérationnelle avec les grands-parents, ou rendez-vous annuel pour suivre la tribu qui grandit : on construit la séance autour de votre histoire.",
+        "Séance famille classique, arrivée d'un nouveau-né, séance avec les grands-parents, ou rendez-vous annuel pour suivre la tribu qui grandit : on construit la séance autour de votre histoire.",
       ],
       quote: "« Une famille, c'est une histoire qu'on n'a jamais fini de photographier. »",
     },
-    gallery: [
-      { ph: "Famille complice en extérieur", o: "h" },
-      { ph: "Fou rire d'enfant", o: "v" },
-      { ph: "Câlin parent-enfant", o: "v" },
-      { ph: "Course dans l'herbe", o: "h" },
-      { ph: "Détail — petites mains", o: "v" },
-      { ph: "Portrait de fratrie", o: "v" },
-      { ph: "Tendresse à contre-jour", o: "v" },
-      { ph: "Trois générations réunies", o: "v" },
-      { ph: "Jeu à l'heure dorée", o: "v" },
-      { ph: "Instant du quotidien", o: "v" },
-    ],
+    gallery: [],
     formules: [
-      { tag: "Découverte · 1 h", name: "Tribu", price: "CHF 390",
-        items: ["Séance 1 h en extérieur", "1 lieu en Suisse romande", "Galerie privée en ligne", "20 photos retouchées", "Fichiers web + impression"] },
-      { tag: "Le plus choisi · 1 h 30", name: "Complices", price: "CHF 590", feature: true,
-        items: ["Séance 1 h 30", "Extérieur ou à domicile", "Jusqu'à 6 personnes", "35 photos retouchées", "Tirage A4 offert"] },
-      { tag: "Multigénération · 2 h", name: "Tribu élargie", price: "CHF 890",
-        items: ["Séance 2 h", "Jusqu'à 12 personnes (grands-parents inclus)", "2 lieux ou 2 ambiances", "50 photos retouchées", "Album fine art 20×20"] },
+      { tag: "Découverte · 30 min", name: "Essentiel", price: "CHF 180",
+        items: ["Séance en famille, 30 min", "1 lieu en extérieur", "10 photos retouchées", "Galerie privée en ligne", "Galerie complète en option"] },
+      { tag: "Le plus choisi · 1 h", name: "Signature", price: "CHF 280", feature: true,
+        items: ["Séance en famille, 1 h", "Extérieur ou à domicile", "25 photos retouchées", "Galerie privée en ligne", "Galerie complète en option"] },
     ],
     process: [
       { n: "01", title: "Prise de contact", text: "On échange sur votre famille, l'âge des enfants, l'ambiance et le lieu qui vous ressemblent." },
@@ -617,19 +630,15 @@ window.KC_PRESTA = {
       { n: "04", title: "Livraison", text: "Votre galerie privée sous 2 semaines, prête à imprimer et à partager avec toute la famille." },
     ],
     inclus: [
-      "Échange préparatoire", "Conseils tenues & couleurs accordées", "Séance en extérieur ou à domicile",
+      "Conseils tenues & couleurs accordées", "Séance en extérieur ou à domicile",
       "Direction bienveillante, au rythme des enfants", "Toutes les photos livrées retouchées", "Galerie privée en ligne",
       "Frais de déplacement inclus en Suisse romande",
-    ],
-    testimonials: [
-      { quote: "Les premières photos de famille où nos enfants sont vraiment eux-mêmes. On rit à chaque fois qu'on les regarde.", who: "Famille Rochat, Lausanne" },
-      { quote: "Kevin a réuni trois générations avec une facilité déconcertante. Un souvenir inestimable pour nous tous.", who: "Famille Pereira, Fribourg" },
     ],
     faq: [
       { q: "À partir de quel âge photographier les enfants ?", a: "À tout âge — du nouveau-né aux adolescents. Pour les bébés, on privilégie les dix premiers jours ou la période après 6 mois (quand ils tiennent assis). Pour les plus grands, la séance se transforme en jeu : c'est souvent là que naissent les plus belles images." },
       { q: "Où se déroule la séance photo de famille ?", a: "Au lieu de votre choix — bord du Léman, forêt, vignes de Lavaux, parc — ou à votre domicile pour des images intimes du quotidien. Le déplacement est inclus dans toute la Suisse romande, sans frais." },
       { q: "Comment ça se passe avec des enfants en bas âge ou agités ?", a: "C'est tout l'intérêt du reportage : je ne cherche pas à les figer. On joue, on bouge, on fait des pauses goûter si besoin. Je m'adapte à leur rythme et à leur humeur — les enfants qui « ne tiennent pas en place » donnent souvent les photos les plus vivantes." },
-      { q: "Peut-on faire une séance avec les grands-parents ?", a: "Oui, et c'est très demandé. La formule Tribu élargie est pensée pour les séances multigénérationnelles, jusqu'à douze personnes — un magnifique cadeau pour réunir toute la famille autour d'images qui restent." },
+      { q: "Peut-on faire une séance avec les grands-parents ?", a: "Oui, et c'est un magnifique cadeau. Pour une grande tribu, je conseille la formule Signature : une heure laisse le temps de photographier chaque génération, puis tout le monde ensemble." },
       { q: "Que porter pour une séance photo de famille ?", a: "Des tenues coordonnées, sans être assorties à l'identique : une palette de 2 ou 3 couleurs douces et naturelles fonctionne très bien. Évitez les gros logos et les motifs chargés. Je vous envoie des conseils personnalisés avant la séance." },
       { q: "Sous quel délai les photos sont-elles livrées ?", a: "Environ deux semaines, dans une galerie privée en ligne, en haute définition pour l'impression comme pour le partage. Une livraison express est possible en option." },
     ],
@@ -678,7 +687,7 @@ window.KC_JOURNAL = {
       heroAlt: "Mariage dans les vignobles de Lavaux au-dessus du lac Léman — Kevin Chinelli, photographe",
       excerpt: "Entre les terrasses viticoles classées à l'UNESCO et les rives du Léman, Lavaux offre quelques-uns des plus beaux décors de mariage de Suisse romande. Mon repérage, lieu par lieu.",
       metaTitle: "Où se marier en Lavaux : 8 lieux face au Léman | Kevin Chinelli",
-      metaDesc: "Guide des plus beaux lieux de mariage en Lavaux et autour du Léman : domaines viticoles, terrasses et salles avec vue. Conseils d'un photographe de mariage en Suisse romande.",
+      metaDesc: "Les plus beaux lieux de mariage en Lavaux : domaines viticoles, terrasses et salles avec vue sur le Léman. Le guide d'un photographe de mariage romand.",
       intro: "Photographier des mariages en Lavaux, c'est travailler dans l'un des plus beaux paysages de Suisse : des terrasses de vignes qui dévalent vers le lac, une lumière de fin de journée incomparable, et les Alpes en toile de fond. Voici les lieux que je recommande à mes mariés, avec un œil de photographe sur la lumière et les angles.",
       sections: [
         { h: "Pourquoi se marier en Lavaux", p: [
@@ -769,7 +778,7 @@ window.KC_JOURNAL = {
       heroAlt: "Séance photo de couple au bord du lac Léman au coucher du soleil — Kevin Chinelli, photographe",
       excerpt: "Quais de Lausanne, vignes de Lavaux, vieille ville de Genève : mes lieux préférés pour une séance couple ou fiançailles autour du lac, et la meilleure heure pour chacun.",
       metaTitle: "Spots photo de couple autour du Léman | Kevin Chinelli",
-      metaDesc: "Les meilleurs lieux pour une séance photo de couple ou fiançailles autour du lac Léman : Lausanne, Lavaux, Genève, Montreux. Conseils d'un photographe en Suisse romande.",
+      metaDesc: "Les plus beaux lieux pour une séance photo de couple ou de fiançailles autour du Léman : Lausanne, Lavaux, Genève, Montreux. Conseils d'un photographe.",
       intro: "Une [séance couple](couple.html) n'a pas besoin d'un décor spectaculaire — juste d'un endroit où vous vous sentez bien et d'une belle lumière. Autour du Léman, on a l'embarras du choix. Voici mes lieux de prédilection, du plus urbain au plus sauvage, avec l'heure qui leur va le mieux.",
       sections: [
         { h: "Côté Lausanne et Lavaux", list: [
@@ -817,7 +826,7 @@ window.KC_JOURNAL = {
       heroAlt: "Prix d'un photographe de mariage en Suisse romande — couple à l'heure dorée | Kevin Chinelli",
       excerpt: "Le plus souvent entre 2'500 et 4'500 francs pour un reportage complet : voici ce qui fait vraiment le prix d'un photographe de mariage en Suisse romande, et comment investir au bon endroit.",
       metaTitle: "Prix d'un photographe de mariage en Suisse romande | Kevin Chinelli",
-      metaDesc: "Combien coûte un photographe de mariage à Lausanne, Genève et en Suisse romande ? Fourchettes de prix, ce qui les explique et comment bien investir. Le guide clair d'Afterglow.",
+      metaDesc: "Combien coûte un photographe de mariage à Lausanne, Genève et en Suisse romande ? Fourchettes de prix, ce qui les explique et comment bien choisir.",
       intro: "C'est souvent la première question qu'on me pose, et c'est bien normal : le budget photo d'un mariage n'a rien d'anodin. Plutôt que de botter en touche, voici des fourchettes honnêtes pour la Suisse romande — et surtout ce qui se cache derrière un prix, pour que vous sachiez exactement où va votre argent et comment investir au bon endroit.",
       sections: [
         { h: "Les fourchettes de prix en Suisse romande", p: [
@@ -867,7 +876,7 @@ window.KC_JOURNAL = {
       heroAlt: "Quand réserver son photographe de mariage en Suisse romande | Kevin Chinelli",
       excerpt: "8 à 14 mois à l'avance, parfois davantage pour un samedi d'été : le bon timing pour réserver votre photographe de mariage en Suisse romande, sans stress et sans regret.",
       metaTitle: "Quand réserver son photographe de mariage ? | Kevin Chinelli",
-      metaDesc: "À quel moment réserver votre photographe de mariage en Suisse romande ? Délais idéaux selon la saison, pourquoi les bonnes dates partent vite, et comment s'y prendre.",
+      metaDesc: "Quand réserver son photographe de mariage en Suisse romande ? Délais selon la saison, pourquoi les bonnes dates partent vite et comment s'y prendre.",
       intro: "Une fois la date posée et le lieu réservé, le photographe figure parmi les premiers prestataires à bloquer. La raison est simple : un bon photographe ne fait qu'un seul mariage par jour. Voici comment ne pas laisser passer le vôtre.",
       sections: [
         { h: "Le délai idéal : 8 à 14 mois", p: [
@@ -909,7 +918,7 @@ window.KC_JOURNAL = {
       heroAlt: "Lieux de mariage dans le canton de Vaud et autour du Léman | Kevin Chinelli",
       excerpt: "Châteaux, domaines viticoles, salles avec vue sur le lac : un tour d'horizon des plus beaux lieux pour se marier dans le canton de Vaud et autour du Léman, vus par un photographe.",
       metaTitle: "Où se marier dans le canton de Vaud : 10 lieux autour du Léman | Kevin Chinelli",
-      metaDesc: "Les plus beaux lieux de mariage dans le canton de Vaud et autour du Léman : châteaux, domaines viticoles, salles avec vue sur le lac. Conseils d'un photographe de mariage romand.",
+      metaDesc: "Les plus beaux lieux de mariage du canton de Vaud et autour du Léman : châteaux, domaines viticoles, salles avec vue sur le lac. Le guide d'un photographe.",
       intro: "Le canton de Vaud concentre une densité rare de beaux lieux de mariage : des rives du Léman aux contreforts des Alpes, en passant par les vignobles et les châteaux. Après l'avoir arpenté article après article — notamment du côté de [Lavaux](journal-lieux-mariage-lavaux.html) — voici un tour d'horizon plus large, avec un œil de photographe sur le décor et la lumière.",
       sections: [
         { h: "Au bord du lac", list: [
@@ -959,7 +968,7 @@ window.KC_JOURNAL = {
       heroAlt: "Quand faire sa séance photo de grossesse en Suisse romande | Kevin Chinelli",
       excerpt: "Entre la 30e et la 36e semaine, le plus souvent : voici le bon moment pour votre séance grossesse, les exceptions à connaître, et comment anticiper selon la saison.",
       metaTitle: "Quand faire sa séance photo de grossesse ? | Kevin Chinelli",
-      metaDesc: "À quelle semaine faire sa séance photo de grossesse ? Le moment idéal, les cas particuliers (jumeaux, terme estival) et comment réserver, par un photographe en Suisse romande.",
+      metaDesc: "À quelle semaine faire sa séance photo de grossesse ? Le moment idéal, les cas particuliers (jumeaux, terme en été) et comment réserver en Suisse romande.",
       intro: "Trop tôt, le ventre ne se dessine pas encore ; trop tard, le confort n'est plus au rendez-vous. Il existe une fenêtre idéale pour photographier une grossesse — la voici, avec les quelques exceptions qui méritent d'avancer la séance.",
       sections: [
         { h: "La fenêtre idéale : 30e à 36e semaine", p: [
@@ -1005,7 +1014,7 @@ window.KC_JOURNAL = {
       heroAlt: "Séance photo grossesse et nouveau-né en Suisse romande | Kevin Chinelli",
       excerpt: "Photographier l'attente puis l'arrivée, dans une même galerie : pourquoi associer séance grossesse et séance nouveau-né donne des souvenirs bien plus forts qu'isolés.",
       metaTitle: "Séance grossesse et nouveau-né : pourquoi les combiner | Kevin Chinelli",
-      metaDesc: "Associer séance grossesse et séance nouveau-né en Suisse romande : l'intérêt de relier l'attente et l'arrivée dans une même histoire. Conseils et déroulé par un photographe maternité.",
+      metaDesc: "Séance grossesse et séance nouveau-né : pourquoi relier l'attente et l'arrivée dans une même histoire. Conseils et déroulé, en Suisse romande.",
       intro: "Il y a la grossesse — cette parenthèse suspendue où tout est encore promesse. Et il y a les premiers jours du bébé, fragiles et fugaces. Les photographier séparément, c'est bien. Les relier dans une même histoire, c'est autre chose. Voici pourquoi je propose désormais de les combiner.",
       sections: [
         { h: "Deux instants qui se répondent", p: [
@@ -1051,7 +1060,7 @@ window.KC_JOURNAL = {
       heroAlt: "Photos LinkedIn et personal branding en studio à Lausanne et Genève | Kevin Chinelli",
       excerpt: "Votre photo de profil est votre première poignée de main. Voici comment réussir vos portraits LinkedIn et personal branding : tenue, fond, expression et usages.",
       metaTitle: "Photos LinkedIn & personal branding : le guide | Kevin Chinelli",
-      metaDesc: "Réussir ses photos professionnelles LinkedIn et personal branding en Suisse romande : tenue, fond, expression, studio ou extérieur. Conseils d'un photographe à Lausanne et Genève.",
+      metaDesc: "Réussir ses photos LinkedIn et de personal branding : tenue, fond, expression, studio ou extérieur. Conseils d'un photographe à Lausanne et Genève.",
       intro: "Sur LinkedIn comme sur un site, votre portrait est votre première poignée de main — celle qui se joue avant le moindre échange. Une bonne photo professionnelle inspire confiance, crédibilise votre discours et vous distingue. Voici comment la réussir.",
       sections: [
         { h: "Pourquoi votre photo compte plus que vous ne le pensez", p: [
@@ -1066,7 +1075,7 @@ window.KC_JOURNAL = {
         ] },
         { h: "Studio ou extérieur ?", p: [
           "Le [studio](studio.html) offre un cadre maîtrisé et reproductible — parfait quand il faut une cohérence visuelle entre plusieurs personnes d'une même équipe, ou des images calibrées pour un site et la presse. L'extérieur, lui, apporte une touche plus vivante et personnelle, idéale pour le personal branding d'un indépendant.",
-          "Pour les entreprises, je me déplace avec un studio mobile dans vos locaux à Lausanne, Genève ou ailleurs en Suisse romande, afin de photographier toute l'équipe sur place, sans perte de temps.",
+          "Pour une entreprise ou une équipe, je réalise ces portraits avec [Snapshot Media](https://snapshotmedia.ch/services/photographie/portraits-professionnels/), mon studio pour les professionnels : un studio mobile installé dans vos locaux, pour photographier toute l'équipe sur place.",
         ] },
         { h: "Penser tous les usages", p: [
           "Une bonne séance ne sert pas qu'à LinkedIn : site internet, signature mail, dossier de presse, supports imprimés, intervention en conférence… On anticipe ces usages pour repartir avec des images aux bons formats et aux bons droits.",
@@ -1091,14 +1100,14 @@ window.KC_JOURNAL = {
       slug: "quelle-tenue-seance-portrait",
       file: "journal-quelle-tenue-seance-portrait.html",
       category: "Portrait",
-      relatedSlug: "portrait", relatedHref: "portraits.html", relatedTitle: "Portraits",
+      relatedSlug: "portrait", relatedHref: "portraits.html", relatedTitle: "Lifestyle",
       date: "2026-05-15", dateLabel: "15 mai 2026", read: "5 min",
       title: "Quelle tenue porter pour une séance portrait ?",
       hero: "Portrait en lumière naturelle, tenue épurée aux tons neutres",
       heroAlt: "Quelle tenue pour une séance portrait en Suisse romande | Kevin Chinelli",
       excerpt: "Tons neutres, matières qui tombent bien, deux options plutôt que dix : mes repères simples pour choisir vos tenues et arriver serein·e à votre séance portrait.",
       metaTitle: "Quelle tenue pour une séance portrait ? | Kevin Chinelli",
-      metaDesc: "Comment choisir sa tenue pour une séance photo portrait en Suisse romande : couleurs, matières, ce qui flatte à l'image. Les conseils d'un photographe portrait à Lausanne et Genève.",
+      metaDesc: "Quelle tenue pour une séance photo portrait ? Couleurs, matières, coupes qui flattent à l'image : les conseils d'un photographe à Lausanne et Genève.",
       intro: "« Je ne sais pas quoi mettre. » C'est le petit stress d'avant-séance le plus répandu — et le plus facile à lever. La règle d'or tient en une phrase : une tenue qui vous ressemble et dans laquelle vous vous sentez bien sera toujours plus belle qu'une tenue « pour la photo ». Voici mes repères.",
       sections: [
         { h: "Misez sur la simplicité", p: [
@@ -1144,7 +1153,7 @@ window.KC_JOURNAL = {
       heroAlt: "Comment choisir son photographe de mariage en Suisse romande | Kevin Chinelli",
       excerpt: "Au-delà du style et du prix, sept questions concrètes pour choisir le bon photographe de mariage en Suisse romande — et éviter les mauvaises surprises le jour J.",
       metaTitle: "Comment choisir son photographe de mariage : 7 questions | Kevin Chinelli",
-      metaDesc: "Bien choisir son photographe de mariage en Suisse romande : style, livrables, sauvegardes, déroulé. Les 7 questions à poser avant de réserver, par un photographe romand.",
+      metaDesc: "Bien choisir son photographe de mariage en Suisse romande : style, livrables, sauvegardes, déroulé. Les 7 questions à poser avant de réserver.",
       intro: "Le style des images compte, évidemment. Mais derrière une belle galerie se cachent des questions plus terre à terre qui font, le jour J, toute la différence entre un mariage serein et une journée sous tension. Voici les sept que je vous encourage à poser à tout photographe — moi compris.",
       sections: [
         { h: "Le style et l'approche", p: [
@@ -1187,18 +1196,18 @@ window.KC_JOURNAL = {
       slug: "portrait-studio-ou-exterieur",
       file: "journal-portrait-studio-ou-exterieur.html",
       category: "Portrait",
-      relatedSlug: "portrait", relatedHref: "portraits.html", relatedTitle: "Portraits",
+      relatedSlug: "portrait", relatedHref: "portraits.html", relatedTitle: "Lifestyle",
       date: "2026-05-02", dateLabel: "2 mai 2026", read: "5 min",
       title: "Portrait en studio ou en extérieur : lequel choisir ?",
       hero: "Diptyque portrait — studio fond sobre et lumière naturelle extérieure",
       heroAlt: "Portrait en studio ou en extérieur en Suisse romande | Kevin Chinelli",
       excerpt: "Cadre maîtrisé ou lumière vivante ? Studio et extérieur ne racontent pas la même chose. Voici comment choisir selon l'usage de vos images et l'effet recherché.",
       metaTitle: "Portrait en studio ou en extérieur : comment choisir | Kevin Chinelli",
-      metaDesc: "Studio ou extérieur pour votre séance portrait en Suisse romande ? Avantages de chaque option selon l'usage (corporate, personnel, artistique). Conseils d'un photographe romand.",
+      metaDesc: "Studio ou extérieur pour votre séance portrait ? Les avantages de chaque option selon l'usage des images. Conseils d'un photographe en Suisse romande.",
       intro: "C'est une question qui revient à chaque prise de contact : « plutôt studio ou plutôt extérieur ? » Les deux donnent de superbes images — mais pas le même type d'images. Tout dépend de l'effet recherché et de l'usage que vous ferez de vos portraits.",
       sections: [
         { h: "Le studio : maîtrise et intemporalité", p: [
-          "En [studio](studio.html), tout est dirigé : la lumière, le fond, la posture, l'expression. Le rendu est net, élégant, reproductible — idéal pour les portraits corporate, l'éditorial, et chaque fois qu'il faut une cohérence visuelle entre plusieurs personnes. Le fond neutre concentre l'attention sur le visage, et le résultat ne se démode pas.",
+          "En [studio](studio.html), tout est dirigé : la lumière, le fond, la posture, l'expression. Le rendu est net, élégant, reproductible — idéal pour un portrait éditorial, un book d'artiste ou une image d'auteur. Le fond neutre concentre l'attention sur le visage, et le résultat ne se démode pas.",
           "C'est aussi l'option la plus confortable par mauvais temps ou en hiver, puisqu'on ne dépend pas de la météo.",
         ] },
         { h: "L'extérieur : lumière vivante et personnalité", p: [
@@ -1238,7 +1247,7 @@ window.KC_JOURNAL = {
       heroAlt: "Déroulé d'une journée de mariage heure par heure | Kevin Chinelli",
       excerpt: "Des préparatifs à la piste de danse : comment s'enchaîne une journée de mariage côté photo, et comment caler le timing pour ne rien manquer de la lumière ni de l'émotion.",
       metaTitle: "Déroulé d'un mariage heure par heure (côté photo) | Kevin Chinelli",
-      metaDesc: "Comment s'organise une journée de mariage côté photographe en Suisse romande : timing des préparatifs, cérémonie, couple à l'heure dorée, soirée. Le guide pour caler votre déroulé.",
+      metaDesc: "Le déroulé d'une journée de mariage côté photo : préparatifs, cérémonie, couple à l'heure dorée, soirée. Le guide pour caler le timing en Suisse romande.",
       intro: "Un mariage réussi en photo, c'est d'abord un déroulé bien pensé. Pas pour transformer votre journée en planning militaire — au contraire, pour vous libérer l'esprit et garantir que les moments forts tombent au bon moment, dans la bonne lumière. Voici comment s'enchaîne une journée type, côté photo.",
       sections: [
         { h: "Matin — les préparatifs", p: [
@@ -1291,7 +1300,7 @@ window.KC_JOURNAL = {
       heroAlt: "Où se marier à Genève — lieux de mariage et spots photo au bord du lac | Kevin Chinelli",
       excerpt: "De la vieille ville aux domaines viticoles de la campagne genevoise, en passant par les quais et les parcs du bord du lac : un tour d'horizon des plus beaux lieux pour se marier à Genève, par un photographe.",
       metaTitle: "Où se marier à Genève : lieux de rêve et spots photo | Kevin Chinelli",
-      metaDesc: "Les plus beaux lieux pour se marier à Genève : vieille ville, parcs du bord du lac, domaines viticoles de la campagne genevoise. Conseils d'un photographe de mariage en Suisse romande.",
+      metaDesc: "Les plus beaux lieux pour se marier à Genève : vieille ville, parcs au bord du lac, domaines viticoles genevois. Le guide d'un photographe de mariage.",
       intro: "Entre son lac, sa vieille ville médiévale et une campagne viticole méconnue, Genève offre une vraie diversité de décors pour un mariage. Que vous rêviez d'une cérémonie urbaine et chic ou d'une fête champêtre face aux vignes, voici les lieux que je recommande, avec un œil de photographe sur la lumière et les angles.",
       sections: [
         { h: "Au bord du lac et dans les parcs", list: [
@@ -1328,14 +1337,14 @@ window.KC_JOURNAL = {
       slug: "spots-seance-photo-lausanne",
       file: "journal-spots-seance-photo-lausanne.html",
       category: "Portrait",
-      relatedSlug: "portrait", relatedHref: "portraits.html", relatedTitle: "Portraits",
+      relatedSlug: "portrait", relatedHref: "portraits.html", relatedTitle: "Lifestyle",
       date: "2026-06-26", dateLabel: "26 juin 2026", read: "5 min",
       title: "Les plus beaux endroits pour une séance photo à Lausanne",
       hero: "Quais d'Ouchy à Lausanne, lumière douce de fin de journée",
       heroAlt: "Spots pour une séance photo à Lausanne — quais d'Ouchy et vieille ville | Kevin Chinelli",
       excerpt: "Ouchy, la vieille ville, le Flon, Sauvabelin : mes lieux préférés pour une séance portrait, couple ou famille à Lausanne, du plus urbain au plus nature, avec l'heure qui leur va le mieux.",
       metaTitle: "Où faire une séance photo à Lausanne : mes spots préférés | Kevin Chinelli",
-      metaDesc: "Les meilleurs endroits pour une séance photo portrait, couple ou famille à Lausanne : Ouchy, vieille ville, Flon, Sauvabelin. Conseils d'un photographe portrait en Suisse romande.",
+      metaDesc: "Les plus beaux endroits pour une séance photo à Lausanne : Ouchy, vieille ville, Flon, Sauvabelin. Conseils de lumière et d'horaire d'un photographe local.",
       intro: "Lausanne est une ville de contrastes : un bord de lac méridional à Ouchy, une vieille ville médiévale tout en escaliers, un quartier du Flon résolument urbain, et des forêts à dix minutes du centre. De quoi varier les ambiances d'une séance sans jamais s'éloigner. Voici mes lieux de prédilection.",
       sections: [
         { h: "Au bord du lac, à Ouchy", p: [
@@ -1375,7 +1384,7 @@ window.KC_JOURNAL = {
       heroAlt: "Lieux de mariage sur La Côte — Nyon, Morges, domaines viticoles | Kevin Chinelli",
       excerpt: "Entre Lausanne et Genève, La Côte aligne châteaux, domaines viticoles et quais face au Mont-Blanc. Un tour d'horizon des plus beaux lieux pour s'y marier, vus par un photographe.",
       metaTitle: "Se marier sur La Côte (Nyon, Morges) : les plus beaux lieux | Kevin Chinelli",
-      metaDesc: "Où se marier sur La Côte vaudoise : châteaux de Nyon et Morges, domaines viticoles de Féchy à Mont-sur-Rolle, quais face au Mont-Blanc. Conseils d'un photographe de mariage romand.",
+      metaDesc: "Se marier sur La Côte vaudoise : châteaux de Nyon et Morges, domaines de Féchy à Mont-sur-Rolle, quais face au Mont-Blanc. Le guide d'un photographe.",
       intro: "Entre Lausanne et Genève, La Côte s'étire le long du Léman, face au Mont-Blanc. C'est le plus grand vignoble du canton de Vaud, parsemé de châteaux et de villages au bord de l'eau. Un décor à la fois noble et champêtre, encore un peu confidentiel pour les mariages. Voici mes lieux préférés, avec un œil de photographe.",
       sections: [
         { h: "Les châteaux de caractère", list: [
@@ -1408,7 +1417,7 @@ window.KC_JOURNAL = {
 };
 
 ;
-(()=>{const{useEffect}=React,DATA=window.KC_PRESTA[window.KC_SLUG],M_CLASS={v:"m-tall",h:"m-wide",big:"m-big"};function PrestaHero({layout}){return React.createElement("section",{className:"phero "+layout},React.createElement("div",{className:"bg"},React.createElement(Slot,{id:"phero-"+DATA.slug,ph:DATA.heroImg,alt:"Photographe "+DATA.title.toLowerCase()+" en Suisse romande \u2014 "+DATA.heroImg+" par Kevin Chinelli",loading:"eager",fetchpriority:"high",style:{width:"100%",height:"100%"}}),React.createElement(Slot,{id:"phero-"+DATA.slug+"-mobile",ph:DATA.heroImg,alt:"Photographe "+DATA.title.toLowerCase()+" en Suisse romande \u2014 "+DATA.heroImg+" par Kevin Chinelli",loading:"eager",fetchpriority:"high",style:{width:"100%",height:"100%"}})),React.createElement("div",{className:"scrim"}),React.createElement("div",{className:"phero-content"},React.createElement("div",{className:"crumb reveal in"},React.createElement("a",{href:KC.HOME},"Accueil"),React.createElement("span",null,"/"),React.createElement("span",null,DATA.crumb)),React.createElement("h1",{className:"reveal in d1"},DATA.title),React.createElement("p",{className:"hint reveal in d2"},DATA.heroHint)))}function ReassureBar(){const isMariage=window.KC_SLUG==="mariage",points=isMariage?["R\xE9ponse sous 48 h","1 seul mariage par jour","Tarifs transparents"]:["R\xE9ponse sous 48 h","Tarifs transparents"],mobileKeep=isMariage?"1 seul mariage par jour":"R\xE9ponse sous 48 h";return React.createElement("section",{className:"reassure s-dark","aria-label":"Engagements"},React.createElement("div",{className:"wrap reassure-row"},points.map((p,i)=>React.createElement("div",{key:i,className:"reassure-item"+(p===mobileKeep?" keep-mobile":"")},React.createElement("span",{className:"rdot"}),p))))}function Intro(){return React.createElement("section",{className:"sec s-light pad-y"},React.createElement("div",{className:"wrap"},React.createElement(Overline,{className:"reveal"},"L'approche"),React.createElement("div",{className:"intro-grid",style:{marginTop:"clamp(34px,4vw,58px)"}},React.createElement("p",{className:"lead reveal d1"},DATA.intro.lead),React.createElement("div",{className:"body reveal d2"},DATA.intro.paragraphs.map((p,i)=>React.createElement("p",{key:i},p)),React.createElement("div",{className:"intro-quote"},DATA.intro.quote)))))}function GalleryMosaic(){return React.createElement("section",{className:"sec s-dark pad-y"},React.createElement("div",{className:"wrap"},React.createElement("div",{style:{display:"flex",alignItems:"flex-end",justifyContent:"space-between",marginBottom:"clamp(34px,4vw,56px)",flexWrap:"wrap",gap:"20px"}},React.createElement("div",null,React.createElement(Overline,{className:"reveal"},"Galerie"),React.createElement("h2",{className:"display reveal d1",style:{fontSize:"clamp(28px,3.4vw,48px)",marginTop:"16px"}},"Un aper\xE7u.")),React.createElement("a",{href:"contact.html",className:"link-arrow reveal d1"},"Demander la galerie compl\xE8te ",React.createElement("span",{className:"ar"},"\u2192"))),React.createElement("div",{className:"mosaic reveal d1","data-lb-group":"mosaic"},DATA.gallery.map((g,i)=>React.createElement("div",{key:i,className:"cell "+(M_CLASS[g.o]||"")},React.createElement(Slot,{id:DATA.slug+"-g"+i,ph:g.ph,alt:g.ph+" \u2014 "+DATA.title.toLowerCase()+" en Suisse romande, photographie par Kevin Chinelli",style:{width:"100%",height:"100%"}}))))))}function Formules(){return React.createElement("section",{className:"sec s-light pad-y"},React.createElement("div",{className:"wrap"},React.createElement("div",{style:{textAlign:"center",marginBottom:"clamp(40px,5vw,68px)"}},React.createElement(Overline,{className:"reveal",style:{justifyContent:"center"}},"Formules & tarifs"),React.createElement("h2",{className:"display reveal d1",style:{fontSize:"clamp(30px,4vw,56px)",marginTop:"20px"}},"Trouvons la bonne formule.")),React.createElement("div",{className:"formules"+(DATA.formules.length===2?" two":"")},DATA.formules.map((f,i)=>React.createElement("div",{key:i,className:"formule reveal d"+(i+1)+(f.feature?" feature":"")},React.createElement("div",{className:"tag"},f.tag),React.createElement("h3",null,f.name),React.createElement("div",{className:"price"},f.price.startsWith("d\xE8s ")?React.createElement(React.Fragment,null,React.createElement("small",null,"d\xE8s"),f.price.slice(3)):f.price),React.createElement("ul",null,f.items.map((it,j)=>React.createElement("li",{key:j},it))),React.createElement("a",{href:"contact.html",className:"pick"},"Choisir ",React.createElement("span",{className:"ar"},"\u2192"))))),React.createElement("p",{className:"tarif-note"},"Tarifs sur devis personnalis\xE9 \u2014 chaque projet est unique. Contactez-moi pour une proposition d\xE9taill\xE9e.")))}function Process(){const three=DATA.process.length===3;return React.createElement("section",{className:"sec s-dark pad-y"},React.createElement("div",{className:"wrap"},React.createElement("div",{style:{textAlign:"center",marginBottom:"clamp(40px,5vw,68px)"}},React.createElement(Overline,{className:"reveal",style:{justifyContent:"center"}},"Le d\xE9roul\xE9"),React.createElement("h2",{className:"display reveal d1",style:{fontSize:"clamp(28px,3.4vw,48px)",marginTop:"20px"}},"De l'id\xE9e \xE0 vos images.")),React.createElement("div",{className:"steps"+(three?" three":"")},DATA.process.map((s,i)=>React.createElement("div",{key:i,className:"step reveal d"+(i+1)},React.createElement("div",{className:"sn"},s.n),React.createElement("h4",null,s.title),React.createElement("p",null,s.text))))))}function Inclus(){return React.createElement("section",{className:"sec s-light pad-y"},React.createElement("div",{className:"wrap"},React.createElement("div",{className:"inclus-grid"},React.createElement("div",{className:"reveal"},React.createElement(Overline,null,"Toujours inclus"),React.createElement("h2",{className:"display",style:{fontSize:"clamp(26px,3vw,42px)",marginTop:"20px",lineHeight:1.15}},"Le soin du d\xE9tail, \xE0 chaque \xE9tape.")),React.createElement("ul",{className:"inclus-list reveal d1"},DATA.inclus.map((it,i)=>React.createElement("li",{key:i},React.createElement("span",{className:"ck"},"\u2014"),it))))))}function Faq(){return React.createElement("section",{className:"sec s-light pad-y"},React.createElement("div",{className:"wrap-narrow"},React.createElement("div",{style:{textAlign:"center",marginBottom:"clamp(34px,4vw,56px)"}},React.createElement(Overline,{className:"reveal",style:{justifyContent:"center"}},"Questions fr\xE9quentes"),React.createElement("h2",{className:"display reveal d1",style:{fontSize:"clamp(28px,3.4vw,46px)",marginTop:"20px"}},"Bon \xE0 savoir.")),React.createElement("div",{className:"faq reveal d1"},DATA.faq.map((f,i)=>React.createElement("details",{key:i,open:i===0},React.createElement("summary",null,f.q,React.createElement("span",{className:"pm"})),React.createElement("div",{className:"ans"},f.a))))))}function DateCheck(){const[date,setDate]=React.useState(""),go=()=>{const q=date?"?date="+encodeURIComponent(date)+"&type="+encodeURIComponent(DATA.title):"?type="+encodeURIComponent(DATA.title);window.location.href="contact.html"+q};return React.createElement("section",{className:"sec s-darker pad-y"},React.createElement("div",{className:"wrap-narrow datecheck reveal"},React.createElement(Overline,{style:{justifyContent:"center"}},"Disponibilit\xE9"),React.createElement("h2",{className:"display",style:{fontSize:"clamp(26px,3.2vw,44px)",margin:"18px 0 14px",textAlign:"center"}},"Votre date est-elle libre\xA0?"),React.createElement("p",{className:"dc-sub"},"Je ne r\xE9serve qu'un seul mariage par jour. Indiquez votre date\xA0: je vous confirme ma disponibilit\xE9 sous 48\xA0h."),React.createElement("div",{className:"dc-row"},React.createElement("input",{className:"control",type:"date",value:date,onChange:e=>setDate(e.target.value),"aria-label":"Date du mariage"}),React.createElement("button",{className:"dc-btn",onClick:go},"V\xE9rifier ma date ",React.createElement("span",{className:"ar"},"\u2192")))))}function GiftBand(){return React.createElement("section",{className:"sec s-light pad-y"},React.createElement("div",{className:"wrap gift-band reveal"},React.createElement("div",{className:"gb-text"},React.createElement(Overline,null,"Bon cadeau"),React.createElement("h2",{className:"display",style:{fontSize:"clamp(26px,3.2vw,44px)",margin:"16px 0 14px"}},"Offrez une s\xE9ance."),React.createElement("p",null,"Une demande \xE0 venir, un anniversaire de rencontre, les f\xEAtes\xA0? Offrez un bon cadeau personnalis\xE9, valable un an dans toute la Suisse romande. Je m'occupe du reste."),React.createElement("a",{href:"contact.html?type=Bon%20cadeau",className:"link-arrow",style:{marginTop:"10px"}},"Commander un bon cadeau ",React.createElement("span",{className:"ar"},"\u2192"))),React.createElement("div",{className:"gb-img"},React.createElement(Slot,{id:"couple-gift",ph:"Bon cadeau \u2014 s\xE9ance couple",alt:"Bon cadeau pour une s\xE9ance photo de couple en Suisse romande \u2014 Kevin Chinelli",style:{width:"100%",height:"100%"}}))))}const VILLE_LINKS={mariage:{label:"mariage",items:[{ville:"Lausanne",href:"photographe-mariage-lausanne.html"},{ville:"Gen\xE8ve",href:"photographe-mariage-geneve.html"},{ville:"Montreux",href:"photographe-mariage-montreux.html"}]},famille:{label:"famille",items:[{ville:"Lausanne",href:"photographe-famille-lausanne.html"},{ville:"Gen\xE8ve",href:"photographe-famille-geneve.html"}]}};function VillesBand(){const cfg=VILLE_LINKS[window.KC_SLUG];if(!cfg)return null;const Cap=cfg.label.charAt(0).toUpperCase()+cfg.label.slice(1);return React.createElement("section",{className:"sec s-light pad-y"},React.createElement("div",{className:"wrap",style:{textAlign:"center"}},React.createElement(Overline,{className:"reveal",style:{justifyContent:"center"}},"Par r\xE9gion"),React.createElement("h2",{className:"display reveal d1",style:{fontSize:"clamp(26px,3.2vw,44px)",margin:"18px 0 clamp(28px,3.5vw,44px)"}},"Photographe ",cfg.label," pr\xE8s de chez vous."),React.createElement("div",{className:"villes-row reveal d1"},cfg.items.map(v=>React.createElement("a",{key:v.ville,href:v.href,className:"ville-chip"},Cap," \xE0 ",v.ville," ",React.createElement("span",{className:"ar"},"\u2192"))))))}const JOURNAL_CATS={mariage:["Mariage"],portrait:["Portrait","Studio"],studio:["Studio","Portrait"],maternite:["Maternit\xE9"]};function JournalBand(){const J=window.KC_JOURNAL,cats=JOURNAL_CATS[window.KC_SLUG];if(!J||!cats)return null;const arts=J.order.map(s=>J.articles[s]).filter(a=>cats.includes(a.category)).slice(0,3);return arts.length===0?null:React.createElement("section",{className:"sec s-dark pad-y"},React.createElement("div",{className:"wrap"},React.createElement("div",{style:{display:"flex",alignItems:"flex-end",justifyContent:"space-between",marginBottom:"clamp(30px,4vw,52px)",flexWrap:"wrap",gap:"18px"}},React.createElement("div",null,React.createElement(Overline,{className:"reveal"},"Le journal"),React.createElement("h2",{className:"display reveal d1",style:{fontSize:"clamp(26px,3vw,44px)",marginTop:"16px"}},"\xC0 lire avant votre s\xE9ance.")),React.createElement("a",{href:"journal.html",className:"link-arrow reveal d1"},"Tout le journal ",React.createElement("span",{className:"ar"},"\u2192"))),React.createElement("div",{className:"journal-list three reveal d1"},arts.map((a,i)=>React.createElement("a",{key:a.slug,href:a.file,className:"jl-card reveal d"+(i+1)},React.createElement("div",{className:"jl-img"},React.createElement(Slot,{id:"art-hero-"+a.slug,ph:a.hero,alt:a.heroAlt,style:{width:"100%",height:"100%"}})),React.createElement("div",{className:"jl-body"},React.createElement("div",{className:"jl-meta"},React.createElement("span",{className:"jl-cat"},a.category),React.createElement("span",{className:"jl-dot"},"\xB7"),React.createElement("span",null,a.read," de lecture")),React.createElement("h2",null,a.title),React.createElement("span",{className:"link-arrow"},"Lire l'article ",React.createElement("span",{className:"ar"},"\u2192"))))))))}function PrestaApp(){const[t,setTweak]=useTweaks({palette:KC.PALETTES["Noir chaud"],heading:"Cinzel",body:"Jost",heroLayout:DATA.heroDefault});return useApplyTweaks(t),useReveal([t.heroLayout]),React.createElement(React.Fragment,null,React.createElement("div",{className:"grain"}),React.createElement(Nav,{active:window.KC_SLUG}),React.createElement("main",null,React.createElement(PrestaHero,{layout:t.heroLayout}),React.createElement(ReassureBar,null),React.createElement(Intro,null),React.createElement(GalleryMosaic,null),React.createElement(Formules,null),window.KC_SLUG==="mariage"&&React.createElement(DateCheck,null),React.createElement(Process,null),React.createElement(Inclus,null),window.KC_SLUG==="couple"&&React.createElement(GiftBand,null),React.createElement(Faq,null),React.createElement(JournalBand,null),VILLE_LINKS[window.KC_SLUG]&&React.createElement(VillesBand,null),React.createElement(RelatedPresta,{current:window.KC_SLUG}),React.createElement(CtaContact,{title:"R\xE9servez votre s\xE9ance."})),React.createElement(Footer,null))}ReactDOM.createRoot(document.getElementById("root")).render(React.createElement(PrestaApp,null));})();
+(()=>{const{useEffect}=React,DATA=window.KC_PRESTA[window.KC_SLUG],PARENT_NAV=DATA.parent?PRESTA_NAV.find(p=>p.slug===DATA.parent):null,CONTACT_TYPE={mariage:"Mariage",studio:"Studio",maternite:"Maternit\xE9 & Grossesse"}[window.KC_SLUG]||"Lifestyle",CONTACT_HREF="contact.html?type="+encodeURIComponent(CONTACT_TYPE),M_CLASS={v:"m-tall",h:"m-wide",big:"m-big"};function PrestaHero({layout}){return React.createElement("section",{className:"phero "+layout},React.createElement("div",{className:"bg"},React.createElement(Slot,{id:"phero-"+DATA.slug,ph:DATA.heroImg,alt:"Photographe "+DATA.title.toLowerCase()+" en Suisse romande \u2014 "+DATA.heroImg+" par Kevin Chinelli",loading:"eager",fetchpriority:"high",style:{width:"100%",height:"100%"}}),React.createElement(Slot,{id:"phero-"+DATA.slug+"-mobile",ph:DATA.heroImg,alt:"Photographe "+DATA.title.toLowerCase()+" en Suisse romande \u2014 "+DATA.heroImg+" par Kevin Chinelli",loading:"eager",fetchpriority:"high",style:{width:"100%",height:"100%"}})),React.createElement("div",{className:"scrim"}),React.createElement("div",{className:"phero-content"},React.createElement("div",{className:"crumb reveal in"},React.createElement("a",{href:KC.HOME},"Accueil"),React.createElement("span",null,"/"),PARENT_NAV&&React.createElement(React.Fragment,null,React.createElement("a",{href:PARENT_NAV.href},PARENT_NAV.title),React.createElement("span",null,"/")),React.createElement("span",null,DATA.crumb)),React.createElement("h1",{className:"reveal in d1"},React.createElement("span",{className:"h1-main"},DATA.title)," ",React.createElement("span",{className:"h1-sub"},DATA.heroHint))))}function ReassureBar(){const isMariage=window.KC_SLUG==="mariage",points=isMariage?["R\xE9ponse sous 48 h","1 seul mariage par jour","Tarifs transparents"]:["R\xE9ponse sous 48 h","Tarifs transparents"],mobileKeep=isMariage?"1 seul mariage par jour":"R\xE9ponse sous 48 h";return React.createElement("section",{className:"reassure s-dark","aria-label":"Engagements"},React.createElement("div",{className:"wrap reassure-row"},points.map((p,i)=>React.createElement("div",{key:i,className:"reassure-item"+(p===mobileKeep?" keep-mobile":"")},React.createElement("span",{className:"rdot"}),p))))}function Intro(){return React.createElement("section",{className:"sec s-light pad-y"},React.createElement("div",{className:"wrap"},React.createElement(Overline,{className:"reveal"},"L'approche"),React.createElement("div",{className:"intro-grid",style:{marginTop:"clamp(34px,4vw,58px)"}},React.createElement("p",{className:"lead reveal d1"},DATA.intro.lead),React.createElement("div",{className:"body reveal d2"},DATA.intro.paragraphs.map((p,i)=>React.createElement("p",{key:i},p)),React.createElement("div",{className:"intro-quote"},DATA.intro.quote)))))}function SubpagesBand(){const nav=PRESTA_NAV.find(p=>p.slug===window.KC_SLUG);return!nav||!nav.children?null:React.createElement("section",{className:"sec s-dark pad-y"},React.createElement("div",{className:"wrap"},React.createElement("div",{style:{textAlign:"center",marginBottom:"clamp(34px,4vw,56px)"}},React.createElement(Overline,{className:"reveal",style:{justifyContent:"center"}},"Trois fa\xE7ons de vivre la s\xE9ance"),React.createElement("h2",{className:"display reveal d1",style:{fontSize:"clamp(28px,3.4vw,48px)",marginTop:"18px"}},"Seul, \xE0 deux ou en famille.")),React.createElement("div",{className:"related-grid sub-grid"},nav.children.map((c,i)=>{const d=window.KC_PRESTA[c.slug]||{},from=d.formules&&d.formules[0]?d.formules[0].price:"";return React.createElement("a",{key:c.slug,href:c.href,className:"related-card sub-card reveal d"+(i+1)},React.createElement("div",{className:"rc-img"},React.createElement(Slot,{id:"presta-"+c.slug,ph:"S\xE9ance "+c.title.toLowerCase(),alt:(d.schemaName||c.title)+" en Suisse romande \u2014 Kevin Chinelli, photographe",style:{width:"100%",height:"100%"}})),React.createElement("div",{className:"sub-body"},React.createElement("div",{className:"rc-meta"},React.createElement("h3",null,c.title),React.createElement("span",{className:"ar"},"D\xE9couvrir \u2192")),d.cardText&&React.createElement("p",{className:"sub-text"},d.cardText),from&&React.createElement("p",{className:"sub-from"},"D\xE8s ",from)))}))))}function GalleryMosaic(){return!DATA.gallery||DATA.gallery.length===0?null:React.createElement("section",{className:"sec s-dark pad-y"},React.createElement("div",{className:"wrap"},React.createElement("div",{style:{display:"flex",alignItems:"flex-end",justifyContent:"space-between",marginBottom:"clamp(34px,4vw,56px)",flexWrap:"wrap",gap:"20px"}},React.createElement("div",null,React.createElement(Overline,{className:"reveal"},"Galerie"),React.createElement("h2",{className:"display reveal d1",style:{fontSize:"clamp(28px,3.4vw,48px)",marginTop:"16px"}},"Un aper\xE7u.")),React.createElement("a",{href:"contact.html",className:"link-arrow reveal d1"},"Demander la galerie compl\xE8te ",React.createElement("span",{className:"ar"},"\u2192"))),React.createElement("div",{className:"mosaic reveal d1","data-lb-group":"mosaic"},DATA.gallery.map((g,i)=>React.createElement("div",{key:i,className:"cell "+(M_CLASS[g.o]||"")},React.createElement(Slot,{id:DATA.slug+"-g"+i,ph:g.ph,alt:g.ph+" \u2014 "+DATA.title.toLowerCase()+" en Suisse romande, photographie par Kevin Chinelli",style:{width:"100%",height:"100%"}}))))))}function Formules(){return React.createElement("section",{className:"sec s-light pad-y"},React.createElement("div",{className:"wrap"},React.createElement("div",{style:{textAlign:"center",marginBottom:"clamp(40px,5vw,68px)"}},React.createElement(Overline,{className:"reveal",style:{justifyContent:"center"}},"Formules & tarifs"),React.createElement("h2",{className:"display reveal d1",style:{fontSize:"clamp(30px,4vw,56px)",marginTop:"20px"}},"Trouvons la bonne formule.")),React.createElement("div",{className:"formules"+(DATA.formules.length===2&&!DATA.entreprise?" two":"")},DATA.formules.map((f,i)=>React.createElement("div",{key:i,className:"formule reveal d"+(i+1)+(f.feature?" feature":"")},React.createElement("div",{className:"tag"},f.tag),React.createElement("h3",null,f.name),React.createElement("div",{className:"price"},f.price.startsWith("d\xE8s ")?React.createElement(React.Fragment,null,React.createElement("small",null,"d\xE8s"),f.price.slice(3)):f.price),React.createElement("ul",null,f.items.map((it,j)=>React.createElement("li",{key:j},it))),React.createElement("a",{href:CONTACT_HREF,className:"pick"},"Choisir ",React.createElement("span",{className:"ar"},"\u2192")))),DATA.entreprise&&React.createElement("div",{className:"formule formule-pro reveal d"+(DATA.formules.length+1)},React.createElement("div",{className:"tag"},"Entreprises & \xE9quipes"),React.createElement("h3",null,"Portrait professionnel"),React.createElement("p",{className:"pro-text"},"Portraits d'\xE9quipe, image de marque, photos pour votre site ou votre profil LinkedIn : je les r\xE9alise avec Snapshot Media, mon studio pour les entreprises."),React.createElement("a",{href:KC.PRO_URL,className:"pick",target:"_blank",rel:"noopener","data-umami-event":"vers-snapshot-media"},"Voir sur Snapshot Media ",React.createElement("span",{className:"ar"},"\u2192")))),React.createElement("p",{className:"tarif-note"},"Tarifs sur devis personnalis\xE9 \u2014 chaque projet est unique. Contactez-moi pour une proposition d\xE9taill\xE9e.")))}function Process(){const three=DATA.process.length===3;return React.createElement("section",{className:"sec s-dark pad-y"},React.createElement("div",{className:"wrap"},React.createElement("div",{style:{textAlign:"center",marginBottom:"clamp(40px,5vw,68px)"}},React.createElement(Overline,{className:"reveal",style:{justifyContent:"center"}},"Le d\xE9roul\xE9"),React.createElement("h2",{className:"display reveal d1",style:{fontSize:"clamp(28px,3.4vw,48px)",marginTop:"20px"}},"De l'id\xE9e \xE0 vos images.")),React.createElement("div",{className:"steps"+(three?" three":"")},DATA.process.map((s,i)=>React.createElement("div",{key:i,className:"step reveal d"+(i+1)},React.createElement("div",{className:"sn"},s.n),React.createElement("h3",null,s.title),React.createElement("p",null,s.text))))))}function Inclus(){return React.createElement("section",{className:"sec s-light pad-y"},React.createElement("div",{className:"wrap"},React.createElement("div",{className:"inclus-grid"},React.createElement("div",{className:"reveal"},React.createElement(Overline,null,"Toujours inclus"),React.createElement("h2",{className:"display",style:{fontSize:"clamp(26px,3vw,42px)",marginTop:"20px",lineHeight:1.15}},"Le soin du d\xE9tail, \xE0 chaque \xE9tape.")),React.createElement("ul",{className:"inclus-list reveal d1"},DATA.inclus.map((it,i)=>React.createElement("li",{key:i},React.createElement("span",{className:"ck"},"\u2014"),it))))))}function Faq(){return React.createElement("section",{className:"sec s-light pad-y"},React.createElement("div",{className:"wrap-narrow"},React.createElement("div",{style:{textAlign:"center",marginBottom:"clamp(34px,4vw,56px)"}},React.createElement(Overline,{className:"reveal",style:{justifyContent:"center"}},"Questions fr\xE9quentes"),React.createElement("h2",{className:"display reveal d1",style:{fontSize:"clamp(28px,3.4vw,46px)",marginTop:"20px"}},"Bon \xE0 savoir.")),React.createElement("div",{className:"faq reveal d1"},DATA.faq.map((f,i)=>React.createElement("details",{key:i,open:i===0},React.createElement("summary",null,f.q,React.createElement("span",{className:"pm"})),React.createElement("div",{className:"ans"},f.a))))))}function DateCheck(){const[date,setDate]=React.useState(""),go=()=>{const q=date?"?date="+encodeURIComponent(date)+"&type="+encodeURIComponent(CONTACT_TYPE):"?type="+encodeURIComponent(CONTACT_TYPE);window.location.href="contact.html"+q};return React.createElement("section",{className:"sec s-darker pad-y"},React.createElement("div",{className:"wrap-narrow datecheck reveal"},React.createElement(Overline,{style:{justifyContent:"center"}},"Disponibilit\xE9"),React.createElement("h2",{className:"display",style:{fontSize:"clamp(26px,3.2vw,44px)",margin:"18px 0 14px",textAlign:"center"}},"Votre date est-elle libre\xA0?"),React.createElement("p",{className:"dc-sub"},"Je ne r\xE9serve qu'un seul mariage par jour. Indiquez votre date\xA0: je vous confirme ma disponibilit\xE9 sous 48\xA0h."),React.createElement("div",{className:"dc-row"},React.createElement("input",{className:"control",type:"date",value:date,onChange:e=>setDate(e.target.value),"aria-label":"Date du mariage"}),React.createElement("button",{className:"dc-btn",onClick:go},"V\xE9rifier ma date ",React.createElement("span",{className:"ar"},"\u2192")))))}function GiftBand(){return React.createElement("section",{className:"sec s-light pad-y"},React.createElement("div",{className:"wrap gift-band reveal"},React.createElement("div",{className:"gb-text"},React.createElement(Overline,null,"Bon cadeau"),React.createElement("h2",{className:"display",style:{fontSize:"clamp(26px,3.2vw,44px)",margin:"16px 0 14px"}},"Offrez une s\xE9ance."),React.createElement("p",null,"Une demande \xE0 venir, un anniversaire de rencontre, les f\xEAtes\xA0? Offrez un bon cadeau personnalis\xE9, valable un an dans toute la Suisse romande. Je m'occupe du reste."),React.createElement("a",{href:"contact.html?type=Bon%20cadeau",className:"link-arrow",style:{marginTop:"10px"}},"Commander un bon cadeau ",React.createElement("span",{className:"ar"},"\u2192"))),React.createElement("div",{className:"gb-img"},React.createElement(Slot,{id:"couple-gift",ph:"Bon cadeau \u2014 s\xE9ance couple",alt:"Bon cadeau pour une s\xE9ance photo de couple en Suisse romande \u2014 Kevin Chinelli",style:{width:"100%",height:"100%"}}))))}const VILLE_LINKS={mariage:{label:"mariage",items:[{ville:"Lausanne",href:"photographe-mariage-lausanne.html"},{ville:"Gen\xE8ve",href:"photographe-mariage-geneve.html"},{ville:"Montreux",href:"photographe-mariage-montreux.html"}]},famille:{label:"famille",items:[{ville:"Lausanne",href:"photographe-famille-lausanne.html"},{ville:"Gen\xE8ve",href:"photographe-famille-geneve.html"}]}};function VillesBand(){const cfg=VILLE_LINKS[window.KC_SLUG];if(!cfg)return null;const Cap=cfg.label.charAt(0).toUpperCase()+cfg.label.slice(1);return React.createElement("section",{className:"sec s-light pad-y"},React.createElement("div",{className:"wrap",style:{textAlign:"center"}},React.createElement(Overline,{className:"reveal",style:{justifyContent:"center"}},"Par r\xE9gion"),React.createElement("h2",{className:"display reveal d1",style:{fontSize:"clamp(26px,3.2vw,44px)",margin:"18px 0 clamp(28px,3.5vw,44px)"}},"Photographe ",cfg.label," pr\xE8s de chez vous."),React.createElement("div",{className:"villes-row reveal d1"},cfg.items.map(v=>React.createElement("a",{key:v.ville,href:v.href,className:"ville-chip"},Cap," \xE0 ",v.ville," ",React.createElement("span",{className:"ar"},"\u2192"))))))}const JOURNAL_CATS={mariage:["Mariage"],portrait:["Portrait","Couple","Studio"],solo:["Portrait","Studio"],couple:["Couple","Portrait"],studio:["Studio","Portrait"],maternite:["Maternit\xE9"]};function JournalBand(){const J=window.KC_JOURNAL,cats=JOURNAL_CATS[window.KC_SLUG];if(!J||!cats)return null;const arts=J.order.map(s=>J.articles[s]).filter(a=>cats.includes(a.category)).slice(0,3);return arts.length===0?null:React.createElement("section",{className:"sec s-dark pad-y"},React.createElement("div",{className:"wrap"},React.createElement("div",{style:{display:"flex",alignItems:"flex-end",justifyContent:"space-between",marginBottom:"clamp(30px,4vw,52px)",flexWrap:"wrap",gap:"18px"}},React.createElement("div",null,React.createElement(Overline,{className:"reveal"},"Le journal"),React.createElement("h2",{className:"display reveal d1",style:{fontSize:"clamp(26px,3vw,44px)",marginTop:"16px"}},"\xC0 lire avant votre s\xE9ance.")),React.createElement("a",{href:"journal.html",className:"link-arrow reveal d1"},"Tout le journal ",React.createElement("span",{className:"ar"},"\u2192"))),React.createElement("div",{className:"journal-list three reveal d1"},arts.map((a,i)=>React.createElement("a",{key:a.slug,href:a.file,className:"jl-card reveal d"+(i+1)},React.createElement("div",{className:"jl-img"},React.createElement(Slot,{id:"art-hero-"+a.slug,ph:a.hero,alt:a.heroAlt,style:{width:"100%",height:"100%"}})),React.createElement("div",{className:"jl-body"},React.createElement("div",{className:"jl-meta"},React.createElement("span",{className:"jl-cat"},a.category),React.createElement("span",{className:"jl-dot"},"\xB7"),React.createElement("span",null,a.read," de lecture")),React.createElement("h2",null,a.title),React.createElement("span",{className:"link-arrow"},"Lire l'article ",React.createElement("span",{className:"ar"},"\u2192"))))))))}function PrestaApp(){const[t,setTweak]=useTweaks({palette:KC.PALETTES["Noir chaud"],heading:"Cinzel",body:"Jost",heroLayout:DATA.heroDefault});return useApplyTweaks(t),useReveal([t.heroLayout]),React.createElement(React.Fragment,null,React.createElement("div",{className:"grain"}),React.createElement(Nav,{active:window.KC_SLUG}),React.createElement("main",null,React.createElement(PrestaHero,{layout:t.heroLayout}),React.createElement(ReassureBar,null),React.createElement(Intro,null),React.createElement(SubpagesBand,null),React.createElement(GalleryMosaic,null),React.createElement(Formules,null),window.KC_SLUG==="mariage"&&React.createElement(DateCheck,null),React.createElement(Process,null),React.createElement(Inclus,null),window.KC_SLUG==="couple"&&React.createElement(GiftBand,null),React.createElement(Faq,null),React.createElement(JournalBand,null),VILLE_LINKS[window.KC_SLUG]&&React.createElement(VillesBand,null),React.createElement(RelatedPresta,{current:window.KC_SLUG}),React.createElement(CtaContact,{title:"R\xE9servez votre s\xE9ance."})),React.createElement(Footer,null))}ReactDOM.createRoot(document.getElementById("root")).render(React.createElement(PrestaApp,null));})();
 
 ;
 /* ============================================================

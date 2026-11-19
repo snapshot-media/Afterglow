@@ -63,8 +63,7 @@ function PortfolioApp() {
       <main>
         <section className="pf-head s-dark">
           <div className="wrap">
-            <Overline className="reveal">Portfolio</Overline>
-            <h1 className="display reveal d1">Travaux choisis.</h1>
+            <h1 className="h1-stack"><span className="overline reveal"><span className="tick"></span>Portfolio · mariage, lifestyle, grossesse</span> <span className="display h1-big reveal d1">Travaux choisis.</span></h1>
             <p className="reveal d2">
               Une sélection d'images à travers les mariages, les portraits et la maternité.
               Cliquez sur une photo pour l'agrandir.

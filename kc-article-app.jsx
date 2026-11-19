@@ -12,7 +12,8 @@ function RichText({ text }) {
   let last = 0, m, k = 0;
   while ((m = re.exec(text)) !== null) {
     if (m.index > last) parts.push(text.slice(last, m.index));
-    parts.push(<a key={k++} href={m[2]} className="art-ilink">{m[1]}</a>);
+    const external = /^https?:/.test(m[2]);
+    parts.push(<a key={k++} href={m[2]} className="art-ilink" {...(external ? { target: "_blank", rel: "noopener" } : {})}>{m[1]}</a>);
     last = m.index + m[0].length;
   }
   if (last < text.length) parts.push(text.slice(last));
@@ -37,7 +38,7 @@ function ArticleApp() {
       <main>
         <article>
           <header className="art-hero">
-            <div className="bg"><Slot id={"art-hero-" + A.slug} ph={A.hero} alt={A.heroAlt} style={{ width: "100%", height: "100%" }} /></div>
+            <div className="bg"><Slot id={"art-hero-" + A.slug} ph={A.hero} alt={A.heroAlt} loading="eager" fetchpriority="high" style={{ width: "100%", height: "100%" }} /></div>
             <div className="scrim"></div>
             <div className="art-hero-content">
               <div className="crumb reveal in"><a href={KC.HOME}>Accueil</a><span>/</span><a href="journal.html">Journal</a><span>/</span><span>{A.category}</span></div>

@@ -39,7 +39,7 @@ window.KC_JOURNAL = {
       heroAlt: "Mariage dans les vignobles de Lavaux au-dessus du lac Léman — Kevin Chinelli, photographe",
       excerpt: "Entre les terrasses viticoles classées à l'UNESCO et les rives du Léman, Lavaux offre quelques-uns des plus beaux décors de mariage de Suisse romande. Mon repérage, lieu par lieu.",
       metaTitle: "Où se marier en Lavaux : 8 lieux face au Léman | Kevin Chinelli",
-      metaDesc: "Guide des plus beaux lieux de mariage en Lavaux et autour du Léman : domaines viticoles, terrasses et salles avec vue. Conseils d'un photographe de mariage en Suisse romande.",
+      metaDesc: "Les plus beaux lieux de mariage en Lavaux : domaines viticoles, terrasses et salles avec vue sur le Léman. Le guide d'un photographe de mariage romand.",
       intro: "Photographier des mariages en Lavaux, c'est travailler dans l'un des plus beaux paysages de Suisse : des terrasses de vignes qui dévalent vers le lac, une lumière de fin de journée incomparable, et les Alpes en toile de fond. Voici les lieux que je recommande à mes mariés, avec un œil de photographe sur la lumière et les angles.",
       sections: [
         { h: "Pourquoi se marier en Lavaux", p: [
@@ -130,7 +130,7 @@ window.KC_JOURNAL = {
       heroAlt: "Séance photo de couple au bord du lac Léman au coucher du soleil — Kevin Chinelli, photographe",
       excerpt: "Quais de Lausanne, vignes de Lavaux, vieille ville de Genève : mes lieux préférés pour une séance couple ou fiançailles autour du lac, et la meilleure heure pour chacun.",
       metaTitle: "Spots photo de couple autour du Léman | Kevin Chinelli",
-      metaDesc: "Les meilleurs lieux pour une séance photo de couple ou fiançailles autour du lac Léman : Lausanne, Lavaux, Genève, Montreux. Conseils d'un photographe en Suisse romande.",
+      metaDesc: "Les plus beaux lieux pour une séance photo de couple ou de fiançailles autour du Léman : Lausanne, Lavaux, Genève, Montreux. Conseils d'un photographe.",
       intro: "Une [séance couple](couple.html) n'a pas besoin d'un décor spectaculaire — juste d'un endroit où vous vous sentez bien et d'une belle lumière. Autour du Léman, on a l'embarras du choix. Voici mes lieux de prédilection, du plus urbain au plus sauvage, avec l'heure qui leur va le mieux.",
       sections: [
         { h: "Côté Lausanne et Lavaux", list: [
@@ -178,7 +178,7 @@ window.KC_JOURNAL = {
       heroAlt: "Prix d'un photographe de mariage en Suisse romande — couple à l'heure dorée | Kevin Chinelli",
       excerpt: "Le plus souvent entre 2'500 et 4'500 francs pour un reportage complet : voici ce qui fait vraiment le prix d'un photographe de mariage en Suisse romande, et comment investir au bon endroit.",
       metaTitle: "Prix d'un photographe de mariage en Suisse romande | Kevin Chinelli",
-      metaDesc: "Combien coûte un photographe de mariage à Lausanne, Genève et en Suisse romande ? Fourchettes de prix, ce qui les explique et comment bien investir. Le guide clair d'Afterglow.",
+      metaDesc: "Combien coûte un photographe de mariage à Lausanne, Genève et en Suisse romande ? Fourchettes de prix, ce qui les explique et comment bien choisir.",
       intro: "C'est souvent la première question qu'on me pose, et c'est bien normal : le budget photo d'un mariage n'a rien d'anodin. Plutôt que de botter en touche, voici des fourchettes honnêtes pour la Suisse romande — et surtout ce qui se cache derrière un prix, pour que vous sachiez exactement où va votre argent et comment investir au bon endroit.",
       sections: [
         { h: "Les fourchettes de prix en Suisse romande", p: [
@@ -228,7 +228,7 @@ window.KC_JOURNAL = {
       heroAlt: "Quand réserver son photographe de mariage en Suisse romande | Kevin Chinelli",
       excerpt: "8 à 14 mois à l'avance, parfois davantage pour un samedi d'été : le bon timing pour réserver votre photographe de mariage en Suisse romande, sans stress et sans regret.",
       metaTitle: "Quand réserver son photographe de mariage ? | Kevin Chinelli",
-      metaDesc: "À quel moment réserver votre photographe de mariage en Suisse romande ? Délais idéaux selon la saison, pourquoi les bonnes dates partent vite, et comment s'y prendre.",
+      metaDesc: "Quand réserver son photographe de mariage en Suisse romande ? Délais selon la saison, pourquoi les bonnes dates partent vite et comment s'y prendre.",
       intro: "Une fois la date posée et le lieu réservé, le photographe figure parmi les premiers prestataires à bloquer. La raison est simple : un bon photographe ne fait qu'un seul mariage par jour. Voici comment ne pas laisser passer le vôtre.",
       sections: [
         { h: "Le délai idéal : 8 à 14 mois", p: [
@@ -270,7 +270,7 @@ window.KC_JOURNAL = {
       heroAlt: "Lieux de mariage dans le canton de Vaud et autour du Léman | Kevin Chinelli",
       excerpt: "Châteaux, domaines viticoles, salles avec vue sur le lac : un tour d'horizon des plus beaux lieux pour se marier dans le canton de Vaud et autour du Léman, vus par un photographe.",
       metaTitle: "Où se marier dans le canton de Vaud : 10 lieux autour du Léman | Kevin Chinelli",
-      metaDesc: "Les plus beaux lieux de mariage dans le canton de Vaud et autour du Léman : châteaux, domaines viticoles, salles avec vue sur le lac. Conseils d'un photographe de mariage romand.",
+      metaDesc: "Les plus beaux lieux de mariage du canton de Vaud et autour du Léman : châteaux, domaines viticoles, salles avec vue sur le lac. Le guide d'un photographe.",
       intro: "Le canton de Vaud concentre une densité rare de beaux lieux de mariage : des rives du Léman aux contreforts des Alpes, en passant par les vignobles et les châteaux. Après l'avoir arpenté article après article — notamment du côté de [Lavaux](journal-lieux-mariage-lavaux.html) — voici un tour d'horizon plus large, avec un œil de photographe sur le décor et la lumière.",
       sections: [
         { h: "Au bord du lac", list: [
@@ -320,7 +320,7 @@ window.KC_JOURNAL = {
       heroAlt: "Quand faire sa séance photo de grossesse en Suisse romande | Kevin Chinelli",
       excerpt: "Entre la 30e et la 36e semaine, le plus souvent : voici le bon moment pour votre séance grossesse, les exceptions à connaître, et comment anticiper selon la saison.",
       metaTitle: "Quand faire sa séance photo de grossesse ? | Kevin Chinelli",
-      metaDesc: "À quelle semaine faire sa séance photo de grossesse ? Le moment idéal, les cas particuliers (jumeaux, terme estival) et comment réserver, par un photographe en Suisse romande.",
+      metaDesc: "À quelle semaine faire sa séance photo de grossesse ? Le moment idéal, les cas particuliers (jumeaux, terme en été) et comment réserver en Suisse romande.",
       intro: "Trop tôt, le ventre ne se dessine pas encore ; trop tard, le confort n'est plus au rendez-vous. Il existe une fenêtre idéale pour photographier une grossesse — la voici, avec les quelques exceptions qui méritent d'avancer la séance.",
       sections: [
         { h: "La fenêtre idéale : 30e à 36e semaine", p: [
@@ -366,7 +366,7 @@ window.KC_JOURNAL = {
       heroAlt: "Séance photo grossesse et nouveau-né en Suisse romande | Kevin Chinelli",
       excerpt: "Photographier l'attente puis l'arrivée, dans une même galerie : pourquoi associer séance grossesse et séance nouveau-né donne des souvenirs bien plus forts qu'isolés.",
       metaTitle: "Séance grossesse et nouveau-né : pourquoi les combiner | Kevin Chinelli",
-      metaDesc: "Associer séance grossesse et séance nouveau-né en Suisse romande : l'intérêt de relier l'attente et l'arrivée dans une même histoire. Conseils et déroulé par un photographe maternité.",
+      metaDesc: "Séance grossesse et séance nouveau-né : pourquoi relier l'attente et l'arrivée dans une même histoire. Conseils et déroulé, en Suisse romande.",
       intro: "Il y a la grossesse — cette parenthèse suspendue où tout est encore promesse. Et il y a les premiers jours du bébé, fragiles et fugaces. Les photographier séparément, c'est bien. Les relier dans une même histoire, c'est autre chose. Voici pourquoi je propose désormais de les combiner.",
       sections: [
         { h: "Deux instants qui se répondent", p: [
@@ -412,7 +412,7 @@ window.KC_JOURNAL = {
       heroAlt: "Photos LinkedIn et personal branding en studio à Lausanne et Genève | Kevin Chinelli",
       excerpt: "Votre photo de profil est votre première poignée de main. Voici comment réussir vos portraits LinkedIn et personal branding : tenue, fond, expression et usages.",
       metaTitle: "Photos LinkedIn & personal branding : le guide | Kevin Chinelli",
-      metaDesc: "Réussir ses photos professionnelles LinkedIn et personal branding en Suisse romande : tenue, fond, expression, studio ou extérieur. Conseils d'un photographe à Lausanne et Genève.",
+      metaDesc: "Réussir ses photos LinkedIn et de personal branding : tenue, fond, expression, studio ou extérieur. Conseils d'un photographe à Lausanne et Genève.",
       intro: "Sur LinkedIn comme sur un site, votre portrait est votre première poignée de main — celle qui se joue avant le moindre échange. Une bonne photo professionnelle inspire confiance, crédibilise votre discours et vous distingue. Voici comment la réussir.",
       sections: [
         { h: "Pourquoi votre photo compte plus que vous ne le pensez", p: [
@@ -427,7 +427,7 @@ window.KC_JOURNAL = {
         ] },
         { h: "Studio ou extérieur ?", p: [
           "Le [studio](studio.html) offre un cadre maîtrisé et reproductible — parfait quand il faut une cohérence visuelle entre plusieurs personnes d'une même équipe, ou des images calibrées pour un site et la presse. L'extérieur, lui, apporte une touche plus vivante et personnelle, idéale pour le personal branding d'un indépendant.",
-          "Pour les entreprises, je me déplace avec un studio mobile dans vos locaux à Lausanne, Genève ou ailleurs en Suisse romande, afin de photographier toute l'équipe sur place, sans perte de temps.",
+          "Pour une entreprise ou une équipe, je réalise ces portraits avec [Snapshot Media](https://snapshotmedia.ch/services/photographie/portraits-professionnels/), mon studio pour les professionnels : un studio mobile installé dans vos locaux, pour photographier toute l'équipe sur place.",
         ] },
         { h: "Penser tous les usages", p: [
           "Une bonne séance ne sert pas qu'à LinkedIn : site internet, signature mail, dossier de presse, supports imprimés, intervention en conférence… On anticipe ces usages pour repartir avec des images aux bons formats et aux bons droits.",
@@ -452,14 +452,14 @@ window.KC_JOURNAL = {
       slug: "quelle-tenue-seance-portrait",
       file: "journal-quelle-tenue-seance-portrait.html",
       category: "Portrait",
-      relatedSlug: "portrait", relatedHref: "portraits.html", relatedTitle: "Portraits",
+      relatedSlug: "portrait", relatedHref: "portraits.html", relatedTitle: "Lifestyle",
       date: "2026-05-15", dateLabel: "15 mai 2026", read: "5 min",
       title: "Quelle tenue porter pour une séance portrait ?",
       hero: "Portrait en lumière naturelle, tenue épurée aux tons neutres",
       heroAlt: "Quelle tenue pour une séance portrait en Suisse romande | Kevin Chinelli",
       excerpt: "Tons neutres, matières qui tombent bien, deux options plutôt que dix : mes repères simples pour choisir vos tenues et arriver serein·e à votre séance portrait.",
       metaTitle: "Quelle tenue pour une séance portrait ? | Kevin Chinelli",
-      metaDesc: "Comment choisir sa tenue pour une séance photo portrait en Suisse romande : couleurs, matières, ce qui flatte à l'image. Les conseils d'un photographe portrait à Lausanne et Genève.",
+      metaDesc: "Quelle tenue pour une séance photo portrait ? Couleurs, matières, coupes qui flattent à l'image : les conseils d'un photographe à Lausanne et Genève.",
       intro: "« Je ne sais pas quoi mettre. » C'est le petit stress d'avant-séance le plus répandu — et le plus facile à lever. La règle d'or tient en une phrase : une tenue qui vous ressemble et dans laquelle vous vous sentez bien sera toujours plus belle qu'une tenue « pour la photo ». Voici mes repères.",
       sections: [
         { h: "Misez sur la simplicité", p: [
@@ -505,7 +505,7 @@ window.KC_JOURNAL = {
       heroAlt: "Comment choisir son photographe de mariage en Suisse romande | Kevin Chinelli",
       excerpt: "Au-delà du style et du prix, sept questions concrètes pour choisir le bon photographe de mariage en Suisse romande — et éviter les mauvaises surprises le jour J.",
       metaTitle: "Comment choisir son photographe de mariage : 7 questions | Kevin Chinelli",
-      metaDesc: "Bien choisir son photographe de mariage en Suisse romande : style, livrables, sauvegardes, déroulé. Les 7 questions à poser avant de réserver, par un photographe romand.",
+      metaDesc: "Bien choisir son photographe de mariage en Suisse romande : style, livrables, sauvegardes, déroulé. Les 7 questions à poser avant de réserver.",
       intro: "Le style des images compte, évidemment. Mais derrière une belle galerie se cachent des questions plus terre à terre qui font, le jour J, toute la différence entre un mariage serein et une journée sous tension. Voici les sept que je vous encourage à poser à tout photographe — moi compris.",
       sections: [
         { h: "Le style et l'approche", p: [
@@ -548,18 +548,18 @@ window.KC_JOURNAL = {
       slug: "portrait-studio-ou-exterieur",
       file: "journal-portrait-studio-ou-exterieur.html",
       category: "Portrait",
-      relatedSlug: "portrait", relatedHref: "portraits.html", relatedTitle: "Portraits",
+      relatedSlug: "portrait", relatedHref: "portraits.html", relatedTitle: "Lifestyle",
       date: "2026-05-02", dateLabel: "2 mai 2026", read: "5 min",
       title: "Portrait en studio ou en extérieur : lequel choisir ?",
       hero: "Diptyque portrait — studio fond sobre et lumière naturelle extérieure",
       heroAlt: "Portrait en studio ou en extérieur en Suisse romande | Kevin Chinelli",
       excerpt: "Cadre maîtrisé ou lumière vivante ? Studio et extérieur ne racontent pas la même chose. Voici comment choisir selon l'usage de vos images et l'effet recherché.",
       metaTitle: "Portrait en studio ou en extérieur : comment choisir | Kevin Chinelli",
-      metaDesc: "Studio ou extérieur pour votre séance portrait en Suisse romande ? Avantages de chaque option selon l'usage (corporate, personnel, artistique). Conseils d'un photographe romand.",
+      metaDesc: "Studio ou extérieur pour votre séance portrait ? Les avantages de chaque option selon l'usage des images. Conseils d'un photographe en Suisse romande.",
       intro: "C'est une question qui revient à chaque prise de contact : « plutôt studio ou plutôt extérieur ? » Les deux donnent de superbes images — mais pas le même type d'images. Tout dépend de l'effet recherché et de l'usage que vous ferez de vos portraits.",
       sections: [
         { h: "Le studio : maîtrise et intemporalité", p: [
-          "En [studio](studio.html), tout est dirigé : la lumière, le fond, la posture, l'expression. Le rendu est net, élégant, reproductible — idéal pour les portraits corporate, l'éditorial, et chaque fois qu'il faut une cohérence visuelle entre plusieurs personnes. Le fond neutre concentre l'attention sur le visage, et le résultat ne se démode pas.",
+          "En [studio](studio.html), tout est dirigé : la lumière, le fond, la posture, l'expression. Le rendu est net, élégant, reproductible — idéal pour un portrait éditorial, un book d'artiste ou une image d'auteur. Le fond neutre concentre l'attention sur le visage, et le résultat ne se démode pas.",
           "C'est aussi l'option la plus confortable par mauvais temps ou en hiver, puisqu'on ne dépend pas de la météo.",
         ] },
         { h: "L'extérieur : lumière vivante et personnalité", p: [
@@ -599,7 +599,7 @@ window.KC_JOURNAL = {
       heroAlt: "Déroulé d'une journée de mariage heure par heure | Kevin Chinelli",
       excerpt: "Des préparatifs à la piste de danse : comment s'enchaîne une journée de mariage côté photo, et comment caler le timing pour ne rien manquer de la lumière ni de l'émotion.",
       metaTitle: "Déroulé d'un mariage heure par heure (côté photo) | Kevin Chinelli",
-      metaDesc: "Comment s'organise une journée de mariage côté photographe en Suisse romande : timing des préparatifs, cérémonie, couple à l'heure dorée, soirée. Le guide pour caler votre déroulé.",
+      metaDesc: "Le déroulé d'une journée de mariage côté photo : préparatifs, cérémonie, couple à l'heure dorée, soirée. Le guide pour caler le timing en Suisse romande.",
       intro: "Un mariage réussi en photo, c'est d'abord un déroulé bien pensé. Pas pour transformer votre journée en planning militaire — au contraire, pour vous libérer l'esprit et garantir que les moments forts tombent au bon moment, dans la bonne lumière. Voici comment s'enchaîne une journée type, côté photo.",
       sections: [
         { h: "Matin — les préparatifs", p: [
@@ -652,7 +652,7 @@ window.KC_JOURNAL = {
       heroAlt: "Où se marier à Genève — lieux de mariage et spots photo au bord du lac | Kevin Chinelli",
       excerpt: "De la vieille ville aux domaines viticoles de la campagne genevoise, en passant par les quais et les parcs du bord du lac : un tour d'horizon des plus beaux lieux pour se marier à Genève, par un photographe.",
       metaTitle: "Où se marier à Genève : lieux de rêve et spots photo | Kevin Chinelli",
-      metaDesc: "Les plus beaux lieux pour se marier à Genève : vieille ville, parcs du bord du lac, domaines viticoles de la campagne genevoise. Conseils d'un photographe de mariage en Suisse romande.",
+      metaDesc: "Les plus beaux lieux pour se marier à Genève : vieille ville, parcs au bord du lac, domaines viticoles genevois. Le guide d'un photographe de mariage.",
       intro: "Entre son lac, sa vieille ville médiévale et une campagne viticole méconnue, Genève offre une vraie diversité de décors pour un mariage. Que vous rêviez d'une cérémonie urbaine et chic ou d'une fête champêtre face aux vignes, voici les lieux que je recommande, avec un œil de photographe sur la lumière et les angles.",
       sections: [
         { h: "Au bord du lac et dans les parcs", list: [
@@ -689,14 +689,14 @@ window.KC_JOURNAL = {
       slug: "spots-seance-photo-lausanne",
       file: "journal-spots-seance-photo-lausanne.html",
       category: "Portrait",
-      relatedSlug: "portrait", relatedHref: "portraits.html", relatedTitle: "Portraits",
+      relatedSlug: "portrait", relatedHref: "portraits.html", relatedTitle: "Lifestyle",
       date: "2026-06-26", dateLabel: "26 juin 2026", read: "5 min",
       title: "Les plus beaux endroits pour une séance photo à Lausanne",
       hero: "Quais d'Ouchy à Lausanne, lumière douce de fin de journée",
       heroAlt: "Spots pour une séance photo à Lausanne — quais d'Ouchy et vieille ville | Kevin Chinelli",
       excerpt: "Ouchy, la vieille ville, le Flon, Sauvabelin : mes lieux préférés pour une séance portrait, couple ou famille à Lausanne, du plus urbain au plus nature, avec l'heure qui leur va le mieux.",
       metaTitle: "Où faire une séance photo à Lausanne : mes spots préférés | Kevin Chinelli",
-      metaDesc: "Les meilleurs endroits pour une séance photo portrait, couple ou famille à Lausanne : Ouchy, vieille ville, Flon, Sauvabelin. Conseils d'un photographe portrait en Suisse romande.",
+      metaDesc: "Les plus beaux endroits pour une séance photo à Lausanne : Ouchy, vieille ville, Flon, Sauvabelin. Conseils de lumière et d'horaire d'un photographe local.",
       intro: "Lausanne est une ville de contrastes : un bord de lac méridional à Ouchy, une vieille ville médiévale tout en escaliers, un quartier du Flon résolument urbain, et des forêts à dix minutes du centre. De quoi varier les ambiances d'une séance sans jamais s'éloigner. Voici mes lieux de prédilection.",
       sections: [
         { h: "Au bord du lac, à Ouchy", p: [
@@ -736,7 +736,7 @@ window.KC_JOURNAL = {
       heroAlt: "Lieux de mariage sur La Côte — Nyon, Morges, domaines viticoles | Kevin Chinelli",
       excerpt: "Entre Lausanne et Genève, La Côte aligne châteaux, domaines viticoles et quais face au Mont-Blanc. Un tour d'horizon des plus beaux lieux pour s'y marier, vus par un photographe.",
       metaTitle: "Se marier sur La Côte (Nyon, Morges) : les plus beaux lieux | Kevin Chinelli",
-      metaDesc: "Où se marier sur La Côte vaudoise : châteaux de Nyon et Morges, domaines viticoles de Féchy à Mont-sur-Rolle, quais face au Mont-Blanc. Conseils d'un photographe de mariage romand.",
+      metaDesc: "Se marier sur La Côte vaudoise : châteaux de Nyon et Morges, domaines de Féchy à Mont-sur-Rolle, quais face au Mont-Blanc. Le guide d'un photographe.",
       intro: "Entre Lausanne et Genève, La Côte s'étire le long du Léman, face au Mont-Blanc. C'est le plus grand vignoble du canton de Vaud, parsemé de châteaux et de villages au bord de l'eau. Un décor à la fois noble et champêtre, encore un peu confidentiel pour les mariages. Voici mes lieux préférés, avec un œil de photographe.",
       sections: [
         { h: "Les châteaux de caractère", list: [

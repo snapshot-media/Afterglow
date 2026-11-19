@@ -18,7 +18,7 @@ const TARIF_FAQ = [
   { q: "Comment réserver et régler ?",
     a: "La date est bloquée à la signature du contrat et au versement d'un acompte de 30 %. Le solde est réglé avant la prestation ; pour les mariages, il est versé 10 jours après la célébration, et je conseille de réserver 8 à 14 mois à l'avance pour les samedis de mai à septembre." },
   { q: "Proposez-vous des bons cadeaux ?",
-    a: "Oui, des bons cadeaux personnalisés valables un an — pour une séance portrait, studio ou maternité. Une belle idée de cadeau pour un anniversaire, une naissance ou les fêtes." },
+    a: "Oui, des bons cadeaux personnalisés valables un an — pour une séance lifestyle (solo, couple ou famille), studio ou maternité. Une belle idée de cadeau pour un anniversaire, une naissance ou les fêtes." },
 ];
 
 function priceNum(s) {
@@ -65,11 +65,10 @@ function TarifsApp() {
       <main>
         <section className="pf-head s-dark">
           <div className="wrap">
-            <Overline className="reveal">Tarifs</Overline>
-            <h1 className="display reveal d1">Des tarifs clairs, annoncés.</h1>
+            <h1 className="h1-stack"><span className="overline reveal"><span className="tick"></span>Tarifs photographe · Suisse romande</span> <span className="display h1-big reveal d1">Des tarifs clairs, annoncés.</span></h1>
             <p className="tarif-intro reveal d2">
               Pas de prix caché ni de devis opaque. Voici mes formules de référence pour la photographie de
-              mariage, portrait, studio et maternité en Suisse romande. Chaque projet étant unique,
+              mariage, lifestyle (solo, couple, famille), studio et maternité en Suisse romande. Chaque projet étant unique,
               le devis final est personnalisé — mais vous savez d'emblée à quoi vous attendre.
             </p>
           </div>
@@ -90,7 +89,7 @@ function TarifsApp() {
               </h2>
             </div>
             <ul className="inclus-list reveal d1">
-              {["Échange préparatoire et conseils", "Galerie privée en ligne, téléchargement HD",
+              {["Conseils avant la séance", "Galerie privée en ligne, téléchargement HD",
                 "Retouche soignée image par image", "Droits d'usage privé inclus",
                 "Déplacement inclus en Suisse romande", "Double sauvegarde sécurisée"].map((it, i) => (
                 <li key={i}><span className="ck">—</span>{it}</li>

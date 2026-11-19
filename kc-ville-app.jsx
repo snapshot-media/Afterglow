@@ -33,7 +33,7 @@ function VilleApp() {
       <main>
         {/* HERO */}
         <section className="phero bas">
-          <div className="bg"><Slot id={"ville-hero-" + V.slug} ph={V.heroImg} alt={V.h1 + " — Kevin Chinelli, photographe en Suisse romande"} style={{ width: "100%", height: "100%" }} /></div>
+          <div className="bg"><Slot id={"ville-hero-" + V.slug} ph={V.heroImg} alt={V.h1 + " — Kevin Chinelli, photographe en Suisse romande"} loading="eager" fetchpriority="high" style={{ width: "100%", height: "100%" }} /></div>
           <div className="scrim"></div>
           <div className="phero-content">
             <div className="crumb reveal in"><a href={KC.HOME}>Accueil</a><span>/</span><a href={VP.href}>{VP.crumb}</a><span>/</span><span>{V.ville}</span></div>

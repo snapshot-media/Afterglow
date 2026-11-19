@@ -634,3 +634,14 @@ select.control option{ background:#1a1714; color:#f2ede6; }
 .kc-cursor.on span{ opacity:1; transform:scale(1); }
 [data-lb-group] image-slot[data-filled]{ cursor:none; }
 @media (hover:none){ [data-lb-group] image-slot[data-filled]{ cursor:zoom-in; } }
+
+/* ---------- Menu : sous-pages de Lifestyle (solo, couple, famille) ---------- */
+.nav-drop a.nd-sub{ padding:6px 26px 6px 42px; font-size:12.5px; color:color-mix(in oklab, var(--cream), transparent 42%); }
+.nav-drop a.nd-sub:last-of-type{ margin-bottom:4px; }
+.mm-group a.mm-sub{ font-size:clamp(11px,3vw,13px); letter-spacing:.16em; color:color-mix(in oklab, var(--cream), transparent 60%); margin-top:-2px; }
+
+/* ---------- H1 composés : la ligne de mots-clés fait partie du titre, sans changer le rendu ---------- */
+.hh-h1{ margin:0; font:inherit; color:inherit; }
+.hh-h1 > span{ display:block; }
+.h1-stack{ margin:0; font:inherit; color:inherit; }
+.h1-stack > span{ display:block; }

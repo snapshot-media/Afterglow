@@ -13,6 +13,7 @@ import { readFileSync, writeFileSync, readdirSync } from "node:fs";
 import { prerenderAll } from "./prerender.mjs";
 import { bundleAll } from "./bundle-scripts.mjs";
 import { downloadFonts } from "./download-fonts.mjs";
+import { genLlms } from "./gen-llms.mjs";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -76,6 +77,9 @@ await downloadFonts();
 // compilation des .js, car il les exécute côté Node).
 // prerender.mjs gère les deux cas : refs originales ou data-bundle-sources (HTML déjà bundlé).
 prerenderAll(root, htmlFiles);
+
+// llms.txt : résumé pour les assistants IA, depuis les mêmes données que les pages
+console.log(`✅ llms.txt généré (${genLlms(root)} lignes)`);
 
 // Bundling JS : 10 requêtes → 2 par page (vendor + page-bundle).
 // Doit tourner APRÈS prerender (pour que la logique SSG n'ait pas à lire les bundles

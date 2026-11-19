@@ -23,16 +23,15 @@ const FORMULES = {
     { name: "Prestige — 2 jours", price: "dès CHF 4'500" },
     { name: "Je ne sais pas encore", price: "" },
   ],
+  // Lifestyle : une seule grille, seul, à deux ou en famille
   "Lifestyle": [
     { name: "Essentiel — 30 min", price: "CHF 180" },
     { name: "Signature — 1 h", price: "CHF 280" },
-    { name: "Corporate — pro & image de marque", price: "Sur devis" },
     { name: "Je ne sais pas encore", price: "" },
   ],
   "Studio": [
     { name: "Portrait — 30 min", price: "CHF 220" },
     { name: "Éditorial — 1 h", price: "CHF 420" },
-    { name: "Corporate — équipe", price: "dès CHF 1'400" },
     { name: "Je ne sais pas encore", price: "" },
   ],
   "Maternité & Grossesse": [
@@ -41,24 +40,14 @@ const FORMULES = {
     { name: "Continuité — grossesse + nouveau-né", price: "CHF 480" },
     { name: "Je ne sais pas encore", price: "" },
   ],
-  "Couple": [
-    { name: "Escapade — 45 min", price: "CHF 320" },
-    { name: "Complices — 1 h 30", price: "CHF 520" },
-    { name: "Promesse — fiançailles 2 h", price: "CHF 850" },
-    { name: "Je ne sais pas encore", price: "" },
-  ],
-  "Famille": [
-    { name: "Tribu — 1 h", price: "CHF 390" },
-    { name: "Complices — 1 h 30", price: "CHF 590" },
-    { name: "Tribu élargie — 2 h", price: "CHF 890" },
-    { name: "Je ne sais pas encore", price: "" },
-  ],
 };
 
 const REGIONS = ["Vaud / Lausanne", "Genève", "Fribourg", "Neuchâtel", "Valais", "Riviera / Montreux", "Autre / à définir"];
 
 function normType(v) {
   if (!v) return "";
+  // les séances solo, couple et famille sont des séances Lifestyle
+  if (/^(solo|couple|famille|portrait)/i.test(v)) return "Lifestyle";
   const hit = TYPES.find((t) => t.key.toLowerCase() === v.toLowerCase() || t.key.toLowerCase().startsWith(v.toLowerCase()));
   return hit ? hit.key : v;
 }
@@ -111,6 +100,8 @@ function ContactApp() {
       const j = await res.json().catch(() => ({}));
       if (res.ok && j && j.ok) {
         setSent(true);
+        // mesure d'audience (Umami, sans cookies) : une demande envoyée, avec la prestation choisie
+        if (window.umami) window.umami.track("demande-envoyee", { type: a.type || "non précisé", formule: a.formule || "", page: "contact" });
       } else if (res.status === 429) {
         setSendError("Trop d'envois en peu de temps. Patientez quelques minutes, puis réessayez.");
       } else {
@@ -246,11 +237,13 @@ function ContactApp() {
             )}
 
             <div className="fn-aside reveal d1">
-              <a href="mailto:contact@afterglowbykevin.ch">contact@afterglowbykevin.ch</a>
+              <a href="mailto:contact@afterglowbykevin.ch" data-umami-event="email">contact@afterglowbykevin.ch</a>
               <span className="jl-dot">·</span>
-              <a href="tel:+41798507603">+41 79 850 76 03</a>
+              <a href="tel:+41798507603" data-umami-event="telephone">+41 79 850 76 03</a>
               <span className="jl-dot">·</span>
-              <a href="https://www.instagram.com/afterglowbykevin/" target="_blank" rel="noopener">@afterglowbykevin</a>
+              <a href={KC.WHATSAPP} target="_blank" rel="noopener" data-umami-event="whatsapp">WhatsApp</a>
+              <span className="jl-dot">·</span>
+              <a href="https://www.instagram.com/afterglowbykevin/" target="_blank" rel="noopener" data-umami-event="instagram">@afterglowbykevin</a>
               <span className="jl-dot">·</span>
               <span>Réponse sous 48 h</span>
             </div>

@@ -19,7 +19,7 @@ function ApHero() {
       <div className="scrim"></div>
       <div className="phero-content">
         <div className="crumb reveal in"><a href={KC.HOME}>Accueil</a><span>/</span><span>À propos</span></div>
-        <h1 className="reveal in d1">Kevin Chinelli</h1>
+        <h1 className="reveal in d1"><span className="h1-main">Kevin Chinelli</span> <span className="h1-sub">Photographe en Suisse romande</span></h1>
         <p className="hint reveal in d2">« Les moments qui comptent ne se mettent pas en scène. »</p>
       </div>
     </section>

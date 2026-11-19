@@ -5,6 +5,11 @@
    ============================================================ */
 const { useEffect } = React;
 const DATA = window.KC_PRESTA[window.KC_SLUG];
+// Sous-page (solo, couple, famille) : sa page mère dans le menu (Lifestyle).
+const PARENT_NAV = DATA.parent ? PRESTA_NAV.find((p) => p.slug === DATA.parent) : null;
+// Prestation présélectionnée dans le formulaire de contact (clés de TYPES, kc-contact-app.jsx)
+const CONTACT_TYPE = { mariage: "Mariage", studio: "Studio", maternite: "Maternité & Grossesse" }[window.KC_SLUG] || "Lifestyle";
+const CONTACT_HREF = "contact.html?type=" + encodeURIComponent(CONTACT_TYPE);
 
 /* mosaic cell class par orientation de la photo :
    v = verticale → cellule verticale (m-tall) · h = horizontale → cellule large (m-wide)
@@ -23,10 +28,12 @@ function PrestaHero({ layout }) {
       <div className="scrim"></div>
       <div className="phero-content">
         <div className="crumb reveal in">
-          <a href={KC.HOME}>Accueil</a><span>/</span><span>{DATA.crumb}</span>
+          <a href={KC.HOME}>Accueil</a><span>/</span>
+          {PARENT_NAV && <><a href={PARENT_NAV.href}>{PARENT_NAV.title}</a><span>/</span></>}
+          <span>{DATA.crumb}</span>
         </div>
-        <h1 className="reveal in d1">{DATA.title}</h1>
-        <p className="hint reveal in d2">{DATA.heroHint}</p>
+        {/* H1 = le grand titre + la ligne de mots-clés (affichée comme avant, sous le titre) */}
+        <h1 className="reveal in d1"><span className="h1-main">{DATA.title}</span> <span className="h1-sub">{DATA.heroHint}</span></h1>
       </div>
     </section>
   );
@@ -69,8 +76,42 @@ function Intro() {
   );
 }
 
+/* ---------- SOUS-PAGES (page mère Lifestyle : solo, couple, famille) ---------- */
+function SubpagesBand() {
+  const nav = PRESTA_NAV.find((p) => p.slug === window.KC_SLUG);
+  if (!nav || !nav.children) return null;
+  return (
+    <section className="sec s-dark pad-y">
+      <div className="wrap">
+        <div style={{ textAlign: "center", marginBottom: "clamp(34px,4vw,56px)" }}>
+          <Overline className="reveal" style={{ justifyContent: "center" }}>Trois façons de vivre la séance</Overline>
+          <h2 className="display reveal d1" style={{ fontSize: "clamp(28px,3.4vw,48px)", marginTop: "18px" }}>Seul, à deux ou en famille.</h2>
+        </div>
+        <div className="related-grid sub-grid">
+          {nav.children.map((c, i) => {
+            const d = window.KC_PRESTA[c.slug] || {};
+            const from = d.formules && d.formules[0] ? d.formules[0].price : "";
+            return (
+              <a key={c.slug} href={c.href} className={"related-card sub-card reveal d" + (i + 1)}>
+                <div className="rc-img"><Slot id={"presta-" + c.slug} ph={"Séance " + c.title.toLowerCase()} alt={(d.schemaName || c.title) + " en Suisse romande — Kevin Chinelli, photographe"} style={{ width: "100%", height: "100%" }} /></div>
+                <div className="sub-body">
+                  <div className="rc-meta"><h3>{c.title}</h3><span className="ar">Découvrir →</span></div>
+                  {d.cardText && <p className="sub-text">{d.cardText}</p>}
+                  {from && <p className="sub-from">Dès {from}</p>}
+                </div>
+              </a>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 /* ---------- GALLERY (mosaic) ---------- */
 function GalleryMosaic() {
+  // Pas encore de photos pour cette prestation (couple, famille) : pas de galerie plutôt que des cases vides.
+  if (!DATA.gallery || DATA.gallery.length === 0) return null;
   return (
     <section className="sec s-dark pad-y">
       <div className="wrap">
@@ -102,16 +143,25 @@ function Formules() {
           <Overline className="reveal" style={{ justifyContent: "center" }}>Formules & tarifs</Overline>
           <h2 className="display reveal d1" style={{ fontSize: "clamp(30px,4vw,56px)", marginTop: "20px" }}>Trouvons la bonne formule.</h2>
         </div>
-        <div className={"formules" + (DATA.formules.length === 2 ? " two" : "")}>
+        <div className={"formules" + (DATA.formules.length === 2 && !DATA.entreprise ? " two" : "")}>
           {DATA.formules.map((f, i) => (
             <div key={i} className={"formule reveal d" + (i + 1) + (f.feature ? " feature" : "")}>
               <div className="tag">{f.tag}</div>
               <h3>{f.name}</h3>
               <div className="price">{f.price.startsWith("dès ") ? <><small>dès</small>{f.price.slice(3)}</> : f.price}</div>
               <ul>{f.items.map((it, j) => <li key={j}>{it}</li>)}</ul>
-              <a href="contact.html" className="pick">Choisir <span className="ar">→</span></a>
+              <a href={CONTACT_HREF} className="pick">Choisir <span className="ar">→</span></a>
             </div>
           ))}
+          {/* Entreprises : portraits pro et d'équipe chez Snapshot Media (décision du 19.11.2026) */}
+          {DATA.entreprise && (
+            <div className={"formule formule-pro reveal d" + (DATA.formules.length + 1)}>
+              <div className="tag">Entreprises & équipes</div>
+              <h3>Portrait professionnel</h3>
+              <p className="pro-text">Portraits d'équipe, image de marque, photos pour votre site ou votre profil LinkedIn : je les réalise avec Snapshot Media, mon studio pour les entreprises.</p>
+              <a href={KC.PRO_URL} className="pick" target="_blank" rel="noopener" data-umami-event="vers-snapshot-media">Voir sur Snapshot Media <span className="ar">→</span></a>
+            </div>
+          )}
         </div>
         <p className="tarif-note">Tarifs sur devis personnalisé — chaque projet est unique. Contactez-moi pour une proposition détaillée.</p>
       </div>
@@ -133,7 +183,7 @@ function Process() {
           {DATA.process.map((s, i) => (
             <div key={i} className={"step reveal d" + (i + 1)}>
               <div className="sn">{s.n}</div>
-              <h4>{s.title}</h4>
+              <h3>{s.title}</h3>
               <p>{s.text}</p>
             </div>
           ))}
@@ -166,25 +216,6 @@ function Inclus() {
   );
 }
 
-/* ---------- TESTIMONIALS ---------- */
-function Testimonials() {
-  return (
-    <section className="sec s-dark pad-y">
-      <div className="wrap">
-        <Overline className="reveal" style={{ justifyContent: "center", textAlign: "center" }}>Ils en parlent</Overline>
-        <div className="tst-2" style={{ marginTop: "clamp(40px,5vw,68px)" }}>
-          {DATA.testimonials.map((t, i) => (
-            <div key={i} className={"tst reveal d" + (i + 1)}>
-              <blockquote>{t.quote}</blockquote>
-              <div className="who"><span className="dash"></span>{t.who}</div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
 /* ---------- FAQ ---------- */
 function Faq() {
   return (
@@ -211,7 +242,7 @@ function Faq() {
 function DateCheck() {
   const [date, setDate] = React.useState("");
   const go = () => {
-    const q = date ? "?date=" + encodeURIComponent(date) + "&type=" + encodeURIComponent(DATA.title) : "?type=" + encodeURIComponent(DATA.title);
+    const q = date ? "?date=" + encodeURIComponent(date) + "&type=" + encodeURIComponent(CONTACT_TYPE) : "?type=" + encodeURIComponent(CONTACT_TYPE);
     window.location.href = "contact.html" + q;
   };
   return (
@@ -280,7 +311,10 @@ function VillesBand() {
 /* ---------- JOURNAL (internal linking, prestation × articles) ---------- */
 const JOURNAL_CATS = {
   mariage: ["Mariage"],
-  portrait: ["Portrait", "Studio"],
+  portrait: ["Portrait", "Couple", "Studio"],
+  solo: ["Portrait", "Studio"],
+  couple: ["Couple", "Portrait"],
+  // famille : pas encore d'article dédié → pas de bande journal
   studio: ["Studio", "Portrait"],
   maternite: ["Maternité"],
 };
@@ -336,13 +370,13 @@ function PrestaApp() {
         <PrestaHero layout={t.heroLayout} />
         <ReassureBar />
         <Intro />
+        <SubpagesBand />
         <GalleryMosaic />
         <Formules />
         {window.KC_SLUG === "mariage" && <DateCheck />}
         <Process />
         <Inclus />
         {window.KC_SLUG === "couple" && <GiftBand />}
-        {/* <Testimonials /> — masqué tant qu'il n'y a pas de vrais avis clients (réactiver une fois disponibles) */}
         <Faq />
         <JournalBand />
         {VILLE_LINKS[window.KC_SLUG] && <VillesBand />}

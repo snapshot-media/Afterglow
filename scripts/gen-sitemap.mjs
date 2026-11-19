@@ -8,14 +8,14 @@ import { fileURLToPath } from "node:url";
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const BASE = "https://afterglowbykevin.ch";
 // 404, wireframes (dev), avis (noindex tant qu'il n'y a pas de vrais avis).
-// Couple & famille : services masqués pour l'instant → hors sitemap (pages
-// conservées mais non promues ; réactiver ici quand les services reviennent).
-const EXCLUDE = /^(404\.html|Wireframe|avis\.html|couple\.html|famille\.html|photographe-famille-|journal-spots-photo-couple-leman\.html)/i;
+// Couple et famille sont revenus le 19.11.2026 comme sous-pages de Lifestyle.
+const EXCLUDE = /^(404\.html|Wireframe|avis\.html)/i;
 
 // priorité / fréquence selon le type de page
 function rank(name) {
   if (name === "index.html") return { p: "1.0", f: "monthly" };
-  if (/^(mariages|portraits|studio|maternite-grossesse|couple|famille)\.html$/.test(name)) return { p: "0.9", f: "monthly" };
+  if (/^(mariages|portraits|studio|maternite-grossesse)\.html$/.test(name)) return { p: "0.9", f: "monthly" };
+  if (/^(solo|couple|famille)\.html$/.test(name)) return { p: "0.8", f: "monthly" };
   if (/^photographe-/.test(name)) return { p: "0.8", f: "monthly" };
   if (/^(tarifs|portfolio)\.html$/.test(name)) return { p: "0.8", f: "monthly" };
   if (name === "journal.html") return { p: "0.7", f: "monthly" };

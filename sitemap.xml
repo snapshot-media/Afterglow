@@ -1,32 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
-  <url><loc>https://afterglowbykevin.ch/apropos.html</loc><changefreq>yearly</changefreq><priority>0.6</priority><lastmod>2026-06-27</lastmod></url>
-  <url><loc>https://afterglowbykevin.ch/confidentialite.html</loc><changefreq>yearly</changefreq><priority>0.2</priority><lastmod>2026-06-27</lastmod></url>
-  <url><loc>https://afterglowbykevin.ch/contact.html</loc><changefreq>yearly</changefreq><priority>0.7</priority><lastmod>2026-06-27</lastmod></url>
-  <url><loc>https://afterglowbykevin.ch/</loc><changefreq>monthly</changefreq><priority>1.0</priority><lastmod>2026-06-27</lastmod><image:image><image:loc>https://afterglowbykevin.ch/og-default.png</image:loc><image:title>Afterglow by Kevin Chinelli — Photographe en Suisse romande</image:title></image:image></url>
-  <url><loc>https://afterglowbykevin.ch/journal-comment-choisir-photographe-mariage.html</loc><changefreq>yearly</changefreq><priority>0.6</priority><lastmod>2026-06-27</lastmod></url>
-  <url><loc>https://afterglowbykevin.ch/journal-deroule-journee-mariage.html</loc><changefreq>yearly</changefreq><priority>0.6</priority><lastmod>2026-06-27</lastmod></url>
-  <url><loc>https://afterglowbykevin.ch/journal-lieux-mariage-la-cote.html</loc><changefreq>yearly</changefreq><priority>0.6</priority><lastmod>2026-06-27</lastmod></url>
-  <url><loc>https://afterglowbykevin.ch/journal-lieux-mariage-lavaux.html</loc><changefreq>yearly</changefreq><priority>0.6</priority><lastmod>2026-06-27</lastmod></url>
-  <url><loc>https://afterglowbykevin.ch/journal-lieux-mariage-vaud-leman.html</loc><changefreq>yearly</changefreq><priority>0.6</priority><lastmod>2026-06-27</lastmod></url>
-  <url><loc>https://afterglowbykevin.ch/journal-ou-se-marier-geneve.html</loc><changefreq>yearly</changefreq><priority>0.6</priority><lastmod>2026-06-27</lastmod></url>
-  <url><loc>https://afterglowbykevin.ch/journal-photos-linkedin-personal-branding.html</loc><changefreq>yearly</changefreq><priority>0.6</priority><lastmod>2026-06-27</lastmod></url>
-  <url><loc>https://afterglowbykevin.ch/journal-portrait-studio-ou-exterieur.html</loc><changefreq>yearly</changefreq><priority>0.6</priority><lastmod>2026-06-27</lastmod></url>
-  <url><loc>https://afterglowbykevin.ch/journal-prix-photographe-mariage-suisse-romande.html</loc><changefreq>yearly</changefreq><priority>0.6</priority><lastmod>2026-06-27</lastmod></url>
-  <url><loc>https://afterglowbykevin.ch/journal-quand-faire-seance-photo-grossesse.html</loc><changefreq>yearly</changefreq><priority>0.6</priority><lastmod>2026-06-27</lastmod></url>
-  <url><loc>https://afterglowbykevin.ch/journal-quand-reserver-photographe-mariage.html</loc><changefreq>yearly</changefreq><priority>0.6</priority><lastmod>2026-06-27</lastmod></url>
-  <url><loc>https://afterglowbykevin.ch/journal-quelle-tenue-seance-portrait.html</loc><changefreq>yearly</changefreq><priority>0.6</priority><lastmod>2026-06-27</lastmod></url>
-  <url><loc>https://afterglowbykevin.ch/journal-seance-grossesse-nouveau-ne.html</loc><changefreq>yearly</changefreq><priority>0.6</priority><lastmod>2026-06-27</lastmod></url>
-  <url><loc>https://afterglowbykevin.ch/journal-spots-seance-photo-lausanne.html</loc><changefreq>yearly</changefreq><priority>0.6</priority><lastmod>2026-06-27</lastmod></url>
-  <url><loc>https://afterglowbykevin.ch/journal-tenue-seance-grossesse.html</loc><changefreq>yearly</changefreq><priority>0.6</priority><lastmod>2026-06-27</lastmod></url>
-  <url><loc>https://afterglowbykevin.ch/journal.html</loc><changefreq>monthly</changefreq><priority>0.7</priority><lastmod>2026-06-27</lastmod></url>
-  <url><loc>https://afterglowbykevin.ch/mariages.html</loc><changefreq>monthly</changefreq><priority>0.9</priority><lastmod>2026-06-27</lastmod></url>
-  <url><loc>https://afterglowbykevin.ch/maternite-grossesse.html</loc><changefreq>monthly</changefreq><priority>0.9</priority><lastmod>2026-06-27</lastmod></url>
-  <url><loc>https://afterglowbykevin.ch/photographe-mariage-geneve.html</loc><changefreq>monthly</changefreq><priority>0.8</priority><lastmod>2026-06-27</lastmod></url>
-  <url><loc>https://afterglowbykevin.ch/photographe-mariage-lausanne.html</loc><changefreq>monthly</changefreq><priority>0.8</priority><lastmod>2026-06-27</lastmod></url>
-  <url><loc>https://afterglowbykevin.ch/photographe-mariage-montreux.html</loc><changefreq>monthly</changefreq><priority>0.8</priority><lastmod>2026-06-27</lastmod></url>
-  <url><loc>https://afterglowbykevin.ch/portfolio.html</loc><changefreq>monthly</changefreq><priority>0.8</priority><lastmod>2026-06-27</lastmod></url>
-  <url><loc>https://afterglowbykevin.ch/portraits.html</loc><changefreq>monthly</changefreq><priority>0.9</priority><lastmod>2026-06-27</lastmod></url>
-  <url><loc>https://afterglowbykevin.ch/studio.html</loc><changefreq>monthly</changefreq><priority>0.9</priority><lastmod>2026-06-27</lastmod></url>
-  <url><loc>https://afterglowbykevin.ch/tarifs.html</loc><changefreq>monthly</changefreq><priority>0.8</priority><lastmod>2026-06-27</lastmod></url>
+  <url><loc>https://afterglowbykevin.ch/apropos.html</loc><changefreq>yearly</changefreq><priority>0.6</priority><lastmod>2026-11-19</lastmod></url>
+  <url><loc>https://afterglowbykevin.ch/confidentialite.html</loc><changefreq>yearly</changefreq><priority>0.2</priority><lastmod>2026-11-19</lastmod></url>
+  <url><loc>https://afterglowbykevin.ch/contact.html</loc><changefreq>yearly</changefreq><priority>0.7</priority><lastmod>2026-11-19</lastmod></url>
+  <url><loc>https://afterglowbykevin.ch/couple.html</loc><changefreq>monthly</changefreq><priority>0.8</priority><lastmod>2026-11-19</lastmod></url>
+  <url><loc>https://afterglowbykevin.ch/famille.html</loc><changefreq>monthly</changefreq><priority>0.8</priority><lastmod>2026-11-19</lastmod></url>
+  <url><loc>https://afterglowbykevin.ch/</loc><changefreq>monthly</changefreq><priority>1.0</priority><lastmod>2026-11-19</lastmod><image:image><image:loc>https://afterglowbykevin.ch/og-default.png</image:loc><image:title>Afterglow by Kevin Chinelli — Photographe en Suisse romande</image:title></image:image></url>
+  <url><loc>https://afterglowbykevin.ch/journal-comment-choisir-photographe-mariage.html</loc><changefreq>yearly</changefreq><priority>0.6</priority><lastmod>2026-11-19</lastmod></url>
+  <url><loc>https://afterglowbykevin.ch/journal-deroule-journee-mariage.html</loc><changefreq>yearly</changefreq><priority>0.6</priority><lastmod>2026-11-19</lastmod></url>
+  <url><loc>https://afterglowbykevin.ch/journal-lieux-mariage-la-cote.html</loc><changefreq>yearly</changefreq><priority>0.6</priority><lastmod>2026-11-19</lastmod></url>
+  <url><loc>https://afterglowbykevin.ch/journal-lieux-mariage-lavaux.html</loc><changefreq>yearly</changefreq><priority>0.6</priority><lastmod>2026-11-19</lastmod></url>
+  <url><loc>https://afterglowbykevin.ch/journal-lieux-mariage-vaud-leman.html</loc><changefreq>yearly</changefreq><priority>0.6</priority><lastmod>2026-11-19</lastmod></url>
+  <url><loc>https://afterglowbykevin.ch/journal-ou-se-marier-geneve.html</loc><changefreq>yearly</changefreq><priority>0.6</priority><lastmod>2026-11-19</lastmod></url>
+  <url><loc>https://afterglowbykevin.ch/journal-photos-linkedin-personal-branding.html</loc><changefreq>yearly</changefreq><priority>0.6</priority><lastmod>2026-11-19</lastmod></url>
+  <url><loc>https://afterglowbykevin.ch/journal-portrait-studio-ou-exterieur.html</loc><changefreq>yearly</changefreq><priority>0.6</priority><lastmod>2026-11-19</lastmod></url>
+  <url><loc>https://afterglowbykevin.ch/journal-prix-photographe-mariage-suisse-romande.html</loc><changefreq>yearly</changefreq><priority>0.6</priority><lastmod>2026-11-19</lastmod></url>
+  <url><loc>https://afterglowbykevin.ch/journal-quand-faire-seance-photo-grossesse.html</loc><changefreq>yearly</changefreq><priority>0.6</priority><lastmod>2026-11-19</lastmod></url>
+  <url><loc>https://afterglowbykevin.ch/journal-quand-reserver-photographe-mariage.html</loc><changefreq>yearly</changefreq><priority>0.6</priority><lastmod>2026-11-19</lastmod></url>
+  <url><loc>https://afterglowbykevin.ch/journal-quelle-tenue-seance-portrait.html</loc><changefreq>yearly</changefreq><priority>0.6</priority><lastmod>2026-11-19</lastmod></url>
+  <url><loc>https://afterglowbykevin.ch/journal-seance-grossesse-nouveau-ne.html</loc><changefreq>yearly</changefreq><priority>0.6</priority><lastmod>2026-11-19</lastmod></url>
+  <url><loc>https://afterglowbykevin.ch/journal-spots-photo-couple-leman.html</loc><changefreq>yearly</changefreq><priority>0.6</priority><lastmod>2026-11-19</lastmod></url>
+  <url><loc>https://afterglowbykevin.ch/journal-spots-seance-photo-lausanne.html</loc><changefreq>yearly</changefreq><priority>0.6</priority><lastmod>2026-11-19</lastmod></url>
+  <url><loc>https://afterglowbykevin.ch/journal-tenue-seance-grossesse.html</loc><changefreq>yearly</changefreq><priority>0.6</priority><lastmod>2026-11-19</lastmod></url>
+  <url><loc>https://afterglowbykevin.ch/journal.html</loc><changefreq>monthly</changefreq><priority>0.7</priority><lastmod>2026-11-19</lastmod></url>
+  <url><loc>https://afterglowbykevin.ch/mariages.html</loc><changefreq>monthly</changefreq><priority>0.9</priority><lastmod>2026-11-19</lastmod></url>
+  <url><loc>https://afterglowbykevin.ch/maternite-grossesse.html</loc><changefreq>monthly</changefreq><priority>0.9</priority><lastmod>2026-11-19</lastmod></url>
+  <url><loc>https://afterglowbykevin.ch/photographe-famille-geneve.html</loc><changefreq>monthly</changefreq><priority>0.8</priority><lastmod>2026-11-19</lastmod></url>
+  <url><loc>https://afterglowbykevin.ch/photographe-famille-lausanne.html</loc><changefreq>monthly</changefreq><priority>0.8</priority><lastmod>2026-11-19</lastmod></url>
+  <url><loc>https://afterglowbykevin.ch/photographe-mariage-geneve.html</loc><changefreq>monthly</changefreq><priority>0.8</priority><lastmod>2026-11-19</lastmod></url>
+  <url><loc>https://afterglowbykevin.ch/photographe-mariage-lausanne.html</loc><changefreq>monthly</changefreq><priority>0.8</priority><lastmod>2026-11-19</lastmod></url>
+  <url><loc>https://afterglowbykevin.ch/photographe-mariage-montreux.html</loc><changefreq>monthly</changefreq><priority>0.8</priority><lastmod>2026-11-19</lastmod></url>
+  <url><loc>https://afterglowbykevin.ch/portfolio.html</loc><changefreq>monthly</changefreq><priority>0.8</priority><lastmod>2026-11-19</lastmod></url>
+  <url><loc>https://afterglowbykevin.ch/portraits.html</loc><changefreq>monthly</changefreq><priority>0.9</priority><lastmod>2026-11-19</lastmod></url>
+  <url><loc>https://afterglowbykevin.ch/solo.html</loc><changefreq>monthly</changefreq><priority>0.8</priority><lastmod>2026-11-19</lastmod></url>
+  <url><loc>https://afterglowbykevin.ch/studio.html</loc><changefreq>monthly</changefreq><priority>0.9</priority><lastmod>2026-11-19</lastmod></url>
+  <url><loc>https://afterglowbykevin.ch/tarifs.html</loc><changefreq>monthly</changefreq><priority>0.8</priority><lastmod>2026-11-19</lastmod></url>
 </urlset>

@@ -664,5 +664,89 @@
     "s": 1,
     "x": 0,
     "y": 0
+  },
+  "presta-solo": {
+    "u": "images/portrait-g6.webp",
+    "s": 1,
+    "x": 0,
+    "y": 0
+  },
+  "presta-famille": {
+    "u": "images/pf-mariage-5.webp",
+    "s": 1,
+    "x": 0,
+    "y": 0
+  },
+  "phero-solo": {
+    "u": "images/portrait-g5.webp",
+    "s": 1,
+    "x": 0,
+    "y": 0
+  },
+  "phero-solo-mobile": {
+    "u": "images/portrait-g6.webp",
+    "s": 1,
+    "x": 0,
+    "y": 0
+  },
+  "solo-g0": {
+    "u": "images/portrait-g0.webp",
+    "s": 1,
+    "x": 0,
+    "y": 0
+  },
+  "solo-g1": {
+    "u": "images/portrait-g1.webp",
+    "s": 1,
+    "x": 0,
+    "y": 0
+  },
+  "solo-g2": {
+    "u": "images/portrait-g2.webp",
+    "s": 1,
+    "x": 0,
+    "y": 0
+  },
+  "solo-g3": {
+    "u": "images/portrait-g3.webp",
+    "s": 1,
+    "x": 0,
+    "y": 0
+  },
+  "solo-g4": {
+    "u": "images/portrait-g4.webp",
+    "s": 1,
+    "x": 0,
+    "y": 0
+  },
+  "solo-g5": {
+    "u": "images/portrait-g5.webp",
+    "s": 1,
+    "x": 0,
+    "y": 0
+  },
+  "solo-g6": {
+    "u": "images/portrait-g6.webp",
+    "s": 1,
+    "x": 0,
+    "y": 0
+  },
+  "solo-g7": {
+    "u": "images/portrait-g7.webp",
+    "s": 1,
+    "x": 0,
+    "y": 0
+  },
+  "solo-g8": {
+    "u": "images/portrait-g8.webp",
+    "s": 1,
+    "x": 0,
+    "y": 0
+  },
+  "couple-gift": {
+    "u": "images/gal-main.webp",
+    "s": 1,
+    "x": 0,
+    "y": 0
   }
 }

@@ -21,6 +21,7 @@ import { readFileSync, writeFileSync, existsSync } from "node:fs";
 import { resolve } from "node:path";
 import vm from "node:vm";
 import { createRequire } from "node:module";
+import { syncPage, finishPage } from "./seo-sync.mjs";
 
 const require = createRequire(import.meta.url);
 const React = require("react");
@@ -133,7 +134,7 @@ function resetRoot(html) {
 
 /* ---------- pré-rendu d'une page ----------
    Renvoie le HTML à écrire, ou null si la page n'est pas concernée. */
-function prerenderPage(root, htmlFile, htmlRaw) {
+function prerenderPage(root, htmlFile, htmlRaw, sidecar) {
   const html = resetRoot(htmlRaw);
   if (!/<div id="root"><\/div>/.test(html)) return null; // pas de point de montage
 
@@ -181,20 +182,24 @@ function prerenderPage(root, htmlFile, htmlRaw) {
   if (!el) throw new Error("aucun élément capté (createRoot non appelé)");
 
   const rendered = ReactDOMServer.renderToString(el);
-  return html.replace(/<div id="root"><\/div>/, `<div id="root"><!--ssg-->${rendered}<!--/ssg--></div>`);
+  const out = html.replace(/<div id="root"><\/div>/, () => `<div id="root"><!--ssg-->${rendered}<!--/ssg--></div>`);
+  // FAQ, fil d'Ariane, offres, préchargements… recalculés depuis le rendu (voir seo-sync.mjs)
+  return syncPage(out, { rendered, ctx, sidecar });
 }
 
 /* ---------- API ---------- */
 export function prerenderAll(root, htmlFiles) {
   let ok = 0, skipped = 0, failed = 0;
+  const sidecarPath = resolve(root, ".image-slots.state.json");
+  const sidecar = existsSync(sidecarPath) ? JSON.parse(readFileSync(sidecarPath, "utf8")) : {};
   for (const htmlFile of htmlFiles) {
     const path = resolve(root, htmlFile);
     const html = readFileSync(path, "utf8");
     try {
-      const out = prerenderPage(root, htmlFile, html);
+      const out = prerenderPage(root, htmlFile, html, sidecar);
       if (out == null) {
         // page non React : on s'assure juste qu'aucun pré-rendu périmé ne traîne
-        const clean = resetRoot(html);
+        const clean = finishPage(resetRoot(html));
         if (clean !== html) writeFileSync(path, clean);
         skipped++;
         continue;

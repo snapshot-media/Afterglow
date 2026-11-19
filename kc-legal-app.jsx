@@ -2,7 +2,7 @@
    KEVIN CHINELLI — Politique de confidentialité (confidentialite.html)
    Conforme nLPD (Suisse, en vigueur depuis sept. 2023).
    ============================================================ */
-const LEGAL_UPDATED = "juin 2026";
+const LEGAL_UPDATED = "novembre 2026";
 
 const LEGAL_SECTIONS = [
   {
@@ -17,7 +17,9 @@ const LEGAL_SECTIONS = [
     t: "2. Données collectées",
     p: [
       "Le site ne collecte des données personnelles que lorsque vous les transmettez volontairement via le formulaire de contact : nom, adresse e-mail, numéro de téléphone (facultatif), type de prestation souhaitée et contenu de votre message.",
-      "Aucune création de compte n'est requise. Le site n'utilise ni cookies publicitaires, ni outils de suivi (analytics, pixels, reciblage).",
+      "Aucune création de compte n'est requise. Le site n'utilise ni cookies, ni publicité, ni pixels de suivi ou de reciblage.",
+      "Une mesure d'audience anonyme (Umami, hébergé sur le même serveur que le site) compte les pages vues, les clics sur les moyens de contact et les demandes envoyées. Elle n'utilise aucun cookie, ne conserve pas votre adresse IP et ne vous suit pas d'un site à l'autre.",
+      "Si vous m'écrivez sur WhatsApp, votre message est acheminé par WhatsApp (Meta) selon ses propres conditions ; je le conserve dans mon outil de suivi des demandes le temps de traiter votre demande.",
     ],
   },
   {
@@ -37,7 +39,7 @@ const LEGAL_SECTIONS = [
     t: "5. Destinataires et sous-traitants",
     p: [
       "Vos données ne sont ni vendues, ni louées, ni transmises à des tiers à des fins commerciales.",
-      "Elles transitent uniquement par les prestataires techniques nécessaires au fonctionnement du site : l'hébergeur du serveur et le service de messagerie Infomaniak (Suisse) qui achemine les e-mails du formulaire. Les polices d'écriture sont chargées depuis Google Fonts, ce qui transmet votre adresse IP aux serveurs de Google lors de l'affichage des pages.",
+      "Elles transitent uniquement par les prestataires techniques nécessaires au fonctionnement du site : l'hébergeur du serveur et le service de messagerie Infomaniak (Suisse) qui achemine les e-mails du formulaire. Les polices d'écriture sont hébergées sur le site lui-même : l'affichage des pages ne transmet aucune donnée à Google. Si vous choisissez WhatsApp, vos messages transitent par Meta.",
     ],
   },
   {

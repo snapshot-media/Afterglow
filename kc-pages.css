@@ -395,3 +395,21 @@
   font-size:13px; color:var(--muted); }
 .fn-aside a{ color:var(--fg); } .fn-aside a:hover{ color:var(--accent); }
 @media(max-width:560px){ .fn-grid{ grid-template-columns:1fr; } .fn-lbl{ display:none; } .fn-steps{ gap:8px 14px; } }
+
+/* ---------- H1 des héros : grand titre + ligne de mots-clés (l'ancien .hint, désormais dans le H1) ---------- */
+.phero h1 .h1-main{ display:block; }
+.phero h1 .h1-sub{ display:block; margin-top:24px; font-family:var(--font-body); font-weight:300; font-size:clamp(15px,1.4vw,19px);
+  line-height:1.72; letter-spacing:normal; color:rgba(255,255,255,.82); max-width:46ch; text-shadow:none; }
+.phero.centre h1 .h1-sub{ margin-inline:auto; }
+.pf-head h1.h1-stack{ margin-top:0; font-size:inherit; }
+.pf-head .h1-stack .h1-big{ font-size:clamp(40px,6vw,84px); margin-top:20px; }
+.step h3{ font-family:var(--font-display); font-weight:400; font-size:clamp(19px,1.7vw,24px); margin:0; color:var(--fg); }
+
+/* ---------- Lifestyle : cartes des sous-pages ---------- */
+.sub-card .sub-text{ margin:10px 0 0; color:var(--muted); font-size:clamp(14px,1vw,16px); line-height:1.6; }
+.sub-card .sub-from{ margin:10px 0 0; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--accent); }
+@media(max-width:780px){ .sub-card .sub-text{ margin-top:6px; } .sub-card .sub-from{ margin-top:6px; } }
+
+/* ---------- Formule « Entreprises » : renvoi vers Snapshot Media ---------- */
+.formule-pro{ border-style:dashed; }
+.formule-pro .pro-text{ margin:0; color:var(--muted); font-size:clamp(14px,1vw,16px); line-height:1.65; flex:1; }

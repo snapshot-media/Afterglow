@@ -20,8 +20,7 @@ function JournalApp() {
       <main>
         <section className="sec s-dark pf-head">
           <div className="wrap">
-            <Overline className="reveal">Journal</Overline>
-            <h1 className="display reveal d1">Le journal.</h1>
+            <h1 className="h1-stack"><span className="overline reveal"><span className="tick"></span>Conseils photo et lieux en Suisse romande</span> <span className="display h1-big reveal d1">Le journal.</span></h1>
             <p className="reveal d1">{J.meta.intro}</p>
           </div>
         </section>

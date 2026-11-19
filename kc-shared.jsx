@@ -28,16 +28,28 @@ const KC = {
   },
   HEAD_FONTS: { Cinzel: '"Cinzel", Georgia, serif', Cormorant: '"Cormorant Garamond", Georgia, serif' },
   BODY_FONTS: { Jost: '"Jost", system-ui, sans-serif', Mulish: '"Mulish", system-ui, sans-serif' },
-  HOME: "index.html",
+  HOME: "/",
+  // WhatsApp Business (079, profil « Snapshot Media ») : le texte prérempli dit d'où vient le message.
+  WHATSAPP: "https://wa.me/41798507603?text=" + encodeURIComponent("Bonjour Kevin, je vous écris depuis le site Afterglow au sujet d'une séance photo : "),
+  // Les entreprises (portraits pro, équipes, image de marque) passent par Snapshot Media.
+  PRO_URL: "https://snapshotmedia.ch/services/photographie/portraits-professionnels/",
 };
 const PALETTE_OPTS = Object.values(KC.PALETTES);
 
 const PRESTA_NAV = [
   { slug: "mariage",   title: "Mariages",              short: "Mariages",  href: "mariages.html" },
-  { slug: "portrait",  title: "Lifestyle",             short: "Lifestyle", href: "portraits.html" },
+  { slug: "portrait",  title: "Lifestyle",             short: "Lifestyle", href: "portraits.html",
+    children: [
+      { slug: "solo",    title: "Solo",    href: "solo.html" },
+      { slug: "couple",  title: "Couple",  href: "couple.html" },
+      { slug: "famille", title: "Famille", href: "famille.html" },
+    ] },
   { slug: "studio",    title: "Studio",                short: "Studio",    href: "studio.html" },
   { slug: "maternite", title: "Maternité & Grossesse", short: "Maternité", href: "maternite-grossesse.html" },
 ];
+// slug d'une sous-page (solo, couple, famille) → slug de sa page mère
+const PRESTA_PARENT = {};
+PRESTA_NAV.forEach((p) => (p.children || []).forEach((c) => { PRESTA_PARENT[c.slug] = p.slug; }));
 
 /* ---------- atoms ---------- */
 function Slot({ id, ph, alt, style, className, loading, fetchpriority }) {
@@ -66,7 +78,10 @@ function Nav({ active = "" }) {
       <div className="mm-inner" onClick={(e) => e.stopPropagation()}>
         <div className="mm-group">
           <span className="mm-label">Prestations</span>
-          {PRESTA_NAV.map((p) => <a key={p.slug} href={p.href} onClick={() => setOpen(false)}>{p.title}</a>)}
+          {PRESTA_NAV.map((p) => [
+            <a key={p.slug} href={p.href} onClick={() => setOpen(false)}>{p.title}</a>,
+            ...(p.children || []).map((c) => <a key={c.slug} href={c.href} className="mm-sub" onClick={() => setOpen(false)}>{c.title}</a>),
+          ])}
         </div>
         <a className="mm-top" href="portfolio.html" onClick={() => setOpen(false)}>Portfolio</a>
         <a className="mm-top" href="tarifs.html" onClick={() => setOpen(false)}>Tarifs</a>
@@ -82,10 +97,13 @@ function Nav({ active = "" }) {
       <nav className={"nav" + (scrolled ? " scrolled" : "") + (open ? " menu-open" : "")}>
         <a href={KC.HOME} className="wordmark"><span className="wm-main">Afterglow</span><span className="wm-by">by Kevin Chinelli</span></a>
         <div className="nav-links">
-          <div className={"nav-item nav-extra" + (PRESTA_NAV.some((p) => p.slug === active) ? " is-active" : "")}>
+          <div className={"nav-item nav-extra" + (PRESTA_NAV.some((p) => p.slug === active || p.slug === PRESTA_PARENT[active]) ? " is-active" : "")}>
             <a href={PRESTA_NAV[0].href} aria-haspopup="true">Prestations<span className="caret">▾</span></a>
             <div className="nav-drop">
-              {PRESTA_NAV.map((p) => <a key={p.slug} href={p.href} className={active === p.slug ? "is-active" : ""}>{p.title}</a>)}
+              {PRESTA_NAV.map((p) => [
+                <a key={p.slug} href={p.href} className={active === p.slug ? "is-active" : ""}>{p.title}</a>,
+                ...(p.children || []).map((c) => <a key={c.slug} href={c.href} className={"nd-sub" + (active === c.slug ? " is-active" : "")}>{c.title}</a>),
+              ])}
             </div>
           </div>
           <a href="portfolio.html" className={"nav-extra" + (active === "portfolio" ? " is-active" : "")}>Portfolio</a>
@@ -110,21 +128,40 @@ function Footer() {
       <div className="footer">
         <a href={KC.HOME} className="wordmark"><span className="wm-main">Afterglow</span><span className="wm-by">by Kevin Chinelli</span></a>
         <div className="copy">© 2026 — Tous droits réservés · Site créé par <a href="https://snapshotmedia.ch" target="_blank" rel="noopener">Snapshot Media</a></div>
-        <div className="social"><a href="apropos.html">À propos</a><a href="confidentialite.html">Confidentialité</a><a href="https://www.instagram.com/afterglowbykevin/" target="_blank" rel="noopener">Instagram</a><a href="https://g.page/r/Ccd14Q8WzKZuEBM" target="_blank" rel="noopener">Google</a><a href="tel:+41798507603">+41 79 850 76 03</a><a href="mailto:contact@afterglowbykevin.ch">contact@afterglowbykevin.ch</a></div>
+        <FooterLinks />
       </div>
     </footer>
   );
 }
-
-/* ---------- related prestations (internal linking) ---------- */
+/* Liens du pied de page (l'accueil, kc-app.jsx, en a une copie). data-umami-event : clics mesurés par Umami. */
+function FooterLinks() {
+  return (
+    <div className="social">
+      <a href="apropos.html">À propos</a>
+      <a href="confidentialite.html">Confidentialité</a>
+      <a href="https://www.instagram.com/afterglowbykevin/" target="_blank" rel="noopener" data-umami-event="instagram">Instagram</a>
+      <a href="https://g.page/r/Ccd14Q8WzKZuEBM" target="_blank" rel="noopener" data-umami-event="fiche-google">Google</a>
+      <a href={KC.WHATSAPP} target="_blank" rel="noopener" data-umami-event="whatsapp">WhatsApp</a>
+      <a href="tel:+41798507603" data-umami-event="telephone">+41 79 850 76 03</a>
+      <a href="mailto:contact@afterglowbykevin.ch" data-umami-event="email">contact@afterglowbykevin.ch</a>
+    </div>
+  );
+}
+/* ---------- related prestations (internal linking) ----------
+   Sur une sous-page (solo, couple, famille) : la page mère et les sous-pages sœurs.
+   Ailleurs : les autres prestations du menu. */
 function RelatedPresta({ current }) {
-  const items = PRESTA_NAV.filter((p) => p.slug !== current).slice(0, 3);
+  const parentSlug = PRESTA_PARENT[current];
+  const parent = PRESTA_NAV.find((p) => p.slug === parentSlug);
+  const items = parent
+    ? [parent, ...parent.children.filter((c) => c.slug !== current)].slice(0, 3)
+    : PRESTA_NAV.filter((p) => p.slug !== current).slice(0, 3);
   return (
     <section className="sec s-light pad-y">
       <div className="wrap">
         <div style={{ textAlign: "center", marginBottom: "clamp(32px,4vw,52px)" }}>
           <Overline className="reveal" style={{ justifyContent: "center" }}>À découvrir aussi</Overline>
-          <h2 className="display reveal d1" style={{ fontSize: "clamp(26px,3.2vw,44px)", marginTop: "18px" }}>Autres prestations.</h2>
+          <h2 className="display reveal d1" style={{ fontSize: "clamp(26px,3.2vw,44px)", marginTop: "18px" }}>{parent ? "Les autres séances lifestyle." : "Autres prestations."}</h2>
         </div>
         <div className="related-grid">
           {items.map((p, i) => (
@@ -187,7 +224,7 @@ function useApplyTweaks(t) {
 }
 
 Object.assign(window, {
-  KC, PALETTE_OPTS, PRESTA_NAV,
-  Slot, Overline, Nav, Footer, CtaContact, RelatedPresta,
+  KC, PALETTE_OPTS, PRESTA_NAV, PRESTA_PARENT,
+  Slot, Overline, Nav, Footer, FooterLinks, CtaContact, RelatedPresta,
   useReveal, useApplyTweaks,
 });

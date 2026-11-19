@@ -24,29 +24,35 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
 }/*EDITMODE-END*/;
 
 /* ---------- CONTENT ---------- */
+// Sous-pages de Lifestyle, affichées dans le menu sous « Lifestyle » (comme PRESTA_NAV dans kc-shared.jsx)
+const LIFESTYLE_SUB = [
+  { slug: "solo", title: "Solo", href: "solo.html" },
+  { slug: "couple", title: "Couple", href: "couple.html" },
+  { slug: "famille", title: "Famille", href: "famille.html" },
+];
+
 const PRESTATIONS = [
   { n: "01", title: "Mariages", id: "presta-mariage", href: "mariages.html",
-    img: "Mariage — cérémonie / golden hour",
+    img: "Photo de groupe d'un mariage au bord du Léman",
     text: "De la promesse échangée aux derniers pas de danse — une narration sensible et discrète de votre journée, au plus près de l'émotion, sans mise en scène inutile." },
   { n: "02", title: "Lifestyle", id: "presta-portrait", href: "portraits.html",
-    img: "Portrait — lumière naturelle / extérieur",
-    text: "Un portrait qui vous ressemble, en lumière naturelle ou en extérieur. Personnel, artistique ou pour votre image de marque — sincère et vivant." },
+    img: "Séance lifestyle — portrait en lumière naturelle, Suisse romande",
+    text: "Seul, à deux ou en famille : des images vraies, en lumière naturelle, dans un lieu qui vous ressemble." },
   { n: "03", title: "Studio", id: "presta-studio", href: "studio.html",
-    img: "Studio — portrait éditorial",
-    text: "Portraits éditoriaux et corporate. Lumière maîtrisée, direction soignée et tirages d'exception pour une présence qui marque." },
+    img: "Portrait en studio sur fond sombre",
+    text: "Portraits éditoriaux en studio. Lumière maîtrisée, direction soignée et tirages d'exception pour une présence qui marque." },
   { n: "04", title: "Maternité & Grossesse", short: "Maternité", id: "presta-maternite", href: "maternite-grossesse.html",
-    img: "Maternité — studio / lumière douce",
+    img: "Séance grossesse en lumière naturelle, champ de blé",
     text: "La douceur de l'attente, saisie en studio ou en lumière naturelle. Des images intemporelles, dans l'intimité et le calme du moment." },
 ];
 
-const TESTIMONIALS = [
-  { quote: "Kevin a capturé notre mariage avec une justesse rare. Chaque image raconte précisément ce que nous avons ressenti ce jour-là.", who: "Camille & Thomas" },
-  { quote: "Une délicatesse et un œil remarquables. Nos portraits sont devenus, sans exagération, nos biens les plus précieux.", who: "Léa & Marc" },
-];
+// WhatsApp Business (079, profil « Snapshot Media ») : le texte prérempli dit d'où vient le message.
+const WHATSAPP = "https://wa.me/41798507603?text=" + encodeURIComponent("Bonjour Kevin, je vous écris depuis le site Afterglow au sujet d'une séance photo : ");
 
 /* ---------- SMALL HELPERS ---------- */
-function Slot({ id, ph, style, loading, fetchpriority }) {
-  return <image-slot id={id} shape="rect" fit="cover" placeholder={ph} aria-label={ph} role="img" style={style} loading={loading} fetchpriority={fetchpriority}></image-slot>;
+// alt : texte alternatif ; à défaut, le texte du placeholder (qui doit alors décrire l'image).
+function Slot({ id, ph, alt, style, loading, fetchpriority }) {
+  return <image-slot id={id} shape="rect" fit="cover" placeholder={ph} alt={alt || ph} aria-label={alt || ph} role="img" style={style} loading={loading} fetchpriority={fetchpriority}></image-slot>;
 }
 function Overline({ children, className = "" }) {
   return <div className={"overline " + className}><span className="tick"></span>{children}</div>;
@@ -71,7 +77,10 @@ function Nav() {
       <div className="mm-inner" onClick={(e) => e.stopPropagation()}>
         <div className="mm-group">
           <span className="mm-label">Prestations</span>
-          {PRESTATIONS.map((p) => <a key={p.id} href={p.href} onClick={() => setOpen(false)}>{p.title}</a>)}
+          {PRESTATIONS.map((p) => [
+            <a key={p.id} href={p.href} onClick={() => setOpen(false)}>{p.title}</a>,
+            ...(p.id === "presta-portrait" ? LIFESTYLE_SUB.map((c) => <a key={c.slug} href={c.href} className="mm-sub" onClick={() => setOpen(false)}>{c.title}</a>) : []),
+          ])}
         </div>
         <a className="mm-top" href="portfolio.html" onClick={() => setOpen(false)}>Portfolio</a>
         <a className="mm-top" href="tarifs.html" onClick={() => setOpen(false)}>Tarifs</a>
@@ -90,7 +99,10 @@ function Nav() {
           <div className="nav-item nav-extra">
             <a href={PRESTATIONS[0].href} aria-haspopup="true">Prestations<span className="caret">▾</span></a>
             <div className="nav-drop">
-              {PRESTATIONS.map((p) => <a key={p.id} href={p.href}>{p.title}</a>)}
+              {PRESTATIONS.map((p) => [
+                <a key={p.id} href={p.href}>{p.title}</a>,
+                ...(p.id === "presta-portrait" ? LIFESTYLE_SUB.map((c) => <a key={c.slug} href={c.href} className="nd-sub">{c.title}</a>) : []),
+              ])}
             </div>
           </div>
           <a href="portfolio.html" className="nav-extra">Portfolio</a>
@@ -110,7 +122,7 @@ function Nav() {
 
 /* ---------- HOME HERO (3 variants via tweak) ---------- */
 const HOME_HERO = {
-  over: "Photographe · Suisse romande",
+  over: "Photographe en Suisse romande",
   title: "Afterglow",
   by: "by Kevin Chinelli",
   tag: "L'émotion d'un instant, et la lumière qui s'attarde.",
@@ -132,8 +144,7 @@ function HomeHero({ variant = "a" }) {
     return (
       <section id="hero" className="hhero vb">
         <div className="hh-text">
-          <div className="overline hh-over reveal in">{H.over}</div>
-          <h1 className="hh-title reveal in d1">{H.title}</h1>
+          <h1 className="hh-h1"><span className="overline hh-over reveal in">{H.over}</span><span className="hh-title reveal in d1">{H.title}</span></h1>
           <div className="hh-by reveal in d1">{H.by}</div>
           <p className="hh-tag reveal in d2">{H.tag}</p>
           <HeroCtas />
@@ -165,13 +176,12 @@ function HomeHero({ variant = "a" }) {
   return (
     <section id="hero" className="hhero va">
       <div className="hh-bg">
-        <Slot id="home-hero-full" ph="Image hero — pleine page" loading="eager" fetchpriority="high" style={{ width: "100%", height: "100%" }} />
-        <Slot id="home-hero-mobile" ph="Image hero — portrait mobile" loading="eager" fetchpriority="high" style={{ width: "100%", height: "100%" }} />
+        <Slot id="home-hero-full" ph="Image hero — pleine page" alt="Portrait en lumière d'automne, en forêt — Kevin Chinelli, photographe en Suisse romande" loading="eager" fetchpriority="high" style={{ width: "100%", height: "100%" }} />
+        <Slot id="home-hero-mobile" ph="Image hero — portrait mobile" alt="Portrait en lumière d'automne, en forêt — Kevin Chinelli, photographe en Suisse romande" loading="eager" fetchpriority="high" style={{ width: "100%", height: "100%" }} />
       </div>
       <div className="scrim"></div>
       <div className="hh-inner">
-        <div className="overline hh-over reveal in">{H.over}</div>
-        <h1 className="hh-title reveal in d1">{H.title}</h1>
+        <h1 className="hh-h1"><span className="overline hh-over reveal in">{H.over}</span><span className="hh-title reveal in d1">{H.title}</span></h1>
         <div className="hh-by reveal in d1">{H.by}</div>
         <p className="hh-tag reveal in d2">{H.tag}</p>
         <HeroCtas light />
@@ -202,7 +212,7 @@ function About() {
         </div>
         <div className="about-ed-photo reveal d2">
           <figure className="about-ed-frame">
-            <Slot id="about-photo" ph="Kevin Chinelli — photographe en Suisse romande" loading="lazy" style={{ width: "100%", height: "100%" }} />
+            <Slot id="about-photo" ph="Kevin Chinelli — photographe en Suisse romande" alt="Kevin Chinelli, photographe en Suisse romande" loading="lazy" style={{ width: "100%", height: "100%" }} />
           </figure>
         </div>
       </div>
@@ -276,12 +286,12 @@ function Gallery() {
           <a href="portfolio.html" className="link-arrow reveal d1">Voir le portfolio <span className="ar">→</span></a>
         </div>
         <div className="gal-mosaic reveal d1" data-lb-group="portfolio">
-          <div className="gm-cell gm-p3"><Slot id="home-p3" ph="Mariage — portrait des mariés" style={{ width: "100%", height: "100%" }} /></div>
-          <div className="gm-cell gm-m5"><Slot id="home-m5" ph="Mariage — instant d'émotion" style={{ width: "100%", height: "100%" }} /></div>
-          <div className="gm-cell gm-m6"><Slot id="home-m6" ph="Mariage — moment clé" style={{ width: "100%", height: "100%" }} /></div>
-          <div className="gm-cell gm-g5"><Slot id="home-g5" ph="Maternité — douceur de l'attente" style={{ width: "100%", height: "100%" }} /></div>
-          <div className="gm-cell gm-p5"><Slot id="home-p5" ph="Portrait — lumière naturelle" style={{ width: "100%", height: "100%" }} /></div>
-          <div className="gm-cell gm-m8"><Slot id="home-m8" ph="Mariage — scène large" style={{ width: "100%", height: "100%" }} /></div>
+          <div className="gm-cell gm-p3"><Slot id="home-p3" ph="Portrait lifestyle en extérieur, chapeau et fleurs" style={{ width: "100%", height: "100%" }} /></div>
+          <div className="gm-cell gm-m5"><Slot id="home-m5" ph="Mariage — la mariée et deux enfants d'honneur" style={{ width: "100%", height: "100%" }} /></div>
+          <div className="gm-cell gm-m6"><Slot id="home-m6" ph="Mariage — la mariée et son bouquet" style={{ width: "100%", height: "100%" }} /></div>
+          <div className="gm-cell gm-g5"><Slot id="home-g5" ph="Séance grossesse à contre-jour" style={{ width: "100%", height: "100%" }} /></div>
+          <div className="gm-cell gm-p5"><Slot id="home-p5" ph="Portrait lifestyle au bord du Léman" style={{ width: "100%", height: "100%" }} /></div>
+          <div className="gm-cell gm-m8"><Slot id="home-m8" ph="Mariage — détail des fleurs" style={{ width: "100%", height: "100%" }} /></div>
         </div>
       </div>
     </section>
@@ -309,25 +319,6 @@ function Process() {
               <div className="process-num">{s.n}</div>
               <h3 className="process-title">{s.title}</h3>
               <p className="process-text">{s.text}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ---------- TESTIMONIALS (désactivé — réactiver quand disponibles) ---------- */
-function Testimonials() {
-  return (
-    <section className="sec s-light pad-y">
-      <div className="wrap">
-        <Overline className="reveal" >Témoignages</Overline>
-        <div className="tst-2" style={{ marginTop: "clamp(40px,5vw,70px)" }}>
-          {TESTIMONIALS.map((t, i) => (
-            <div key={i} className={"tst reveal d" + (i + 1)}>
-              <blockquote>« {t.quote} »</blockquote>
-              <div className="who"><span className="dash"></span>{t.who}</div>
             </div>
           ))}
         </div>
@@ -369,6 +360,8 @@ function Contact() {
       const j = await res.json().catch(() => ({}));
       if (res.ok && j && j.ok) {
         setSent(true);
+        // mesure d'audience (Umami, sans cookies) : une demande envoyée depuis l'accueil
+        if (window.umami) window.umami.track("demande-envoyee", { type: data.type || "non précisé", page: "accueil" });
       } else if (res.status === 429) {
         setSendError("Trop d'envois en peu de temps. Patientez quelques minutes, puis réessayez.");
       } else {
@@ -400,27 +393,27 @@ function Contact() {
             <form className="form reveal d2" noValidate onSubmit={onSubmit}>
               <div className="field-row">
                 <div className={"field" + (err.nom ? " error" : "")}>
-                  <label>Nom</label>
-                  <input className="control" name="nom" type="text" placeholder="Votre nom" />
+                  <label htmlFor="hc-nom">Nom</label>
+                  <input className="control" id="hc-nom" name="nom" type="text" placeholder="Votre nom" autoComplete="name" />
                   {err.nom && <span className="field-err">{err.nom}</span>}
                 </div>
                 <div className={"field" + (err.email ? " error" : "")}>
-                  <label>Email</label>
-                  <input className="control" name="email" type="email" placeholder="vous@email.com" />
+                  <label htmlFor="hc-email">Email</label>
+                  <input className="control" id="hc-email" name="email" type="email" placeholder="vous@email.com" autoComplete="email" />
                   {err.email && <span className="field-err">{err.email}</span>}
                 </div>
               </div>
               <div className="field">
-                <label>Type de shooting</label>
-                <select className="control" name="type" defaultValue="">
+                <label htmlFor="hc-type">Type de shooting</label>
+                <select className="control" id="hc-type" name="type" defaultValue="">
                   <option value="" disabled>Sélectionner</option>
                   {PRESTATIONS.map((p) => <option key={p.id} value={p.title}>{p.title}</option>)}
                   <option value="autre">Autre</option>
                 </select>
               </div>
               <div className={"field" + (err.message ? " error" : "")}>
-                <label>Message</label>
-                <textarea className="control" name="message" rows="4" placeholder="Parlez-moi de votre projet, de la date envisagée…"></textarea>
+                <label htmlFor="hc-message">Message</label>
+                <textarea className="control" id="hc-message" name="message" rows="4" placeholder="Parlez-moi de votre projet, de la date envisagée…"></textarea>
                 {err.message && <span className="field-err">{err.message}</span>}
               </div>
               {sendError && <span className="field-err" style={{ display: "block", marginBottom: "12px" }}>{sendError}</span>}
@@ -428,7 +421,7 @@ function Contact() {
             </form>
           )}
           <div className="contact-direct reveal d3">
-            <a href="mailto:contact@afterglowbykevin.ch">contact@afterglowbykevin.ch</a>
+            <a href="mailto:contact@afterglowbykevin.ch" data-umami-event="email">contact@afterglowbykevin.ch</a>
           </div>
         </div>
       </div>
@@ -443,7 +436,16 @@ function Footer() {
       <div className="footer">
         <div className="wordmark"><span className="wm-main">Afterglow</span><span className="wm-by">by Kevin Chinelli</span></div>
         <div className="copy">© 2026 — Tous droits réservés · Site créé par <a href="https://snapshotmedia.ch" target="_blank" rel="noopener">Snapshot Media</a></div>
-        <div className="social"><a href="apropos.html">À propos</a><a href="confidentialite.html">Confidentialité</a><a href="https://www.instagram.com/afterglowbykevin/" target="_blank" rel="noopener">Instagram</a><a href="tel:+41798507603">+41 79 850 76 03</a><a href="mailto:contact@afterglowbykevin.ch">contact@afterglowbykevin.ch</a></div>
+        {/* même liste que FooterLinks (kc-shared.jsx), que l'accueil ne charge pas */}
+        <div className="social">
+          <a href="apropos.html">À propos</a>
+          <a href="confidentialite.html">Confidentialité</a>
+          <a href="https://www.instagram.com/afterglowbykevin/" target="_blank" rel="noopener" data-umami-event="instagram">Instagram</a>
+          <a href="https://g.page/r/Ccd14Q8WzKZuEBM" target="_blank" rel="noopener" data-umami-event="fiche-google">Google</a>
+          <a href={WHATSAPP} target="_blank" rel="noopener" data-umami-event="whatsapp">WhatsApp</a>
+          <a href="tel:+41798507603" data-umami-event="telephone">+41 79 850 76 03</a>
+          <a href="mailto:contact@afterglowbykevin.ch" data-umami-event="email">contact@afterglowbykevin.ch</a>
+        </div>
       </div>
     </footer>
   );
@@ -526,7 +528,6 @@ function App() {
         <Prestations layout={t.prestaLayout} />
         <Gallery />
         <Process />
-        {/* <Testimonials /> — réactiver quand les premiers avis sont disponibles */}
         <Contact />
       </main>
       <Footer />
