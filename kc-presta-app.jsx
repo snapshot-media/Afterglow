@@ -22,8 +22,8 @@ function PrestaHero({ layout }) {
   return (
     <section className={"phero " + layout}>
       <div className="bg">
-        <Slot id={"phero-" + DATA.slug} ph={DATA.heroImg} alt={"Photographe " + DATA.title.toLowerCase() + " en Suisse romande — " + DATA.heroImg + " par Kevin Chinelli"} loading="eager" fetchpriority="high" style={{ width: "100%", height: "100%" }} />
-        <Slot id={"phero-" + DATA.slug + "-mobile"} ph={DATA.heroImg} alt={"Photographe " + DATA.title.toLowerCase() + " en Suisse romande — " + DATA.heroImg + " par Kevin Chinelli"} loading="eager" fetchpriority="high" style={{ width: "100%", height: "100%" }} />
+        <Slot id={"phero-" + DATA.slug} ph={DATA.heroImg} alt={"Photographe " + DATA.title.toLowerCase() + " en Suisse romande — " + DATA.heroImg + " par Kevin Chinelli"} loading="eager" fetchpriority="high" media="(min-width:601px)" style={{ width: "100%", height: "100%" }} />
+        <Slot id={"phero-" + DATA.slug + "-mobile"} ph={DATA.heroImg} alt={"Photographe " + DATA.title.toLowerCase() + " en Suisse romande — " + DATA.heroImg + " par Kevin Chinelli"} loading="eager" fetchpriority="high" media="(max-width:600px)" style={{ width: "100%", height: "100%" }} />
       </div>
       <div className="scrim"></div>
       <div className="phero-content">

@@ -51,8 +51,9 @@ const WHATSAPP = "https://wa.me/41798507603?text=" + encodeURIComponent("Bonjour
 
 /* ---------- SMALL HELPERS ---------- */
 // alt : texte alternatif ; à défaut, le texte du placeholder (qui doit alors décrire l'image).
-function Slot({ id, ph, alt, style, loading, fetchpriority }) {
-  return <image-slot id={id} shape="rect" fit="cover" placeholder={ph} alt={alt || ph} aria-label={alt || ph} role="img" style={style} loading={loading} fetchpriority={fetchpriority}></image-slot>;
+// media : l'image n'est chargée que si la condition est vraie (paire ordinateur / téléphone du héros).
+function Slot({ id, ph, alt, style, loading, fetchpriority, media }) {
+  return <image-slot id={id} shape="rect" fit="cover" placeholder={ph} alt={alt || ph} aria-label={alt || ph} role="img" style={style} loading={loading} fetchpriority={fetchpriority} media={media}></image-slot>;
 }
 function Overline({ children, className = "" }) {
   return <div className={"overline " + className}><span className="tick"></span>{children}</div>;
@@ -178,8 +179,8 @@ function HomeHero({ variant = "a" }) {
   return (
     <section id="hero" className="hhero va">
       <div className="hh-bg">
-        <Slot id="home-hero-full" ph="Image hero — pleine page" alt="Une maman et son nouveau-né dans un pré, au soleil couchant — Kevin Chinelli, photographe en Suisse romande" loading="eager" fetchpriority="high" style={{ width: "100%", height: "100%" }} />
-        <Slot id="home-hero-mobile" ph="Image hero — portrait mobile" alt="Portrait en lumière d'automne, en forêt — Kevin Chinelli, photographe en Suisse romande" loading="eager" fetchpriority="high" style={{ width: "100%", height: "100%" }} />
+        <Slot id="home-hero-full" ph="Image hero — pleine page" alt="Une maman et son nouveau-né dans un pré, au soleil couchant — Kevin Chinelli, photographe en Suisse romande" loading="eager" fetchpriority="high" media="(min-width:601px)" style={{ width: "100%", height: "100%" }} />
+        <Slot id="home-hero-mobile" ph="Image hero — portrait mobile" alt="Portrait en lumière d'automne, en forêt — Kevin Chinelli, photographe en Suisse romande" loading="eager" fetchpriority="high" media="(max-width:600px)" style={{ width: "100%", height: "100%" }} />
       </div>
       <div className="scrim"></div>
       <div className="hh-inner">

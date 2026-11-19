@@ -12,7 +12,8 @@
    - BlogPosting   ← titre, description, dates, image, auteur (articles)
    - meta description / og:description des articles ← metaDesc des données
    - <link rel="preload" as="image"> ← les images héros réellement affichées
-   - lang="fr-CH", <noscript> de secours (le pré-rendu suffit)
+   - <img> écrite dans chaque <image-slot> du pré-rendu + correspondance id → image (#kc-slots)
+   - lang="fr-CH", <noscript> de secours (le pré-rendu suffit), fondu d'entrée après lien interne
    - script de mesure Umami (si UMAMI_WEBSITE_ID est renseigné)
    ============================================================ */
 
@@ -55,14 +56,55 @@ function readCrumb(rendered) {
   }
   return items.length ? items : null;
 }
+const slotAttr = (attrs, name) => (attrs.match(new RegExp(`(?:^|\\s)${name}="([^"]*)"`)) || [])[1];
+const slotUrl = (sidecar, id) => {
+  const v = id && sidecar[id];
+  return v ? (typeof v === "string" ? v : v.u) || null : null;
+};
 function readEagerSlots(rendered) {
-  const ids = [];
+  const out = [];
   for (const m of rendered.matchAll(/<image-slot ([^>]*)>/g)) {
     if (!/loading="eager"/.test(m[1])) continue;
-    const id = (m[1].match(/id="([^"]+)"/) || [])[1];
-    if (id && !ids.includes(id)) ids.push(id);
+    const id = slotAttr(m[1], "id");
+    if (id && !out.some((s) => s.id === id)) out.push({ id, media: slotAttr(m[1], "media") || null });
   }
-  return ids;
+  return out;
+}
+
+/* ---------- images écrites dans le HTML ----------
+   Sans cela, une photo n'apparaît qu'une fois le JavaScript chargé et exécuté (le composant
+   <image-slot> la cherche dans .image-slots.state.json) : sur téléphone, c'était l'essentiel du
+   temps d'affichage du héros. Le build écrit donc l'image dans chaque <image-slot> du pré-rendu ;
+   le composant la laisse affichée (son <slot>) jusqu'au rendu React. Un emplacement qui porte
+   media= devient un <picture> sans image par défaut : hors de sa condition, rien n'est téléchargé. */
+function fillSlots(rendered, sidecar) {
+  return rendered.replace(/<image-slot ([^>]*)><\/image-slot>/g, (whole, attrs) => {
+    const url = slotUrl(sidecar, slotAttr(attrs, "id"));
+    if (!url) return whole;
+    const alt = slotAttr(attrs, "alt") ?? slotAttr(attrs, "placeholder") ?? "";
+    const loading = slotAttr(attrs, "loading") || "lazy";
+    const fp = slotAttr(attrs, "fetchpriority");
+    const fit = slotAttr(attrs, "fit") || "cover";
+    const pos = slotAttr(attrs, "position");
+    const media = slotAttr(attrs, "media");
+    const style = (fit !== "cover" ? `object-fit:${fit};` : "") + (pos ? `object-position:${pos};` : "");
+    const img = `<img alt="${alt}" loading="${loading}"` + (fp ? ` fetchpriority="${fp}"` : ` decoding="async"`) +
+      (style ? ` style="${style}"` : "");
+    const light = media
+      ? `<picture><source media="${media}" srcset="${attr(url)}">${img}></picture>`
+      : `${img} src="${attr(url)}">`;
+    return `<image-slot ${attrs}>${light}</image-slot>`;
+  });
+}
+// La correspondance id → image des emplacements de la page, lue par image-slot.js sans requête.
+function slotMap(rendered, sidecar) {
+  const map = {};
+  for (const m of rendered.matchAll(/<image-slot ([^>]*)>/g)) {
+    const id = slotAttr(m[1], "id");
+    const url = slotUrl(sidecar, id);
+    if (url) map[id] = url;
+  }
+  return map;
 }
 
 /* ---------- JSON-LD ---------- */
@@ -160,17 +202,24 @@ export function syncPage(html, { rendered, ctx, sidecar }) {
   }
 
   // 3) préchargement des images héros réellement affichées (desktop / mobile ≤ 600 px)
-  const eager = readEagerSlots(rendered).filter((id) => sidecar[id] && sidecar[id].u);
-  const hasMobile = eager.some((id) => /-mobile$/.test(id));
-  const preloads = eager.map((id) => {
-    const media = hasMobile ? (/-mobile$/.test(id) ? ' media="(max-width:600px)"' : ' media="(min-width:601px)"') : "";
-    return `<link rel="preload" as="image" href="${sidecar[id].u}"${media} fetchpriority="high">`;
+  const eager = readEagerSlots(rendered).filter((s) => slotUrl(sidecar, s.id));
+  const hasMobile = eager.some((s) => /-mobile$/.test(s.id));
+  const preloads = eager.map((s) => {
+    const q = s.media || (hasMobile ? (/-mobile$/.test(s.id) ? "(max-width:600px)" : "(min-width:601px)") : null);
+    return `<link rel="preload" as="image" href="${attr(slotUrl(sidecar, s.id))}"${q ? ` media="${q}"` : ""} fetchpriority="high">`;
   });
   html = html.replace(/<link rel="preload" as="image"[^>]*>\r?\n?/g, "");
-  if (preloads.length) {
-    const anchor = html.match(/<link rel="preload" href="\.image-slots\.state\.json"[^>]*>\r?\n/);
-    if (anchor) html = html.replace(anchor[0], anchor[0] + preloads.join("\n") + "\n");
-    else html = html.replace(/(<link rel="stylesheet")/, preloads.join("\n") + "\n$1");
+  // la correspondance des images est désormais dans la page : plus de requête à précharger
+  html = html.replace(/<link rel="preload" href="\.image-slots\.state\.json"[^>]*>\r?\n?/g, "");
+  if (preloads.length) html = html.replace(/(<link rel="stylesheet")/, preloads.join("\n") + "\n$1");
+
+  // 4) images écrites dans le pré-rendu + correspondance id → image pour image-slot.js
+  html = html.replace(/<!--ssg-->([\s\S]*?)<!--\/ssg-->/, (_m, inner) => `<!--ssg-->${fillSlots(inner, sidecar)}<!--/ssg-->`);
+  html = html.replace(/<script type="application\/json" id="kc-slots">[\s\S]*?<\/script>\r?\n?/g, "");
+  const map = slotMap(rendered, sidecar);
+  if (Object.keys(map).length) {
+    const json = JSON.stringify(map).replace(/</g, "\\u003c");
+    html = html.replace("</head>", `<script type="application/json" id="kc-slots">${json}</script>\n</head>`);
   }
 
   return finishPage(html);
@@ -179,6 +228,12 @@ export function syncPage(html, { rendered, ctx, sidecar }) {
 /* Valable aussi pour les pages sans React (404) : langue, <noscript>, mesure. */
 export function finishPage(html) {
   html = html.replace(/<html lang="fr">/, '<html lang="fr-CH">');
+  // Fondu d'entrée après un lien interne seulement (kc-transitions.js laisse « kc-fade » au clic) :
+  // la classe doit être là avant le premier affichage, d'où ce script en tête, avant les feuilles de style.
+  html = html.replace(/<script data-kc-fade>[\s\S]*?<\/script>\r?\n?/g, "");
+  const FADE = '<script data-kc-fade>try{var t=+sessionStorage.getItem("kc-fade");sessionStorage.removeItem("kc-fade");' +
+    'if(t&&Date.now()-t<5000&&!matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("kc-anim-pages")}catch(e){}</script>';
+  html = html.replace(/(<meta charset="UTF-8">\r?\n?)/i, (m) => m + FADE + "\n");
   // Le pré-rendu met déjà tout le contenu dans le HTML : l'ancien bloc <noscript> (doublon,
   // avec un second H1 et un menu périmé) est retiré. Sans JavaScript, on affiche simplement
   // les éléments animés, qui restent sinon transparents.

@@ -93,6 +93,11 @@ html.no-anim .reveal{ opacity:1 !important; transform:none !important; transitio
 /* ---------- IMAGE SLOTS ---------- */
 image-slot{ background:#1b1815; color:rgba(242,237,230,.5) !important; }
 .s-light image-slot{ background:#ece8e0; color:rgba(20,18,16,.46) !important; }
+/* L'image écrite dans le HTML au build (scripts/seo-sync.mjs) s'affiche avant tout JavaScript.
+   Mêmes valeurs que le :host du composant, pour que rien ne bouge quand il prend le relais. */
+image-slot{ display:inline-block; position:relative; vertical-align:top; }
+image-slot > picture{ display:contents; }
+image-slot > img, image-slot > picture > img{ position:absolute; inset:0; width:100%; height:100%; display:block; object-fit:cover; }
 
 /* Decorative overlays must not steal drops from the image-slot beneath them.
    Only genuine links/buttons keep pointer events. */
@@ -406,7 +411,10 @@ html.no-anim .hslide.active .hero-content{ animation:none !important; }
 
 /* ---------- PAGE TRANSITIONS (JS fade, universal) ---------- */
 body{ transition:opacity .32s ease; }
-html.kc-anim-pages body{ animation:kcPageIn .5s ease both; }
+/* backwards, pas both : une animation terminée qui garde son opacity:1 l'emporte sur .is-leaving,
+   et le fondu de sortie ne s'affichait jamais. La classe est posée avant le premier affichage
+   (petit script en tête de page, voir kc-transitions.js), seulement après un lien interne. */
+html.kc-anim-pages body{ animation:kcPageIn .5s ease backwards; }
 body.is-leaving{ opacity:0; }
 @keyframes kcPageIn{ from{ opacity:0; } to{ opacity:1; } }
 @media (prefers-reduced-motion:reduce){ html.kc-anim-pages body{ animation:none; } body.is-leaving{ opacity:1; } }

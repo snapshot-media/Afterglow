@@ -52,8 +52,9 @@ const PRESTA_PARENT = {};
 PRESTA_NAV.forEach((p) => (p.children || []).forEach((c) => { PRESTA_PARENT[c.slug] = p.slug; }));
 
 /* ---------- atoms ---------- */
-function Slot({ id, ph, alt, style, className, loading, fetchpriority }) {
-  return <image-slot id={id} shape="rect" fit="cover" placeholder={ph} alt={alt || ph} aria-label={alt || ph} role="img" style={style} class={className} loading={loading} fetchpriority={fetchpriority}></image-slot>;
+// media : l'image n'est chargée que si la condition est vraie (paire ordinateur / téléphone d'un héros).
+function Slot({ id, ph, alt, style, className, loading, fetchpriority, media }) {
+  return <image-slot id={id} shape="rect" fit="cover" placeholder={ph} alt={alt || ph} aria-label={alt || ph} role="img" style={style} class={className} loading={loading} fetchpriority={fetchpriority} media={media}></image-slot>;
 }
 function Overline({ children, className = "" }) {
   return <div className={"overline " + className}><span className="tick"></span>{children}</div>;

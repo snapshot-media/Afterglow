@@ -1,16 +1,22 @@
 (() => {
   const STATE_FILE = '.image-slots.state.json';
 
-  // Shared sidecar store (lecture seule — écriture via Omelette supprimée)
+  // Correspondance id → image. Le build (scripts/seo-sync.mjs) écrit dans chaque page celles
+  // qu'elle affiche (<script type="application/json" id="kc-slots">) : l'image s'affiche sans
+  // attendre de requête. Le fichier complet n'est demandé que pour un id absent de la page.
   const subs = new Set();
   let slots = {};
   let loadP = null;
+  try {
+    const inline = document.getElementById('kc-slots');
+    if (inline) slots = JSON.parse(inline.textContent) || {};
+  } catch (e) { slots = {}; }
 
   function load() {
     if (loadP) return loadP;
     loadP = fetch(STATE_FILE, { cache: 'no-cache' })
       .then((r) => (r.ok ? r.json() : null))
-      .then((j) => { if (j && typeof j === 'object') slots = j; })
+      .then((j) => { if (j && typeof j === 'object') slots = Object.assign({}, j, slots); })
       .catch(() => {})
       .then(() => { subs.forEach((fn) => fn()); });
     return loadP;
@@ -21,6 +27,24 @@
     if (!v) return null;
     return typeof v === 'string' ? { u: v } : v;
   }
+
+  // media="(max-width:600px)" : l'image n'est chargée que si la condition est vraie
+  // (la version téléphone d'un héros ne se télécharge plus sur ordinateur, et inversement).
+  const mqls = new Map();
+  function mediaMatches(q, fn) {
+    if (!q || !window.matchMedia) return true;
+    let m = mqls.get(q);
+    if (!m) {
+      m = { mql: matchMedia(q), fns: new Set() };
+      const fire = () => m.fns.forEach((f) => f());
+      if (m.mql.addEventListener) m.mql.addEventListener('change', fire);
+      else if (m.mql.addListener) m.mql.addListener(fire);
+      mqls.set(q, m);
+    }
+    m.fns.add(fn);
+    return m.mql.matches;
+  }
+  function mediaForget(fn) { mqls.forEach((m) => m.fns.delete(fn)); }
 
   // ── Custom element ──────────────────────────────────────────────────────
   const stylesheet =
@@ -42,12 +66,14 @@
 
   class ImageSlot extends HTMLElement {
     static get observedAttributes() {
-      return ['shape', 'radius', 'mask', 'fit', 'position', 'placeholder', 'src', 'id', 'loading', 'fetchpriority'];
+      return ['shape', 'radius', 'mask', 'fit', 'position', 'placeholder', 'src', 'id', 'loading', 'fetchpriority', 'media'];
     }
 
     constructor() {
       super();
       const root = this.attachShadow({ mode: 'open' });
+      // <slot> : l'image écrite dans le HTML au build reste affichée telle quelle
+      // jusqu'au rendu React, qui recrée l'élément sans elle.
       root.innerHTML =
         '<style>' + stylesheet + '</style>' +
         '<div class="frame" part="frame">' +
@@ -55,6 +81,7 @@
         '  <div class="empty" part="empty">' + icon +
         '    <div class="cap"></div>' +
         '</div>' +
+        '  <slot></slot>' +
         '</div>';
       this._frame = root.querySelector('.frame');
       this._img = root.querySelector('.frame img');
@@ -65,15 +92,18 @@
 
     connectedCallback() {
       subs.add(this._subFn);
-      load();
+      if (this.id && !(this.id in slots)) load();
       this._render();
     }
 
     disconnectedCallback() {
       subs.delete(this._subFn);
+      mediaForget(this._subFn);
     }
 
-    attributeChangedCallback() { if (this.shadowRoot) this._render(); }
+    // React (et l'analyse du HTML) posent les attributs un à un avant l'insertion : rendre seulement
+    // une fois l'élément dans la page, quand media, loading et fetchpriority sont tous connus.
+    attributeChangedCallback() { if (this.shadowRoot && this.isConnected) this._render(); }
 
     _render() {
       const mask = this.getAttribute('mask');
@@ -94,17 +124,31 @@
 
       this._cap.textContent = this.getAttribute('placeholder') || 'Drop an image';
 
+      // Image pré-rendue (HTML du build) : on la laisse s'afficher, rien à charger.
+      if (this.querySelector(':scope > img, :scope > picture')) {
+        this._img.style.display = 'none';
+        this._empty.style.display = 'none';
+        this.setAttribute('data-filled', '');
+        return;
+      }
+
       const stored = this.id ? getSlot(this.id) : null;
       const url = (stored && stored.u) || this.getAttribute('src') || '';
+      const shown = mediaMatches(this.getAttribute('media'), this._subFn);
 
-      if (url) {
-        if (this._img.getAttribute('src') !== url) this._img.src = url;
+      if (url && !shown && !this._img.getAttribute('src')) {
+        // hors de sa condition media (et jamais chargée) : rien à télécharger
+        this._img.style.display = 'none';
+        this._empty.style.display = 'none';
+        this.setAttribute('data-filled', '');
+      } else if (url) {
         this._img.alt = this.getAttribute('alt') || this.getAttribute('placeholder') || '';
-        const loadingVal = this.getAttribute('loading') || 'lazy';
-        this._img.setAttribute('loading', loadingVal);
+        this._img.setAttribute('loading', this.getAttribute('loading') || 'lazy');
         const fp = this.getAttribute('fetchpriority');
         if (fp) this._img.setAttribute('fetchpriority', fp);
+        else this._img.removeAttribute('fetchpriority');
         this._img.setAttribute('decoding', fp === 'high' ? 'sync' : 'async');
+        if (this._img.getAttribute('src') !== url) this._img.src = url;
         this._img.style.display = 'block';
         this._empty.style.display = 'none';
         this.setAttribute('data-filled', '');
@@ -274,7 +318,7 @@
 (()=>{function useTweaks(defaults){return[defaults,()=>{}]}Object.assign(window,{useTweaks});})();
 
 ;
-(()=>{const{useState,useEffect,useRef}=React;(function(){try{var p=document.createElement("div");p.style.cssText="position:fixed;left:-9999px;top:0;width:2px;height:2px;opacity:0;transition:opacity .05s linear;pointer-events:none",document.documentElement.appendChild(p),requestAnimationFrame(function(){p.style.opacity="1"}),setTimeout(function(){var op=parseFloat(getComputedStyle(p).opacity);op>.9||document.documentElement.classList.add("no-anim"),p.remove()},220)}catch{}})();const KC={PALETTES:{"Noir chaud":["#141210","#b9926b","#f8f5ef"],"Noir profond":["#0f0e0d","#9a8f7e","#efe9df"],Anthracite:["#16181a","#8a97a0","#eef0f1"],"Ardoise cuivre":["#12100f","#a9744f","#f3ede4"]},HEAD_FONTS:{Cinzel:'"Cinzel", Georgia, serif',Cormorant:'"Cormorant Garamond", Georgia, serif'},BODY_FONTS:{Jost:'"Jost", system-ui, sans-serif',Mulish:'"Mulish", system-ui, sans-serif'},HOME:"/",WHATSAPP:"https://wa.me/41798507603?text="+encodeURIComponent("Bonjour Kevin, je vous \xE9cris depuis le site Afterglow au sujet d'une s\xE9ance photo : "),PRO_URL:"https://snapshotmedia.ch/services/photographie/portraits-professionnels/"},PALETTE_OPTS=Object.values(KC.PALETTES),PRESTA_NAV=[{slug:"mariage",title:"Mariages",short:"Mariages",href:"mariages.html"},{slug:"portrait",title:"Lifestyle",short:"Lifestyle",href:"portraits.html",children:[{slug:"solo",title:"Solo",href:"solo.html"},{slug:"couple",title:"Couple",href:"couple.html"},{slug:"famille",title:"Famille",href:"famille.html"}]},{slug:"studio",title:"Studio",short:"Studio",href:"studio.html"},{slug:"maternite",title:"Maternit\xE9 & Grossesse",short:"Maternit\xE9",href:"maternite-grossesse.html"}],PRESTA_PARENT={};PRESTA_NAV.forEach(p=>(p.children||[]).forEach(c=>{PRESTA_PARENT[c.slug]=p.slug}));function Slot({id,ph,alt,style,className,loading,fetchpriority}){return React.createElement("image-slot",{id,shape:"rect",fit:"cover",placeholder:ph,alt:alt||ph,"aria-label":alt||ph,role:"img",style,class:className,loading,fetchpriority})}function Overline({children,className=""}){return React.createElement("div",{className:"overline "+className},React.createElement("span",{className:"tick"}),children)}function Nav({active=""}){const[scrolled,setScrolled]=useState(!1),[open,setOpen]=useState(!1);useEffect(()=>{const onScroll=()=>setScrolled(window.scrollY>40);return onScroll(),window.addEventListener("scroll",onScroll,{passive:!0}),()=>window.removeEventListener("scroll",onScroll)},[]),useEffect(()=>(document.body.style.overflow=open?"hidden":"",()=>{document.body.style.overflow=""}),[open]);const menu=ReactDOM.createPortal(React.createElement("div",{className:"mobile-menu"+(open?" is-open":""),onClick:()=>setOpen(!1)},React.createElement("div",{className:"mm-inner",onClick:e=>e.stopPropagation()},React.createElement("div",{className:"mm-group"},React.createElement("span",{className:"mm-label"},"Prestations"),PRESTA_NAV.map(p=>[React.createElement("a",{key:p.slug,href:p.href,onClick:()=>setOpen(!1)},p.title),...(p.children||[]).map(c=>React.createElement("a",{key:c.slug,href:c.href,className:"mm-sub",onClick:()=>setOpen(!1)},c.title))]),React.createElement("a",{href:"bon-cadeau.html",onClick:()=>setOpen(!1)},"Bon cadeau")),React.createElement("a",{className:"mm-top",href:"portfolio.html",onClick:()=>setOpen(!1)},"Portfolio"),React.createElement("a",{className:"mm-top",href:"tarifs.html",onClick:()=>setOpen(!1)},"Tarifs"),React.createElement("a",{className:"mm-top",href:"journal.html",onClick:()=>setOpen(!1)},"Journal"),React.createElement("a",{className:"mm-top",href:"apropos.html",onClick:()=>setOpen(!1)},"\xC0 propos"),React.createElement("a",{className:"mm-top",href:"contact.html",onClick:()=>setOpen(!1)},"Contact"))),document.body);return React.createElement(React.Fragment,null,React.createElement("nav",{className:"nav"+(scrolled?" scrolled":"")+(open?" menu-open":"")},React.createElement("a",{href:KC.HOME,className:"wordmark"},React.createElement("span",{className:"wm-main"},"Afterglow"),React.createElement("span",{className:"wm-by"},"by Kevin Chinelli")),React.createElement("div",{className:"nav-links"},React.createElement("div",{className:"nav-item nav-extra"+(active==="cadeau"||PRESTA_NAV.some(p=>p.slug===active||p.slug===PRESTA_PARENT[active])?" is-active":"")},React.createElement("a",{href:PRESTA_NAV[0].href,"aria-haspopup":"true"},"Prestations",React.createElement("span",{className:"caret"},"\u25BE")),React.createElement("div",{className:"nav-drop"},PRESTA_NAV.map(p=>[React.createElement("a",{key:p.slug,href:p.href,className:active===p.slug?"is-active":""},p.title),...(p.children||[]).map(c=>React.createElement("a",{key:c.slug,href:c.href,className:"nd-sub"+(active===c.slug?" is-active":"")},c.title))]),React.createElement("a",{href:"bon-cadeau.html",className:"nd-gift"+(active==="cadeau"?" is-active":"")},"Bon cadeau"))),React.createElement("a",{href:"portfolio.html",className:"nav-extra"+(active==="portfolio"?" is-active":"")},"Portfolio"),React.createElement("a",{href:"tarifs.html",className:"nav-extra"+(active==="tarifs"?" is-active":"")},"Tarifs"),React.createElement("a",{href:"journal.html",className:"nav-extra"+(active==="journal"?" is-active":"")},"Journal"),React.createElement("a",{href:"apropos.html",className:"nav-extra"+(active==="apropos"?" is-active":"")},"\xC0 propos"),React.createElement("a",{href:"contact.html",className:"nav-cta"+(active==="contact"?" is-active":"")},"Contact")),React.createElement("button",{className:"nav-burger","aria-label":"Ouvrir le menu","aria-expanded":open,onClick:()=>setOpen(o=>!o)},React.createElement("span",null),React.createElement("span",null))),menu)}function Footer(){return React.createElement("footer",{className:"s-dark",style:{borderTop:"1px solid var(--line-d)"}},React.createElement("div",{className:"footer"},React.createElement("a",{href:KC.HOME,className:"wordmark"},React.createElement("span",{className:"wm-main"},"Afterglow"),React.createElement("span",{className:"wm-by"},"by Kevin Chinelli")),React.createElement("div",{className:"copy"},"\xA9 2026 \u2014 Tous droits r\xE9serv\xE9s \xB7 Site cr\xE9\xE9 par ",React.createElement("a",{href:"https://snapshotmedia.ch",target:"_blank",rel:"noopener"},"Snapshot Media")),React.createElement(FooterLinks,null)))}function FooterLinks(){return React.createElement("div",{className:"social"},React.createElement("a",{href:"apropos.html"},"\xC0 propos"),React.createElement("a",{href:"bon-cadeau.html"},"Bon cadeau"),React.createElement("a",{href:"confidentialite.html"},"Confidentialit\xE9"),React.createElement("a",{href:"https://www.instagram.com/afterglowbykevin/",target:"_blank",rel:"noopener","data-umami-event":"instagram"},"Instagram"),React.createElement("a",{href:"https://g.page/r/Ccd14Q8WzKZuEBM",target:"_blank",rel:"noopener","data-umami-event":"fiche-google"},"Google"),React.createElement("a",{href:KC.WHATSAPP,target:"_blank",rel:"noopener","data-umami-event":"whatsapp"},"WhatsApp"),React.createElement("a",{href:"tel:+41798507603","data-umami-event":"telephone"},"+41 79 850 76 03"),React.createElement("a",{href:"mailto:contact@afterglowbykevin.ch","data-umami-event":"email"},"contact@afterglowbykevin.ch"))}function RelatedPresta({current}){const parentSlug=PRESTA_PARENT[current],parent=PRESTA_NAV.find(p=>p.slug===parentSlug),items=parent?[parent,...parent.children.filter(c=>c.slug!==current)].slice(0,3):PRESTA_NAV.filter(p=>p.slug!==current).slice(0,3);return React.createElement("section",{className:"sec s-light pad-y"},React.createElement("div",{className:"wrap"},React.createElement("div",{style:{textAlign:"center",marginBottom:"clamp(32px,4vw,52px)"}},React.createElement(Overline,{className:"reveal",style:{justifyContent:"center"}},"\xC0 d\xE9couvrir aussi"),React.createElement("h2",{className:"display reveal d1",style:{fontSize:"clamp(26px,3.2vw,44px)",marginTop:"18px"}},parent?"Les autres s\xE9ances lifestyle.":"Autres prestations.")),React.createElement("div",{className:"related-grid"},items.map((p,i)=>React.createElement("a",{key:p.slug,href:p.href,className:"related-card reveal d"+(i+1)},React.createElement("div",{className:"rc-img"},React.createElement(Slot,{id:"presta-"+p.slug,ph:p.title,alt:"Photographe "+p.title.toLowerCase()+" en Suisse romande \u2014 Kevin Chinelli",style:{width:"100%",height:"100%"}})),React.createElement("div",{className:"rc-meta"},React.createElement("h3",null,p.title),React.createElement("span",{className:"ar"},"D\xE9couvrir \u2192")))))))}function CtaContact({overline="Parlons de votre projet",title="R\xE9servez votre date.",href="contact.html",label="Me contacter"}){return React.createElement("section",{className:"sec s-darker cta-band"},React.createElement("div",{className:"wrap pad-y",style:{textAlign:"center"}},React.createElement(Overline,{className:"reveal"},overline),React.createElement("h2",{className:"display reveal d1",style:{fontSize:"clamp(34px,5.4vw,72px)",margin:"22px 0 38px"}},title),React.createElement("a",{href,className:"link-arrow reveal d2",style:{fontSize:"14px"}},label," ",React.createElement("span",{className:"ar"},"\u2192"))))}function useReveal(deps=[]){useEffect(()=>{const reveal=()=>{const vh=window.innerHeight;document.querySelectorAll(".reveal:not(.in)").forEach(el=>{const r=el.getBoundingClientRect();r.top<vh*.9&&r.bottom>0&&el.classList.add("in")})};reveal(),window.addEventListener("scroll",reveal,{passive:!0}),window.addEventListener("resize",reveal);const id=setTimeout(reveal,220);return()=>{window.removeEventListener("scroll",reveal),window.removeEventListener("resize",reveal),clearTimeout(id)}},deps)}function useApplyTweaks(t){useEffect(()=>{const r=document.documentElement.style;Array.isArray(t.palette)&&(r.setProperty("--bg",t.palette[0]),r.setProperty("--accent",t.palette[1]),r.setProperty("--cream",t.palette[2])),r.setProperty("--font-display",KC.HEAD_FONTS[t.heading]||KC.HEAD_FONTS.Cinzel),r.setProperty("--font-body",KC.BODY_FONTS[t.body]||KC.BODY_FONTS.Jost)},[t.palette,t.heading,t.body])}Object.assign(window,{KC,PALETTE_OPTS,PRESTA_NAV,PRESTA_PARENT,Slot,Overline,Nav,Footer,FooterLinks,CtaContact,RelatedPresta,useReveal,useApplyTweaks});})();
+(()=>{const{useState,useEffect,useRef}=React;(function(){try{var p=document.createElement("div");p.style.cssText="position:fixed;left:-9999px;top:0;width:2px;height:2px;opacity:0;transition:opacity .05s linear;pointer-events:none",document.documentElement.appendChild(p),requestAnimationFrame(function(){p.style.opacity="1"}),setTimeout(function(){var op=parseFloat(getComputedStyle(p).opacity);op>.9||document.documentElement.classList.add("no-anim"),p.remove()},220)}catch{}})();const KC={PALETTES:{"Noir chaud":["#141210","#b9926b","#f8f5ef"],"Noir profond":["#0f0e0d","#9a8f7e","#efe9df"],Anthracite:["#16181a","#8a97a0","#eef0f1"],"Ardoise cuivre":["#12100f","#a9744f","#f3ede4"]},HEAD_FONTS:{Cinzel:'"Cinzel", Georgia, serif',Cormorant:'"Cormorant Garamond", Georgia, serif'},BODY_FONTS:{Jost:'"Jost", system-ui, sans-serif',Mulish:'"Mulish", system-ui, sans-serif'},HOME:"/",WHATSAPP:"https://wa.me/41798507603?text="+encodeURIComponent("Bonjour Kevin, je vous \xE9cris depuis le site Afterglow au sujet d'une s\xE9ance photo : "),PRO_URL:"https://snapshotmedia.ch/services/photographie/portraits-professionnels/"},PALETTE_OPTS=Object.values(KC.PALETTES),PRESTA_NAV=[{slug:"mariage",title:"Mariages",short:"Mariages",href:"mariages.html"},{slug:"portrait",title:"Lifestyle",short:"Lifestyle",href:"portraits.html",children:[{slug:"solo",title:"Solo",href:"solo.html"},{slug:"couple",title:"Couple",href:"couple.html"},{slug:"famille",title:"Famille",href:"famille.html"}]},{slug:"studio",title:"Studio",short:"Studio",href:"studio.html"},{slug:"maternite",title:"Maternit\xE9 & Grossesse",short:"Maternit\xE9",href:"maternite-grossesse.html"}],PRESTA_PARENT={};PRESTA_NAV.forEach(p=>(p.children||[]).forEach(c=>{PRESTA_PARENT[c.slug]=p.slug}));function Slot({id,ph,alt,style,className,loading,fetchpriority,media}){return React.createElement("image-slot",{id,shape:"rect",fit:"cover",placeholder:ph,alt:alt||ph,"aria-label":alt||ph,role:"img",style,class:className,loading,fetchpriority,media})}function Overline({children,className=""}){return React.createElement("div",{className:"overline "+className},React.createElement("span",{className:"tick"}),children)}function Nav({active=""}){const[scrolled,setScrolled]=useState(!1),[open,setOpen]=useState(!1);useEffect(()=>{const onScroll=()=>setScrolled(window.scrollY>40);return onScroll(),window.addEventListener("scroll",onScroll,{passive:!0}),()=>window.removeEventListener("scroll",onScroll)},[]),useEffect(()=>(document.body.style.overflow=open?"hidden":"",()=>{document.body.style.overflow=""}),[open]);const menu=ReactDOM.createPortal(React.createElement("div",{className:"mobile-menu"+(open?" is-open":""),onClick:()=>setOpen(!1)},React.createElement("div",{className:"mm-inner",onClick:e=>e.stopPropagation()},React.createElement("div",{className:"mm-group"},React.createElement("span",{className:"mm-label"},"Prestations"),PRESTA_NAV.map(p=>[React.createElement("a",{key:p.slug,href:p.href,onClick:()=>setOpen(!1)},p.title),...(p.children||[]).map(c=>React.createElement("a",{key:c.slug,href:c.href,className:"mm-sub",onClick:()=>setOpen(!1)},c.title))]),React.createElement("a",{href:"bon-cadeau.html",onClick:()=>setOpen(!1)},"Bon cadeau")),React.createElement("a",{className:"mm-top",href:"portfolio.html",onClick:()=>setOpen(!1)},"Portfolio"),React.createElement("a",{className:"mm-top",href:"tarifs.html",onClick:()=>setOpen(!1)},"Tarifs"),React.createElement("a",{className:"mm-top",href:"journal.html",onClick:()=>setOpen(!1)},"Journal"),React.createElement("a",{className:"mm-top",href:"apropos.html",onClick:()=>setOpen(!1)},"\xC0 propos"),React.createElement("a",{className:"mm-top",href:"contact.html",onClick:()=>setOpen(!1)},"Contact"))),document.body);return React.createElement(React.Fragment,null,React.createElement("nav",{className:"nav"+(scrolled?" scrolled":"")+(open?" menu-open":"")},React.createElement("a",{href:KC.HOME,className:"wordmark"},React.createElement("span",{className:"wm-main"},"Afterglow"),React.createElement("span",{className:"wm-by"},"by Kevin Chinelli")),React.createElement("div",{className:"nav-links"},React.createElement("div",{className:"nav-item nav-extra"+(active==="cadeau"||PRESTA_NAV.some(p=>p.slug===active||p.slug===PRESTA_PARENT[active])?" is-active":"")},React.createElement("a",{href:PRESTA_NAV[0].href,"aria-haspopup":"true"},"Prestations",React.createElement("span",{className:"caret"},"\u25BE")),React.createElement("div",{className:"nav-drop"},PRESTA_NAV.map(p=>[React.createElement("a",{key:p.slug,href:p.href,className:active===p.slug?"is-active":""},p.title),...(p.children||[]).map(c=>React.createElement("a",{key:c.slug,href:c.href,className:"nd-sub"+(active===c.slug?" is-active":"")},c.title))]),React.createElement("a",{href:"bon-cadeau.html",className:"nd-gift"+(active==="cadeau"?" is-active":"")},"Bon cadeau"))),React.createElement("a",{href:"portfolio.html",className:"nav-extra"+(active==="portfolio"?" is-active":"")},"Portfolio"),React.createElement("a",{href:"tarifs.html",className:"nav-extra"+(active==="tarifs"?" is-active":"")},"Tarifs"),React.createElement("a",{href:"journal.html",className:"nav-extra"+(active==="journal"?" is-active":"")},"Journal"),React.createElement("a",{href:"apropos.html",className:"nav-extra"+(active==="apropos"?" is-active":"")},"\xC0 propos"),React.createElement("a",{href:"contact.html",className:"nav-cta"+(active==="contact"?" is-active":"")},"Contact")),React.createElement("button",{className:"nav-burger","aria-label":"Ouvrir le menu","aria-expanded":open,onClick:()=>setOpen(o=>!o)},React.createElement("span",null),React.createElement("span",null))),menu)}function Footer(){return React.createElement("footer",{className:"s-dark",style:{borderTop:"1px solid var(--line-d)"}},React.createElement("div",{className:"footer"},React.createElement("a",{href:KC.HOME,className:"wordmark"},React.createElement("span",{className:"wm-main"},"Afterglow"),React.createElement("span",{className:"wm-by"},"by Kevin Chinelli")),React.createElement("div",{className:"copy"},"\xA9 2026 \u2014 Tous droits r\xE9serv\xE9s \xB7 Site cr\xE9\xE9 par ",React.createElement("a",{href:"https://snapshotmedia.ch",target:"_blank",rel:"noopener"},"Snapshot Media")),React.createElement(FooterLinks,null)))}function FooterLinks(){return React.createElement("div",{className:"social"},React.createElement("a",{href:"apropos.html"},"\xC0 propos"),React.createElement("a",{href:"bon-cadeau.html"},"Bon cadeau"),React.createElement("a",{href:"confidentialite.html"},"Confidentialit\xE9"),React.createElement("a",{href:"https://www.instagram.com/afterglowbykevin/",target:"_blank",rel:"noopener","data-umami-event":"instagram"},"Instagram"),React.createElement("a",{href:"https://g.page/r/Ccd14Q8WzKZuEBM",target:"_blank",rel:"noopener","data-umami-event":"fiche-google"},"Google"),React.createElement("a",{href:KC.WHATSAPP,target:"_blank",rel:"noopener","data-umami-event":"whatsapp"},"WhatsApp"),React.createElement("a",{href:"tel:+41798507603","data-umami-event":"telephone"},"+41 79 850 76 03"),React.createElement("a",{href:"mailto:contact@afterglowbykevin.ch","data-umami-event":"email"},"contact@afterglowbykevin.ch"))}function RelatedPresta({current}){const parentSlug=PRESTA_PARENT[current],parent=PRESTA_NAV.find(p=>p.slug===parentSlug),items=parent?[parent,...parent.children.filter(c=>c.slug!==current)].slice(0,3):PRESTA_NAV.filter(p=>p.slug!==current).slice(0,3);return React.createElement("section",{className:"sec s-light pad-y"},React.createElement("div",{className:"wrap"},React.createElement("div",{style:{textAlign:"center",marginBottom:"clamp(32px,4vw,52px)"}},React.createElement(Overline,{className:"reveal",style:{justifyContent:"center"}},"\xC0 d\xE9couvrir aussi"),React.createElement("h2",{className:"display reveal d1",style:{fontSize:"clamp(26px,3.2vw,44px)",marginTop:"18px"}},parent?"Les autres s\xE9ances lifestyle.":"Autres prestations.")),React.createElement("div",{className:"related-grid"},items.map((p,i)=>React.createElement("a",{key:p.slug,href:p.href,className:"related-card reveal d"+(i+1)},React.createElement("div",{className:"rc-img"},React.createElement(Slot,{id:"presta-"+p.slug,ph:p.title,alt:"Photographe "+p.title.toLowerCase()+" en Suisse romande \u2014 Kevin Chinelli",style:{width:"100%",height:"100%"}})),React.createElement("div",{className:"rc-meta"},React.createElement("h3",null,p.title),React.createElement("span",{className:"ar"},"D\xE9couvrir \u2192")))))))}function CtaContact({overline="Parlons de votre projet",title="R\xE9servez votre date.",href="contact.html",label="Me contacter"}){return React.createElement("section",{className:"sec s-darker cta-band"},React.createElement("div",{className:"wrap pad-y",style:{textAlign:"center"}},React.createElement(Overline,{className:"reveal"},overline),React.createElement("h2",{className:"display reveal d1",style:{fontSize:"clamp(34px,5.4vw,72px)",margin:"22px 0 38px"}},title),React.createElement("a",{href,className:"link-arrow reveal d2",style:{fontSize:"14px"}},label," ",React.createElement("span",{className:"ar"},"\u2192"))))}function useReveal(deps=[]){useEffect(()=>{const reveal=()=>{const vh=window.innerHeight;document.querySelectorAll(".reveal:not(.in)").forEach(el=>{const r=el.getBoundingClientRect();r.top<vh*.9&&r.bottom>0&&el.classList.add("in")})};reveal(),window.addEventListener("scroll",reveal,{passive:!0}),window.addEventListener("resize",reveal);const id=setTimeout(reveal,220);return()=>{window.removeEventListener("scroll",reveal),window.removeEventListener("resize",reveal),clearTimeout(id)}},deps)}function useApplyTweaks(t){useEffect(()=>{const r=document.documentElement.style;Array.isArray(t.palette)&&(r.setProperty("--bg",t.palette[0]),r.setProperty("--accent",t.palette[1]),r.setProperty("--cream",t.palette[2])),r.setProperty("--font-display",KC.HEAD_FONTS[t.heading]||KC.HEAD_FONTS.Cinzel),r.setProperty("--font-body",KC.BODY_FONTS[t.body]||KC.BODY_FONTS.Jost)},[t.palette,t.heading,t.body])}Object.assign(window,{KC,PALETTE_OPTS,PRESTA_NAV,PRESTA_PARENT,Slot,Overline,Nav,Footer,FooterLinks,CtaContact,RelatedPresta,useReveal,useApplyTweaks});})();
 
 ;
 (()=>{const LEGAL_UPDATED="novembre 2026",LEGAL_SECTIONS=[{t:"1. Responsable du traitement",p:["Le pr\xE9sent site afterglowbykevin.ch (\xAB Afterglow by Kevin \xBB) est \xE9dit\xE9 et exploit\xE9 par Kevin Chinelli, photographe ind\xE9pendant.","Adresse : Ch. de l'Ancien-Tram 18, 1083 M\xE9zi\xE8res (Vaud), Suisse.","Contact : contact@afterglowbykevin.ch \xB7 +41 79 850 76 03."]},{t:"2. Donn\xE9es collect\xE9es",p:["Le site ne collecte des donn\xE9es personnelles que lorsque vous les transmettez volontairement via le formulaire de contact : nom, adresse e-mail, num\xE9ro de t\xE9l\xE9phone (facultatif), type de prestation souhait\xE9e et contenu de votre message.","Aucune cr\xE9ation de compte n'est requise. Le site n'utilise ni cookies, ni publicit\xE9, ni pixels de suivi ou de reciblage.","Une mesure d'audience anonyme (Umami, h\xE9berg\xE9 sur le m\xEAme serveur que le site) compte les pages vues, les clics sur les moyens de contact et les demandes envoy\xE9es. Elle n'utilise aucun cookie, ne conserve pas votre adresse IP et ne vous suit pas d'un site \xE0 l'autre.","Si vous m'\xE9crivez sur WhatsApp, votre message est achemin\xE9 par WhatsApp (Meta) selon ses propres conditions ; je le conserve dans mon outil de suivi des demandes le temps de traiter votre demande."]},{t:"3. Finalit\xE9s et base l\xE9gale",p:["Vos donn\xE9es sont utilis\xE9es uniquement pour r\xE9pondre \xE0 votre demande, \xE9tablir un devis et assurer le suivi de notre \xE9ventuelle collaboration.","La base l\xE9gale est votre consentement et l'ex\xE9cution de mesures pr\xE9contractuelles prises \xE0 votre demande (art. 6 nLPD)."]},{t:"4. Dur\xE9e de conservation",p:["Les demandes re\xE7ues via le formulaire sont conserv\xE9es le temps n\xE9cessaire au traitement de votre requ\xEAte, puis archiv\xE9es au maximum 24 mois, sauf relation contractuelle en cours ou obligation l\xE9gale (par ex. comptable) imposant une dur\xE9e plus longue."]},{t:"5. Destinataires et sous-traitants",p:["Vos donn\xE9es ne sont ni vendues, ni lou\xE9es, ni transmises \xE0 des tiers \xE0 des fins commerciales.","Elles transitent uniquement par les prestataires techniques n\xE9cessaires au fonctionnement du site : l'h\xE9bergeur du serveur et le service de messagerie Infomaniak (Suisse) qui achemine les e-mails du formulaire. Les polices d'\xE9criture sont h\xE9berg\xE9es sur le site lui-m\xEAme : l'affichage des pages ne transmet aucune donn\xE9e \xE0 Google. Si vous choisissez WhatsApp, vos messages transitent par Meta."]},{t:"6. Vos droits",p:["Conform\xE9ment \xE0 la nLPD, vous disposez d'un droit d'acc\xE8s, de rectification, de suppression et d'opposition concernant vos donn\xE9es personnelles.","Pour exercer ces droits, \xE9crivez \xE0 contact@afterglowbykevin.ch. Une r\xE9ponse vous sera apport\xE9e dans les meilleurs d\xE9lais."]},{t:"7. S\xE9curit\xE9",p:["Le site est servi exclusivement en HTTPS (connexion chiffr\xE9e). Les demandes envoy\xE9es via le formulaire sont stock\xE9es hors de la racine web et l'acc\xE8s au serveur est restreint. Malgr\xE9 le soin apport\xE9, aucune transmission sur Internet ne peut \xEAtre garantie comme totalement s\xFBre."]},{t:"8. Modifications",p:["Cette politique peut \xEAtre mise \xE0 jour \xE0 tout moment pour refl\xE9ter l'\xE9volution du site ou de la l\xE9gislation. La date de derni\xE8re mise \xE0 jour figure ci-dessous."]}];function LegalApp(){const[t,setTweak]=useTweaks({palette:KC.PALETTES["Noir chaud"],heading:"Cinzel",body:"Jost"});return useApplyTweaks(t),useReveal([]),React.createElement(React.Fragment,null,React.createElement("div",{className:"grain"}),React.createElement(Nav,{active:""}),React.createElement("main",null,React.createElement("section",{className:"sec s-dark legal-head"},React.createElement("div",{className:"wrap-narrow"},React.createElement(Overline,{className:"reveal"},"Informations l\xE9gales"),React.createElement("h1",{className:"display reveal d1",style:{fontSize:"clamp(32px,4.2vw,58px)",marginTop:"18px"}},"Politique de confidentialit\xE9"),React.createElement("p",{className:"reveal d1",style:{color:"var(--muted)",maxWidth:"60ch",marginTop:"18px",lineHeight:1.7}},"Votre vie priv\xE9e compte. Voici, en toute transparence, quelles donn\xE9es sont collect\xE9es sur ce site et comment elles sont trait\xE9es."))),React.createElement("section",{className:"sec s-light pad-y"},React.createElement("div",{className:"wrap-narrow legal-body"},LEGAL_SECTIONS.map((s,i)=>React.createElement("div",{key:i,className:"legal-block reveal"},React.createElement("h2",null,s.t),s.p.map((para,j)=>React.createElement("p",{key:j},para)))),React.createElement("p",{className:"legal-updated reveal"},"Derni\xE8re mise \xE0 jour : ",LEGAL_UPDATED))),React.createElement(CtaContact,{overline:"Une question ?",title:"Parlons de votre projet."})),React.createElement(Footer,null))}ReactDOM.createRoot(document.getElementById("root")).render(React.createElement(LegalApp,null));})();
@@ -491,8 +535,16 @@
 ;
 /* ============================================================
    KEVIN CHINELLI — page transitions
-   JS fade-out on internal navigation + fade-in on load (universal,
-   respects prefers-reduced-motion). Plain <script>, no dependencies.
+   JS fade-out on internal navigation + fade-in of the next page
+   (respects prefers-reduced-motion). Plain <script>, no dependencies.
+
+   The fade-in only follows an internal link: the click leaves a
+   timestamp in sessionStorage ("kc-fade"), and a tiny script at the
+   top of every <head> (scripts/seo-sync.mjs, finishPage) adds
+   html.kc-anim-pages BEFORE the first paint. A visitor arriving from
+   Google sees the page at once: a body starting at opacity 0 hides
+   every paint from Chrome's LCP (it measured nothing at all), and
+   adding the class after the first paint made the page blink.
    ============================================================ */
 (function () {
   var html = document.documentElement;
@@ -513,10 +565,7 @@
 
   if (reduce) return; // honour reduced motion — no fades
 
-  // Fade the page in on load…
-  html.classList.add("kc-anim-pages");
-
-  // …and fade out before following an internal link.
+  // Fade out before following an internal link (the next page fades in, see above).
   document.addEventListener("click", function (e) {
     if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
     var a = e.target.closest ? e.target.closest("a[href]") : null;
@@ -534,6 +583,7 @@
     if (url.pathname === location.pathname && url.hash) return;
 
     e.preventDefault();
+    try { sessionStorage.setItem("kc-fade", String(Date.now())); } catch (err) {}
     document.body.classList.add("is-leaving");
     setTimeout(function () { location.href = a.href; }, 300);
   });

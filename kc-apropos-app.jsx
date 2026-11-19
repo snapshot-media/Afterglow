@@ -13,8 +13,8 @@ function ApHero() {
   return (
     <section className="phero bas">
       <div className="bg">
-        <Slot id="apropos-hero" ph="Kevin Chinelli — photographe en Suisse romande, en montagne" loading="eager" fetchpriority="high" style={{ width: "100%", height: "100%" }} />
-        <Slot id="apropos-hero-mobile" ph="Kevin Chinelli — photographe en Suisse romande" loading="eager" fetchpriority="high" style={{ width: "100%", height: "100%" }} />
+        <Slot id="apropos-hero" ph="Kevin Chinelli — photographe en Suisse romande, en montagne" loading="eager" fetchpriority="high" media="(min-width:601px)" style={{ width: "100%", height: "100%" }} />
+        <Slot id="apropos-hero-mobile" ph="Kevin Chinelli — photographe en Suisse romande" loading="eager" fetchpriority="high" media="(max-width:600px)" style={{ width: "100%", height: "100%" }} />
       </div>
       <div className="scrim"></div>
       <div className="phero-content">
