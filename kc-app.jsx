@@ -177,7 +177,7 @@ function HomeHero({ variant = "a" }) {
     <section id="hero" className="hhero va">
       <div className="hh-bg">
         <Slot id="home-hero-full" ph="Image hero — pleine page" alt="Une maman et son nouveau-né dans un pré, au soleil couchant — Kevin Chinelli, photographe en Suisse romande" loading="eager" fetchpriority="high" style={{ width: "100%", height: "100%" }} />
-        <Slot id="home-hero-mobile" ph="Image hero — portrait mobile" alt="Une maman et son nouveau-né dans un pré, au soleil couchant — Kevin Chinelli, photographe en Suisse romande" loading="eager" fetchpriority="high" style={{ width: "100%", height: "100%" }} />
+        <Slot id="home-hero-mobile" ph="Image hero — portrait mobile" alt="Portrait en lumière d'automne, en forêt — Kevin Chinelli, photographe en Suisse romande" loading="eager" fetchpriority="high" style={{ width: "100%", height: "100%" }} />
       </div>
       <div className="scrim"></div>
       <div className="hh-inner">
