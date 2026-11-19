@@ -1,0 +1,756 @@
+{
+ "images/about-photo-mobile.webp": {
+  "hash": "3bfe9aee7861",
+  "W": 1080,
+  "H": 1440,
+  "w": [
+   480,
+   800
+  ]
+ },
+ "images/about-photo.webp": {
+  "hash": "c6e2f4a2f6d6",
+  "W": 1920,
+  "H": 1080,
+  "w": [
+   480,
+   800,
+   1200,
+   1600
+  ]
+ },
+ "images/about-portrait.webp": {
+  "hash": "ccb3ff7f098d",
+  "W": 600,
+  "H": 800,
+  "w": [
+   480
+  ]
+ },
+ "images/about-tri-1.webp": {
+  "hash": "4e94299cb4a7",
+  "W": 527,
+  "H": 790,
+  "w": []
+ },
+ "images/about-tri-2.webp": {
+  "hash": "71049365252a",
+  "W": 527,
+  "H": 790,
+  "w": []
+ },
+ "images/ap-portrait.webp": {
+  "hash": "70d17ae8f4e3",
+  "W": 1200,
+  "H": 1600,
+  "w": [
+   480,
+   800
+  ]
+ },
+ "images/apropos-hero-mobile.webp": {
+  "hash": "631f85b7c65e",
+  "W": 1080,
+  "H": 1440,
+  "w": [
+   480,
+   800
+  ]
+ },
+ "images/apropos-hero.webp": {
+  "hash": "1067731bc9a4",
+  "W": 2400,
+  "H": 1350,
+  "w": [
+   480,
+   800,
+   1200,
+   1600
+  ]
+ },
+ "images/art-hero-ou-se-marier-geneve.webp": {
+  "hash": "92b7bf8fbb65",
+  "W": 1920,
+  "H": 1080,
+  "w": [
+   480,
+   800,
+   1200,
+   1600
+  ]
+ },
+ "images/art-hero-spots-seance-photo-lausanne.webp": {
+  "hash": "da2f45e69b46",
+  "W": 1920,
+  "H": 1080,
+  "w": [
+   480,
+   800,
+   1200,
+   1600
+  ]
+ },
+ "images/gal-2.webp": {
+  "hash": "6a83de078f96",
+  "W": 800,
+  "H": 700,
+  "w": [
+   480
+  ]
+ },
+ "images/gal-3.webp": {
+  "hash": "ad538569bbbc",
+  "W": 800,
+  "H": 700,
+  "w": [
+   480
+  ]
+ },
+ "images/gal-main.webp": {
+  "hash": "9ad660606fcf",
+  "W": 1000,
+  "H": 1400,
+  "w": [
+   480,
+   800
+  ]
+ },
+ "images/hero-main.webp": {
+  "hash": "8fe381807336",
+  "W": 1200,
+  "H": 800,
+  "w": [
+   480,
+   800
+  ]
+ },
+ "images/hero-mariage.webp": {
+  "hash": "e267b64753a5",
+  "W": 2200,
+  "H": 1238,
+  "w": [
+   480,
+   800,
+   1200,
+   1600
+  ]
+ },
+ "images/hero-portrait.webp": {
+  "hash": "2598e0826079",
+  "W": 2200,
+  "H": 1238,
+  "w": [
+   480,
+   800,
+   1200,
+   1600
+  ]
+ },
+ "images/hero-studio.webp": {
+  "hash": "2c218bdd612b",
+  "W": 1000,
+  "H": 1000,
+  "w": [
+   480,
+   800
+  ]
+ },
+ "images/home-g5.webp": {
+  "hash": "e1107ccc8064",
+  "W": 800,
+  "H": 1400,
+  "w": [
+   480
+  ]
+ },
+ "images/home-hero-2026-11.webp": {
+  "hash": "4fb01fb56a86",
+  "W": 2400,
+  "H": 1600,
+  "w": [
+   480,
+   800,
+   1200,
+   1600
+  ]
+ },
+ "images/home-hero-full.webp": {
+  "hash": "ccfbd4a2b55a",
+  "W": 2200,
+  "H": 1467,
+  "w": [
+   480,
+   800,
+   1200,
+   1600
+  ]
+ },
+ "images/home-hero-mobile.webp": {
+  "hash": "470a11687d44",
+  "W": 1000,
+  "H": 1500,
+  "w": [
+   480,
+   800
+  ]
+ },
+ "images/home-hero-split.webp": {
+  "hash": "8496fcdc7a37",
+  "W": 800,
+  "H": 1200,
+  "w": [
+   480
+  ]
+ },
+ "images/home-hero-strip-1.webp": {
+  "hash": "6d6392b87e6c",
+  "W": 521,
+  "H": 782,
+  "w": []
+ },
+ "images/home-hero-strip-2.webp": {
+  "hash": "bd7859618a78",
+  "W": 521,
+  "H": 782,
+  "w": []
+ },
+ "images/home-hero-strip-3.webp": {
+  "hash": "545a6fa1861b",
+  "W": 521,
+  "H": 782,
+  "w": []
+ },
+ "images/home-m5.webp": {
+  "hash": "ea787e14ce39",
+  "W": 1100,
+  "H": 1500,
+  "w": [
+   480,
+   800
+  ]
+ },
+ "images/home-m6.webp": {
+  "hash": "f2930bb66ee4",
+  "W": 1100,
+  "H": 1100,
+  "w": [
+   480,
+   800
+  ]
+ },
+ "images/home-m8.webp": {
+  "hash": "49d23be99546",
+  "W": 1600,
+  "H": 900,
+  "w": [
+   480,
+   800,
+   1200
+  ]
+ },
+ "images/home-p3.webp": {
+  "hash": "f4893ce0f63e",
+  "W": 1200,
+  "H": 1800,
+  "w": [
+   480,
+   800
+  ]
+ },
+ "images/home-p5.webp": {
+  "hash": "73237d416f85",
+  "W": 800,
+  "H": 1400,
+  "w": [
+   480
+  ]
+ },
+ "images/maternite-g0.webp": {
+  "hash": "50185cb49620",
+  "W": 1400,
+  "H": 2100,
+  "w": [
+   480,
+   800,
+   1200
+  ]
+ },
+ "images/maternite-g1.webp": {
+  "hash": "f61fef4f0d80",
+  "W": 1920,
+  "H": 1080,
+  "w": [
+   480,
+   800,
+   1200,
+   1600
+  ]
+ },
+ "images/maternite-g2.webp": {
+  "hash": "9207b13f4507",
+  "W": 1400,
+  "H": 2100,
+  "w": [
+   480,
+   800,
+   1200
+  ]
+ },
+ "images/maternite-g3.webp": {
+  "hash": "6572deca896a",
+  "W": 1400,
+  "H": 2100,
+  "w": [
+   480,
+   800,
+   1200
+  ]
+ },
+ "images/maternite-g4.webp": {
+  "hash": "9a2a42860b23",
+  "W": 1400,
+  "H": 2100,
+  "w": [
+   480,
+   800,
+   1200
+  ]
+ },
+ "images/maternite-g5.webp": {
+  "hash": "67c97e57f735",
+  "W": 1400,
+  "H": 2100,
+  "w": [
+   480,
+   800,
+   1200
+  ]
+ },
+ "images/maternite-g6.webp": {
+  "hash": "2b7b72b88085",
+  "W": 1920,
+  "H": 1080,
+  "w": [
+   480,
+   800,
+   1200,
+   1600
+  ]
+ },
+ "images/maternite-g8.webp": {
+  "hash": "30da79fc13e3",
+  "W": 1920,
+  "H": 1080,
+  "w": [
+   480,
+   800,
+   1200,
+   1600
+  ]
+ },
+ "images/pf-mariage-1.webp": {
+  "hash": "6feef5c814b1",
+  "W": 1200,
+  "H": 1800,
+  "w": [
+   480,
+   800
+  ]
+ },
+ "images/pf-mariage-2.webp": {
+  "hash": "c42932b32cb6",
+  "W": 1200,
+  "H": 1800,
+  "w": [
+   480,
+   800
+  ]
+ },
+ "images/pf-mariage-3.webp": {
+  "hash": "4b9f0979b4e6",
+  "W": 1200,
+  "H": 1800,
+  "w": [
+   480,
+   800
+  ]
+ },
+ "images/pf-mariage-4b.webp": {
+  "hash": "2849683c5683",
+  "W": 1400,
+  "H": 2100,
+  "w": [
+   480,
+   800,
+   1200
+  ]
+ },
+ "images/pf-mariage-5.webp": {
+  "hash": "da525c3700ab",
+  "W": 1400,
+  "H": 1750,
+  "w": [
+   480,
+   800,
+   1200
+  ]
+ },
+ "images/pf-mariage-6.webp": {
+  "hash": "154c79a27111",
+  "W": 1400,
+  "H": 2100,
+  "w": [
+   480,
+   800,
+   1200
+  ]
+ },
+ "images/pf-mariage-7.webp": {
+  "hash": "0a09e2fb1ac9",
+  "W": 1400,
+  "H": 2100,
+  "w": [
+   480,
+   800,
+   1200
+  ]
+ },
+ "images/pf-mariage-8.webp": {
+  "hash": "3bd66eea6ac0",
+  "W": 1920,
+  "H": 1080,
+  "w": [
+   480,
+   800,
+   1200,
+   1600
+  ]
+ },
+ "images/pf-portrait-1.webp": {
+  "hash": "0c15a4cf25c6",
+  "W": 1200,
+  "H": 1800,
+  "w": [
+   480,
+   800
+  ]
+ },
+ "images/pf-portrait-2.webp": {
+  "hash": "35464a10bdf8",
+  "W": 1200,
+  "H": 1800,
+  "w": [
+   480,
+   800
+  ]
+ },
+ "images/pf-portrait-3.webp": {
+  "hash": "a0c27f02ecef",
+  "W": 1400,
+  "H": 2100,
+  "w": [
+   480,
+   800,
+   1200
+  ]
+ },
+ "images/pf-portrait-7.webp": {
+  "hash": "d76676fb218a",
+  "W": 1800,
+  "H": 1200,
+  "w": [
+   480,
+   800,
+   1200,
+   1600
+  ]
+ },
+ "images/pf-portrait-8.webp": {
+  "hash": "bfe4e15eab85",
+  "W": 1920,
+  "H": 1080,
+  "w": [
+   480,
+   800,
+   1200,
+   1600
+  ]
+ },
+ "images/phero-mariage-mobile.webp": {
+  "hash": "1ae8f134313a",
+  "W": 1080,
+  "H": 1350,
+  "w": [
+   480,
+   800
+  ]
+ },
+ "images/phero-mariage.webp": {
+  "hash": "6148b6ef7ac2",
+  "W": 2400,
+  "H": 1350,
+  "w": [
+   480,
+   800,
+   1200,
+   1600
+  ]
+ },
+ "images/phero-maternite-mobile.webp": {
+  "hash": "675b22b5f2bf",
+  "W": 900,
+  "H": 1200,
+  "w": [
+   480,
+   800
+  ]
+ },
+ "images/phero-maternite.webp": {
+  "hash": "9672114a2c0b",
+  "W": 1920,
+  "H": 1080,
+  "w": [
+   480,
+   800,
+   1200,
+   1600
+  ]
+ },
+ "images/phero-portrait-mobile.webp": {
+  "hash": "603fcf05985c",
+  "W": 1080,
+  "H": 1350,
+  "w": [
+   480,
+   800
+  ]
+ },
+ "images/phero-portrait.webp": {
+  "hash": "b57bdb6ecd68",
+  "W": 2400,
+  "H": 1350,
+  "w": [
+   480,
+   800,
+   1200,
+   1600
+  ]
+ },
+ "images/phero-studio-mobile.webp": {
+  "hash": "23e61b3d268d",
+  "W": 1080,
+  "H": 1350,
+  "w": [
+   480,
+   800
+  ]
+ },
+ "images/phero-studio.webp": {
+  "hash": "7ab9f18ff7e6",
+  "W": 2400,
+  "H": 1350,
+  "w": [
+   480,
+   800,
+   1200,
+   1600
+  ]
+ },
+ "images/portrait-g0.webp": {
+  "hash": "22c19578d893",
+  "W": 1400,
+  "H": 2100,
+  "w": [
+   480,
+   800,
+   1200
+  ]
+ },
+ "images/portrait-g1.webp": {
+  "hash": "f3ad332904e6",
+  "W": 1400,
+  "H": 2100,
+  "w": [
+   480,
+   800,
+   1200
+  ]
+ },
+ "images/portrait-g2.webp": {
+  "hash": "b5f3caa67635",
+  "W": 1920,
+  "H": 1080,
+  "w": [
+   480,
+   800,
+   1200,
+   1600
+  ]
+ },
+ "images/portrait-g3.webp": {
+  "hash": "117df6040a7d",
+  "W": 1400,
+  "H": 2100,
+  "w": [
+   480,
+   800,
+   1200
+  ]
+ },
+ "images/portrait-g4.webp": {
+  "hash": "93974eb535b9",
+  "W": 1400,
+  "H": 2100,
+  "w": [
+   480,
+   800,
+   1200
+  ]
+ },
+ "images/portrait-g5.webp": {
+  "hash": "da2f45e69b46",
+  "W": 1920,
+  "H": 1080,
+  "w": [
+   480,
+   800,
+   1200,
+   1600
+  ]
+ },
+ "images/portrait-g6.webp": {
+  "hash": "ab2f74bf9dbe",
+  "W": 1400,
+  "H": 2100,
+  "w": [
+   480,
+   800,
+   1200
+  ]
+ },
+ "images/portrait-g7.webp": {
+  "hash": "c9029dfb33c1",
+  "W": 1400,
+  "H": 2100,
+  "w": [
+   480,
+   800,
+   1200
+  ]
+ },
+ "images/portrait-g8.webp": {
+  "hash": "412f70ed3dfc",
+  "W": 1920,
+  "H": 1080,
+  "w": [
+   480,
+   800,
+   1200,
+   1600
+  ]
+ },
+ "images/presta-couple.webp": {
+  "hash": "70824c3ad44d",
+  "W": 800,
+  "H": 1200,
+  "w": [
+   480
+  ]
+ },
+ "images/presta-mariage.webp": {
+  "hash": "9fc3c8c95b8d",
+  "W": 1200,
+  "H": 900,
+  "w": [
+   480,
+   800
+  ]
+ },
+ "images/presta-maternite.webp": {
+  "hash": "541172ffe2f4",
+  "W": 1200,
+  "H": 900,
+  "w": [
+   480,
+   800
+  ]
+ },
+ "images/presta-portrait.webp": {
+  "hash": "5bf95e256462",
+  "W": 1200,
+  "H": 900,
+  "w": [
+   480,
+   800
+  ]
+ },
+ "images/presta-studio.webp": {
+  "hash": "04816bfeeb5d",
+  "W": 1200,
+  "H": 900,
+  "w": [
+   480,
+   800
+  ]
+ },
+ "images/studio-g0.webp": {
+  "hash": "45f06ed97852",
+  "W": 1400,
+  "H": 2100,
+  "w": [
+   480,
+   800,
+   1200
+  ]
+ },
+ "images/studio-g1.webp": {
+  "hash": "174417899fb6",
+  "W": 1400,
+  "H": 2100,
+  "w": [
+   480,
+   800,
+   1200
+  ]
+ },
+ "images/studio-g2.webp": {
+  "hash": "788ac3c930e9",
+  "W": 1400,
+  "H": 2100,
+  "w": [
+   480,
+   800,
+   1200
+  ]
+ },
+ "images/studio-g3.webp": {
+  "hash": "c78b137b3e5b",
+  "W": 1400,
+  "H": 2100,
+  "w": [
+   480,
+   800,
+   1200
+  ]
+ },
+ "images/studio-g4.webp": {
+  "hash": "d34754b13c61",
+  "W": 1400,
+  "H": 2100,
+  "w": [
+   480,
+   800,
+   1200
+  ]
+ },
+ "images/studio-g5.webp": {
+  "hash": "2d463ef2c105",
+  "W": 1400,
+  "H": 2100,
+  "w": [
+   480,
+   800,
+   1200
+  ]
+ }
+}

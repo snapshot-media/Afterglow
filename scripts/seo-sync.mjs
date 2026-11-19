@@ -17,6 +17,8 @@
    - script de mesure Umami (si UMAMI_WEBSITE_ID est renseigné)
    ============================================================ */
 
+import { srcsetOf } from "./gen-variants.mjs";
+
 export const BASE = "https://afterglowbykevin.ch";
 
 // Mesure d'audience : Umami auto-hébergé, servi sous /u/ (même origine → CSP inchangée).
@@ -66,7 +68,7 @@ function readEagerSlots(rendered) {
   for (const m of rendered.matchAll(/<image-slot ([^>]*)>/g)) {
     if (!/loading="eager"/.test(m[1])) continue;
     const id = slotAttr(m[1], "id");
-    if (id && !out.some((s) => s.id === id)) out.push({ id, media: slotAttr(m[1], "media") || null });
+    if (id && !out.some((s) => s.id === id)) out.push({ id, media: slotAttr(m[1], "media") || null, sizes: slotAttr(m[1], "sizes") || null });
   }
   return out;
 }
@@ -77,7 +79,21 @@ function readEagerSlots(rendered) {
    temps d'affichage du héros. Le build écrit donc l'image dans chaque <image-slot> du pré-rendu ;
    le composant la laisse affichée (son <slot>) jusqu'au rendu React. Un emplacement qui porte
    media= devient un <picture> sans image par défaut : hors de sa condition, rien n'est téléchargé. */
-function fillSlots(rendered, sidecar) {
+/* sizes : la largeur à laquelle la photo sera dessinée, pour que le navigateur prenne la plus petite
+   version réduite qui suffit. Les photos remplissent leur cadre (object-fit: cover) : une photo en
+   largeur dans un cadre en hauteur est dessinée plus large que le cadre (jusqu'à 2,6 fois sur le
+   site, mesuré le 19.11). « sizes=auto » de Chrome, qui ne regarde que le cadre, la rendrait floue.
+   - héros (eager, chargés avant toute mise en page) : cadre = l'écran ; si l'écran est plus étroit
+     que la photo, c'est la hauteur qui commande : (max-aspect-ratio: L/H) <100·L/H>vh, sinon 100vw ;
+   - les autres (lazy) : 100vw dans le HTML, puis la taille exacte, max(largeur, hauteur × L/H) du
+     cadre, posée par le petit script data-kc-sizes avant tout chargement, et par image-slot.js
+     (même calcul, sinon le navigateur prendrait la même photo deux fois en deux tailles). */
+export const heroSizes = (m) => `(max-aspect-ratio: ${m.W}/${m.H}) ${Math.ceil((100 * m.W) / m.H)}vh, 100vw`;
+const SIZES_SCRIPT = '<script data-kc-sizes>(function(){var l=document.querySelectorAll("image-slot>img[data-ar]");' +
+  'for(var i=0;i<l.length;i++){var g=l[i],r=g.parentNode.getBoundingClientRect();' +
+  'if(r.width)g.sizes=Math.ceil(Math.max(r.width,r.height*g.getAttribute("data-ar")))+"px"}})()</script>';
+
+function fillSlots(rendered, sidecar, variants) {
   return rendered.replace(/<image-slot ([^>]*)><\/image-slot>/g, (whole, attrs) => {
     const url = slotUrl(sidecar, slotAttr(attrs, "id"));
     if (!url) return whole;
@@ -87,22 +103,31 @@ function fillSlots(rendered, sidecar) {
     const fit = slotAttr(attrs, "fit") || "cover";
     const pos = slotAttr(attrs, "position");
     const media = slotAttr(attrs, "media");
+    const set = srcsetOf(variants, url);
+    const m = variants[url];
+    const own = slotAttr(attrs, "sizes");
+    const sizes = !set ? "" : ` sizes="${own || (loading === "lazy" ? "100vw" : heroSizes(m))}"`;
+    // rapport largeur / hauteur pour le script data-kc-sizes (0 hors cover : la largeur du cadre suffit)
+    const ar = set && !own && loading === "lazy" ? ` data-ar="${fit === "cover" ? m.W / m.H : 0}"` : "";
     const style = (fit !== "cover" ? `object-fit:${fit};` : "") + (pos ? `object-position:${pos};` : "");
     const img = `<img alt="${alt}" loading="${loading}"` + (fp ? ` fetchpriority="${fp}"` : ` decoding="async"`) +
       (style ? ` style="${style}"` : "");
     const light = media
-      ? `<picture><source media="${media}" srcset="${attr(url)}">${img}></picture>`
-      : `${img} src="${attr(url)}">`;
+      ? `<picture><source media="${media}" srcset="${attr(set || url)}"${sizes}>${img}></picture>`
+      : `${img}${set ? ` srcset="${attr(set)}"${sizes}${ar}` : ""} src="${attr(url)}">`;
     return `<image-slot ${attrs}>${light}</image-slot>`;
   });
 }
-// La correspondance id → image des emplacements de la page, lue par image-slot.js sans requête.
-function slotMap(rendered, sidecar) {
+// La correspondance id → image des emplacements de la page, lue par image-slot.js sans requête
+// (avec, quand la photo a des versions réduites, leur srcset et ses dimensions : { u, s, w, h }).
+function slotMap(rendered, sidecar, variants) {
   const map = {};
   for (const m of rendered.matchAll(/<image-slot ([^>]*)>/g)) {
     const id = slotAttr(m[1], "id");
     const url = slotUrl(sidecar, id);
-    if (url) map[id] = url;
+    if (!url) continue;
+    const set = srcsetOf(variants, url);
+    map[id] = set ? { u: url, s: set, w: variants[url].W, h: variants[url].H } : url;
   }
   return map;
 }
@@ -122,7 +147,7 @@ function priceOf(s) {
 }
 
 /* ---------- API ---------- */
-export function syncPage(html, { rendered, ctx, sidecar }) {
+export function syncPage(html, { rendered, ctx, sidecar, variants = {} }) {
   const canonical = (html.match(/<link rel="canonical" href="([^"]+)"/) || [])[1];
   const metaDesc = decode((html.match(/<meta name="description" content="([^"]*)"/) || [])[1] || "");
   const ogImage = (html.match(/<meta property="og:image" content="([^"]+)"/) || [])[1];
@@ -206,7 +231,12 @@ export function syncPage(html, { rendered, ctx, sidecar }) {
   const hasMobile = eager.some((s) => /-mobile$/.test(s.id));
   const preloads = eager.map((s) => {
     const q = s.media || (hasMobile ? (/-mobile$/.test(s.id) ? "(max-width:600px)" : "(min-width:601px)") : null);
-    return `<link rel="preload" as="image" href="${attr(slotUrl(sidecar, s.id))}"${q ? ` media="${q}"` : ""} fetchpriority="high">`;
+    const url = slotUrl(sidecar, s.id);
+    const set = srcsetOf(variants, url);
+    // imagesrcset / imagesizes identiques à ceux de l'image : le préchargement prend la même version
+    return `<link rel="preload" as="image" href="${attr(url)}"` +
+      (set ? ` imagesrcset="${attr(set)}" imagesizes="${s.sizes || heroSizes(variants[url])}"` : "") +
+      `${q ? ` media="${q}"` : ""} fetchpriority="high">`;
   });
   html = html.replace(/<link rel="preload" as="image"[^>]*>\r?\n?/g, "");
   // la correspondance des images est désormais dans la page : plus de requête à précharger
@@ -214,9 +244,12 @@ export function syncPage(html, { rendered, ctx, sidecar }) {
   if (preloads.length) html = html.replace(/(<link rel="stylesheet")/, preloads.join("\n") + "\n$1");
 
   // 4) images écrites dans le pré-rendu + correspondance id → image pour image-slot.js
-  html = html.replace(/<!--ssg-->([\s\S]*?)<!--\/ssg-->/, (_m, inner) => `<!--ssg-->${fillSlots(inner, sidecar)}<!--/ssg-->`);
+  html = html.replace(/<!--ssg-->([\s\S]*?)<!--\/ssg-->/, (_m, inner) => `<!--ssg-->${fillSlots(inner, sidecar, variants)}<!--/ssg-->`);
+  // taille exacte des photos « lazy » avant leur chargement (voir heroSizes) : juste après le contenu
+  html = html.replace(/<script data-kc-sizes>[\s\S]*?<\/script>\r?\n?/g, "");
+  if (html.includes(" data-ar=")) html = html.replace("<!--/ssg--></div>", () => `<!--/ssg--></div>\n${SIZES_SCRIPT}`);
   html = html.replace(/<script type="application\/json" id="kc-slots">[\s\S]*?<\/script>\r?\n?/g, "");
-  const map = slotMap(rendered, sidecar);
+  const map = slotMap(rendered, sidecar, variants);
   if (Object.keys(map).length) {
     const json = JSON.stringify(map).replace(/</g, "\\u003c");
     html = html.replace("</head>", `<script type="application/json" id="kc-slots">${json}</script>\n</head>`);

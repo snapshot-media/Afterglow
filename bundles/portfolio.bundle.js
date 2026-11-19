@@ -22,6 +22,7 @@
     return loadP;
   }
 
+  // { u: image d'origine, s: srcset des versions réduites (absent hors de #kc-slots) }
   function getSlot(id) {
     const v = slots[id];
     if (!v) return null;
@@ -46,6 +47,16 @@
   }
   function mediaForget(fn) { mqls.forEach((m) => m.fns.delete(fn)); }
 
+  // Cadre redimensionné (fenêtre, rotation) : la taille d'affichage change, le navigateur reprend
+  // au besoin une version plus grande. Un seul observateur pour tous les emplacements.
+  let ro = null;
+  function sizeWatch(el) {
+    if (!window.ResizeObserver) return;
+    if (!ro) ro = new ResizeObserver((entries) => entries.forEach((e) => e.target._resized && e.target._resized()));
+    if (!el._watched) { el._watched = true; ro.observe(el); }
+  }
+  function sizeForget(el) { if (ro && el._watched) { ro.unobserve(el); el._watched = false; } }
+
   // ── Custom element ──────────────────────────────────────────────────────
   const stylesheet =
     ':host{display:inline-block;position:relative;vertical-align:top;' +
@@ -66,7 +77,7 @@
 
   class ImageSlot extends HTMLElement {
     static get observedAttributes() {
-      return ['shape', 'radius', 'mask', 'fit', 'position', 'placeholder', 'src', 'id', 'loading', 'fetchpriority', 'media'];
+      return ['shape', 'radius', 'mask', 'fit', 'position', 'placeholder', 'src', 'id', 'loading', 'fetchpriority', 'media', 'sizes'];
     }
 
     constructor() {
@@ -99,11 +110,34 @@
     disconnectedCallback() {
       subs.delete(this._subFn);
       mediaForget(this._subFn);
+      sizeForget(this);
     }
 
     // React (et l'analyse du HTML) posent les attributs un à un avant l'insertion : rendre seulement
     // une fois l'élément dans la page, quand media, loading et fetchpriority sont tous connus.
     attributeChangedCallback() { if (this.shadowRoot && this.isConnected) this._render(); }
+
+    // Largeur à laquelle la photo sera dessinée — MÊME calcul que scripts/seo-sync.mjs (heroSizes et
+    // le script data-kc-sizes), pour que le navigateur reprenne la version déjà chargée par le HTML.
+    // La photo remplit son cadre (cover) : en hauteur, elle peut déborder la largeur du cadre.
+    _sizes(stored) {
+      const own = this.getAttribute('sizes');
+      if (own) return own;
+      if ((this.getAttribute('loading') || 'lazy') !== 'lazy') {
+        return '(max-aspect-ratio: ' + stored.w + '/' + stored.h + ') ' + Math.ceil(100 * stored.w / stored.h) + 'vh, 100vw';
+      }
+      const r = this.getBoundingClientRect();
+      if (!r.width) return '100vw';
+      const ar = (this.getAttribute('fit') || 'cover') === 'cover' ? stored.w / stored.h : 0;
+      return Math.ceil(Math.max(r.width, r.height * ar)) + 'px';
+    }
+
+    _resized() {
+      const stored = this.id ? getSlot(this.id) : null;
+      if (!stored || !stored.s || this.querySelector(':scope > img, :scope > picture')) return;
+      const s = this._sizes(stored);
+      if (this._img.getAttribute('sizes') !== s) this._img.setAttribute('sizes', s);
+    }
 
     _render() {
       const mask = this.getAttribute('mask');
@@ -148,6 +182,18 @@
         if (fp) this._img.setAttribute('fetchpriority', fp);
         else this._img.removeAttribute('fetchpriority');
         this._img.setAttribute('decoding', fp === 'high' ? 'sync' : 'async');
+        // Versions réduites (images/w/, scripts/gen-variants.mjs) : le navigateur prend la plus petite
+        // qui suffit au cadre. sizes : même règle que le build (seo-sync.mjs), pour retomber sur la
+        // version déjà chargée par l'image du HTML. src reste l'original (agrandissement, kc-lightbox).
+        const set = stored && stored.s;
+        if (set) {
+          this._img.setAttribute('sizes', this._sizes(stored));
+          if (this._img.getAttribute('srcset') !== set) this._img.setAttribute('srcset', set);
+          if (!this.getAttribute('sizes') && (this.getAttribute('loading') || 'lazy') === 'lazy') sizeWatch(this);
+        } else {
+          this._img.removeAttribute('srcset');
+          this._img.removeAttribute('sizes');
+        }
         if (this._img.getAttribute('src') !== url) this._img.src = url;
         this._img.style.display = 'block';
         this._empty.style.display = 'none';

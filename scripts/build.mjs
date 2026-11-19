@@ -15,6 +15,7 @@ import { prerenderAll } from "./prerender.mjs";
 import { bundleAll } from "./bundle-scripts.mjs";
 import { downloadFonts } from "./download-fonts.mjs";
 import { genLlms } from "./gen-llms.mjs";
+import { genVariants } from "./gen-variants.mjs";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -74,6 +75,9 @@ const htmlFiles = readdirSync(root).filter((f) => f.endsWith(".html"));
 
 // Polices locales (skip si fonts/fonts.css existe déjà)
 await downloadFonts();
+
+// Versions réduites des photos (images/w/), lues par le pré-rendu pour écrire les srcset.
+await genVariants(root);
 
 // Pré-rendu SSG : injecte le HTML React dans #root (doit tourner APRÈS la
 // compilation des .js, car il les exécute côté Node).

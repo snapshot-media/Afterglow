@@ -22,6 +22,7 @@ import { resolve } from "node:path";
 import vm from "node:vm";
 import { createRequire } from "node:module";
 import { syncPage, finishPage } from "./seo-sync.mjs";
+import { readManifest } from "./gen-variants.mjs";
 
 const require = createRequire(import.meta.url);
 const React = require("react");
@@ -134,7 +135,7 @@ function resetRoot(html) {
 
 /* ---------- pré-rendu d'une page ----------
    Renvoie le HTML à écrire, ou null si la page n'est pas concernée. */
-function prerenderPage(root, htmlFile, htmlRaw, sidecar) {
+function prerenderPage(root, htmlFile, htmlRaw, sidecar, variants) {
   const html = resetRoot(htmlRaw);
   if (!/<div id="root"><\/div>/.test(html)) return null; // pas de point de montage
 
@@ -184,7 +185,7 @@ function prerenderPage(root, htmlFile, htmlRaw, sidecar) {
   const rendered = ReactDOMServer.renderToString(el);
   const out = html.replace(/<div id="root"><\/div>/, () => `<div id="root"><!--ssg-->${rendered}<!--/ssg--></div>`);
   // FAQ, fil d'Ariane, offres, préchargements… recalculés depuis le rendu (voir seo-sync.mjs)
-  return syncPage(out, { rendered, ctx, sidecar });
+  return syncPage(out, { rendered, ctx, sidecar, variants });
 }
 
 /* ---------- API ---------- */
@@ -192,11 +193,12 @@ export function prerenderAll(root, htmlFiles) {
   let ok = 0, skipped = 0, failed = 0;
   const sidecarPath = resolve(root, ".image-slots.state.json");
   const sidecar = existsSync(sidecarPath) ? JSON.parse(readFileSync(sidecarPath, "utf8")) : {};
+  const variants = readManifest(root); // versions réduites des photos (gen-variants.mjs)
   for (const htmlFile of htmlFiles) {
     const path = resolve(root, htmlFile);
     const html = readFileSync(path, "utf8");
     try {
-      const out = prerenderPage(root, htmlFile, html, sidecar);
+      const out = prerenderPage(root, htmlFile, html, sidecar, variants);
       if (out == null) {
         // page non React : on s'assure juste qu'aucun pré-rendu périmé ne traîne
         const clean = finishPage(resetRoot(html));
