@@ -648,3 +648,6 @@ select.control option{ background:#1a1714; color:#f2ede6; }
 .hh-h1 > span{ display:block; }
 .h1-stack{ margin:0; font:inherit; color:inherit; }
 .h1-stack > span{ display:block; }
+
+/* Menu Prestations : « Bon cadeau », séparé des prestations par un filet */
+.nav-drop a.nd-gift{ margin-top:6px; padding-top:13px; border-top:1px solid color-mix(in oklab, var(--cream), transparent 88%); }

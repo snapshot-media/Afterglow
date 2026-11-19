@@ -18,7 +18,7 @@ const TARIF_FAQ = [
   { q: "Comment réserver et régler ?",
     a: "La date est bloquée à la signature du contrat et au versement d'un acompte de 30 %. Le solde est réglé avant la prestation ; pour les mariages, il est versé 10 jours après la célébration, et je conseille de réserver 8 à 14 mois à l'avance pour les samedis de mai à septembre." },
   { q: "Proposez-vous des bons cadeaux ?",
-    a: "Oui, des bons cadeaux personnalisés valables un an — pour une séance lifestyle (solo, couple ou famille), studio ou maternité. Une belle idée de cadeau pour un anniversaire, une naissance ou les fêtes." },
+    a: <>Oui : une séance précise (lifestyle, grossesse ou studio) ou un montant dès CHF 100, à valoir sur la séance de son choix. Le bon arrive par e-mail en PDF et reste valable 12 mois. Tous les détails sur la page <a href="bon-cadeau.html">Bon cadeau</a>.</> },
 ];
 
 function priceNum(s) {

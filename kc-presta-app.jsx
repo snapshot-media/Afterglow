@@ -163,7 +163,9 @@ function Formules() {
             </div>
           )}
         </div>
-        <p className="tarif-note">Tarifs sur devis personnalisé — chaque projet est unique. Contactez-moi pour une proposition détaillée.</p>
+        <p className="tarif-note">Tarifs sur devis personnalisé — chaque projet est unique. Contactez-moi pour une proposition détaillée.
+          {window.KC_SLUG !== "mariage" && <><br /><a href="bon-cadeau.html" className="gift-link" data-umami-event="vers-bon-cadeau">Offrir cette séance en bon cadeau <span className="ar">→</span></a></>}
+        </p>
       </div>
     </section>
   );
@@ -268,8 +270,8 @@ function GiftBand() {
         <div className="gb-text">
           <Overline>Bon cadeau</Overline>
           <h2 className="display" style={{ fontSize: "clamp(26px,3.2vw,44px)", margin: "16px 0 14px" }}>Offrez une séance.</h2>
-          <p>Une demande à venir, un anniversaire de rencontre, les fêtes&nbsp;? Offrez un bon cadeau personnalisé, valable un an dans toute la Suisse romande. Je m'occupe du reste.</p>
-          <a href="contact.html?type=Bon%20cadeau" className="link-arrow" style={{ marginTop: "10px" }}>Commander un bon cadeau <span className="ar">→</span></a>
+          <p>Une demande à venir, un anniversaire de rencontre, les fêtes&nbsp;? Offrez une séance, ou un montant à valoir sur la séance de son choix. Le bon arrive par e-mail et reste valable 12&nbsp;mois.</p>
+          <a href="bon-cadeau.html" className="link-arrow" style={{ marginTop: "10px" }} data-umami-event="vers-bon-cadeau">Offrir un bon cadeau <span className="ar">→</span></a>
         </div>
         <div className="gb-img"><Slot id="couple-gift" ph="Bon cadeau — séance couple" alt="Bon cadeau pour une séance photo de couple en Suisse romande — Kevin Chinelli" style={{ width: "100%", height: "100%" }} /></div>
       </div>

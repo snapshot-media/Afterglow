@@ -81,6 +81,7 @@ function Nav() {
             <a key={p.id} href={p.href} onClick={() => setOpen(false)}>{p.title}</a>,
             ...(p.id === "presta-portrait" ? LIFESTYLE_SUB.map((c) => <a key={c.slug} href={c.href} className="mm-sub" onClick={() => setOpen(false)}>{c.title}</a>) : []),
           ])}
+          <a href="bon-cadeau.html" onClick={() => setOpen(false)}>Bon cadeau</a>
         </div>
         <a className="mm-top" href="portfolio.html" onClick={() => setOpen(false)}>Portfolio</a>
         <a className="mm-top" href="tarifs.html" onClick={() => setOpen(false)}>Tarifs</a>
@@ -103,6 +104,7 @@ function Nav() {
                 <a key={p.id} href={p.href}>{p.title}</a>,
                 ...(p.id === "presta-portrait" ? LIFESTYLE_SUB.map((c) => <a key={c.slug} href={c.href} className="nd-sub">{c.title}</a>) : []),
               ])}
+              <a href="bon-cadeau.html" className="nd-gift">Bon cadeau</a>
             </div>
           </div>
           <a href="portfolio.html" className="nav-extra">Portfolio</a>
@@ -439,6 +441,7 @@ function Footer() {
         {/* même liste que FooterLinks (kc-shared.jsx), que l'accueil ne charge pas */}
         <div className="social">
           <a href="apropos.html">À propos</a>
+          <a href="bon-cadeau.html">Bon cadeau</a>
           <a href="confidentialite.html">Confidentialité</a>
           <a href="https://www.instagram.com/afterglowbykevin/" target="_blank" rel="noopener" data-umami-event="instagram">Instagram</a>
           <a href="https://g.page/r/Ccd14Q8WzKZuEBM" target="_blank" rel="noopener" data-umami-event="fiche-google">Google</a>

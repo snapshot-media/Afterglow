@@ -413,3 +413,16 @@
 /* ---------- Formule « Entreprises » : renvoi vers Snapshot Media ---------- */
 .formule-pro{ border-style:dashed; }
 .formule-pro .pro-text{ margin:0; color:var(--muted); font-size:clamp(14px,1vw,16px); line-height:1.65; flex:1; }
+
+/* ---------- Bon cadeau (bon-cadeau.html) et liens « Offrir cette séance » ---------- */
+.gift-head-cta{ margin-top:clamp(26px,3vw,36px); }
+.sec.pad-y.gift-seances{ padding-top:0; scroll-margin-top:90px; }
+.gift-sub{ margin:0 0 14px; color:var(--muted); font-size:clamp(14px,1vw,16px); line-height:1.6; }
+a.gift-card{ color:inherit; text-decoration:none; }
+.gift-offer{ margin-top:auto; padding-top:6px; display:inline-flex; align-items:center; gap:10px; font-size:11px; letter-spacing:.18em;
+  text-transform:uppercase; color:var(--fg); }
+.gift-offer .ar{ color:var(--accent); transition:transform .5s cubic-bezier(.2,.7,.2,1); }
+a.gift-card:hover .gift-offer .ar{ transform:translateX(6px); }
+.tarif-note .gift-link{ display:inline-block; margin-top:10px; color:var(--fg); }
+.tarif-note .gift-link .ar{ color:var(--accent); }
+.tarif-note .gift-link:hover{ color:var(--accent); }

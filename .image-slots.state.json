@@ -748,5 +748,11 @@
     "s": 1,
     "x": 0,
     "y": 0
+  },
+  "cadeau-img": {
+    "u": "images/maternite-g2.webp",
+    "s": 1,
+    "x": 0,
+    "y": 0
   }
 }

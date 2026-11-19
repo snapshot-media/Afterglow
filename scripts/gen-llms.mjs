@@ -61,6 +61,7 @@ export function genLlms(root) {
 
   L.push("## Autres pages", "");
   L.push(`- [Tarifs](${BASE}/tarifs.html) : toutes les formules et la FAQ tarifaire.`);
+  L.push(`- [Bon cadeau](${BASE}/bon-cadeau.html) : offrir une séance lifestyle, grossesse ou studio, ou un montant dès CHF 100 ; valable 12 mois, envoyé par e-mail en PDF après paiement sur facture.`);
   L.push(`- [Portfolio](${BASE}/portfolio.html) : sélection d'images, mariage, lifestyle, grossesse, studio.`);
   L.push(`- [À propos](${BASE}/apropos.html) : Kevin Chinelli, son parcours et sa façon de travailler.`);
   L.push(`- [Contact et devis](${BASE}/contact.html) : demande guidée en quelques étapes, réponse sous 48 h.`, "");

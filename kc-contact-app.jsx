@@ -44,6 +44,25 @@ const FORMULES = {
 
 const REGIONS = ["Vaud / Lausanne", "Genève", "Fribourg", "Neuchâtel", "Valais", "Riviera / Montreux", "Autre / à définir"];
 
+/* Bon cadeau (conditions du 19.11.2026) : une séance précise ou un montant libre dès CHF 100.
+   Les clés (« lifestyle-signature », « montant ») sont celles des liens de bon-cadeau.html (kc-cadeau-app.jsx).
+   contact.php ne connaît que ses champs habituels : le choix part dans « formule », le prénom et le mot dans « message ». */
+const GIFT_TYPES = [
+  { type: "Lifestyle", key: "lifestyle", label: "Lifestyle" },
+  { type: "Maternité & Grossesse", key: "maternite", label: "Grossesse" },
+  { type: "Studio", key: "studio", label: "Studio" },
+];
+const bonKey = (prefix, name) => prefix + "-" + name.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().split(/[^a-z0-9]+/)[0];
+const GIFT_OPTS = GIFT_TYPES.flatMap((g) => FORMULES[g.type]
+  .filter((f) => f.price)
+  .map((f) => ({ key: bonKey(g.key, f.name), label: g.label + " · " + f.name, price: f.price })));
+const MIN_MONTANT = 100;
+function giftLabel(a) {
+  if (a.bon === "montant") return a.montant ? "Montant libre · CHF " + a.montant : "Montant libre";
+  const o = GIFT_OPTS.find((x) => x.key === a.bon);
+  return o ? o.label + " · " + o.price : "";
+}
+
 function normType(v) {
   if (!v) return "";
   // les séances solo, couple et famille sont des séances Lifestyle
@@ -67,17 +86,27 @@ function ContactApp() {
     date: Q.get("date") || "",
     region: "",
     nom: "", email: "", tel: "", message: "", website: "",
+    // bon cadeau
+    bon: (() => { const b = Q.get("bon") || ""; return b === "montant" || GIFT_OPTS.some((o) => o.key === b) ? b : ""; })(),
+    montant: "", pour: "", mot: "",
   });
   useReveal([step, sent]);
 
   const set = (k, v) => setA((s) => ({ ...s, [k]: v }));
+  const isGift = a.type === "Bon cadeau";
   const hasFormules = !!FORMULES[a.type];
-  const STEPS = ["Prestation", hasFormules ? "Formule" : null, "Date & lieu", "Coordonnées", "Récapitulatif"].filter(Boolean);
+  const STEPS = isGift
+    ? ["Prestation", "Le bon", "Coordonnées", "Récapitulatif"]
+    : ["Prestation", hasFormules ? "Formule" : null, "Date & lieu", "Coordonnées", "Récapitulatif"].filter(Boolean);
 
   const validateStep = (i) => {
     const e = {};
     const label = STEPS[i];
     if (label === "Prestation" && !a.type) e.type = "Choisissez une prestation.";
+    if (label === "Le bon") {
+      if (!a.bon) e.bon = "Choisissez une séance ou un montant.";
+      else if (a.bon === "montant" && !(parseInt(a.montant, 10) >= MIN_MONTANT)) e.montant = "Le montant commence à CHF " + MIN_MONTANT + ".";
+    }
     if (label === "Coordonnées") {
       if (!a.nom.trim()) e.nom = "Indiquez votre nom.";
       if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(a.email)) e.email = "Adresse email invalide.";
@@ -92,16 +121,23 @@ function ContactApp() {
     setSending(true);
     setSendError("");
     try {
+      // Bon cadeau : le choix dans « formule », le prénom et le mot en tête du message (champs connus de contact.php)
+      const payload = isGift
+        ? { ...a, formule: giftLabel(a), date: "", region: "",
+            message: ["Pour : " + (a.pour.trim() || "(non précisé)"),
+                      "Mot sur le bon : " + (a.mot.trim() || "(aucun)"),
+                      a.message.trim() ? "\n" + a.message.trim() : ""].join("\n").trim() }
+        : a;
       const res = await fetch("contact.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(a),
+        body: JSON.stringify(payload),
       });
       const j = await res.json().catch(() => ({}));
       if (res.ok && j && j.ok) {
         setSent(true);
         // mesure d'audience (Umami, sans cookies) : une demande envoyée, avec la prestation choisie
-        if (window.umami) window.umami.track("demande-envoyee", { type: a.type || "non précisé", formule: a.formule || "", page: "contact" });
+        if (window.umami) window.umami.track("demande-envoyee", { type: a.type || "non précisé", formule: payload.formule || "", page: "contact" });
       } else if (res.status === 429) {
         setSendError("Trop d'envois en peu de temps. Patientez quelques minutes, puis réessayez.");
       } else {
@@ -133,7 +169,9 @@ function ContactApp() {
               <div className="form-sent reveal" style={{ margin: "0 auto", maxWidth: "560px" }}>
                 <div className="fs-mark">✓</div>
                 <h3>Merci, votre demande est bien partie.</h3>
-                <p>Je l'ai bien reçue et je vous réponds personnellement sous 48&nbsp;h ouvrées. À très vite&nbsp;!</p>
+                {isGift
+                  ? <p>Je vous envoie la facture sous 48&nbsp;h ouvrées. Le bon vous parvient par e-mail dès le paiement reçu.</p>
+                  : <p>Je l'ai bien reçue et je vous réponds personnellement sous 48&nbsp;h ouvrées. À très vite&nbsp;!</p>}
                 <a href="mailto:contact@afterglowbykevin.ch" className="link-arrow">contact@afterglowbykevin.ch <span className="ar">→</span></a>
               </div>
             ) : (
@@ -175,6 +213,41 @@ function ContactApp() {
                   </div>
                 )}
 
+                {label === "Le bon" && (
+                  <div className="fn-body">
+                    <h2 className="fn-q">Que souhaitez-vous offrir&nbsp;?</h2>
+                    <div className="fn-list">
+                      {GIFT_OPTS.map((o) => (
+                        <button key={o.key} type="button" className={"fn-row" + (a.bon === o.key ? " sel" : "")}
+                          onClick={() => set("bon", o.key)}>
+                          <span>{o.label}</span><span className="fn-price">{o.price}</span>
+                        </button>
+                      ))}
+                      <button type="button" className={"fn-row" + (a.bon === "montant" ? " sel" : "")}
+                        onClick={() => set("bon", "montant")}>
+                        <span>Un montant, à valoir sur la séance de son choix</span><span className="fn-price">dès CHF {MIN_MONTANT}</span>
+                      </button>
+                    </div>
+                    {err.bon && <span className="field-err">{err.bon}</span>}
+                    {a.bon === "montant" && (
+                      <div className={"field" + (err.montant ? " error" : "")} style={{ marginTop: "18px" }}>
+                        <label htmlFor="gift-montant">Montant (CHF)</label>
+                        <input id="gift-montant" className="control" type="number" inputMode="numeric" min={MIN_MONTANT} step="10"
+                          value={a.montant} onChange={(e) => set("montant", e.target.value)} placeholder={String(MIN_MONTANT)} />
+                        {err.montant && <span className="field-err">{err.montant}</span>}
+                      </div>
+                    )}
+                    <div className="field" style={{ marginTop: "18px" }}>
+                      <label htmlFor="gift-pour">Pour qui&nbsp;? <span className="opt">(prénom inscrit sur le bon, facultatif)</span></label>
+                      <input id="gift-pour" className="control" type="text" value={a.pour} onChange={(e) => set("pour", e.target.value)} placeholder="Prénom" />
+                    </div>
+                    <div className="field">
+                      <label htmlFor="gift-mot">Un mot sur le bon <span className="opt">(facultatif)</span></label>
+                      <input id="gift-mot" className="control" type="text" maxLength="140" value={a.mot} onChange={(e) => set("mot", e.target.value)} placeholder="Joyeux Noël, avec tout mon amour…" />
+                    </div>
+                  </div>
+                )}
+
                 {label === "Date & lieu" && (
                   <div className="fn-body">
                     <h2 className="fn-q">Quand et où&nbsp;?</h2>
@@ -202,7 +275,7 @@ function ContactApp() {
                     <div className="field"><label>Téléphone <span className="opt">(facultatif)</span></label>
                       <input className="control" type="tel" value={a.tel} onChange={(e) => set("tel", e.target.value)} placeholder="+41 …" /></div>
                     <div className="field"><label>Votre message <span className="opt">(facultatif)</span></label>
-                      <textarea className="control" rows="4" value={a.message} onChange={(e) => set("message", e.target.value)} placeholder="Le lieu, l'ambiance souhaitée, vos questions…"></textarea></div>
+                      <textarea className="control" rows="4" value={a.message} onChange={(e) => set("message", e.target.value)} placeholder={isGift ? "Une précision pour le bon, une question…" : "Le lieu, l'ambiance souhaitée, vos questions…"}></textarea></div>
                     <input type="text" name="website" tabIndex="-1" autoComplete="off" aria-hidden="true" value={a.website} onChange={(e) => set("website", e.target.value)} style={{ position: "absolute", left: "-9999px", width: "1px", height: "1px", opacity: 0 }} />
                   </div>
                 )}
@@ -213,13 +286,21 @@ function ContactApp() {
                     <dl className="fn-recap">
                       <div><dt>Prestation</dt><dd>{a.type || "—"}</dd></div>
                       {hasFormules && <div><dt>Formule</dt><dd>{a.formule || "—"}{estimate ? " · " + estimate : ""}</dd></div>}
-                      <div><dt>Date</dt><dd>{a.date || "à définir"}</dd></div>
-                      <div><dt>Lieu</dt><dd>{a.region || "à définir"}</dd></div>
+                      {isGift ? <>
+                        <div><dt>Le bon</dt><dd>{giftLabel(a) || "—"}</dd></div>
+                        <div><dt>Pour</dt><dd>{a.pour.trim() || "—"}</dd></div>
+                        {a.mot.trim() && <div><dt>Mot</dt><dd>{a.mot.trim()}</dd></div>}
+                      </> : <>
+                        <div><dt>Date</dt><dd>{a.date || "à définir"}</dd></div>
+                        <div><dt>Lieu</dt><dd>{a.region || "à définir"}</dd></div>
+                      </>}
                       <div><dt>Nom</dt><dd>{a.nom || "—"}</dd></div>
                       <div><dt>Email</dt><dd>{a.email || "—"}</dd></div>
                       {a.tel && <div><dt>Téléphone</dt><dd>{a.tel}</dd></div>}
                     </dl>
-                    <p className="fn-note">En envoyant, votre demande m'est transmise directement. Je vous réponds personnellement sous 48&nbsp;h.</p>
+                    <p className="fn-note">{isGift
+                      ? <>En envoyant, votre demande m'est transmise directement. Je vous envoie la facture sous 48&nbsp;h&nbsp;; le bon, valable 12&nbsp;mois, vous parvient par e-mail dès le paiement reçu.</>
+                      : <>En envoyant, votre demande m'est transmise directement. Je vous réponds personnellement sous 48&nbsp;h.</>}</p>
                   </div>
                 )}
 

@@ -82,6 +82,7 @@ function Nav({ active = "" }) {
             <a key={p.slug} href={p.href} onClick={() => setOpen(false)}>{p.title}</a>,
             ...(p.children || []).map((c) => <a key={c.slug} href={c.href} className="mm-sub" onClick={() => setOpen(false)}>{c.title}</a>),
           ])}
+          <a href="bon-cadeau.html" onClick={() => setOpen(false)}>Bon cadeau</a>
         </div>
         <a className="mm-top" href="portfolio.html" onClick={() => setOpen(false)}>Portfolio</a>
         <a className="mm-top" href="tarifs.html" onClick={() => setOpen(false)}>Tarifs</a>
@@ -97,13 +98,14 @@ function Nav({ active = "" }) {
       <nav className={"nav" + (scrolled ? " scrolled" : "") + (open ? " menu-open" : "")}>
         <a href={KC.HOME} className="wordmark"><span className="wm-main">Afterglow</span><span className="wm-by">by Kevin Chinelli</span></a>
         <div className="nav-links">
-          <div className={"nav-item nav-extra" + (PRESTA_NAV.some((p) => p.slug === active || p.slug === PRESTA_PARENT[active]) ? " is-active" : "")}>
+          <div className={"nav-item nav-extra" + (active === "cadeau" || PRESTA_NAV.some((p) => p.slug === active || p.slug === PRESTA_PARENT[active]) ? " is-active" : "")}>
             <a href={PRESTA_NAV[0].href} aria-haspopup="true">Prestations<span className="caret">▾</span></a>
             <div className="nav-drop">
               {PRESTA_NAV.map((p) => [
                 <a key={p.slug} href={p.href} className={active === p.slug ? "is-active" : ""}>{p.title}</a>,
                 ...(p.children || []).map((c) => <a key={c.slug} href={c.href} className={"nd-sub" + (active === c.slug ? " is-active" : "")}>{c.title}</a>),
               ])}
+              <a href="bon-cadeau.html" className={"nd-gift" + (active === "cadeau" ? " is-active" : "")}>Bon cadeau</a>
             </div>
           </div>
           <a href="portfolio.html" className={"nav-extra" + (active === "portfolio" ? " is-active" : "")}>Portfolio</a>
@@ -138,6 +140,7 @@ function FooterLinks() {
   return (
     <div className="social">
       <a href="apropos.html">À propos</a>
+      <a href="bon-cadeau.html">Bon cadeau</a>
       <a href="confidentialite.html">Confidentialité</a>
       <a href="https://www.instagram.com/afterglowbykevin/" target="_blank" rel="noopener" data-umami-event="instagram">Instagram</a>
       <a href="https://g.page/r/Ccd14Q8WzKZuEBM" target="_blank" rel="noopener" data-umami-event="fiche-google">Google</a>
@@ -177,13 +180,13 @@ function RelatedPresta({ current }) {
 }
 
 /* ---------- CTA band ---------- */
-function CtaContact({ overline = "Parlons de votre projet", title = "Réservez votre date." }) {
+function CtaContact({ overline = "Parlons de votre projet", title = "Réservez votre date.", href = "contact.html", label = "Me contacter" }) {
   return (
     <section className="sec s-darker cta-band">
       <div className="wrap pad-y" style={{ textAlign: "center" }}>
         <Overline className="reveal">{overline}</Overline>
         <h2 className="display reveal d1" style={{ fontSize: "clamp(34px,5.4vw,72px)", margin: "22px 0 38px" }}>{title}</h2>
-        <a href="contact.html" className="link-arrow reveal d2" style={{ fontSize: "14px" }}>Me contacter <span className="ar">→</span></a>
+        <a href={href} className="link-arrow reveal d2" style={{ fontSize: "14px" }}>{label} <span className="ar">→</span></a>
       </div>
     </section>
   );

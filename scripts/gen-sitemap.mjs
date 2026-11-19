@@ -17,7 +17,7 @@ function rank(name) {
   if (/^(mariages|portraits|studio|maternite-grossesse)\.html$/.test(name)) return { p: "0.9", f: "monthly" };
   if (/^(solo|couple|famille)\.html$/.test(name)) return { p: "0.8", f: "monthly" };
   if (/^photographe-/.test(name)) return { p: "0.8", f: "monthly" };
-  if (/^(tarifs|portfolio)\.html$/.test(name)) return { p: "0.8", f: "monthly" };
+  if (/^(tarifs|portfolio|bon-cadeau)\.html$/.test(name)) return { p: "0.8", f: "monthly" };
   if (name === "journal.html") return { p: "0.7", f: "monthly" };
   if (name === "contact.html") return { p: "0.7", f: "yearly" };
   if (name === "confidentialite.html") return { p: "0.2", f: "yearly" };

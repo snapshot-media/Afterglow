@@ -28,7 +28,9 @@ const LD_RE = /<script type="application\/ld\+json">([\s\S]*?)<\/script>/;
 const decode = (s) => s
   .replace(/&#x27;|&#39;/g, "'").replace(/&quot;/g, '"').replace(/&lt;/g, "<").replace(/&gt;/g, ">")
   .replace(/&nbsp;|&#xa0;|&#160;/gi, " ").replace(/&amp;/g, "&");
-const text = (h) => decode(h.replace(/<!-- -->/g, "").replace(/<[^>]+>/g, " ")).replace(/\s+/g, " ").trim();
+// (les balises deviennent des espaces : « page <a>Bon cadeau</a>. » donnerait « Bon cadeau . », d'où le dernier replace,
+// limité au point, à la virgule et à la parenthèse, qui ne prennent jamais d'espace avant en français)
+const text = (h) => decode(h.replace(/<!-- -->/g, "").replace(/<[^>]+>/g, " ")).replace(/\s+/g, " ").replace(/\s+([.,)])/g, "$1").trim();
 const attr = (s) => s.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
 const abs = (href) => {
   if (!href || href === "/" || href === "./" || href === "index.html") return BASE + "/";
